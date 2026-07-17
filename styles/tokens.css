@@ -1,0 +1,84 @@
+:root {
+  --color-ink: #111111;
+  --color-charcoal: #232323;
+  --color-graphite: #343434;
+  --color-smoke: #464646;
+  --color-ash: #575757;
+  --color-concrete: #696969;
+  --color-steel: #7a7a7a;
+  --color-warm-gray: #9c9a9a;
+  --color-silver: #b9b9b9;
+  --color-laterite: #be5b3f;
+  --color-bone: #d8d6cf;
+  --color-sand: #b9b9b9;
+  --color-olive: #575757;
+  --color-clay: #be5b3f;
+  --color-brass: #be5b3f;
+  --color-white: #ffffff;
+
+  --space-page-x: clamp(1.5rem, 4vw, 5rem);
+  --space-section-y: clamp(5rem, 9vw, 10rem);
+  --space-section-y-tight: clamp(3.5rem, 6vw, 6rem);
+
+  --type-hero: clamp(4.5rem, 9vw, 10rem);
+  --type-display: clamp(3rem, 6vw, 6.75rem);
+  --type-title: clamp(2rem, 3.2vw, 3.75rem);
+  --type-body-large: clamp(1.125rem, 1.45vw, 1.5rem);
+  --type-kicker: 0.72rem;
+
+  --z-base: 0;
+  --z-elevated: 10;
+  --z-header: 50;
+  --z-overlay: 100;
+
+  --border-hairline: 1px solid rgb(17 16 12 / 0.14);
+  --border-strong: 1px solid rgb(17 16 12 / 0.28);
+  --radius-soft: 0.375rem;
+  --radius-panel: 0.5rem;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-charcoal: var(--color-charcoal);
+  --color-graphite: var(--color-graphite);
+  --color-smoke: var(--color-smoke);
+  --color-ash: var(--color-ash);
+  --color-concrete: var(--color-concrete);
+  --color-steel: var(--color-steel);
+  --color-warm-gray: var(--color-warm-gray);
+  --color-silver: var(--color-silver);
+  --color-laterite: var(--color-laterite);
+  --color-bone: var(--color-bone);
+  --color-sand: var(--color-sand);
+  --color-olive: var(--color-olive);
+  --color-clay: var(--color-clay);
+  --color-brass: var(--color-brass);
+  --color-white: var(--color-white);
+
+  --font-sans: var(--font-bahnschrift);
+  --font-display: var(--font-bahnschrift);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  --spacing-page-x: var(--space-page-x);
+  --spacing-section-y: var(--space-section-y);
+  --spacing-section-y-tight: var(--space-section-y-tight);
+
+  --text-hero: var(--type-hero);
+  --text-hero--line-height: 0.82;
+  --text-display: var(--type-display);
+  --text-display--line-height: 0.9;
+  --text-title: var(--type-title);
+  --text-title--line-height: 1;
+  --text-body-large: var(--type-body-large);
+  --text-body-large--line-height: 1.55;
+  --text-kicker: var(--type-kicker);
+  --text-kicker--line-height: 1.1;
+
+  --z-index-base: var(--z-base);
+  --z-index-elevated: var(--z-elevated);
+  --z-index-header: var(--z-header);
+  --z-index-overlay: var(--z-overlay);
+
+  --radius-soft: var(--radius-soft);
+  --radius-panel: var(--radius-panel);
+}
