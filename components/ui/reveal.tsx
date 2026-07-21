@@ -19,7 +19,10 @@ type RevealProps = HTMLAttributes<HTMLElement> & {
   children?: ReactNode;
   delay?: number;
   duration?: number;
+  fade?: boolean;
   revealId?: string;
+  start?: string;
+  triggerClosest?: string;
   y?: number;
 };
 
@@ -29,7 +32,10 @@ export function Reveal({
   className,
   delay = 0,
   duration = 0.78,
+  fade = true,
   revealId,
+  start = "top 84%",
+  triggerClosest,
   y = 22,
   ...props
 }: RevealProps) {
@@ -51,18 +57,22 @@ export function Reveal({
     }
 
     const ctx = gsap.context(() => {
-      gsap.set(element, { autoAlpha: 0, y });
+      const trigger = triggerClosest
+        ? element.closest<HTMLElement>(triggerClosest) ?? element
+        : element;
+
+      gsap.set(element, fade ? { autoAlpha: 0, y } : { y });
 
       gsap.to(element, {
-        autoAlpha: 1,
+        ...(fade ? { autoAlpha: 1 } : {}),
         y: 0,
         delay,
         duration,
         ease: "power3.out",
         clearProps: "transform",
         scrollTrigger: {
-          trigger: element,
-          start: "top 84%",
+          trigger,
+          start,
           once: true,
         },
       });
@@ -71,7 +81,7 @@ export function Reveal({
     return () => {
       ctx.revert();
     };
-  }, [delay, duration, y]);
+  }, [delay, duration, fade, start, triggerClosest, y]);
 
   const revealProps = {
     className,

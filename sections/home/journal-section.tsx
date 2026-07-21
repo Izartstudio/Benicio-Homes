@@ -41,6 +41,10 @@ const visibleJournalArticles = [...journalArticles, ...journalArticles] as const
 
 export function JournalSection() {
   useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      return;
+    }
+
     const section = document.querySelector<HTMLElement>(
       '[data-section="journal"]',
     );
@@ -93,6 +97,7 @@ export function JournalSection() {
       aria-labelledby="journal-section-title"
       className="relative isolate overflow-hidden bg-[#949494] text-[#232323]"
       data-section="journal"
+      id="journal"
     >
       <div
         aria-hidden="true"

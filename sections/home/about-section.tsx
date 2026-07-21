@@ -51,6 +51,7 @@ export function AboutSection() {
       aria-labelledby="about-section-title"
       className="relative isolate overflow-x-clip overflow-y-visible bg-[#b9b9b9] text-[#232323]"
       data-section="about"
+      id="about"
     >
       <div
         aria-hidden="true"

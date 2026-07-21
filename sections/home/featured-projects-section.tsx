@@ -60,6 +60,10 @@ const imageStateClasses = [
 
 export function FeaturedProjectsSection() {
   useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      return;
+    }
+
     const section = document.querySelector<HTMLElement>(
       '[data-section="featured-projects"]',
     );

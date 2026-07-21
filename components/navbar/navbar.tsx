@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { FooterLink } from "@/components/footer/footer-link";
+import { projects } from "@/lib/projects";
 
 const navigationLinks = [
-  { href: "#about", label: "The Practice" },
-  { href: "#featured-projects", label: "Projects" },
-  { href: "#restoration-showcase", label: "Journal" },
+  { href: "/#about", label: "The Practice" },
+  { href: "/#journal", label: "Journal" },
 ] as const;
 
 type LenisScrollEvent = {
@@ -30,6 +30,10 @@ declare global {
 
 export function Navbar() {
   const wrapperRef = useRef<HTMLElement | null>(null);
+  const projectsItemRef = useRef<HTMLLIElement | null>(null);
+  const projectsMenuRef = useRef<HTMLUListElement | null>(null);
+  const projectsTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -135,6 +139,27 @@ export function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isProjectsOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !projectsItemRef.current?.contains(event.target)
+      ) {
+        setIsProjectsOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [isProjectsOpen]);
+
   return (
     <header
       className="fixed inset-x-0 top-0 z-overlay pointer-events-none text-bone mix-blend-difference"
@@ -164,24 +189,113 @@ export function Navbar() {
 
         <nav aria-label="Primary navigation" data-navbar-links>
           <ul className="flex items-center gap-[clamp(1.5rem,2.8vw,2.5rem)] font-display text-[0.9375rem] leading-none">
-            {navigationLinks.map((item) => (
-              <li key={item.href}>
-                <FooterLink
-                  className="text-bone hover:text-laterite"
-                  data-navbar-link
-                  href={item.href}
+            <li>
+              <FooterLink
+                className="text-bone hover:text-laterite"
+                data-navbar-link
+                href={navigationLinks[0].href}
+              >
+                {navigationLinks[0].label}
+              </FooterLink>
+            </li>
+
+            <li
+              className="relative"
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setIsProjectsOpen(false);
+                }
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  setIsProjectsOpen(false);
+                  projectsTriggerRef.current?.focus();
+                }
+
+                if (
+                  event.key === "ArrowDown" &&
+                  event.target === projectsTriggerRef.current
+                ) {
+                  event.preventDefault();
+                  setIsProjectsOpen(true);
+                  requestAnimationFrame(() => {
+                    projectsMenuRef.current
+                      ?.querySelector<HTMLAnchorElement>("a")
+                      ?.focus();
+                  });
+                }
+              }}
+              onMouseEnter={() => setIsProjectsOpen(true)}
+              onMouseLeave={() => setIsProjectsOpen(false)}
+              ref={projectsItemRef}
+            >
+              <button
+                aria-controls="navbar-projects-menu"
+                aria-expanded={isProjectsOpen}
+                aria-haspopup="true"
+                className="inline-flex items-center gap-2 text-bone transition-colors duration-300 ease-out hover:text-laterite focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-laterite"
+                data-navbar-link
+                data-navbar-projects-trigger
+                onClick={() => setIsProjectsOpen((isOpen) => !isOpen)}
+                ref={projectsTriggerRef}
+                type="button"
+              >
+                Projects
+                <span
+                  aria-hidden="true"
+                  className={`text-[0.8rem] transition-transform duration-200 ${
+                    isProjectsOpen ? "rotate-180" : "rotate-0"
+                  }`}
                 >
-                  {item.label}
-                </FooterLink>
-              </li>
-            ))}
+                  &#8964;
+                </span>
+              </button>
+
+              <div
+                className={`absolute left-1/2 top-[calc(100%+1rem)] w-[13.5rem] -translate-x-1/2 border border-bone/15 bg-[#2d2d2d]/95 p-2 shadow-2xl backdrop-blur-md transition-[opacity,transform,visibility] duration-200 ${
+                  isProjectsOpen
+                    ? "visible translate-y-0 opacity-100"
+                    : "invisible -translate-y-2 opacity-0"
+                }`}
+                data-navbar-projects-menu
+              >
+                <ul
+                  aria-label="Projects"
+                  className="grid gap-1"
+                  id="navbar-projects-menu"
+                  ref={projectsMenuRef}
+                >
+                  {projects.map((project) => (
+                    <li key={project.slug}>
+                      <FooterLink
+                        className="block px-4 py-3 text-bone hover:bg-bone/10 hover:text-laterite"
+                        href={`/projects/${project.slug}`}
+                        onClick={() => setIsProjectsOpen(false)}
+                      >
+                        {project.title}
+                      </FooterLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+
+            <li>
+              <FooterLink
+                className="text-bone hover:text-laterite"
+                data-navbar-link
+                href={navigationLinks[1].href}
+              >
+                {navigationLinks[1].label}
+              </FooterLink>
+            </li>
           </ul>
         </nav>
 
         <FooterLink
           className="inline-flex h-[3.125rem] w-[11rem] items-center justify-between justify-self-end bg-[#CCCCCC] px-[0.8125rem] font-display text-[0.9375rem] leading-none text-[#1A1A1A] hover:text-laterite"
           data-navbar-cta
-          href="#contact"
+          href="/#contact"
         >
           Get in Touch
           <span
@@ -191,6 +305,16 @@ export function Navbar() {
             &rsaquo;
           </span>
         </FooterLink>
+
+        <span
+          aria-hidden="true"
+          className="hidden justify-self-end text-bone"
+          data-navbar-mobile-menu
+        >
+          <span className="block h-px w-5 bg-current" />
+          <span className="mt-[0.35rem] block h-px w-5 bg-current" />
+          <span className="mt-[0.35rem] block h-px w-5 bg-current" />
+        </span>
       </div>
     </header>
   );

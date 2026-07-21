@@ -1,12 +1,20 @@
 import { ContactForm } from "@/components/contact/contact-form";
 import { Reveal } from "@/components/ui/reveal";
 
-export function ContactSection() {
+const defaultCopy =
+  "Whether you're looking for a thoughtfully designed home, exploring a restoration opportunity, or simply want to learn more about Benicio, we'd be glad to hear from you.";
+
+type ContactSectionProps = {
+  copy?: string;
+};
+
+export function ContactSection({ copy = defaultCopy }: ContactSectionProps) {
   return (
     <section
       aria-labelledby="contact-section-copy"
       className="relative isolate h-[55.9375rem] overflow-hidden bg-[linear-gradient(#B9B9B9),linear-gradient(#B9B9B9),linear-gradient(180deg,#d7d0c2,#9b6f52)] text-[#232323]"
       data-section="contact"
+      id="contact"
     >
       <div
         aria-hidden="true"
@@ -27,9 +35,7 @@ export function ContactSection() {
               className="max-w-[39rem] font-display text-[clamp(1.875rem,2.25vw,2rem)] font-normal leading-[1.35] tracking-[0.01em]"
               id="contact-section-copy"
             >
-              Whether you&apos;re looking for a thoughtfully designed home,
-              exploring a restoration opportunity, or simply want to learn more
-              about Benicio, we&apos;d be glad to hear from you.
+              {copy}
             </p>
           </Reveal>
         </div>
