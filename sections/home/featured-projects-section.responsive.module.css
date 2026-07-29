@@ -4,6 +4,18 @@
   min-width: 0;
 }
 
+.responsiveRoot:global([data-section="featured-projects"]),
+.responsiveRoot :global([data-featured-animation-canvas]) {
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
+}
+
+.responsiveRoot :global([data-featured-image]) {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  contain: paint;
+}
+
 .responsiveRoot :global([data-featured-mobile-progress-rail]) {
   display: none;
 }

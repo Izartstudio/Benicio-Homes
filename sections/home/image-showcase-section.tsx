@@ -62,6 +62,8 @@ const markers = [
   "right-edge",
 ] as const;
 
+type DragAxis = "x" | "y" | null;
+
 export function ImageShowcaseSection() {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const mobileRevealRef = useRef<HTMLDivElement | null>(null);
@@ -71,11 +73,21 @@ export function ImageShowcaseSection() {
   const mobileTickerReadyRef = useRef(false);
   const mobileTickerVisibleRef = useRef(false);
   const animationFrameRef = useRef<number | null>(null);
-  const dragStateRef = useRef({
+  const dragStateRef = useRef<{
+    axis: DragAxis;
+    currentScrollLeft: number;
+    isDragging: boolean;
+    scrollLeft: number;
+    startX: number;
+    startY: number;
+    targetScrollLeft: number;
+  }>({
+    axis: null,
     currentScrollLeft: 0,
     isDragging: false,
     scrollLeft: 0,
     startX: 0,
+    startY: 0,
     targetScrollLeft: 0,
   });
 
@@ -300,16 +312,21 @@ export function ImageShowcaseSection() {
     }
 
     dragStateRef.current = {
+      axis: event.pointerType === "mouse" ? "x" : null,
       currentScrollLeft: viewport.scrollLeft,
       isDragging: true,
       scrollLeft: viewport.scrollLeft,
       startX: event.clientX,
+      startY: event.clientY,
       targetScrollLeft: viewport.scrollLeft,
     };
 
     stopSmoothScroll();
-    viewport.dataset.dragging = "true";
-    viewport.setPointerCapture(event.pointerId);
+
+    if (event.pointerType === "mouse") {
+      viewport.dataset.dragging = "true";
+      viewport.setPointerCapture(event.pointerId);
+    }
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
@@ -320,8 +337,32 @@ export function ImageShowcaseSection() {
       return;
     }
 
+    const deltaX = event.clientX - dragState.startX;
+    const deltaY = event.clientY - dragState.startY;
+
+    if (dragState.axis === null) {
+      if (Math.hypot(deltaX, deltaY) < 8) {
+        return;
+      }
+
+      if (Math.abs(deltaY) >= Math.abs(deltaX)) {
+        dragState.axis = "y";
+        dragState.isDragging = false;
+        delete viewport.dataset.dragging;
+        return;
+      }
+
+      dragState.axis = "x";
+      viewport.dataset.dragging = "true";
+      viewport.setPointerCapture(event.pointerId);
+    }
+
+    if (dragState.axis !== "x") {
+      return;
+    }
+
     event.preventDefault();
-    dragState.targetScrollLeft = dragState.scrollLeft - (event.clientX - dragState.startX);
+    dragState.targetScrollLeft = dragState.scrollLeft - deltaX;
     startSmoothScroll();
   };
 
@@ -329,6 +370,7 @@ export function ImageShowcaseSection() {
     const viewport = viewportRef.current;
 
     dragStateRef.current.isDragging = false;
+    dragStateRef.current.axis = null;
 
     if (!viewport) {
       return;

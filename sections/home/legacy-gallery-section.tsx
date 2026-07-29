@@ -137,19 +137,25 @@ export function LegacyGallerySection() {
         data-gallery-texture-stack
       >
         <figure
-    className="pointer-events-none absolute inset-y-0 left-[-4px] w-[calc(100%+4px)] select-none"
+          className="pointer-events-none absolute inset-y-0 left-[-4px] w-[calc(100%+4px)] select-none"
           data-gallery-texture
         >
           <Image
-            src="/assets/textures/legacy-transitiontexture.webp"
+            src="/assets/textures/legacy-texture.webp"
             alt=""
             fill
             draggable={false}
             unoptimized
             sizes="100vw"
-      className="object-fill [-webkit-user-drag:none]"
+            className="object-fill [-webkit-user-drag:none]"
           />
         </figure>
+
+        <div
+          aria-hidden="true"
+          className={responsiveStyles.legacyRestorationBlend}
+          data-gallery-restoration-blend
+        />
       </div>
     </section>
   );

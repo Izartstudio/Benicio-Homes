@@ -18,6 +18,7 @@ import { isSafariBrowser } from "@/utils/is-safari-browser";
 gsap.registerPlugin(ScrollTrigger);
 
 const LenisContext = createContext<Lenis | null>(null);
+const nativeScrollMediaQuery = "(max-width: 767px), (pointer: coarse)";
 
 /** The single document-level Lenis instance for public site routes. */
 export function LenisProvider({ children }: { children: ReactNode }) {
@@ -43,8 +44,6 @@ export function LenisProvider({ children }: { children: ReactNode }) {
           lenisRef.current?.resize();
           ScrollTrigger.sort();
           ScrollTrigger.refresh();
-          ScrollTrigger.update();
-          lenisRef.current?.resize();
         });
       });
     }, 180);
@@ -61,13 +60,16 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       ignoreMobileResize: true,
     });
 
-    if (mediaQuery.matches) {
-      return;
-    }
+    const isSafari = isSafariBrowser();
+    const useNativeScrolling =
+      mediaQuery.matches ||
+      isSafari ||
+      window.matchMedia(nativeScrollMediaQuery).matches;
 
-    if (isSafariBrowser()) {
-      document.documentElement.dataset.scrollEngine = "safari-native";
-
+    if (useNativeScrolling) {
+      document.documentElement.dataset.scrollEngine = isSafari
+        ? "safari-native"
+        : "native";
       return () => {
         delete document.documentElement.dataset.scrollEngine;
       };
@@ -106,7 +108,6 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
     instance.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(update);
-    gsap.ticker.lagSmoothing(0);
     const publishFrame = requestAnimationFrame(() => {
       document.documentElement.dataset.scrollEngine = "lenis";
       setLenis(instance);
@@ -155,15 +156,45 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   }, [pathname, scheduleRefresh]);
 
   useEffect(() => {
-    const handleResize = () => scheduleRefresh();
-    const visualViewport = window.visualViewport;
+    let lastWidth = window.innerWidth;
+    let lastHeight = window.innerHeight;
+    let lastOrientation = window.screen.orientation?.type ?? "";
 
-    window.addEventListener("resize", handleResize);
-    visualViewport?.addEventListener("resize", handleResize);
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const orientation = window.screen.orientation?.type ?? "";
+      const usesNativeMobileScroll = window
+        .matchMedia(nativeScrollMediaQuery)
+        .matches;
+      const widthChanged = Math.abs(width - lastWidth) > 1;
+      const heightChanged = Math.abs(height - lastHeight) > 1;
+      const orientationChanged = orientation !== lastOrientation;
+
+      lastWidth = width;
+      lastHeight = height;
+      lastOrientation = orientation;
+
+      // Mobile browser chrome changes only the viewport height while a touch
+      // scroll is active. Refreshing pins for that transient resize rewrites
+      // spacer geometry mid-gesture and is the primary source of iOS jumping.
+      if (
+        widthChanged ||
+        orientationChanged ||
+        (!usesNativeMobileScroll && heightChanged)
+      ) {
+        scheduleRefresh();
+      }
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("orientationchange", handleResize, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      visualViewport?.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
     };
   }, [scheduleRefresh]);
 

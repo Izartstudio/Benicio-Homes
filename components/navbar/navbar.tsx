@@ -32,6 +32,7 @@ export function Navbar() {
   const projectsTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileProjectsOpen, setIsMobileProjectsOpen] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
@@ -295,12 +296,15 @@ export function Navbar() {
               >
                 <ul
                   aria-label="Projects"
-                  className="grid gap-1"
+                  className="grid"
                   id="navbar-projects-menu"
                   ref={projectsMenuRef}
                 >
                   {projectList.map((project) => (
-                    <li key={project.slug}>
+                    <li
+                      className={responsiveStyles.desktopProjectItem}
+                      key={project.slug}
+                    >
                       <FooterLink
                         className="block px-4 py-3 !text-white hover:bg-white/10 hover:!text-white"
                         href="/#featured-projects-title"
@@ -345,7 +349,10 @@ export function Navbar() {
           }
           className="hidden size-11 place-items-center justify-self-end text-[#cccccc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#cccccc]"
           data-navbar-mobile-menu
-          onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+          onClick={() => {
+            setIsMobileMenuOpen((isOpen) => !isOpen);
+            setIsMobileProjectsOpen(false);
+          }}
           type="button"
         >
           <span
@@ -382,14 +389,64 @@ export function Navbar() {
               The Practice
             </FooterLink>
           </li>
-          <li className={responsiveStyles.mobileMenuRow}>
-            <FooterLink
-              className={responsiveStyles.mobileMenuLink}
-              href="/#featured-projects-title"
-              onClick={() => setIsMobileMenuOpen(false)}
+          <li
+            className={`${responsiveStyles.mobileMenuRow} ${responsiveStyles.mobileProjectsRow}`}
+          >
+            <button
+              aria-controls="navbar-mobile-projects-menu"
+              aria-expanded={isMobileProjectsOpen}
+              aria-haspopup="true"
+              className={`${responsiveStyles.mobileMenuLink} ${responsiveStyles.mobileProjectsTrigger}`}
+              onClick={() =>
+                setIsMobileProjectsOpen((isOpen) => !isOpen)
+              }
+              type="button"
             >
               Projects
-            </FooterLink>
+              <span
+                aria-hidden="true"
+                className={`${responsiveStyles.mobileProjectsChevron} ${
+                  isMobileProjectsOpen
+                    ? responsiveStyles.mobileProjectsChevronOpen
+                    : ""
+                }`}
+              >
+                &#8964;
+              </span>
+            </button>
+
+            <div
+              aria-hidden={!isMobileProjectsOpen}
+              className={`${responsiveStyles.mobileProjectsDropdown} ${
+                isMobileProjectsOpen
+                  ? responsiveStyles.mobileProjectsDropdownOpen
+                  : responsiveStyles.mobileProjectsDropdownClosed
+              }`}
+            >
+              <ul
+                aria-label="Projects"
+                className={responsiveStyles.mobileProjectsList}
+                id="navbar-mobile-projects-menu"
+              >
+                {projectList.map((project) => (
+                  <li
+                    className={responsiveStyles.mobileProjectItem}
+                    key={project.slug}
+                  >
+                    <FooterLink
+                      className={responsiveStyles.mobileProjectLink}
+                      href="/#featured-projects-title"
+                      onClick={() => {
+                        setIsMobileProjectsOpen(false);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      {project.title}
+                    </FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </li>
           <li className={responsiveStyles.mobileMenuRow}>
             <FooterLink

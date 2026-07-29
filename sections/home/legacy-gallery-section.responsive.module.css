@@ -1,3 +1,36 @@
+.legacyRestorationBlend {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-color: #fafafa;
+  background-image:
+    linear-gradient(rgb(250 250 250 / 0.3), rgb(250 250 250 / 0.3)),
+    url("/assets/textures/heritage-texture.webp");
+  background-position: center;
+  background-size: cover;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(0 0 0 / 0.08) 24%,
+    rgb(0 0 0 / 0.32) 48%,
+    rgb(0 0 0 / 0.68) 74%,
+    #000 100%
+  );
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(0 0 0 / 0.08) 24%,
+    rgb(0 0 0 / 0.32) 48%,
+    rgb(0 0 0 / 0.68) 74%,
+    #000 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+}
+
 @media (min-width: 768px) {
   .responsiveRoot :global([data-gallery-composition]) {
     display: grid;
@@ -20,7 +53,7 @@
 
 @media (min-width: 1024px) {
   .responsiveRoot :global([data-gallery-texture]) {
-    left: -2.5%;
+    left: -1.4%;
     width: 104.1%;
   }
 }

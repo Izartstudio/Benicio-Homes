@@ -15,6 +15,10 @@
   display: none;
 }
 
+.responsiveRoot :global([data-showcase-viewport]) {
+  touch-action: pan-y;
+}
+
 @media (max-width: 1023px) {
   .responsiveRoot:global([data-section="image-showcase"]) {
     max-width: 100%;

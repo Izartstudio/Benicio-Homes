@@ -12,7 +12,7 @@ import { OrangeBlock } from "@/components/ui/orange-block";
 gsap.registerPlugin(ScrollTrigger);
 
 const texturePath = "/assets/textures/concrete-background-textures-09-1.webp";
-const MOBILE_SCROLL_VH_PER_TRANSITION = 70;
+const MOBILE_SCROLL_CANVAS_RATIO_PER_TRANSITION = 0.68;
 
 const projects = [
   {
@@ -45,7 +45,6 @@ const projects = [
     id: "palm-house",
     title: "ZEN VILLA II",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-section-villa3.webp",
-    loading: 'eager',
     imageAlt: "Palm House villa exterior with tropical landscape",
     description:
       "An architectural sanctuary of modern design, Zen Villa II offers a secluded retreat defined by contemporary elegance and luxury. ",
@@ -68,240 +67,245 @@ export function FeaturedProjectsSection() {
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
+    const scrollContainer = section?.querySelector<HTMLElement>(
+      "[data-featured-scroll-container]",
+    );
     const canvas = section?.querySelector<HTMLElement>(
       "[data-featured-animation-canvas]",
     );
 
-    if (!section || !canvas) {
+    if (!section || !scrollContainer || !canvas) {
       return;
     }
 
     const media = gsap.matchMedia();
-    const ctx = gsap.context(() => {
-      media.add(
-        {
-          desktop: "(min-width: 768px)",
-          tablet: "(min-width: 768px) and (max-width: 1199px)",
-          mobile: "(max-width: 767px)",
-          reduceMotion: "(prefers-reduced-motion: reduce)",
-        },
-        (context) => {
-      const isMobile = Boolean(context.conditions?.mobile);
-      const reduceMotion = Boolean(context.conditions?.reduceMotion);
-      const titleTravel = reduceMotion ? 0 : isMobile ? 5 : 8;
-      const images = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-image]",
-        canvas,
-      );
-      const titles = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-floating-title]",
-        canvas,
-      );
-      const contentGroups = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-project-content]",
-        canvas,
-      );
-      const progressFills = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-progress-fill]",
-        canvas,
-      );
 
-      if (
-        images.length < projects.length ||
-        titles.length < projects.length ||
-        contentGroups.length < projects.length
-      ) {
-        return;
-      }
+    media.add(
+      {
+        desktop: "(min-width: 1200px)",
+        tablet: "(min-width: 768px) and (max-width: 1199px)",
+        mobile:
+          "(max-width: 767px), (pointer: coarse), ((max-width: 1199px) and (max-height: 500px))",
+        reduceMotion: "(prefers-reduced-motion: reduce)",
+      },
+      (context) => {
+        const ctx = gsap.context(() => {
+          const isMobile = Boolean(context.conditions?.mobile);
+          const reduceMotion = Boolean(context.conditions?.reduceMotion);
+          const titleTravel = reduceMotion ? 0 : isMobile ? 5 : 8;
+          const contentTravel = reduceMotion ? 0 : 18;
+          const images = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-image]",
+            canvas,
+          );
+          const titles = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-floating-title]",
+            canvas,
+          );
+          const contentGroups = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-project-content]",
+            canvas,
+          );
+          const progressFills = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-progress-fill]",
+            canvas,
+          );
 
-      const activeImageState = isMobile
-        ? {
-            left: "clamp(1.5rem, 8.974vw, 2.1875rem)",
-            right: "clamp(1.5rem, 8.974vw, 2.1875rem)",
-            top: "6.6875rem",
-            bottom: "auto",
-            width: "auto",
-            height: "min(70.513vw, 17.1875rem)",
+          if (
+            images.length < projects.length ||
+            titles.length < projects.length ||
+            contentGroups.length < projects.length
+          ) {
+            return;
           }
-        : {
-            left: "0%",
-            top: "19.65%",
-            bottom: "auto",
-            width: "64.24%",
-            height: "51.46%",
+
+          const activeImageState = isMobile
+            ? {
+                left: "clamp(1.5rem, 8.974vw, 2.1875rem)",
+                right: "clamp(1.5rem, 8.974vw, 2.1875rem)",
+                top: "6.6875rem",
+                bottom: "auto",
+                width: "auto",
+                height: "min(70.513vw, 17.1875rem)",
+              }
+            : {
+                left: "0%",
+                top: "19.65%",
+                bottom: "auto",
+                width: "64.24%",
+                height: "51.46%",
+              };
+
+          gsap.set(images, {
+            ...activeImageState,
+            autoAlpha: 0,
+            clipPath: "inset(100% 0% 0% 0%)",
+            willChange: "clip-path, opacity",
+          });
+          gsap.set(images[0], {
+            ...activeImageState,
+            autoAlpha: 1,
+            clipPath: "inset(0% 0% 0% 0%)",
+          });
+          gsap.set(titles, {
+            autoAlpha: 0,
+            y: titleTravel,
+            force3D: true,
+          });
+          gsap.set(titles[0], {
+            autoAlpha: 1,
+            y: 0,
+          });
+          gsap.set(contentGroups[0], {
+            autoAlpha: 1,
+            force3D: true,
+            y: 0,
+          });
+          gsap.set(contentGroups.slice(1), {
+            autoAlpha: 0,
+            force3D: true,
+            y: contentTravel,
+          });
+          gsap.set(progressFills, { width: "33%" });
+
+          const timeline = gsap.timeline({
+            defaults: {
+              ease: "power3.inOut",
+            },
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: isMobile
+                ? () =>
+                    `+=${Math.round(
+                      canvas.offsetHeight *
+                        Math.max(projects.length - 1, 1) *
+                        MOBILE_SCROLL_CANVAS_RATIO_PER_TRANSITION,
+                    )}`
+                : "+=300%",
+              // Keep every visual layer together by pinning the complete
+              // internal shell. The outer section remains in document flow.
+              pin: scrollContainer,
+              pinSpacing: true,
+              scrub: reduceMotion ? true : 0.25,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              // This upstream pin must establish its spacer before Journal measures.
+              // Responsive matchMedia callbacks can otherwise recreate the two pins
+              // in listener order instead of document order.
+              refreshPriority: 20,
+            },
+          });
+
+          const transitionToProject = (
+            fromIndex: number,
+            toIndex: number,
+          ) => {
+            const position = toIndex;
+            const progressWidth = `${((toIndex + 1) / projects.length) * 100}%`;
+            const titleTransitionDuration = reduceMotion ? 0.01 : 0.52;
+            const imageTransitionDuration = reduceMotion ? 0.01 : 0.66;
+            const contentTransitionDuration = reduceMotion ? 0.01 : 0.5;
+
+            timeline
+              .set(images[toIndex], { zIndex: 20 }, position)
+              .set(images[fromIndex], { zIndex: 19 }, position)
+              .set(
+                images[toIndex],
+                {
+                  ...activeImageState,
+                  autoAlpha: 1,
+                  clipPath: "inset(100% 0% 0% 0%)",
+                },
+                position,
+              )
+              .set(
+                images[fromIndex],
+                {
+                  ...activeImageState,
+                  autoAlpha: 1,
+                  clipPath: "inset(0% 0% 0% 0%)",
+                },
+                position,
+              )
+              .to(
+                images[toIndex],
+                {
+                  clipPath: "inset(0% 0% 0% 0%)",
+                  duration: imageTransitionDuration,
+                },
+                position,
+              )
+              .set(
+                images[fromIndex],
+                { autoAlpha: 0, zIndex: 10 },
+                position + imageTransitionDuration + 0.01,
+              )
+              .to(
+                titles[fromIndex],
+                {
+                  autoAlpha: 0,
+                  y: -titleTravel,
+                  duration: titleTransitionDuration,
+                  ease: "power2.inOut",
+                },
+                position,
+              )
+              .to(
+                titles[toIndex],
+                {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: titleTransitionDuration,
+                  ease: "power2.inOut",
+                },
+                position,
+              )
+              .to(
+                contentGroups[fromIndex],
+                {
+                  autoAlpha: 0,
+                  y: -contentTravel,
+                  duration: contentTransitionDuration,
+                },
+                position,
+              )
+              .to(
+                contentGroups[toIndex],
+                {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: reduceMotion ? 0.01 : 0.62,
+                },
+                position + (reduceMotion ? 0 : 0.08),
+              )
+              .to(
+                progressFills,
+                {
+                  width: progressWidth,
+                  duration: reduceMotion ? 0.01 : 0.58,
+                },
+                position + (reduceMotion ? 0 : 0.08),
+              );
           };
 
-      gsap.set(images, {
-        ...activeImageState,
-        autoAlpha: 0,
-        clipPath: "inset(100% 0% 0% 0%)",
-        filter: "blur(0px)",
-        scale: 1,
-        transformOrigin: "50% 50%",
-        y: 0,
-      });
-      gsap.set(images[0], {
-        ...activeImageState,
-        autoAlpha: 1,
-        clipPath: "inset(0% 0% 0% 0%)",
-        scale: 1,
-        y: 0,
-      });
-      gsap.set(titles, {
-        autoAlpha: 0,
-        y: titleTravel,
-        force3D: true,
-      });
-      gsap.set(titles[0], {
-        autoAlpha: 1,
-        y: 0,
-      });
-      gsap.set(contentGroups[0], { autoAlpha: 1, y: 0 });
-      gsap.set(contentGroups.slice(1), { autoAlpha: 0, y: 18 });
-      gsap.set(progressFills, { width: "33%" });
+          timeline.to({}, { duration: 1 });
+          projects.slice(1).forEach((_, index) => {
+            const toIndex = index + 1;
+            transitionToProject(toIndex - 1, toIndex);
 
-      const timeline = gsap.timeline({
-        defaults: {
-          ease: "power3.inOut",
-        },
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: isMobile
-            ? () =>
-                `+=${Math.round(
-                  window.innerHeight *
-                    Math.max(projects.length - 1, 1) *
-                    (MOBILE_SCROLL_VH_PER_TRANSITION / 100),
-                )}`
-            : "+=300%",
-          pin: true,
-          scrub: 0.25,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          // This upstream pin must establish its spacer before Journal measures.
-          // Responsive matchMedia callbacks can otherwise recreate the two pins
-          // in listener order instead of document order.
-          refreshPriority: 20,
-        },
-      });
+            if (toIndex < projects.length - 1) {
+              timeline.to({}, { duration: 0.75 });
+            }
+          });
+          timeline.to({}, { duration: isMobile ? 0.35 : 1 });
+        }, section);
 
-      const transitionToProject = (fromIndex: number, toIndex: number) => {
-        const position = toIndex;
-        const progressWidth = `${((toIndex + 1) / projects.length) * 100}%`;
-        const titleTransitionDuration = reduceMotion ? 0.22 : 0.52;
+        return () => ctx.revert();
+      },
+    );
 
-        timeline
-          .set(images[toIndex], { zIndex: 20 }, position)
-          .set(images[fromIndex], { zIndex: 19 }, position)
-          .set(
-            images[toIndex],
-            {
-              ...activeImageState,
-              autoAlpha: 1,
-              filter: "blur(0px)",
-              scale: 1,
-              y: 0,
-              clipPath: "inset(100% 0% 0% 0%)",
-            },
-            position,
-          )
-          .set(
-            images[fromIndex],
-            {
-              ...activeImageState,
-              autoAlpha: 1,
-              filter: "blur(0px)",
-              scale: 1,
-              y: 0,
-              clipPath: "inset(0% 0% 0% 0%)",
-            },
-            position,
-          )
-          .to(
-            images[toIndex],
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 0.66,
-            },
-            position,
-          )
-          .set(images[fromIndex], { autoAlpha: 0, zIndex: 10 }, position + 0.67)
-          .to(
-            titles[fromIndex],
-            {
-              autoAlpha: 0,
-              y: -titleTravel,
-              duration: titleTransitionDuration,
-              ease: "power2.inOut",
-            },
-            position,
-          )
-          .to(
-            titles[toIndex],
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: titleTransitionDuration,
-              ease: "power2.inOut",
-            },
-            position,
-          )
-          .to(
-            contentGroups[fromIndex],
-            {
-              autoAlpha: 0,
-              y: -18,
-              duration: 0.5,
-            },
-            position,
-          )
-          .to(
-            contentGroups[toIndex],
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.62,
-            },
-            position + 0.08,
-          )
-          .to(
-            progressFills,
-            {
-              width: progressWidth,
-              duration: 0.58,
-            },
-            position + 0.08,
-          );
-      };
-
-      timeline.to({}, { duration: 1 });
-      projects.slice(1).forEach((_, index) => {
-        const toIndex = index + 1;
-        transitionToProject(toIndex - 1, toIndex);
-
-        if (toIndex < projects.length - 1) {
-          timeline.to({}, { duration: 0.75 });
-        }
-      });
-      timeline.to({}, { duration: isMobile ? 0.35 : 1 });
-
-      return () => {
-        timeline.scrollTrigger?.kill();
-        timeline.kill();
-        gsap.set([...images, ...titles, ...contentGroups, ...progressFills], {
-          clearProps:
-            "transform,transformOrigin,opacity,visibility,clipPath,left,right,top,bottom,width,height,zIndex",
-        });
-      };
-        },
-      );
-    }, section);
-
-    return () => {
-      media.revert();
-      ctx.revert();
-    };
+    return () => media.revert();
   }, []);
 
   return (
@@ -322,7 +326,7 @@ export function FeaturedProjectsSection() {
           data-featured-background-layer
         >
           <div
-            className="absolute inset-0 bg-[linear-gradient(180deg,#464646_0%,#2d2d2d_100%)] mix-blend-multiply"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#464646_0%,#2d2d2d_100%)] mix-blend-multiply"
             data-featured-gradient-overlay
           />
           <div
@@ -331,7 +335,7 @@ export function FeaturedProjectsSection() {
             style={{ backgroundImage: `url("${texturePath}")` }}
           />
           <div
-            className="absolute inset-x-0 bottom-0 top-[73.24%] bg-[linear-gradient(180deg,rgba(70,70,70,0)_0%,#464646_100%)]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 top-[73.24%] bg-[linear-gradient(180deg,rgba(70,70,70,0)_0%,#464646_100%)]"
             data-featured-lower-gradient-overlay
           />
         </div>
@@ -362,7 +366,7 @@ export function FeaturedProjectsSection() {
           </div>
 
           <div
-            className="absolute inset-0 z-20"
+            className="pointer-events-none absolute inset-0 z-20"
             data-featured-image-stack
           >
             {projects.map((project, index) => (
@@ -386,7 +390,7 @@ export function FeaturedProjectsSection() {
 
           <div
             aria-hidden="true"
-            className="absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden mix-blend-difference"
+            className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden mix-blend-difference"
             data-featured-floating-title-stack
           >
             {projects.map((project, index) => (
@@ -528,7 +532,7 @@ export function FeaturedProjectsSection() {
 
           <div
             aria-hidden="true"
-            className="absolute inset-0 z-[35]"
+            className="pointer-events-none absolute inset-0 z-[35]"
             data-featured-decorative-layer
           >
             <div

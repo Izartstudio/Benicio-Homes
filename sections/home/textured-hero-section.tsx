@@ -9,7 +9,7 @@ export function TexturedHeroSection() {
   return (
     <section
       aria-label="Benicio hero"
-      className={`relative isolate h-screen min-h-[640px] overflow-hidden bg-[#2d2d2d] ${responsiveStyles.responsiveRoot}`}
+      className={`relative isolate h-[100svh] min-h-[640px] overflow-hidden bg-[#2d2d2d] ${responsiveStyles.responsiveRoot}`}
       data-section="textured-hero"
     >
       <div
