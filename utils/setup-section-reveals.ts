@@ -5,8 +5,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 type SectionRevealOptions = {
   duration?: number;
+  groupTrigger?: HTMLElement;
   selector?: string;
   start?: string;
+  stagger?: number;
   y?: number;
 };
 
@@ -14,8 +16,10 @@ export function setupSectionReveals(
   section: HTMLElement,
   {
     duration = 0.8,
+    groupTrigger,
     selector = "[data-reveal-child]",
     start = "top 84%",
+    stagger = 0,
     y = 22,
   }: SectionRevealOptions = {},
 ) {
@@ -31,6 +35,30 @@ export function setupSectionReveals(
   }
 
   gsap.set(revealChildren, { autoAlpha: 0, y });
+
+  if (groupTrigger) {
+    const tween = gsap.to(revealChildren, {
+      autoAlpha: 1,
+      clearProps: "transform",
+      duration,
+      ease: "power3.out",
+      stagger,
+      y: 0,
+      scrollTrigger: {
+        trigger: groupTrigger,
+        start,
+        once: true,
+      },
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+      gsap.set(revealChildren, {
+        clearProps: "opacity,visibility,transform",
+      });
+    };
+  }
 
   const triggers = revealChildren.map((child) =>
     ScrollTrigger.create({
@@ -48,8 +76,6 @@ export function setupSectionReveals(
       },
     }),
   );
-
-  ScrollTrigger.refresh();
 
   return () => {
     triggers.forEach((trigger) => trigger.kill());

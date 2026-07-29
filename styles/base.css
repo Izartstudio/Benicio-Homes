@@ -11,10 +11,9 @@
 
   body {
     min-height: 100vh;
-    overflow-x: clip;
     background: var(--color-bone);
     color: var(--color-ink);
-    font-family: var(--font-bahnschrift), Arial, Helvetica, sans-serif;
+    font-family: var(--font-bahnschrift);
     text-rendering: geometricPrecision;
   }
 

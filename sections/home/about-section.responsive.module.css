@@ -1,0 +1,264 @@
+.aboutHeading {
+  transform: translateX(-50%);
+}
+
+@media (min-width: 1200px) {
+  .responsiveRoot :global([data-about-heading]) {
+    top: clamp(-4rem, -4.15vw, -3rem);
+  }
+}
+
+@media (max-width: 1023px) {
+  .responsiveRoot:global([data-section="about"]) {
+    max-width: 100%;
+  }
+
+  .responsiveRoot :global([data-about-content-container]) {
+    max-width: 100%;
+    min-height: clamp(62rem, 108vw, 78rem);
+  }
+
+  .responsiveRoot :global([data-about-heading]) {
+    left: 50%;
+    width: 100vw;
+    max-width: 100vw;
+    overflow: visible;
+    transform: translateX(-50%);
+    font-size: clamp(1.2rem, 7vw, 3.75rem);
+    line-height: 0.85;
+    white-space: nowrap;
+  }
+
+  .responsiveRoot :global([data-about-intro]),
+  .responsiveRoot :global([data-about-copy]) {
+    overflow-wrap: break-word;
+  }
+
+  .responsiveRoot :global([data-about-collage]) {
+    height: clamp(44rem, 78vw, 52rem);
+  }
+
+  .responsiveRoot :global([data-about-image]) {
+    max-width: min(17.6875rem, 38vw);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsiveRoot :global([data-about-center-axis]) {
+    left: 50%;
+    transform: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .responsiveRoot:global([data-section="about"]) {
+    overflow: visible;
+  }
+
+  .responsiveRoot :global([data-about-content-container]) {
+    min-height: clamp(53.125rem, 78vw, 59.375rem);
+  }
+
+  .responsiveRoot :global([data-about-heading]) {
+    left: 50%;
+    top: -3.95vw;
+    z-index: 60;
+    width: 96vw;
+    max-width: 96vw;
+    font-size: clamp(3.35rem, 7vw, 6.4rem);
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  .responsiveRoot :global([data-about-collage]) {
+    height: clamp(34rem, 68vw, 46rem);
+  }
+
+  .responsiveRoot :global([data-about-image]) {
+    width: 17.7vw;
+    height: auto;
+    max-width: 13.25rem;
+    aspect-ratio: 283 / 159;
+  }
+
+  .responsiveRoot :global([data-about-reveal="4"]),
+  .responsiveRoot :global([data-about-reveal="5"]) {
+    width: 40%;
+    max-width: none;
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+
+  .responsiveRoot :global([data-about-reveal="4"]) {
+    left: 5%;
+    top: 68%;
+  }
+
+  .responsiveRoot :global([data-about-reveal="5"]) {
+    right: 5%;
+    top: 48%;
+  }
+
+  .responsiveRoot :global([data-about-copy]) {
+    width: 100%;
+    max-width: none;
+  }
+
+  .responsiveRoot :global([data-about-orange-square]) {
+    flex: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .responsiveRoot :global([data-about-content-container]) {
+    min-height: clamp(70rem, 315vw, 78rem);
+    padding-inline: clamp(1rem, 5.5vw, 1.75rem);
+    padding-bottom: 4rem;
+  }
+
+  .responsiveRoot :global([data-about-heading]) {
+    top: -0.75rem;
+  }
+
+  .responsiveRoot :global([data-about-reveal="2"]) {
+    max-width: min(24rem, 100%);
+    padding-top: 4.75rem;
+  }
+
+  .responsiveRoot :global([data-about-intro]) {
+    font-size: clamp(0.9rem, 4.35vw, 1rem);
+  }
+
+  .responsiveRoot :global([data-about-collage]) {
+    --about-axis-x: 50%;
+    --about-mobile-layout-width: min(100vw, 26.5625rem);
+
+    width: var(--about-mobile-layout-width);
+    height: min(168.94vw, 44.875rem);
+    margin-left: calc(
+      (100% - var(--about-mobile-layout-width)) / 2
+    );
+    margin-top: 2.5rem;
+  }
+
+  .responsiveRoot :global([data-about-center-axis]) {
+    left: var(--about-axis-x);
+    transform: none;
+  }
+
+  .responsiveRoot :global([data-about-image]) {
+    width: min(43.53vw, 11.5625rem);
+    height: auto;
+    max-width: none;
+    aspect-ratio: 170 / 96;
+  }
+
+  .responsiveRoot :global([data-about-image="texture-left"]) {
+    left: 9.21%;
+    top: 9.65%;
+  }
+
+  .responsiveRoot :global([data-about-image="villa-entry"]) {
+    right: auto;
+    left: 47.63%;
+    top: 20.7%;
+  }
+
+  .responsiveRoot :global([data-about-image="stone"]) {
+    left: calc(2.82vw - min(43.53vw, 11.5625rem));
+    right: auto;
+    top: 38.29%;
+    transform: none;
+  }
+
+  .responsiveRoot :global([data-about-image="courtyard"]) {
+    left: 47.63%;
+    top: 47.19%;
+  }
+
+  .responsiveRoot :global([data-about-image="palm"]) {
+    left: 6.71%;
+    top: 67.06%;
+  }
+
+  .responsiveRoot :global([data-about-image="villa-right"]) {
+    right: auto;
+    left: 47.63%;
+    top: 75.97%;
+  }
+
+  .responsiveRoot :global([data-about-logo]) {
+    top: 50%;
+    z-index: 80;
+    width: 3.5rem;
+    height: 3rem;
+    translate: none !important;
+    transform: translate(-50%, -50%);
+  }
+
+  .responsiveRoot :global([data-about-logo] img) {
+    height: 2rem;
+  }
+
+  .responsiveRoot :global([data-about-axis-marker="top"]) {
+    top: 5.14%;
+  }
+
+  .responsiveRoot :global([data-about-axis-marker="bottom"]) {
+    bottom: 2.35%;
+  }
+
+  .responsiveRoot :global([data-about-vertical-divider]) {
+    top: calc(5.14% + 10px);
+    bottom: calc(2.35% + 10px);
+  }
+
+  .responsiveRoot :global([data-about-reveal="4"]),
+  .responsiveRoot :global([data-about-reveal="5"]) {
+    position: relative;
+    inset: auto;
+    z-index: 60;
+    width: 100%;
+    max-width: none;
+    gap: 1rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .responsiveRoot :global([data-about-reveal="4"]) {
+    margin-top: 1.75rem;
+  }
+
+  .responsiveRoot :global([data-about-reveal="5"]) {
+    margin-top: 4.5rem;
+  }
+
+  .responsiveRoot :global([data-about-copy]) {
+    max-width: min(18rem, calc(100vw - 3.5rem));
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .responsiveRoot :global([data-about-orange-square="right-copy"]) {
+    display: none;
+  }
+
+  .responsiveRoot :global([data-about-orange-square="left-copy"]) {
+    position: absolute;
+    bottom: -2.625rem;
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 424px) {
+  .responsiveRoot :global([data-about-image]) {
+    width: min(43.53vw, 11.5625rem);
+  }
+}
+
+@media (max-width: 374px) {
+  .responsiveRoot :global([data-about-content-container]) {
+    padding-inline: 1rem;
+  }
+}

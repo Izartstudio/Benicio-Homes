@@ -1,50 +1,72 @@
 import { ContactForm } from "@/components/contact/contact-form";
+import { ContactTextureSurface } from "@/components/ui/contact-texture-surface";
 import { Reveal } from "@/components/ui/reveal";
+import styles from "./contact-section.module.css";
 
-export function ContactSection() {
+const defaultHeading = "Begin The Conversation.";
+const defaultCopy =
+  "Whether you're exploring a Benicio residence, considering a restoration opportunity, or simply want to understand our philosophy, we'd be pleased to hear from you. Every meaningful project begins with a conversation.";
+
+type ContactSectionProps = {
+  heading?: string;
+  copy?: string;
+};
+
+export function ContactSection({
+  heading = defaultHeading,
+  copy = defaultCopy,
+}: ContactSectionProps) {
   return (
     <section
-      aria-labelledby="contact-section-copy"
-      className="relative isolate h-[55.9375rem] overflow-hidden bg-[linear-gradient(#B9B9B9),linear-gradient(#B9B9B9),linear-gradient(180deg,#d7d0c2,#9b6f52)] text-[#232323]"
+      aria-labelledby="contact-section-heading"
+      className={`relative isolate h-[63.75rem] overflow-hidden bg-[#b9b9b9] text-[#232323] ${styles.section}`}
       data-section="contact"
+      id="contact"
     >
+      <ContactTextureSurface data-contact-background />
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-35 mix-blend-multiply"
-        data-contact-background
-        style={{
-          backgroundImage: 'url("/assets/textures/contact-texture.svg")',
-        }}
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,#b9b9b9_0%,#b9b9b9_45%,rgba(185,185,185,0.88)_52%,rgba(185,185,185,0.45)_63%,rgba(185,185,185,0)_75%)]"
+        data-contact-background-wash
       />
 
       <div
-        className="relative z-10 grid h-full grid-cols-[minmax(0,1fr)_37.9375rem] gap-[clamp(4rem,6vw,5.75rem)] px-[5.208vw] pt-[6.25rem]"
+        className={`relative z-10 grid h-full grid-cols-[minmax(0,1fr)_37.9375rem] gap-[clamp(4rem,6vw,5.75rem)] px-[5.208vw] pb-[8rem] pt-[6.25rem] ${styles.container}`}
         data-contact-container
       >
-        <div data-contact-left-column>
+        <div className={styles.leftColumn} data-contact-left-column>
           <Reveal revealId="contact-intro">
-            <p
-              className="max-w-[39rem] font-display text-[clamp(1.875rem,2.25vw,2rem)] font-normal leading-[1.35] tracking-[0.01em]"
-              id="contact-section-copy"
+            <div
+              className={`max-w-[39rem] ${styles.copyBlock}`}
+              data-contact-copy-block
             >
-              Whether you&apos;re looking for a thoughtfully designed home,
-              exploring a restoration opportunity, or simply want to learn more
-              about Benicio, we&apos;d be glad to hear from you.
-            </p>
+              <h2
+                className={`font-display text-[2.5rem] font-[350] leading-normal tracking-[0.01em] lg:text-[40px] ${styles.heading}`}
+                id="contact-section-heading"
+              >
+                {heading}
+              </h2>
+              <p
+                className="mt-[clamp(2rem,3vw,2.75rem)] font-display text-[1rem] font-light leading-[135%] tracking-[0.01em]"
+                id="contact-section-copy"
+              >
+                {copy}
+              </p>
+            </div>
           </Reveal>
         </div>
 
         <Reveal revealId="contact-form">
           <div
-            className="relative h-[43.4375rem] w-[37.9375rem] overflow-hidden  bg-[#fafafa]"
+            className={`relative h-[49.5rem] w-[37.9375rem] overflow-hidden bg-[#fafafa] ${styles.card}`}
             data-contact-card
           >
             <div
               aria-hidden="true"
-              className="absolute inset-0 z-0 bg-cover bg-center opacity-50 mix-blend-multiply"
+              className="pointer-events-none absolute inset-0 z-0 select-none bg-cover bg-center opacity-50 mix-blend-multiply"
               data-contact-card-texture
               style={{
-                backgroundImage: 'url("/assets/textures/formbgtexture.svg")',
+                backgroundImage: 'url("/assets/textures/formbgtexture.webp")',
               }}
             />
             <ContactForm />

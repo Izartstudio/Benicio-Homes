@@ -1,4 +1,4 @@
-import { ButtonLink } from "@/components/ui/button-link";
+import { CTA } from "@/components/ui/cta";
 import { Container } from "@/components/ui/container";
 import type { Stat } from "@/types/home";
 
@@ -46,9 +46,13 @@ export function HeroSection() {
               homepage foundation is structured for immersive storytelling
               without coupling presentation to animation logic.
             </p>
-            <ButtonLink href="#enquire" variant="light">
+            <CTA
+              className="inline-flex min-h-12 items-center justify-center rounded-soft border border-bone/70 px-6 text-[0.78rem] font-semibold uppercase tracking-[0.16em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
+              href="#enquire"
+              variant="light"
+            >
               Register interest
-            </ButtonLink>
+            </CTA>
           </div>
         </div>
 

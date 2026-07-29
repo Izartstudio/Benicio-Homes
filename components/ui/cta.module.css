@@ -1,0 +1,38 @@
+.root {
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+.light {
+  background-color: var(--cta-light-background, #f2f2f2);
+  color: #1b1b1b;
+}
+
+.light:hover {
+  background-color: #1b1b1b;
+  color: #f2f2f2;
+}
+
+.dark {
+  background-color: var(--cta-dark-background, #2b2b2b);
+  color: #f2f2f2;
+}
+
+.dark:hover {
+  background-color: #f2f2f2;
+  color: #1b1b1b;
+}
+
+.arrow {
+  color: currentColor;
+}
+
+.arrow :where(svg),
+.root > :where(svg) {
+  fill: currentColor;
+  stroke: currentColor;
+  transition:
+    fill 250ms ease,
+    stroke 250ms ease;
+}

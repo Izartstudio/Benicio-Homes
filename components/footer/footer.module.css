@@ -1,0 +1,132 @@
+@media (max-width: 1439px) {
+  .content {
+    min-width: 0;
+    grid-template-columns:
+      minmax(18rem, 2fr)
+      repeat(3, minmax(8rem, 1fr));
+    gap: clamp(1.75rem, 2.5vw, 2.5rem);
+    padding-inline: clamp(3rem, 5.208vw, 4.6875rem);
+  }
+}
+
+@media (max-width: 1279px) {
+  .content {
+    grid-template-columns:
+      minmax(17rem, 1.65fr)
+      repeat(3, minmax(7.5rem, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .footer {
+    height: auto;
+  }
+
+  .content {
+    height: auto;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 3.5rem 3rem;
+    padding: 5rem clamp(2.5rem, 7vw, 4rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .footer :global([data-footer-background]) {
+    background-position: top center;
+    background-size: 100% 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer :global([data-footer-background]) {
+    background-position: top center;
+    background-size: 100% 100%;
+  }
+
+  .content {
+    min-height: 52.75rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(1.5rem, 12vw, 3rem);
+    row-gap: 0;
+    align-content: start;
+    padding: 4.375rem 2.1875rem 4rem;
+  }
+
+  .brandSocialGroup {
+    display: contents;
+  }
+
+  .navigationReveal {
+    grid-column: 1;
+    order: 1;
+  }
+
+  .legalReveal {
+    grid-column: 2;
+    order: 2;
+  }
+
+  .contactReveal {
+    grid-column: 1 / -1;
+    order: 3;
+    margin-top: 4.125rem;
+  }
+
+  .socialReveal {
+    grid-column: 1 / -1;
+    order: 4;
+    margin-top: 1rem;
+  }
+
+  .brandReveal {
+    grid-column: 1 / -1;
+    order: 5;
+    margin-top: 5.6875rem;
+  }
+
+  .columnTitle {
+    font-size: 1rem;
+  }
+
+  .columnBody {
+    margin-top: 2.375rem;
+    font-size: 0.875rem;
+    line-height: 1.32;
+  }
+
+  .columnList {
+    gap: 1.625rem;
+  }
+
+  .contactAddress {
+    max-width: 20rem;
+  }
+
+  .socialList {
+    gap: 1.5rem;
+  }
+
+  .socialLink {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .brandLogo {
+    width: 3.125rem;
+    height: auto;
+  }
+
+  .brandTagline {
+    max-width: 20rem;
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 374px) {
+  .content {
+    padding-inline: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}

@@ -1,40 +1,111 @@
 "use client";
 
+import responsiveStyles from "./story-section.responsive.module.css";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ParallaxMedia } from "@/components/ui/parallax-media";
 import { setupSectionReveals } from "@/utils/setup-section-reveals";
+import { CdnImage } from "@/components/ui/cdn-image";
+import { OrangeBlock } from "@/components/ui/orange-block";
 
-const texturePath = "/assets/textures/concrete-background-textures-09-1.svg";
-const orangeBlockPath = "/assets/blocks/orange-block.svg";
+gsap.registerPlugin(ScrollTrigger);
 
 const storyImages = {
   upper: {
-    src: "/assets/projects/palm-house-front-view.png",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/story-section-upper.webp",
     loading: "eager",
     alt: "Open sky above a tropical villa",
   },
   hero: {
-    src: "/assets/storysection/storysection.svg",
+    url: "/assets/storysection/story-hero.webp",
     loading: "eager",
     alt: "Goan coastal landscape and villa atmosphere",
   },
 } as const;
 
 export function StorySection() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = document.querySelector<HTMLElement>('[data-section="story"]');
 
     if (!section) {
       return;
     }
 
-    return setupSectionReveals(section);
+    const divider = section.querySelector<HTMLElement>(
+      "[data-story-orange-divider]",
+    );
+    const tabletMedia = window.matchMedia(
+      "(min-width: 768px) and (max-width: 1199px)",
+    );
+    let cleanupReveals = () => {};
+    let cleanupDivider = () => {};
+
+    const setupAnimations = () => {
+      cleanupReveals();
+      cleanupDivider();
+
+      const isTablet = tabletMedia.matches;
+      cleanupReveals = setupSectionReveals(section, {
+        duration: isTablet ? 0.68 : undefined,
+        groupTrigger: isTablet ? section : undefined,
+        stagger: isTablet ? 0.08 : undefined,
+        start: isTablet ? "top 115%" : undefined,
+      });
+
+      if (!divider) {
+        cleanupDivider = () => {};
+        return;
+      }
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set(divider, {
+          scaleX: 1,
+          transformOrigin: "center center",
+        });
+        cleanupDivider = () => {
+          gsap.set(divider, {
+            clearProps: "transform,transformOrigin",
+          });
+        };
+        return;
+      }
+
+      const dividerTween = gsap.to(divider, {
+        scaleX: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: isTablet ? "top 115%" : "top 84%",
+          once: true,
+        },
+      });
+
+      cleanupDivider = () => {
+        dividerTween.scrollTrigger?.kill();
+        dividerTween.kill();
+        gsap.set(divider, {
+          clearProps: "transform,transformOrigin",
+        });
+      };
+    };
+
+    setupAnimations();
+    tabletMedia.addEventListener("change", setupAnimations);
+
+    return () => {
+      tabletMedia.removeEventListener("change", setupAnimations);
+      cleanupReveals();
+      cleanupDivider();
+    };
   }, []);
 
   return (
     <section
       aria-labelledby="story-section-title"
-      className="relative isolate overflow-hidden bg-[#2d2d2d] text-bone"
+      className={`relative overflow-x-clip overflow-y-visible bg-[#464646] text-bone ${responsiveStyles.responsiveRoot}`}
       data-section="story"
     >
       <div
@@ -47,9 +118,9 @@ export function StorySection() {
           data-story-gradient-overlay
         />
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-90 mix-blend-overlay"
+          className="pointer-events-none absolute inset-0 select-none bg-cover bg-center opacity-90 mix-blend-overlay"
           data-story-texture-layer
-          style={{ backgroundImage: `url("${texturePath}")` }}
+
         />
       </div>
 
@@ -62,7 +133,7 @@ export function StorySection() {
         <p data-story-label="existing">EXISTING</p>
         <div
           aria-hidden="true"
-          className="h-px w-[clamp(44px,3.5vw,56px)] bg-laterite"
+          className="h-px w-[clamp(44px,3.5vw,56px)] origin-center scale-x-0 bg-laterite motion-reduce:scale-x-100"
           data-story-orange-divider
         />
         <p data-story-label="enduring">ENDURING</p>
@@ -97,10 +168,11 @@ export function StorySection() {
         data-story-reveal-group="3"
         data-story-upper-image
       >
-        <Image
-          src={storyImages.upper.src}
+        <CdnImage
+          src={storyImages.upper.url}
           alt={storyImages.upper.alt}
           fill
+          loading="eager"
           sizes="10vw"
           className="object-cover object-top"
         />
@@ -108,7 +180,6 @@ export function StorySection() {
 
       <div
         className="relative z-10 mt-0 pt-0"
-        data-reveal-child
         data-story-reveal-group="4"
         data-story-hero-composition
       >
@@ -117,24 +188,27 @@ export function StorySection() {
           className="absolute left-1/2 top-0 z-30 grid h-[clamp(8rem,11.8vw,10.625rem)] w-[clamp(8rem,10.4vw,9.375rem)] -translate-x-1/2 place-items-center bg-smoke"
           data-story-grey-block
         >
-          <div
-            aria-hidden="true"
-            className="size-[clamp(38px,3.45vw,50px)] bg-cover bg-center"
+          <OrangeBlock
             data-story-orange-block
-            style={{ backgroundImage: `url("${orangeBlockPath}")` }}
           />
         </div>
         <figure
           className="relative z-20 h-[clamp(28rem,36.111vw,32.5rem)] w-full overflow-hidden"
-          data-story-hero-image
-        >
-          <Image
-            src={storyImages.hero.src}
-            alt={storyImages.hero.alt}
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
+        data-story-hero-image
+      >
+          <ParallaxMedia
+            amount={5}
+            className={responsiveStyles.storyHeroMedia}
+          >
+            <Image
+              src={storyImages.hero.url}
+              alt={storyImages.hero.alt}
+              fill
+              loading="eager"
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </ParallaxMedia>
         </figure>
       </div>
     </section>

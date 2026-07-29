@@ -4,7 +4,15 @@ import { appendContactSubmission } from "@/lib/googleSheets";
 import { sendContactNotification } from "@/lib/resend";
 
 export type ContactFormErrors = Partial<
-  Record<"email" | "location" | "message" | "name" | "phone", string>
+  Record<
+    | "email"
+    | "interestedProject"
+    | "location"
+    | "message"
+    | "name"
+    | "phone",
+    string
+  >
 >;
 
 export type ContactFormState = {
@@ -31,6 +39,7 @@ export async function submitContactForm(
   const phone = getField(formData, "phone");
   const email = getField(formData, "email");
   const location = getField(formData, "location");
+  const interestedProject = getField(formData, "interestedProject");
   const message = getField(formData, "message");
   const errors: ContactFormErrors = {};
 
@@ -63,6 +72,7 @@ export async function submitContactForm(
   try {
     await appendContactSubmission({
       email,
+      interestedProject,
       location,
       message,
       name,

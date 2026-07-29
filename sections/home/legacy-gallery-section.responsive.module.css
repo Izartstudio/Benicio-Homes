@@ -1,0 +1,93 @@
+@media (min-width: 768px) {
+  .responsiveRoot :global([data-gallery-composition]) {
+    display: grid;
+  }
+
+  .responsiveRoot :global([data-gallery-intro]),
+  .responsiveRoot :global([data-gallery-region]) {
+    grid-area: 1 / 1;
+  }
+
+  .responsiveRoot :global([data-gallery-region]) {
+    margin-top: 0;
+  }
+
+  .responsiveRoot :global([data-gallery-image="1"]),
+  .responsiveRoot :global([data-gallery-image="2"]) {
+    margin-top: clamp(10rem, 13.75vw, 12.375rem);
+  }
+}
+
+@media (max-width: 1023px) {
+
+  .responsiveRoot:global([data-section="legacy-gallery"]) {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .responsiveRoot :global([data-gallery-content]) {
+    padding-top: 0.3rem;
+    padding-inline: clamp(1.25rem, 8.97vw, 2.1875rem);
+  }
+
+  .responsiveRoot :global([data-gallery-copy]) {
+    max-width: none;
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .responsiveRoot :global([data-gallery]) {
+    display: grid;
+    grid-template-columns: minmax(0, 129fr) minmax(0, 180fr);
+    grid-template-rows: minmax(0, 154fr) minmax(0, 106fr);
+    gap: clamp(0.5rem, 2.56vw, 0.625rem);
+    aspect-ratio: 320 / 270;
+  }
+
+  .responsiveRoot :global([data-gallery-image]) {
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .responsiveRoot :global([data-gallery-image="1"]) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .responsiveRoot :global([data-gallery-image="2"]) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .responsiveRoot :global([data-gallery-image="3"]) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .responsiveRoot :global([data-gallery-region]) {
+    margin-top: 2.75rem;
+  }
+
+  .responsiveRoot :global([data-gallery-footer]) {
+    margin-top: 2.75rem;
+    padding-bottom: 2rem;
+  }
+
+  .responsiveRoot :global([data-gallery-divider]) {
+    width: 3.125rem;
+  }
+
+  .responsiveRoot :global([data-gallery-texture-stack]) {
+    height: 6.9375rem;
+  }
+}
+
+@media (max-width: 374px) {
+  .responsiveRoot :global([data-gallery-content]) {
+    padding-inline: clamp(1.25rem, 8.97vw, 2.1875rem);
+  }
+}

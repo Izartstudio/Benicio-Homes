@@ -1,0 +1,120 @@
+.responsiveRoot {
+  --steps-first-step-width: 100%;
+  --steps-location-right-divider-left: 14.44%;
+  --steps-location-right-divider-width: 64.65%;
+  --steps-about-right-divider-left: 18.05%;
+  --steps-about-right-divider-width: 15.55%;
+}
+
+.responsiveRoot :global([data-architectural-stair="stair-01"]) {
+  width: var(--steps-first-step-width);
+}
+
+.responsiveRoot :global([data-step-divider="location-right"]) {
+  left: var(--steps-location-right-divider-left);
+  width: var(--steps-location-right-divider-width);
+}
+
+.responsiveRoot :global([data-step-divider="about-right"]) {
+  left: var(--steps-about-right-divider-left);
+  width: var(--steps-about-right-divider-width);
+}
+
+@media (max-width: 1279px) {
+  .responsiveRoot :global([data-steps-animation-canvas]) {
+    --steps-location-right-divider-left: 16%;
+    --steps-location-right-divider-width: 63.1%;
+    --steps-about-right-divider-left: 23.5%;
+    --steps-about-right-divider-width: 10.11%;
+  }
+}
+
+@media (max-width: 1023px) {
+
+  .responsiveRoot :global([data-steps-animation-canvas]) {
+    height: clamp(35rem, 72vw, 40rem);
+    min-height: clamp(35rem, 72vw, 40rem);
+  }
+
+  .responsiveRoot :global([data-step-copy]) {
+    max-width: min(47rem, 82vw);
+    font-size: clamp(1.25rem, 3.2vw, 1.75rem);
+  }
+
+  .responsiveRoot :global([data-step-location]) {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+  }
+
+  .responsiveRoot :global([data-step-link]) {
+    font-size: clamp(0.85rem, 1.85vw, 1.05rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .responsiveRoot :global([data-steps-animation-canvas]) {
+    --steps-content-x: clamp(1.25rem, 6vw, 2rem);
+    --steps-marker-size: 10px;
+    --steps-location-label-reach: clamp(7rem, 30.5vw, 7.5rem);
+    --steps-location-right-divider-left: calc(
+      var(--steps-content-x) + var(--steps-location-label-reach) + 0.5rem
+    );
+    --steps-location-right-divider-width: calc(
+      79.1% - var(--steps-location-right-divider-left)
+    );
+    --steps-about-label-reach: clamp(3.25rem, 15.5vw, 3.85rem);
+    --steps-about-right-divider-left: calc(
+      var(--steps-content-x) + var(--steps-about-label-reach) + 0.5rem
+    );
+    --steps-about-step-width: 34.097%;
+    --steps-about-right-divider-width: calc(
+      var(--steps-about-step-width) -
+      var(--steps-about-right-divider-left)
+    );
+    height: clamp(34rem, 143vw, 35rem);
+    min-height: clamp(34rem, 143vw, 35rem);
+  }
+
+  .responsiveRoot :global([data-step-copy]) {
+    left: var(--steps-content-x);
+    right: var(--steps-content-x);
+    top: clamp(4.5rem, 14vw, 5.25rem);
+    max-width: none;
+    font-size: clamp(1rem, 4.5vw, 1.15rem);
+    line-height: 1.46;
+  }
+
+  .responsiveRoot :global([data-step-location]) {
+    left: var(--steps-content-x);
+    top: 55.85%;
+    font-size: clamp(0.76rem, 3.5vw, 0.9rem);
+  }
+
+  .responsiveRoot :global([data-step-link]) {
+    left: var(--steps-content-x);
+    top: 47.75%;
+    max-width: calc(100% - (2 * var(--steps-content-x)));
+    font-size: clamp(0.7rem, 3.15vw, 0.8rem);
+  }
+
+  .responsiveRoot :global([data-step-divider]),
+  .responsiveRoot :global([data-step-marker]) {
+    opacity: 0.8;
+  }
+
+  .responsiveRoot :global([data-step-marker="about-marker"]) {
+    left: calc(
+      var(--steps-about-step-width) - (var(--steps-marker-size) / 2)
+    );
+  }
+
+  .responsiveRoot :global([data-architectural-stair="stair-03"]) {
+    width: var(--steps-about-step-width);
+  }
+
+}
+
+@media (max-width: 430px) {
+  .responsiveRoot :global([data-step-copy]) {
+    font-size: clamp(0.95rem, 5.1vw, 1.1rem);
+  }
+}

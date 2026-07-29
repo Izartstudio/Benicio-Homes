@@ -1,0 +1,26 @@
+# Local development and audit output
+artifacts
+scripts
+
+# Legacy homepage media no longer referenced by the current release
+public/assets/hero
+public/assets/carousel
+public/assets/Restoration/carousel-1.svg
+public/assets/blocks/orange-gallery-accent.svg
+public/assets/storysection/storysection.svg
+public/assets/textures/Generative Object.svg
+public/assets/textures/NotesSection-texture.svg
+public/assets/textures/concrete-background-textures-09-1.svg
+public/assets/textures/contact-texture.svg
+public/assets/textures/cta-section-texture.svg
+public/assets/textures/footer-texture.svg
+public/assets/textures/formbgtexture.svg
+public/assets/textures/heritage-texture.svg
+public/assets/textures/imageshowcase-texture.svg
+public/assets/textures/journal-section-texture.svg
+public/assets/textures/journal-sectiontexture.svg
+public/assets/textures/journalcard.svg
+public/assets/textures/legacy-texture.svg
+public/assets/textures/texture-laterite-bg.svg
+public/assets/textures/texture-legacy.svg
+public/assets/textures/texturebg-legacy.svg

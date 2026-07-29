@@ -9,7 +9,11 @@
   --color-warm-gray: #9c9a9a;
   --color-silver: #b9b9b9;
   --color-laterite: #be5b3f;
+  --color-benicio-orange: #dc4c28;
+  --color-benicio-blend: var(--color-silver);
   --color-bone: #d8d6cf;
+  --color-mist: #d9d9d9;
+  --color-gradient-gray: #737373;
   --color-sand: #b9b9b9;
   --color-olive: #575757;
   --color-clay: #be5b3f;
@@ -48,7 +52,11 @@
   --color-warm-gray: var(--color-warm-gray);
   --color-silver: var(--color-silver);
   --color-laterite: var(--color-laterite);
+  --color-benicio-orange: var(--color-benicio-orange);
+  --color-benicio-blend: var(--color-benicio-blend);
   --color-bone: var(--color-bone);
+  --color-mist: var(--color-mist);
+  --color-gradient-gray: var(--color-gradient-gray);
   --color-sand: var(--color-sand);
   --color-olive: var(--color-olive);
   --color-clay: var(--color-clay);
@@ -57,7 +65,8 @@
 
   --font-sans: var(--font-bahnschrift);
   --font-display: var(--font-bahnschrift);
-  --font-mono: var(--font-ibm-plex-mono);
+  --font-mono: var(--font-roboto-slab);
+  --font-serif: var(--font-roboto-slab);
 
   --spacing-page-x: var(--space-page-x);
   --spacing-section-y: var(--space-section-y);

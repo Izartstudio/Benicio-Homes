@@ -7,6 +7,8 @@ import {
   type ContactFormState,
   type ContactFormErrors,
 } from "@/app/actions/contact";
+import { CTA } from "@/components/ui/cta";
+import styles from "./contact-section.module.css";
 
 type FieldProps = {
   autoComplete?: string;
@@ -33,7 +35,7 @@ function FieldError({
   }
 
   return (
-    <p className="mt-1 font-display text-[0.75rem] leading-none text-laterite">
+    <p className="mt-1 text-[0.75rem] leading-none text-laterite">
       {errors[name]}
     </p>
   );
@@ -50,7 +52,7 @@ function TextField({
   return (
     <div className="border-b border-[#464646]/15 pb-[0.8rem]">
       <label
-        className="block font-display text-[clamp(1rem,1.25vw,1.125rem)] leading-none text-[#464646]"
+        className="block [font-size:var(--contact-form-text-size)] leading-none text-[#464646]"
         htmlFor={`contact-${name}`}
       >
         {label}
@@ -59,7 +61,7 @@ function TextField({
         aria-describedby={errors?.[name] ? `contact-${name}-error` : undefined}
         aria-invalid={Boolean(errors?.[name])}
         autoComplete={autoComplete}
-        className="mt-2 block w-full bg-transparent font-display text-[1rem] leading-none text-[#232323] outline-none"
+        className="mt-2 block w-full bg-transparent [font-size:var(--contact-form-text-size)] leading-none text-[#232323] outline-none"
         id={`contact-${name}`}
         name={name}
         required={required}
@@ -72,11 +74,38 @@ function TextField({
   );
 }
 
+function ProjectSelect() {
+  return (
+    <div className="relative border-b border-[#464646]/15 pb-[0.8rem]">
+      <label className="sr-only" htmlFor="contact-interested-project">
+        Interested Project
+      </label>
+      <select
+        className="block w-full appearance-none bg-transparent pr-[2.5rem] [font-size:var(--contact-form-text-size)] leading-none text-[#232323] outline-none"
+        defaultValue=""
+        id="contact-interested-project"
+        name="interestedProject"
+      >
+        <option disabled value="">
+          Interested Project
+        </option>
+        <option value="Vanam Villa">Vanam Villa</option>
+        <option value="Zen Villa">Zen Villa</option>
+        <option value="Majodra Villa">Majodra Villa</option>
+      </select>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[0.65rem] top-[0.15rem] size-[0.55rem] rotate-45 border-b border-r border-[#232323]"
+      />
+    </div>
+  );
+}
+
 function MessageField({ errors }: { errors?: ContactFormErrors }) {
   return (
     <div className="border-b border-[#464646]/15 pb-[0.8rem]">
       <label
-        className="block font-display text-[clamp(1rem,1.25vw,1.125rem)] leading-none text-[#232323]"
+        className="block [font-size:var(--contact-form-text-size)] leading-none text-[#232323]"
         htmlFor="contact-message"
       >
         Enter Your Message
@@ -86,7 +115,7 @@ function MessageField({ errors }: { errors?: ContactFormErrors }) {
           errors?.message ? "contact-message-error" : undefined
         }
         aria-invalid={Boolean(errors?.message)}
-        className="mt-3 block min-h-[7.7rem] w-full resize-none bg-transparent font-display text-[1rem] leading-[1.45] text-[#232323] outline-none"
+        className="mt-3 block min-h-[7.7rem] w-full resize-none bg-transparent [font-size:var(--contact-form-text-size)] leading-[1.45] text-[#232323] outline-none"
         id="contact-message"
         name="message"
         required
@@ -102,16 +131,16 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button
-      className="mt-[2.625rem] flex h-[3.125rem] w-full items-center justify-between bg-[#4e4e4e] px-[0.75rem] font-display text-[1rem] leading-none text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+    <CTA
+      arrowClassName="text-[1.35rem] leading-none"
+      className="mt-[2.625rem] flex h-[3.125rem] w-full items-center justify-between px-[0.75rem] [font-size:var(--contact-form-text-size)] leading-none disabled:cursor-not-allowed disabled:opacity-60"
+      darkBackground="#4e4e4e"
       disabled={pending}
       type="submit"
+      variant="dark"
     >
-      <span>{pending ? "Sending" : "Send Enquiry"}</span>
-      <span aria-hidden="true" className="text-[1.35rem] leading-none">
-        &rsaquo;
-      </span>
-    </button>
+      {pending ? "Sending" : "Send Enquiry"}
+    </CTA>
   );
 }
 
@@ -131,7 +160,7 @@ export function ContactForm() {
   return (
     <form
       action={formAction}
-      className="relative z-10 flex h-full flex-col px-[2.625rem] pb-[3.25rem] pt-[3.65rem]"
+      className={`relative z-10 flex h-full flex-col px-[2.625rem] pb-[4rem] pt-[3.65rem] ${styles.form}`}
       noValidate
       ref={formRef}
     >
@@ -165,13 +194,14 @@ export function ContactForm() {
           label="Location"
           name="location"
         />
+        <ProjectSelect />
         <MessageField errors={state.errors} />
       </div>
 
       <div className="mt-auto">
         {state.message ? (
           <p
-            className={`mb-[1rem] font-display text-[0.875rem] leading-[1.35] ${
+            className={`mb-[1rem] text-[0.875rem] leading-[1.35] ${
               state.status === "success" ? "text-[#232323]" : "text-laterite"
             }`}
             role={state.status === "error" ? "alert" : "status"}
