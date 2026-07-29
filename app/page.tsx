@@ -1,6 +1,7 @@
 import { AboutSection } from "@/sections/home/about-section";
 import { ContactSection } from "@/components/contact/contact-section";
 import { Footer } from "@/components/footer/footer";
+import { HomepageInteractionGuard } from "@/components/homepage-interaction-guard";
 import { BlendScope } from "@/components/ui/blend-scope";
 import { FeaturedProjectsSection } from "@/sections/home/featured-projects-section";
 import { ImageShowcaseSection } from "@/sections/home/image-showcase-section";
@@ -17,7 +18,7 @@ export default async function Home() {
   const journalArticles = await getHomepageJournalArticles();
 
   return (
-    <main>
+    <HomepageInteractionGuard>
       <TexturedHeroSection />
       <StepsSection />
       <FeaturedProjectsSection />
@@ -32,6 +33,6 @@ export default async function Home() {
       <JournalSection articles={journalArticles} />
       <ContactSection />
       <Footer />
-    </main>
+    </HomepageInteractionGuard>
   );
 }

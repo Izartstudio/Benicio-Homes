@@ -12,6 +12,7 @@ import { OrangeBlock } from "@/components/ui/orange-block";
 gsap.registerPlugin(ScrollTrigger);
 
 const texturePath = "/assets/textures/concrete-background-textures-09-1.webp";
+const MOBILE_SCROLL_VH_PER_TRANSITION = 70;
 
 const projects = [
   {
@@ -58,8 +59,8 @@ const projects = [
 
 const imageStateClasses = [
   "left-0 top-[19.65%] z-20 h-[51.46%] w-[64.24%] opacity-100",
-  "bottom-[-3.5%] left-[5.56%] z-10 h-[23.5%] w-[50.7%] scale-[0.96] opacity-40",
-  "bottom-[-14%] left-[19%] z-0 h-[21%] w-[45%] scale-[0.9] opacity-0",
+  "invisible left-0 top-[19.65%] z-10 h-[51.46%] w-[64.24%] opacity-0",
+  "invisible left-0 top-[19.65%] z-0 h-[51.46%] w-[64.24%] opacity-0",
 ] as const;
 
 export function FeaturedProjectsSection() {
@@ -86,7 +87,6 @@ export function FeaturedProjectsSection() {
         },
         (context) => {
       const isMobile = Boolean(context.conditions?.mobile);
-      const isTablet = Boolean(context.conditions?.tablet);
       const reduceMotion = Boolean(context.conditions?.reduceMotion);
       const titleTravel = reduceMotion ? 0 : isMobile ? 5 : 8;
       const images = gsap.utils.toArray<HTMLElement>(
@@ -131,8 +131,22 @@ export function FeaturedProjectsSection() {
             height: "51.46%",
           };
 
-      gsap.set(images, { filter: "blur(0px)", transformOrigin: "50% 50%" });
-      gsap.set(images, { clipPath: "inset(0% 0% 0% 0%)" });
+      gsap.set(images, {
+        ...activeImageState,
+        autoAlpha: 0,
+        clipPath: "inset(100% 0% 0% 0%)",
+        filter: "blur(0px)",
+        scale: 1,
+        transformOrigin: "50% 50%",
+        y: 0,
+      });
+      gsap.set(images[0], {
+        ...activeImageState,
+        autoAlpha: 1,
+        clipPath: "inset(0% 0% 0% 0%)",
+        scale: 1,
+        y: 0,
+      });
       gsap.set(titles, {
         autoAlpha: 0,
         y: titleTravel,
@@ -146,21 +160,6 @@ export function FeaturedProjectsSection() {
       gsap.set(contentGroups.slice(1), { autoAlpha: 0, y: 18 });
       gsap.set(progressFills, { width: "33%" });
 
-      if (isMobile || isTablet) {
-        gsap.set(images[0], {
-          ...activeImageState,
-          autoAlpha: 1,
-          scale: 1,
-          y: 0,
-        });
-        gsap.set(images.slice(1), {
-          ...activeImageState,
-          autoAlpha: 0,
-          scale: 1,
-          y: 0,
-        });
-      }
-
       const timeline = gsap.timeline({
         defaults: {
           ease: "power3.inOut",
@@ -168,11 +167,22 @@ export function FeaturedProjectsSection() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=300%",
+          end: isMobile
+            ? () =>
+                `+=${Math.round(
+                  window.innerHeight *
+                    Math.max(projects.length - 1, 1) *
+                    (MOBILE_SCROLL_VH_PER_TRANSITION / 100),
+                )}`
+            : "+=300%",
           pin: true,
           scrub: 0.25,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          // This upstream pin must establish its spacer before Journal measures.
+          // Responsive matchMedia callbacks can otherwise recreate the two pins
+          // in listener order instead of document order.
+          refreshPriority: 20,
         },
       });
 
@@ -266,10 +276,15 @@ export function FeaturedProjectsSection() {
       };
 
       timeline.to({}, { duration: 1 });
-      transitionToProject(0, 1);
-      timeline.to({}, { duration: 0.75 });
-      transitionToProject(1, 2);
-      timeline.to({}, { duration: 1 });
+      projects.slice(1).forEach((_, index) => {
+        const toIndex = index + 1;
+        transitionToProject(toIndex - 1, toIndex);
+
+        if (toIndex < projects.length - 1) {
+          timeline.to({}, { duration: 0.75 });
+        }
+      });
+      timeline.to({}, { duration: isMobile ? 0.35 : 1 });
 
       return () => {
         timeline.scrollTrigger?.kill();

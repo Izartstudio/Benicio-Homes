@@ -1,6 +1,5 @@
 import { ContactForm } from "@/components/contact/contact-form";
 import { ContactTextureSurface } from "@/components/ui/contact-texture-surface";
-import { Reveal } from "@/components/ui/reveal";
 import styles from "./contact-section.module.css";
 
 const defaultHeading = "Begin The Conversation.";
@@ -35,7 +34,7 @@ export function ContactSection({
         data-contact-container
       >
         <div className={styles.leftColumn} data-contact-left-column>
-          <Reveal revealId="contact-intro">
+          <div data-contact-intro-static>
             <div
               className={`max-w-[39rem] ${styles.copyBlock}`}
               data-contact-copy-block
@@ -53,10 +52,10 @@ export function ContactSection({
                 {copy}
               </p>
             </div>
-          </Reveal>
+          </div>
         </div>
 
-        <Reveal revealId="contact-form">
+        <div data-contact-form-static>
           <div
             className={`relative h-[49.5rem] w-[37.9375rem] overflow-hidden bg-[#fafafa] ${styles.card}`}
             data-contact-card
@@ -71,7 +70,7 @@ export function ContactSection({
             />
             <ContactForm />
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

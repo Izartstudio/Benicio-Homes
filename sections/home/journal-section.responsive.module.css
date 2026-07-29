@@ -55,6 +55,11 @@
 }
 
 @media (min-width: 768px) {
+  .responsiveRoot:global([data-section="journal"]) {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
   .responsiveRoot :global([data-journal-static-panel]) {
     position: relative;
     z-index: 2;
@@ -70,7 +75,8 @@
 @media (max-width: 767px) {
 
   .responsiveRoot :global([data-journal-restoration-texture]) {
-    height: 121.7rem;
+    bottom: 0;
+    height: auto;
   }
 
   .responsiveRoot :global([data-journal-restoration-texture-image]) {
@@ -82,100 +88,58 @@
   .responsiveRoot :global([data-journal-contact-transition]) {
     pointer-events: none;
     position: absolute;
-    inset: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 2;
     display: block;
-    background:
-      linear-gradient(
-        180deg,
-        rgb(185 185 185 / 0%) 0%,
-        rgb(185 185 185 / 0%) 50%,
-        rgb(185 185 185 / 7%) 58%,
-        rgb(185 185 185 / 24%) 68%,
-        rgb(185 185 185 / 55%) 80%,
-        rgb(185 185 185 / 82%) 87%,
-        #b9b9b9 92%,
-        #b9b9b9 100%
-      );
-  }
-
-  .responsiveRoot :global([data-journal-foreground]) {
-    display: grid;
-    min-height: 54rem;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 3.5rem 0 4rem;
-  }
-
-  .responsiveRoot :global([data-journal-static-panel]) {
-    margin-inline: 1.75rem;
-    height: 34rem;
-    padding: 3rem 2.25rem;
-  }
-
-  .responsiveRoot :global([data-journal-viewport]) {
-    width: 100vw;
-    overflow-x: auto;
-    padding-left: 1.75rem;
-    scroll-snap-type: x mandatory;
+    height: 20rem;
+    background: linear-gradient(
+      180deg,
+      #cdcdcd 0%,
+      #cdcdcd 55%,
+      #c7c7c7 72%,
+      #bfbfbf 86%,
+      #b9b9b9 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 18%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 18%,
+      #000 100%
+    );
   }
 
   .responsiveRoot :global([data-journal-track]) {
     transform: none;
   }
 
-  .responsiveRoot :global([data-journal-card]) {
-    width: 78vw;
-    min-width: 78vw;
-    scroll-snap-align: start;
-  }
-
-  .responsiveRoot :global([data-journal-image]) {
-    height: 20rem;
-  }
-
-  .responsiveRoot :global([data-journal-foreground]) {
-    grid-template-columns: minmax(0, 1fr);
-    padding-block: clamp(3.5rem, 16vw, 4rem);
-  }
-
-  .responsiveRoot :global([data-journal-static-panel]) {
-    margin-inline: clamp(1.25rem, 7vw, 1.75rem);
-    width: auto;
-  }
-
-  .responsiveRoot :global([data-journal-viewport]) {
-    width: 100%;
-    padding-left: clamp(1.25rem, 7vw, 1.75rem);
-    padding-right: clamp(1.25rem, 7vw, 1.75rem);
-  }
-
-  .responsiveRoot :global([data-journal-card]) {
-    width: min(78vw, 21rem);
-    min-width: min(78vw, 21rem);
-  }
-
-  .responsiveRoot :global([data-journal-image]) {
-    height: clamp(16rem, 72vw, 20rem);
-  }
   .responsiveRoot:global([data-section="journal"]) {
     background-color: #b9b9b9;
   }
 
   .responsiveRoot :global([data-journal-foreground]) {
     position: relative;
-    display: block;
-    min-height: 129.625rem;
-    padding: 0;
-    overflow: hidden;
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 4.125rem clamp(1.25rem, 7vw, 2.1875rem) 1.5rem;
+    overflow: visible;
   }
 
   .responsiveRoot :global([data-journal-static-panel]) {
-    position: absolute;
-    inset: 0 2.1875rem;
+    position: relative;
+    inset: auto;
     z-index: 0;
     display: block;
-    width: auto;
+    width: 100%;
     height: auto;
     margin: 0;
     padding: 0;
@@ -184,9 +148,8 @@
   }
 
   .intro {
-    position: absolute;
-    left: 0;
-    top: 4.125rem;
+    position: relative;
+    inset: auto;
     max-width: 20rem;
   }
 
@@ -241,12 +204,11 @@
   }
 
   .responsiveRoot :global([data-journal-viewport]) {
-    position: absolute;
-    left: 2.1875rem;
-    right: 2.1875rem;
-    top: 18rem;
+    position: relative;
+    inset: auto;
     z-index: 10;
-    width: auto;
+    width: 100%;
+    margin-top: 4.5rem;
     padding: 0;
     overflow: visible;
   }
@@ -260,8 +222,8 @@
   }
 
   .responsiveRoot :global([data-journal-card]) {
-    width: min(20rem, calc(100vw - 4.375rem));
-    min-width: min(20rem, calc(100vw - 4.375rem));
+    width: min(20rem, 100%);
+    min-width: 0;
   }
 
   .duplicateCard {
@@ -269,7 +231,8 @@
   }
 
   .responsiveRoot :global([data-journal-image]) {
-    height: calc(min(20rem, calc(100vw - 4.375rem)) * 1.0294);
+    height: auto;
+    aspect-ratio: 1 / 1.0294;
   }
 
   .responsiveRoot :global([data-journal-info]) {
@@ -284,16 +247,16 @@
   }
 
   .responsiveRoot :global([data-journal-mobile-footer]) {
-    position: absolute;
-    right: 2.1875rem;
-    bottom: 1.5rem;
-    left: 2.1875rem;
+    position: relative;
+    inset: auto;
     z-index: 20;
     display: grid;
     grid-template-columns: 9.25rem minmax(0, 1fr) 0.9375rem;
     column-gap: 0.75rem;
     align-items: center;
+    width: 100%;
     height: 2.4375rem;
+    margin-top: 4.25rem;
   }
 
   .responsiveRoot :global([data-journal-mobile-cta]) {
@@ -328,11 +291,12 @@
 @media (max-width: 430px) {
 
   .responsiveRoot :global([data-journal-restoration-texture]) {
-    height: calc(59.9375rem + 240.88vw);
+    bottom: 0;
+    height: auto;
   }
 
   .responsiveRoot :global([data-journal-card]) {
-    width: 78vw;
-    min-width: 78vw;
+    width: 100%;
+    min-width: 0;
   }
 }

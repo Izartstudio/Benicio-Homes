@@ -66,13 +66,17 @@
   }
 
   .responsiveRoot :global([data-restoration-heading-wrapper]) {
-    top: 3.65rem;
+    top: calc(6.75rem - clamp(0.9rem, 4.485vw, 1.17rem));
     padding-inline: 1.25rem;
   }
 
   .responsiveRoot :global([data-restoration-heading]) {
-    font-size: clamp(3.15rem, 14vw, 3.75rem);
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(2rem, 11.5vw, 3rem);
     line-height: 0.78;
+    text-align: center;
+    white-space: nowrap;
   }
 
   .responsiveRoot :global([data-restoration-stage]) {
@@ -135,12 +139,6 @@
 
   .responsiveRoot :global([data-restoration-label="right"]) {
     text-align: right;
-  }
-}
-
-@media (max-width: 430px) {
-  .responsiveRoot :global([data-restoration-heading]) {
-    font-size: clamp(2.25rem, 14vw, 3.65rem);
   }
 }
 

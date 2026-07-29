@@ -18,6 +18,13 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .responsiveRoot :global([data-gallery-texture]) {
+    left: -2.5%;
+    width: 104.1%;
+  }
+}
+
 @media (max-width: 1023px) {
 
   .responsiveRoot:global([data-section="legacy-gallery"]) {

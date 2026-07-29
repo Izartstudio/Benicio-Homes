@@ -6,7 +6,6 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState,
   type PointerEvent,
 } from "react";
 import gsap from "gsap";
@@ -64,9 +63,6 @@ const markers = [
 ] as const;
 
 export function ImageShowcaseSection() {
-  const [layoutMode, setLayoutMode] = useState<
-    "desktop" | "mobile" | null
-  >(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const mobileRevealRef = useRef<HTMLDivElement | null>(null);
   const mobileSequenceRef = useRef<HTMLDivElement | null>(null);
@@ -82,20 +78,6 @@ export function ImageShowcaseSection() {
     startX: 0,
     targetScrollLeft: 0,
   });
-
-  useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px)");
-    const updateLayoutMode = () => {
-      setLayoutMode(media.matches ? "desktop" : "mobile");
-    };
-
-    updateLayoutMode();
-    media.addEventListener("change", updateLayoutMode);
-
-    return () => {
-      media.removeEventListener("change", updateLayoutMode);
-    };
-  }, []);
 
   const getLoopWidth = (viewport: HTMLDivElement) => viewport.scrollWidth / 2;
 
@@ -155,7 +137,7 @@ export function ImageShowcaseSection() {
         animationFrameRef.current = null;
       }
     };
-  }, [layoutMode]);
+  }, []);
 
   const stopMobileTicker = useCallback(() => {
     const track = mobileTrackRef.current;
@@ -266,7 +248,7 @@ export function ImageShowcaseSection() {
       media.removeEventListener("change", handleMediaChange);
       stopMobileTicker();
     };
-  }, [layoutMode, startMobileTicker, stopMobileTicker]);
+  }, [startMobileTicker, stopMobileTicker]);
 
   const stopSmoothScroll = () => {
     if (animationFrameRef.current === null) {
@@ -387,11 +369,11 @@ export function ImageShowcaseSection() {
         />
       </div>
 
-      {layoutMode === "desktop" ? (
-        <div
-          className="relative mx-auto h-full w-full max-w-[1440px]"
-          data-showcase-content
-        >
+      <div
+        className="relative mx-auto h-full w-full max-w-[1440px]"
+        data-showcase-content
+        data-showcase-desktop-layout
+      >
         <h2
           className="absolute left-1/2 top-[5.75rem] z-30 w-[min(36.5rem,72vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.35rem,2.1vw,1.875rem)] font-normal uppercase leading-[1.25] tracking-[0.01em] text-transparent"
           data-showcase-heading
@@ -474,7 +456,6 @@ export function ImageShowcaseSection() {
                       alt={index < showcaseImages.length ? image.alt : ""}
                       fill
                       draggable={false}
-                      loading="eager"
                       sizes="(min-width: 1024px) 16vw, 42vw"
                       className="pointer-events-none select-none object-cover"
                     />
@@ -484,17 +465,15 @@ export function ImageShowcaseSection() {
             </div>
           </div>
         </div>
-        </div>
-      ) : null}
+      </div>
 
-      {layoutMode === "mobile" ? (
-        <Reveal
-          className="relative mx-auto h-full w-full"
-          data-showcase-mobile-layout
-          onRevealComplete={handleMobileRevealComplete}
-          revealId="image-showcase-mobile"
-        >
-          <div ref={mobileRevealRef} className="relative h-full w-full">
+      <Reveal
+        className="relative mx-auto h-full w-full"
+        data-showcase-mobile-layout
+        onRevealComplete={handleMobileRevealComplete}
+        revealId="image-showcase-mobile"
+      >
+        <div ref={mobileRevealRef} className="relative h-full w-full">
           <h2
             className="absolute left-1/2 top-[4rem] z-30 w-[min(21rem,84vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.25rem,5.65vw,1.55rem)] font-normal uppercase leading-[1.25] tracking-[0.01em] text-transparent"
             data-showcase-mobile-heading
@@ -575,7 +554,6 @@ export function ImageShowcaseSection() {
                       alt={image.alt}
                       fill
                       draggable={false}
-                      loading="eager"
                       sizes="42vw"
                       className="pointer-events-none select-none object-cover"
                     />
@@ -608,7 +586,6 @@ export function ImageShowcaseSection() {
                       alt=""
                       fill
                       draggable={false}
-                      loading="eager"
                       sizes="42vw"
                       className="pointer-events-none select-none object-cover"
                     />
@@ -617,9 +594,8 @@ export function ImageShowcaseSection() {
               </div>
             </div>
           </div>
-          </div>
-        </Reveal>
-      ) : null}
+        </div>
+      </Reveal>
     </section>
   );
 }

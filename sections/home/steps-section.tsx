@@ -2,7 +2,7 @@
 
 import responsiveStyles from "./steps-section.responsive.module.css";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { OrangeBlock } from "@/components/ui/orange-block";
@@ -43,7 +43,7 @@ const markers = [
 ] as const;
 
 export function StepsSection() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = document.querySelector<HTMLElement>(
       "[data-steps-animation-canvas]",
     );
@@ -110,6 +110,11 @@ export function StepsSection() {
       gsap.set(mainParagraph, { autoAlpha: 0, y: 14 });
     }
     gsap.set(supportingLabels, { autoAlpha: 0, y: 8 });
+    [...stairs, mainParagraph, ...supportingLabels]
+      .filter(Boolean)
+      .forEach((element) => {
+        (element as HTMLElement).dataset.revealInitialized = "";
+      });
 
     const paragraphTimeline = mainParagraph
       ? gsap

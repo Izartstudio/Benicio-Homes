@@ -2,7 +2,7 @@
 
 import responsiveStyles from "./legacy-gallery-section.responsive.module.css";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { setupSectionReveals } from "@/utils/setup-section-reveals";
 import { CdnImage } from "@/components/ui/cdn-image";
 import { ParallaxMedia } from "@/components/ui/parallax-media";
@@ -24,7 +24,7 @@ const galleryImages = [
 ] as const;
 
 export function LegacyGallerySection() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = document.querySelector<HTMLElement>(
       '[data-section="legacy-gallery"]',
     );
@@ -134,7 +134,6 @@ export function LegacyGallerySection() {
 
       <div
         className="relative h-[6.9375rem] w-full overflow-hidden"
-        data-reveal-child
         data-gallery-texture-stack
       >
         <figure

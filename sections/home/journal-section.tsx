@@ -2,7 +2,7 @@
 
 import responsiveStyles from "./journal-section.responsive.module.css";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CTA } from "@/components/ui/cta";
@@ -21,6 +21,7 @@ export function JournalSection({
   articles = fallbackJournalArticles,
 }: JournalSectionProps) {
   const visibleJournalArticles = [...articles, ...articles];
+  const sectionRef = useRef<HTMLElement | null>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   const navigateJournal = (direction: -1 | 1) => {
@@ -45,14 +46,8 @@ export function JournalSection({
     });
   };
 
-  useEffect(() => {
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      return;
-    }
-
-    const section = document.querySelector<HTMLElement>(
-      '[data-section="journal"]',
-    );
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
     const viewport = section?.querySelector<HTMLElement>(
       "[data-journal-viewport]",
     );
@@ -62,38 +57,51 @@ export function JournalSection({
       return;
     }
 
-    const ctx = gsap.context(() => {
-      const getScrollDistance = () =>
-        Math.max(0, track.scrollWidth - viewport.clientWidth);
+    const media = gsap.matchMedia();
 
-      if (getScrollDistance() <= 1) {
-        return;
-      }
+    media.add("(min-width: 768px)", () => {
+      const ctx = gsap.context(() => {
+        const getScrollDistance = () =>
+          Math.max(0, track.scrollWidth - viewport.clientWidth);
 
-      gsap.set(track, { x: 0, force3D: true });
+        if (getScrollDistance() <= 1) {
+          return;
+        }
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${getScrollDistance()}`,
-          pin: true,
-          scrub: 0.25,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
+        gsap.set(track, { x: 0, force3D: true });
 
-      timeline.to(track, {
-        x: () => -getScrollDistance(),
-        ease: "none",
-      });
-      scrollTriggerRef.current = timeline.scrollTrigger ?? null;
-    }, section);
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${getScrollDistance()}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.25,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            // Refresh after the upstream Featured Projects pin has finalized its
+            // responsive spacer, regardless of matchMedia recreation order.
+            refreshPriority: 10,
+          },
+        });
+
+        timeline.to(track, {
+          x: () => -getScrollDistance(),
+          ease: "none",
+        });
+        scrollTriggerRef.current = timeline.scrollTrigger ?? null;
+      }, section);
+
+      return () => {
+        scrollTriggerRef.current = null;
+        ctx.revert();
+      };
+    });
 
     return () => {
       scrollTriggerRef.current = null;
-      ctx.revert();
+      media.revert();
     };
   }, []);
 
@@ -103,6 +111,7 @@ export function JournalSection({
       className={`relative isolate overflow-hidden bg-[#b9b9b9] text-[#232323] ${responsiveStyles.responsiveRoot}`}
       data-section="journal"
       id="journal"
+      ref={sectionRef}
     >
       <div
         aria-hidden="true"

@@ -337,8 +337,3 @@
     padding-inline: 0.8125rem 0.625rem;
   }
 }
-@media (max-width: 374px) {
-  .responsiveRoot :global([data-navbar-container]) {
-    padding-inline: 1.5rem;
-  }
-}

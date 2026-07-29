@@ -1,10 +1,23 @@
+.responsiveRoot :global([data-showcase-panel]),
+.responsiveRoot :global([data-showcase-mobile-panel]) {
+  left: 50%;
+  right: auto;
+  width: 100vw;
+  max-width: none;
+  transform: translateX(-50%);
+}
+
+.responsiveRoot :global([data-showcase-desktop-layout]) {
+  display: block;
+}
+
+.responsiveRoot :global([data-showcase-mobile-layout]) {
+  display: none;
+}
+
 @media (max-width: 1023px) {
   .responsiveRoot:global([data-section="image-showcase"]) {
     max-width: 100%;
-  }
-
-  .responsiveRoot :global([data-showcase-mobile-layout]) {
-    display: block;
   }
 
   .responsiveRoot :global([data-showcase-mobile-heading]) {
@@ -97,9 +110,12 @@
 }
 
 @media (max-width: 767px) {
+  .responsiveRoot :global([data-showcase-desktop-layout]) {
+    display: none;
+  }
 
-  .responsiveRoot:global([data-section="image-showcase"]) {
-    height: 43.75rem;
+  .responsiveRoot :global([data-showcase-mobile-layout]) {
+    display: block;
   }
 
   .responsiveRoot :global([data-showcase-heading]) {

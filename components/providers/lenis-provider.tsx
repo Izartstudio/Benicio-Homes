@@ -22,23 +22,44 @@ const LenisContext = createContext<Lenis | null>(null);
 /** The single document-level Lenis instance for public site routes. */
 export function LenisProvider({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
   const refreshFrameRef = useRef<number | null>(null);
-  const viewportWidthRef = useRef<number | null>(null);
+  const refreshTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
 
   const scheduleRefresh = useCallback(() => {
+    if (refreshTimerRef.current !== null) {
+      window.clearTimeout(refreshTimerRef.current);
+    }
     if (refreshFrameRef.current !== null) {
       cancelAnimationFrame(refreshFrameRef.current);
     }
 
-    refreshFrameRef.current = requestAnimationFrame(() => {
-      refreshFrameRef.current = null;
-      ScrollTrigger.refresh();
-    });
+    refreshTimerRef.current = window.setTimeout(() => {
+      refreshTimerRef.current = null;
+      refreshFrameRef.current = requestAnimationFrame(() => {
+        refreshFrameRef.current = requestAnimationFrame(() => {
+          refreshFrameRef.current = null;
+          lenisRef.current?.resize();
+          ScrollTrigger.sort();
+          ScrollTrigger.refresh();
+          ScrollTrigger.update();
+          lenisRef.current?.resize();
+        });
+      });
+    }, 180);
   }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    // Resize is owned by the settled handler below. Letting ScrollTrigger also
+    // refresh on every raw DevTools/zoom resize event can measure downstream
+    // pins while an upstream responsive pin is still being rebuilt.
+    ScrollTrigger.config({
+      autoRefreshEvents: "visibilitychange",
+      ignoreMobileResize: true,
+    });
 
     if (mediaQuery.matches) {
       return;
@@ -78,6 +99,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       wheelMultiplier: 0.95,
     });
 
+    lenisRef.current = instance;
     const update = (time: number) => {
       instance.raf(time * 1000);
     };
@@ -85,7 +107,6 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     instance.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
-    ScrollTrigger.config({ ignoreMobileResize: true });
     const publishFrame = requestAnimationFrame(() => {
       document.documentElement.dataset.scrollEngine = "lenis";
       setLenis(instance);
@@ -97,14 +118,35 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       gsap.ticker.remove(update);
       instance.off("scroll", ScrollTrigger.update);
       instance.destroy();
+      lenisRef.current = null;
       setLenis(null);
     };
   }, []);
 
   useEffect(() => {
-    scheduleRefresh();
+    let active = true;
+    const refreshWhenReady = () => {
+      void document.fonts.ready.then(() => {
+        if (active) {
+          scheduleRefresh();
+        }
+      });
+    };
+
+    if (document.readyState === "complete") {
+      refreshWhenReady();
+    } else {
+      window.addEventListener("load", refreshWhenReady, { once: true });
+    }
 
     return () => {
+      active = false;
+      window.removeEventListener("load", refreshWhenReady);
+
+      if (refreshTimerRef.current !== null) {
+        window.clearTimeout(refreshTimerRef.current);
+        refreshTimerRef.current = null;
+      }
       if (refreshFrameRef.current !== null) {
         cancelAnimationFrame(refreshFrameRef.current);
         refreshFrameRef.current = null;
@@ -113,38 +155,15 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   }, [pathname, scheduleRefresh]);
 
   useEffect(() => {
-    let active = true;
-    const handleLoad = () => scheduleRefresh();
-
-    window.addEventListener("load", handleLoad, { once: true });
-    void document.fonts.ready.then(() => {
-      if (active) {
-        scheduleRefresh();
-      }
-    });
-
-    return () => {
-      active = false;
-      window.removeEventListener("load", handleLoad);
-    };
-  }, [scheduleRefresh]);
-
-  useEffect(() => {
-    viewportWidthRef.current = window.innerWidth;
-
-    const handleResize = () => {
-      if (viewportWidthRef.current === window.innerWidth) {
-        return;
-      }
-
-      viewportWidthRef.current = window.innerWidth;
-      scheduleRefresh();
-    };
+    const handleResize = () => scheduleRefresh();
+    const visualViewport = window.visualViewport;
 
     window.addEventListener("resize", handleResize);
+    visualViewport?.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      visualViewport?.removeEventListener("resize", handleResize);
     };
   }, [scheduleRefresh]);
 

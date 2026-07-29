@@ -2,7 +2,7 @@
 
 import responsiveStyles from "./restoration-showcase-section.responsive.module.css";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -28,7 +28,7 @@ const restorationSlides = [
     leftLabel: "Heritage Value",
     rightLabel: "Portuguese-Inspired Architecture",
     number: "Restoration 002 -",
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/restoration-section-villa2.webp",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section-villa2.webp",
     alt: "Restoration project facade with warm laterite material",
   },
 ] as const;
@@ -36,6 +36,7 @@ const restorationSlides = [
 
 export function RestorationShowcaseSection() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const leftLabelRef = useRef<HTMLParagraphElement | null>(null);
   const rightLabelRef = useRef<HTMLParagraphElement | null>(null);
@@ -44,10 +45,8 @@ export function RestorationShowcaseSection() {
 
   const activeSlide = restorationSlides[activeSlideIndex];
 
-  useEffect(() => {
-    const section = document.querySelector<HTMLElement>(
-      '[data-section="restoration-showcase"]',
-    );
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
     const carousel = section?.querySelector<HTMLElement>(
       "[data-restoration-carousel]",
     );
@@ -224,6 +223,7 @@ export function RestorationShowcaseSection() {
       aria-labelledby="restoration-showcase-title"
       className={`relative isolate overflow-hidden bg-[#FAFAFA] text-[#232323] ${responsiveStyles.responsiveRoot}`}
       data-section="restoration-showcase"
+      ref={sectionRef}
     >
       <div
         aria-hidden="true"
@@ -281,9 +281,11 @@ export function RestorationShowcaseSection() {
             className="relative aspect-[535/342] w-full overflow-hidden"
             data-restoration-carousel
           >
-            {restorationSlides.map((slide) => (
+            {restorationSlides.map((slide, index) => (
               <figure
-                className="absolute inset-0 h-full w-full overflow-hidden"
+                className={`absolute inset-0 h-full w-full overflow-hidden ${
+                  index === 0 ? "visible opacity-100" : "invisible opacity-0"
+                }`}
                 data-restoration-slide
                 key={slide.id}
               >

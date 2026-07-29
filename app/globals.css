@@ -2,3 +2,84 @@
 @import "lenis/dist/lenis.css";
 @import "../styles/tokens.css";
 @import "../styles/base.css";
+
+[data-homepage-root],
+body:has([data-homepage-root]) [data-navbar] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+:is(
+    [data-homepage-root],
+    body:has([data-homepage-root]) [data-navbar]
+  )
+  :where(img, picture, svg) {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+[data-homepage-root]
+  :where(input, textarea, select, option, [contenteditable="true"]) {
+  -webkit-touch-callout: default;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/*
+ * Reveal elements arrive from the server in their actual animation start
+ * state, so hydration never paints them once, hides them, and paints again.
+ */
+[data-reveal]:not([data-reveal-initialized]) {
+  transform: translate3d(0, var(--reveal-y, 22px), 0);
+}
+
+[data-reveal][data-reveal-fade="true"]:not([data-reveal-initialized]),
+[data-homepage-root]
+  [data-reveal-child]:not([data-reveal-initialized]),
+[data-steps-animation-canvas]
+  :is(
+    [data-architectural-stair],
+    [data-step-copy],
+    [data-step-location],
+    [data-step-link]
+  ):not([data-reveal-initialized]),
+[data-section="legacy"]
+  [data-architectural-stair]:not([data-reveal-initialized]) {
+  visibility: hidden;
+  opacity: 0;
+}
+
+[data-homepage-root]
+  [data-reveal-child]:not([data-reveal-initialized]),
+[data-steps-animation-canvas]
+  :is(
+    [data-architectural-stair],
+    [data-step-copy],
+    [data-step-location],
+    [data-step-link]
+  ):not([data-reveal-initialized]),
+[data-section="legacy"]
+  [data-architectural-stair]:not([data-reveal-initialized]) {
+  transform: translate3d(0, 22px, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal]:not([data-reveal-initialized]),
+  [data-homepage-root]
+    [data-reveal-child]:not([data-reveal-initialized]),
+  [data-steps-animation-canvas]
+    :is(
+      [data-architectural-stair],
+      [data-step-copy],
+      [data-step-location],
+      [data-step-link]
+    ):not([data-reveal-initialized]),
+  [data-section="legacy"]
+    [data-architectural-stair]:not([data-reveal-initialized]) {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+}

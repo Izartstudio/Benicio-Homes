@@ -4,13 +4,18 @@
   }
 
   html {
+    max-width: 100%;
+    overflow-x: clip;
     background: var(--color-bone);
     color: var(--color-ink);
     scroll-behavior: auto;
   }
 
   body {
+    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
+    overflow-x: clip;
     background: var(--color-bone);
     color: var(--color-ink);
     font-family: var(--font-bahnschrift);

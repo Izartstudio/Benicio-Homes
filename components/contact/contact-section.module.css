@@ -1,3 +1,11 @@
+.section,
+.section :global([data-contact-intro-static]),
+.section :global([data-contact-form-static]) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
 .form {
   --contact-form-text-size: 1.125rem;
   font-family: var(--font-roboto-slab);

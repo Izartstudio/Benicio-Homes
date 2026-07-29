@@ -15,12 +15,12 @@ gsap.registerPlugin(ScrollTrigger);
 const storyImages = {
   upper: {
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/story-section-upper.webp",
-    loading: "eager",
+    loading: "lazy",
     alt: "Open sky above a tropical villa",
   },
   hero: {
     url: "/assets/storysection/story-hero.webp",
-    loading: "eager",
+    loading: "lazy",
     alt: "Goan coastal landscape and villa atmosphere",
   },
 } as const;

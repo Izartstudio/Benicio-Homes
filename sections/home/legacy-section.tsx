@@ -3,7 +3,7 @@
 import responsiveStyles from "./legacy-section.responsive.module.css";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CTA } from "@/components/ui/cta";
@@ -14,52 +14,64 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 export function LegacySection() {
-  useEffect(() => {
-    const section = document.querySelector<HTMLElement>('[data-section="legacy"]');
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
 
     if (!section) {
       return;
     }
 
-    const cleanupReveals = setupSectionReveals(section);
-    const stairs = gsap.utils.toArray<HTMLElement>(
-      "[data-architectural-stair]",
-      section,
-    );
+    let cleanupReveals = () => {};
+    let stairs: HTMLElement[] = [];
+    const ctx = gsap.context(() => {
+      cleanupReveals = setupSectionReveals(section);
+      stairs = gsap.utils.toArray<HTMLElement>(
+        "[data-architectural-stair]",
+        section,
+      );
 
-    if (stairs.length === 0) {
-      return cleanupReveals;
-    }
+      if (stairs.length === 0) {
+        return;
+      }
 
-    gsap.set(stairs, { autoAlpha: 0, y: 20 });
+      gsap.set(stairs, { autoAlpha: 0, y: 20 });
+      stairs.forEach((stair) => {
+        stair.dataset.revealInitialized = "";
+      });
 
-    const stairTimeline = gsap.timeline({
-      paused: true,
-      defaults: {
-        duration: 0.78,
-        ease: "power3.out",
-      },
-    });
+      const stairTimeline = gsap.timeline({
+        paused: true,
+        defaults: {
+          duration: 0.78,
+          ease: "power3.out",
+        },
+      });
 
-    stairTimeline.to(stairs, {
-      autoAlpha: 1,
-      y: 0,
-      stagger: 0.08,
-    });
+      stairTimeline.to(
+        stairs,
+        {
+          autoAlpha: 1,
+          clearProps: "opacity,visibility,transform",
+          stagger: 0.08,
+          y: 0,
+        },
+      );
 
-    const stairTrigger = ScrollTrigger.create({
-      trigger: section,
-      start: "top 68%",
-      once: true,
-      onEnter: () => {
-        stairTimeline.play(0);
-      },
-    });
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 68%",
+        once: true,
+        onEnter: () => {
+          stairTimeline.play(0);
+        },
+      });
+    }, section);
 
     return () => {
       cleanupReveals();
-      stairTrigger.kill();
-      stairTimeline.kill();
+      ctx.revert();
       gsap.set(stairs, { clearProps: "opacity,visibility,transform" });
     };
   }, []);
@@ -69,6 +81,7 @@ export function LegacySection() {
       aria-labelledby="legacy-section-title"
       className={`relative isolate overflow-hidden bg-[#2d2d2d] text-[#1A1A1A] ${responsiveStyles.responsiveRoot}`}
       data-section="legacy"
+      ref={sectionRef}
     >
       <div
         className="relative min-h-[clamp(40rem,53.333vw,48rem)]"

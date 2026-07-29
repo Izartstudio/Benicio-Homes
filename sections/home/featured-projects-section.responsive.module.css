@@ -137,10 +137,25 @@
     clip-path: none;
   }
 
+  .responsiveRoot :global([data-featured-decorative-line="panel-top"]) {
+    display: none;
+  }
+
+  .responsiveRoot :global([data-featured-metadata-row]) {
+    border-bottom-color: rgb(255 255 255 / 50%);
+    background: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .responsiveRoot :global([data-featured-metadata-row]:last-child) {
+    border-bottom-color: transparent;
+  }
+
   .responsiveRoot:global([data-section="featured-projects"] [data-featured-scroll-container]),
   .responsiveRoot:global([data-section="featured-projects"] [data-featured-animation-canvas]) {
-    height: 58rem;
-    min-height: 58rem;
+    height: 47rem;
+    min-height: 47rem;
   }
 
   .responsiveRoot :global([data-featured-image-stack] [data-featured-image]) {
@@ -239,14 +254,9 @@
     position: absolute;
     inset: 0;
     display: block;
-    background:
-      linear-gradient(
-        90deg,
-        rgb(185 185 185 / 0%) 0%,
-        rgb(185 185 185 / 62%) 48%,
-        rgb(185 185 185 / 62%) 52%,
-        rgb(185 185 185 / 0%) 100%
-      );
+    background: rgb(255 255 255 / 50%);
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .responsiveRoot :global([data-featured-decorative-accent="laterite-square"]) {

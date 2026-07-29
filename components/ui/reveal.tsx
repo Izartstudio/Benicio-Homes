@@ -3,6 +3,7 @@
 import {
   useLayoutEffect,
   useRef,
+  type CSSProperties,
   type HTMLAttributes,
   type JSX,
   type ReactNode,
@@ -37,6 +38,7 @@ export function Reveal({
   onRevealComplete,
   revealId,
   start = "top 84%",
+  style,
   triggerClosest,
   y = 22,
   ...props
@@ -54,43 +56,64 @@ export function Reveal({
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      gsap.set(element, { autoAlpha: 1, y: 0 });
+      element.dataset.revealInitialized = "";
+      gsap.set(element, {
+        clearProps: "opacity,visibility,transform",
+      });
       onRevealComplete?.();
       return;
     }
+
+    let tween: gsap.core.Tween | null = null;
+    gsap.set(element, fade ? { autoAlpha: 0, y } : { y });
+    element.dataset.revealInitialized = "";
 
     const ctx = gsap.context(() => {
       const trigger = triggerClosest
         ? element.closest<HTMLElement>(triggerClosest) ?? element
         : element;
 
-      gsap.set(element, fade ? { autoAlpha: 0, y } : { y });
-
-      gsap.to(element, {
-        ...(fade ? { autoAlpha: 1 } : {}),
-        y: 0,
-        delay,
-        duration,
-        ease: "power3.out",
-        clearProps: "transform",
-        onComplete: onRevealComplete,
-        scrollTrigger: {
-          trigger,
-          start,
-          once: true,
+      ScrollTrigger.create({
+        trigger,
+        start,
+        once: true,
+        onEnter: () => {
+          tween = gsap.to(
+            element,
+            {
+              ...(fade ? { autoAlpha: 1 } : {}),
+              y: 0,
+              delay,
+              duration,
+              ease: "power3.out",
+              clearProps: fade
+                ? "opacity,visibility,transform"
+                : "transform",
+              onComplete: onRevealComplete,
+            },
+          );
         },
       });
     }, element);
 
     return () => {
+      tween?.kill();
       ctx.revert();
+      gsap.set(element, {
+        clearProps: "opacity,visibility,transform",
+      });
     };
   }, [delay, duration, fade, onRevealComplete, start, triggerClosest, y]);
 
   const revealProps = {
     className,
     "data-reveal": true,
+    "data-reveal-fade": fade ? "true" : undefined,
     "data-reveal-id": revealId,
+    style: {
+      "--reveal-y": `${y}px`,
+      ...style,
+    } as CSSProperties,
     ...props,
   };
 

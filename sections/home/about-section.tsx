@@ -2,7 +2,7 @@
 
 import responsiveStyles from "./about-section.responsive.module.css";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { setupSectionReveals } from "@/utils/setup-section-reveals";
 import { CdnImage } from "@/components/ui/cdn-image";
 import { OrangeBlock } from "@/components/ui/orange-block";
@@ -37,7 +37,7 @@ const aboutImages = {
 } as const;
 
 export function AboutSection() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = document.querySelector<HTMLElement>('[data-section="about"]');
 
     if (!section) {
