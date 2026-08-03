@@ -22,10 +22,10 @@ export const PROJECT_MEDIA = {
     moodboardMobile:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/moodboar-collage-mobile.webp",
     architecture: "/assets/projects/vanam-site-showcase.png",
-    floorPlan01Ground: "/assets/projects/vanam-ground-floor-plan.png",
-    floorPlan01First: "/assets/projects/vanam-first-floor-plan.png",
-    floorPlan02Ground: "/assets/projects/vanam-villa-type-2-ground-floor.png",
-    floorPlan02First: "/assets/projects/vanam-villa-type-2-first-floor.png",
+    floorPlan01Ground: "/assets/projects/villatype01-1.svg",
+    floorPlan01First: "/assets/projects/villatype01-2.svg",
+    floorPlan02Ground: "/assets/projects/vilatype02-1.svg",
+    floorPlan02First: "/assets/projects/villatype02-2.svg",
     gallery: [
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-gallery1.webp",
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-gallery2.webp",
@@ -125,7 +125,7 @@ export const PROJECT_MEDIA = {
     moodboardDesktop: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalva-moodboard-desktop.webp",
     moodboardMobile: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalva-moodboard-mobile.webp",
     architecture:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalva-architecture.webp",
+      "/assets/projects/elsalva-architecture.jpg",
     floorPlan01Ground:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalva-floorplan1.webp",
     floorPlan01First:

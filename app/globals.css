@@ -89,5 +89,14 @@ body:has([data-homepage-root]) [data-navbar] {
 html[data-scroll-engine="safari-native"] [data-project-title-texture] {
   background-image: none !important;
   color: var(--color-bone) !important;
+  line-height: 0.9 !important;
+  margin-block-start: 0 !important;
+  padding-block-start: 0.12em !important;
   -webkit-text-fill-color: var(--color-bone) !important;
+}
+
+html[data-scroll-engine="safari-native"]
+  [data-hero-title-layer]
+  [data-reveal-id="project-hero-title"] {
+  overflow: visible !important;
 }
