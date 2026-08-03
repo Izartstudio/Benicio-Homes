@@ -10,6 +10,7 @@ import {
 } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { isSafariBrowser } from "@/utils/is-safari-browser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,7 +80,23 @@ export function Reveal({
     }
 
     let tween: gsap.core.Tween | null = null;
-    gsap.set(element, fade ? { autoAlpha: 0, y } : { y });
+    const useLightweightMotion =
+      isSafariBrowser() ||
+      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    const effectiveDelay = useLightweightMotion ? Math.min(delay, 0.12) : delay;
+    const effectiveDuration = useLightweightMotion
+      ? Math.min(duration, 0.5)
+      : duration;
+    const effectiveY = useLightweightMotion
+      ? Math.sign(y) * Math.min(Math.abs(y), 14)
+      : y;
+    const effectiveStart = useLightweightMotion
+      ? start.replace(/^top\s+(\d+)%$/, (_, percentage: string) =>
+          `top ${Math.max(Number(percentage), 90)}%`,
+        )
+      : start;
+
+    gsap.set(element, fade ? { autoAlpha: 0, y: effectiveY } : { y: effectiveY });
     element.dataset.revealInitialized = "";
 
     const ctx = gsap.context(() => {
@@ -89,8 +106,8 @@ export function Reveal({
           {
             ...(fade ? { autoAlpha: 1 } : {}),
             y: 0,
-            delay,
-            duration,
+            delay: effectiveDelay,
+            duration: effectiveDuration,
             ease: "power3.out",
             clearProps: fade
               ? "opacity,visibility,transform"
@@ -113,7 +130,7 @@ export function Reveal({
 
       ScrollTrigger.create({
         trigger,
-        start,
+        start: effectiveStart,
         once: true,
         onEnter: reveal,
       });

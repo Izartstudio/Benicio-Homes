@@ -13,19 +13,19 @@ export const PROJECT_MEDIA = {
     hero: "/assets/projects/vanam-hero-background.webp",
     heroForeground: "/assets/projects/vanam-hero-foreground.webp",
     intro: "/assets/projects/vanam-hero-continuation.webp",
-    location: "/assets/storysection/storysection.svg",
+    location: "/assets/storysection/story-hero.webp",
     locationDecorative:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
-    siteComposition: "/assets/projects/site-layout.svg",
+    siteComposition: "/assets/projects/vanam-masterplan.png",
     moodboardDesktop:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/moodboard-collage.webp",
     moodboardMobile:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/moodboar-collage-mobile.webp",
     architecture: "/assets/projects/vanam-site-showcase.png",
-    floorPlan01Ground: "/assets/projects/villatype01-1.svg",
-    floorPlan01First: "/assets/projects/villatype01-2.svg",
-    floorPlan02Ground: "/assets/projects/vilatype02-1.svg",
-    floorPlan02First: "/assets/projects/villatype02-2.svg",
+    floorPlan01Ground: "/assets/projects/vanam-ground-floor-plan.png",
+    floorPlan01First: "/assets/projects/vanam-first-floor-plan.png",
+    floorPlan02Ground: "/assets/projects/vanam-villa-type-2-ground-floor.png",
+    floorPlan02First: "/assets/projects/vanam-villa-type-2-first-floor.png",
     gallery: [
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-gallery1.webp",
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-gallery2.webp",

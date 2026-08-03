@@ -10,6 +10,7 @@ import { DifferenceText } from "@/components/ui/difference-text";
 import { getCdnAsset } from "@/lib/getCdnAsset";
 import { PDP_MEDIA_URLS } from "./pdp-texture";
 import { Reveal } from "@/components/ui/reveal";
+import { isSafariBrowser } from "@/utils/is-safari-browser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -162,6 +163,8 @@ export function ProjectSiteCompositionSection({
             mobile: boolean;
             reduceMotion: boolean;
           };
+          const useLightweightMotion =
+            conditions.mobile || isSafariBrowser();
 
           if (conditions.reduceMotion) {
             gsap.set(guideLines, { strokeDashoffset: 0 });
@@ -187,9 +190,10 @@ export function ProjectSiteCompositionSection({
             },
             scrollTrigger: {
               trigger: section,
-              start: conditions.desktop ? "top 76%" : "top 82%",
+              start: useLightweightMotion ? "top 90%" : "top 76%",
               end: conditions.desktop ? "top 30%" : "top 48%",
-              scrub: conditions.desktop ? 0.4 : 0.3,
+              once: useLightweightMotion,
+              scrub: useLightweightMotion ? false : 0.4,
               invalidateOnRefresh: true,
             },
           });

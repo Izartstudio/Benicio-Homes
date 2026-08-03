@@ -34,8 +34,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL?.trim().replace(/\/+$/, "");
+
   return (
     <html lang="en">
+      {cdnUrl ? (
+        <head>
+          <link crossOrigin="anonymous" href={cdnUrl} rel="preconnect" />
+          <link href={cdnUrl} rel="dns-prefetch" />
+        </head>
+      ) : null}
       <body className={`${bahnschrift.variable} ${robotoSlab.variable} antialiased`}>
         <LenisProvider>
           <Navbar />

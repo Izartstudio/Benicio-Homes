@@ -20,6 +20,21 @@
     color: var(--color-ink);
     font-family: var(--font-bahnschrift);
     text-rendering: geometricPrecision;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  :where(img, picture, svg, video) {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  :where(input, textarea, select, option, [contenteditable="true"]) {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    user-select: text;
   }
 
   ::selection {

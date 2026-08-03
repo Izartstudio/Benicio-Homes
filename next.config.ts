@@ -31,7 +31,31 @@ function getRemotePattern(urlValue: string | undefined, variableName: string): R
 }
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
   images: {
+    formats: ["image/webp"],
+    minimumCacheTTL: 31536000,
     qualities: [75, 90],
     remotePatterns: [
       // Keep the server-side upload public URL supported for existing uploads.

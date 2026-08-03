@@ -13,8 +13,8 @@ import { ParallaxMedia } from "@/components/ui/parallax-media";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SHOWCASE_REVEAL_START = "center center";
-const SHOWCASE_REVEAL_TRIGGER = "[data-project-moodboard-section]";
+const SHOWCASE_REVEAL_START = "top 88%";
+const SHOWCASE_REVEAL_TRIGGER = "[data-project-site-showcase-section]";
 
 type SiteShowcaseImage = {
   alt: string;

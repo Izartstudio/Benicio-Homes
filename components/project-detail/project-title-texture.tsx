@@ -32,6 +32,7 @@ export function ProjectTitleTexture({
     <h1
       {...props}
       className={cn("isolate", className)}
+      data-project-title-texture
       style={{ ...titleTextureStyle, ...style }}
     />
   );

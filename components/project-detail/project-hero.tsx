@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CdnImage } from "@/components/ui/cdn-image";
 import { Reveal } from "@/components/ui/reveal";
 import { ProjectTitleTexture } from "./project-title-texture";
+import { isSafariBrowser } from "@/utils/is-safari-browser";
 import styles from "./project-hero.responsive.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -133,6 +134,31 @@ export function ProjectHeroSequence({
               y: conditions.desktop ? 24 : 16,
             });
 
+            // Native touch scrolling should track the finger exactly. A
+            // scrubbed catch-up transform makes the image and title chase the
+            // viewport on mobile, which reads as jitter. Keep a lightweight
+            // one-shot statement reveal while leaving the hero layers stable.
+            if (conditions.mobile || isSafariBrowser()) {
+              const statementTween = gsap.to(continuationStatement, {
+                autoAlpha: 1,
+                duration: 0.48,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: continuationStatement,
+                  start: "top 90%",
+                  once: true,
+                },
+                y: 0,
+              });
+
+              return () => {
+                statementTween.kill();
+                gsap.set(continuationStatement, {
+                  clearProps: "opacity,transform,visibility,willChange",
+                });
+              };
+            }
+
             const setWillChange = (active: boolean) => {
               animatedMedia.forEach((element) => {
                 if (element instanceof HTMLElement) {
@@ -249,7 +275,6 @@ export function ProjectHeroSequence({
               fill
               loading="eager"
               preload
-              quality={90}
               ref={backgroundImageRef}
               sizes="100vw"
               src={media.background.src}
@@ -300,7 +325,6 @@ export function ProjectHeroSequence({
                 alt={media.foreground.alt}
                 className={styles.heroMediaImage}
                 fill
-                quality={90}
                 sizes="100vw"
                 src={media.foreground.src}
               />

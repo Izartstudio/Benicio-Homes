@@ -83,3 +83,11 @@ body:has([data-homepage-root]) [data-navbar] {
     transform: none;
   }
 }
+
+/* WebKit can drop background-clipped text when its transformed parent is
+ * composited. Safari uses a solid title fill so project names never vanish. */
+html[data-scroll-engine="safari-native"] [data-project-title-texture] {
+  background-image: none !important;
+  color: var(--color-bone) !important;
+  -webkit-text-fill-color: var(--color-bone) !important;
+}
