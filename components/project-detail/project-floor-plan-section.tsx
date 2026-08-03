@@ -1,11 +1,14 @@
 "use client";
 
-import Image, { type ImageProps } from "next/image";
-import { useLayoutEffect, useRef } from "react";
+import responsiveStyles from "./project-floor-plan-section.responsive.module.css";
+import type { ImageProps } from "next/image";
+import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CdnImage } from "@/components/ui/cdn-image";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import { Reveal } from "@/components/ui/reveal";
+import { PDP_MEDIA_URLS, PDP_TEXTURE_URL } from "./pdp-texture";
 import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -30,7 +33,9 @@ export type ProjectFloorPlanSectionProps = {
   villaLabel: string;
 };
 
-function FloorPlanCopy({ description }: Pick<ProjectFloorPlanSectionProps, "description">) {
+function FloorPlanCopy({
+  description,
+}: Pick<ProjectFloorPlanSectionProps, "description">) {
   return (
     <Reveal
       data-project-floor-plan-copy-wrapper
@@ -109,8 +114,11 @@ export function ProjectFloorPlanSection({
       "[data-architectural-stair]",
       section,
     );
-    const axisLine = section.querySelector<HTMLElement>(
-      "[data-project-floor-plan-axis-line]",
+    const upperAxisLine = section.querySelector<HTMLElement>(
+      "[data-project-floor-plan-axis-line-upper]",
+    );
+    const lowerAxisLine = section.querySelector<HTMLElement>(
+      "[data-project-floor-plan-axis-line-lower]",
     );
     const leftDrawing = section.querySelector<HTMLElement>(
       "[data-project-floor-plan-left-drawing-image-wrapper]",
@@ -121,7 +129,8 @@ export function ProjectFloorPlanSection({
 
     if (
       stairs.length === 0 ||
-      !axisLine ||
+      !upperAxisLine ||
+      !lowerAxisLine ||
       !leftDrawing ||
       !rightDrawing
     ) {
@@ -130,7 +139,7 @@ export function ProjectFloorPlanSection({
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.set(stairs, { autoAlpha: 1, y: 0 });
-      gsap.set(axisLine, { scaleY: 1 });
+      gsap.set([upperAxisLine, lowerAxisLine], { scaleY: 1 });
       gsap.set([leftDrawing, rightDrawing], {
         clipPath: "inset(0% 0% 0% 0%)",
       });
@@ -139,7 +148,7 @@ export function ProjectFloorPlanSection({
 
     const ctx = gsap.context(() => {
       gsap.set(stairs, { autoAlpha: 0, y: 20 });
-      gsap.set(axisLine, {
+      gsap.set([upperAxisLine, lowerAxisLine], {
         scaleY: 0,
         transformOrigin: "top center",
       });
@@ -155,24 +164,38 @@ export function ProjectFloorPlanSection({
             once: true,
           },
         })
-        .to(stairs, {
-          autoAlpha: 1,
-          duration: 0.78,
-          ease: "power3.out",
-          stagger: {
-            each: 0.12,
-            from: "end",
-          },
-          y: 0,
-        })
+        .addLabel("stepsReveal", 0)
         .to(
-          axisLine,
+          stairs,
           {
-            duration: 2.35,
+            autoAlpha: 1,
+            duration: 0.78,
+            ease: "power3.out",
+            stagger: {
+              each: 0.12,
+              from: "end",
+            },
+            y: 0,
+          },
+          "stepsReveal",
+        )
+        .to(
+          upperAxisLine,
+          {
+            duration: 1.35,
             ease: "power2.inOut",
             scaleY: 1,
           },
-          1.08,
+          "stepsReveal",
+        )
+        .to(
+          lowerAxisLine,
+          {
+            duration: 1.65,
+            ease: "power2.inOut",
+            scaleY: 1,
+          },
+          1.55,
         )
         .to(
           leftDrawing,
@@ -181,7 +204,7 @@ export function ProjectFloorPlanSection({
             duration: 0.9,
             ease: "power2.inOut",
           },
-          1.62,
+          0.72,
         )
         .to(
           rightDrawing,
@@ -190,7 +213,7 @@ export function ProjectFloorPlanSection({
             duration: 0.9,
             ease: "power2.inOut",
           },
-          1.76,
+          0.86,
         );
     }, section);
 
@@ -204,15 +227,21 @@ export function ProjectFloorPlanSection({
   return (
     <section
       aria-label={`${villaLabel} floor plans`}
-      className="relative isolate -mt-px overflow-hidden bg-[#fafafa] text-[#1a1a1a]"
+      className={`relative isolate -mt-px overflow-hidden bg-[#fafafa] text-[#1a1a1a] ${responsiveStyles.responsiveRoot}`}
       data-layout={mirrored ? "mirrored" : "default"}
       data-project-floor-plan-section
       ref={sectionRef}
+      style={
+        {
+          "--pdp-concrete-texture": `url('${PDP_MEDIA_URLS.concreteTexture}')`,
+        } as CSSProperties
+      }
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 bg-[#fafafa] bg-[url('/assets/projects/floor-plan-light-texture.png')] bg-cover bg-center opacity-50 mix-blend-multiply"
+        className="absolute inset-0 z-0 bg-[#fafafa] bg-cover bg-center opacity-50 mix-blend-multiply"
         data-project-floor-plan-background-texture
+        style={{ backgroundImage: `url('${PDP_TEXTURE_URL}')` }}
       />
 
       <div
@@ -225,7 +254,7 @@ export function ProjectFloorPlanSection({
       >
         <ArchitecturalStairs
           className="[&>[data-stair-index='1']]:left-0 [&>[data-stair-index='1']]:top-0 [&>[data-stair-index='1']]:h-full [&>[data-stair-index='1']]:w-[1.3889%] [&>[data-stair-index='2']]:left-0 [&>[data-stair-index='2']]:top-0 [&>[data-stair-index='2']]:h-[39.726%] [&>[data-stair-index='2']]:w-[20.3472%] [&>[data-stair-index='3']]:left-0 [&>[data-stair-index='3']]:top-0 [&>[data-stair-index='3']]:h-[24.3836%] [&>[data-stair-index='3']]:w-[65.8333%] [&>[data-stair-index='4']]:left-0 [&>[data-stair-index='4']]:top-0 [&>[data-stair-index='4']]:h-[15.3425%] [&>[data-stair-index='4']]:w-[72.2917%]"
-          stairClassName="bg-[#343434] bg-[url('/assets/textures/concrete-background-textures-09-1.svg')] bg-[length:1440px_365px] bg-left-top bg-no-repeat bg-blend-overlay"
+          stairClassName="bg-[#343434] [background-image:var(--pdp-concrete-texture)] bg-[length:1440px_365px] bg-left-top bg-no-repeat bg-blend-overlay"
           variant="ascending"
         />
       </div>
@@ -256,16 +285,25 @@ export function ProjectFloorPlanSection({
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-[4.4375rem] -top-[10.0625rem] left-1/2 z-20 hidden w-[5rem] -translate-x-1/2 sm:block"
+            className="pointer-events-none absolute -bottom-[4.4375rem] -top-[10.0625rem] left-1/2 z-20 hidden w-[5rem] -translate-x-1/3 sm:block"
             data-project-floor-plan-vertical-axis
           >
             <span
-              className="absolute inset-0 before:absolute before:left-1/2 before:top-0 before:h-[6.841rem] before:w-px before:-translate-x-1/2 before:bg-[#151414] after:absolute after:left-1/2 after:top-[9.715rem] after:h-[33.5625rem] after:w-px after:-translate-x-1/2 after:bg-[#151414]"
+              className="absolute inset-0"
               data-project-floor-plan-axis-line
-            />
+            >
+              <span
+                className="absolute left-1/2 top-0 h-[6.841rem] w-px -translate-x-1/2 bg-[#151414]"
+                data-project-floor-plan-axis-line-upper
+              />
+              <span
+                className="absolute left-1/2 top-[9.715rem] h-[33.5625rem] w-px -translate-x-1/2 bg-[#151414]"
+                data-project-floor-plan-axis-line-lower
+              />
+            </span>
 
             <div
-              className="absolute left-1/2 top-[6.6638rem] flex h-[3.0496rem] w-full -translate-x-1/2 flex-col items-center justify-between bg-[#fafafa]"
+              className="absolute left-1/4 top-[6.6638rem] flex h-[3.0496rem] w-full -translate-x-1/4 flex-col items-center justify-between"
               data-project-floor-plan-villa-marker
             >
               <Reveal
@@ -290,7 +328,7 @@ export function ProjectFloorPlanSection({
                 triggerClosest="[data-project-floor-plan-section]"
                 y={10}
               >
-                <span className="block font-serif text-[0.75rem] uppercase leading-none tracking-[0.01em]">
+                <span className="block font-serif text-[0.75rem] uppercase leading-none tracking-[0.01em] text-center">
                   {villaLabel}
                 </span>
               </Reveal>
@@ -312,7 +350,7 @@ export function ProjectFloorPlanSection({
             </div>
 
             <div
-              className="absolute bottom-0 left-1/2 h-[2.7216rem] w-full -translate-x-1/2 bg-[#fafafa]"
+              className="absolute bottom-0 left-1/2 h-[2.7216rem] w-full -translate-x-1/2"
               data-project-floor-plan-bottom-marker
             >
               <Reveal
@@ -349,14 +387,14 @@ export function ProjectFloorPlanSection({
             <Reveal
               className="relative aspect-[365/504] w-full lg:h-full lg:aspect-auto"
               data-project-floor-plan-left-drawing-image-wrapper
-              delay={1.62}
+              delay={0.72}
               fade={false}
               revealId="project-floor-plan-left-drawing"
               start="top 78%"
               triggerClosest="[data-project-floor-plan-section]"
               y={0}
             >
-              <Image
+              <CdnImage
                 alt={leftDrawing.alt}
                 className="object-contain mix-blend-multiply"
                 data-project-floor-plan-left-drawing-image
@@ -371,14 +409,14 @@ export function ProjectFloorPlanSection({
             <Reveal
               className="relative aspect-[365/504] w-full lg:h-full lg:aspect-auto"
               data-project-floor-plan-right-drawing-image-wrapper
-              delay={1.76}
+              delay={0.86}
               fade={false}
               revealId="project-floor-plan-right-drawing"
               start="top 78%"
               triggerClosest="[data-project-floor-plan-section]"
               y={0}
             >
-              <Image
+              <CdnImage
                 alt={rightDrawing.alt}
                 className="object-contain mix-blend-multiply"
                 data-project-floor-plan-right-drawing-image

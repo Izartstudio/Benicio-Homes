@@ -3,6 +3,7 @@
 import {
   useLayoutEffect,
   useRef,
+  type CSSProperties,
   type HTMLAttributes,
   type JSX,
   type ReactNode,
@@ -20,9 +21,12 @@ type RevealProps = HTMLAttributes<HTMLElement> & {
   delay?: number;
   duration?: number;
   fade?: boolean;
+  onRevealComplete?: () => void;
+  revealMode?: "manual" | "mount" | "scroll";
   revealId?: string;
   start?: string;
   triggerClosest?: string;
+  triggerSelector?: string;
   y?: number;
 };
 
@@ -33,9 +37,13 @@ export function Reveal({
   delay = 0,
   duration = 0.78,
   fade = true,
+  onRevealComplete,
+  revealMode = "scroll",
   revealId,
   start = "top 84%",
+  style,
   triggerClosest,
+  triggerSelector,
   y = 22,
   ...props
 }: RevealProps) {
@@ -51,42 +59,94 @@ export function Reveal({
       return;
     }
 
+    if (revealMode === "manual") {
+      element.dataset.revealInitialized = "";
+
+      return () => {
+        gsap.set(element, {
+          clearProps: "opacity,visibility,transform",
+        });
+      };
+    }
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      gsap.set(element, { autoAlpha: 1, y: 0 });
+      element.dataset.revealInitialized = "";
+      gsap.set(element, {
+        clearProps: "opacity,visibility,transform",
+      });
+      onRevealComplete?.();
       return;
     }
 
+    let tween: gsap.core.Tween | null = null;
+    gsap.set(element, fade ? { autoAlpha: 0, y } : { y });
+    element.dataset.revealInitialized = "";
+
     const ctx = gsap.context(() => {
-      const trigger = triggerClosest
-        ? element.closest<HTMLElement>(triggerClosest) ?? element
-        : element;
+      const reveal = () => {
+        tween = gsap.to(
+          element,
+          {
+            ...(fade ? { autoAlpha: 1 } : {}),
+            y: 0,
+            delay,
+            duration,
+            ease: "power3.out",
+            clearProps: fade
+              ? "opacity,visibility,transform"
+              : "transform",
+            onComplete: onRevealComplete,
+          },
+        );
+      };
 
-      gsap.set(element, fade ? { autoAlpha: 0, y } : { y });
+      if (revealMode === "mount") {
+        reveal();
+        return;
+      }
 
-      gsap.to(element, {
-        ...(fade ? { autoAlpha: 1 } : {}),
-        y: 0,
-        delay,
-        duration,
-        ease: "power3.out",
-        clearProps: "transform",
-        scrollTrigger: {
-          trigger,
-          start,
-          once: true,
-        },
+      const trigger = triggerSelector
+        ? document.querySelector<HTMLElement>(triggerSelector) ?? element
+        : triggerClosest
+          ? element.closest<HTMLElement>(triggerClosest) ?? element
+          : element;
+
+      ScrollTrigger.create({
+        trigger,
+        start,
+        once: true,
+        onEnter: reveal,
       });
     }, element);
 
     return () => {
+      tween?.kill();
       ctx.revert();
+      gsap.set(element, {
+        clearProps: "opacity,visibility,transform",
+      });
     };
-  }, [delay, duration, fade, start, triggerClosest, y]);
+  }, [
+    delay,
+    duration,
+    fade,
+    onRevealComplete,
+    revealMode,
+    start,
+    triggerClosest,
+    triggerSelector,
+    y,
+  ]);
 
   const revealProps = {
     className,
     "data-reveal": true,
+    "data-reveal-fade": fade ? "true" : undefined,
     "data-reveal-id": revealId,
+    style: {
+      "--reveal-y": `${y}px`,
+      ...style,
+    } as CSSProperties,
     ...props,
   };
 

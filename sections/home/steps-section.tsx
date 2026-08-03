@@ -1,14 +1,16 @@
 "use client";
 
+import responsiveStyles from "./steps-section.responsive.module.css";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { OrangeBlock } from "@/components/ui/orange-block";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const texturePath =
-  "/assets/textures/concrete-background-textures-09-1.svg";
+  "/assets/textures/concrete-background-textures-09-1.webp";
 
 const dividers = [
   {
@@ -41,7 +43,7 @@ const markers = [
 ] as const;
 
 export function StepsSection() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = document.querySelector<HTMLElement>(
       "[data-steps-animation-canvas]",
     );
@@ -108,6 +110,11 @@ export function StepsSection() {
       gsap.set(mainParagraph, { autoAlpha: 0, y: 14 });
     }
     gsap.set(supportingLabels, { autoAlpha: 0, y: 8 });
+    [...stairs, mainParagraph, ...supportingLabels]
+      .filter(Boolean)
+      .forEach((element) => {
+        (element as HTMLElement).dataset.revealInitialized = "";
+      });
 
     const paragraphTimeline = mainParagraph
       ? gsap
@@ -352,7 +359,7 @@ export function StepsSection() {
   return (
     <section
       aria-labelledby="steps-section-title"
-      className="relative isolate overflow-hidden bg-graphite"
+      className={`relative isolate overflow-hidden bg-graphite ${responsiveStyles.responsiveRoot}`}
     >
       <div
         className="relative h-[clamp(560px,48.611vw,700px)] min-h-[560px] w-full overflow-hidden"
@@ -365,7 +372,7 @@ export function StepsSection() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 z-0 bg-cover bg-center opacity-62"
+          className="pointer-events-none absolute inset-0 z-0 select-none bg-cover bg-center opacity-62"
           data-steps-background-texture
           style={{ backgroundImage: `url("${texturePath}")` }}
         />
@@ -393,9 +400,9 @@ export function StepsSection() {
           data-steps-marker-layer
         >
           {markers.map((marker, index) => (
-            <div
+            <OrangeBlock
               key={marker.id}
-              className={`absolute size-[clamp(11px,1.042vw,15px)] bg-[url('/assets/blocks/orange-block.svg')] bg-cover bg-center ${marker.className}`}
+              className={`absolute ${marker.className}`}
               data-step-marker={marker.id}
               data-marker-index={index + 1}
             />
@@ -407,7 +414,7 @@ export function StepsSection() {
             About Benicio
           </h2>
           <p
-            className="absolute left-[5.28%] top-[15.7%] max-w-[61rem] font-display text-[clamp(1.35rem,2.08vw,1.875rem)] font-normal leading-[1.42] tracking-[0.01em] text-bone"
+            className="absolute left-[5.28%] top-[15.7%] max-w-[61rem] font-display text-[2rem] font-light leading-[1.42] tracking-[0.01em] text-[#eeeeee]"
             data-step-copy
           >
             Every Benicio home begins by understanding what already exists.
@@ -416,7 +423,7 @@ export function StepsSection() {
           </p>
 
           <p
-            className="absolute left-[5.28%] top-[47.75%] font-mono text-[clamp(0.875rem,1.32vw,1.1875rem)] font-semibold uppercase tracking-[0.08em] text-silver"
+            className="absolute left-[5.28%] top-[47.75%] font-mono text-[1.25rem] font-medium uppercase tracking-[0.08em] text-[#b9b9b9]"
             data-step-location
           >
             GOA, IN
@@ -424,8 +431,9 @@ export function StepsSection() {
 
           <a
             href="#about"
-            className="absolute left-[5.28%] top-[55.85%] inline-flex items-center gap-3 font-mono text-[clamp(0.75rem,1.11vw,1rem)] font-semibold uppercase tracking-[0.04em] text-laterite"
+            className="absolute left-[5.28%] top-[55.85%] inline-flex items-center gap-3 font-mono text-[1.125rem] font-medium uppercase leading-[1.35] tracking-[0.04em] text-[#dc4c28]"
             data-step-link
+            style={{ color: "#DC4C28" }}
           >
             ABOUT BENICIO
             <span aria-hidden="true" className="translate-y-[-1px]">

@@ -1,0 +1,161 @@
+.responsiveRoot {
+  --site-composition-base-background: #343434;
+  --site-composition-compass-offset: 0;
+  --site-composition-plan-aspect-ratio: 779 / 735;
+  --site-composition-specification-offset: 0;
+  --site-composition-transition-height: clamp(10rem, 18vh, 16rem);
+}
+
+.responsiveRoot[data-guide-line-variant="zen"] {
+  --site-composition-plan-aspect-ratio: 737 / 491;
+}
+
+.responsiveRoot[data-guide-line-variant="el-salva"] {
+  --site-composition-plan-aspect-ratio: 1119 / 727;
+}
+
+.siteCompositionTexture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--site-composition-base-background);
+  background-image: var(--site-composition-texture);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+}
+
+.siteCompositionTexture::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--site-composition-transition-height);
+  background: linear-gradient(
+    to bottom,
+    rgb(52 52 52 / 0) 0%,
+    var(--site-composition-base-background) 100%
+  );
+}
+
+.responsiveRoot
+  :global([data-project-site-composition-guide-lines]),
+.responsiveRoot
+  :global([data-project-site-composition-masterplan-wrapper]) {
+  aspect-ratio: var(--site-composition-plan-aspect-ratio);
+}
+
+.responsiveRoot :global([data-project-site-composition-compass]) {
+  bottom: var(--site-composition-compass-offset);
+}
+
+@media (min-width: 1024px) {
+  .responsiveRoot {
+    --site-composition-compass-offset: clamp(3.25rem, 4.5vw, 4rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsiveRoot {
+    --site-composition-specification-offset: clamp(
+      11.5rem,
+      14.5vw,
+      13rem
+    );
+  }
+
+  .responsiveRoot :global([data-project-site-composition-right-content]) {
+    padding-block-start: var(--site-composition-specification-offset);
+  }
+
+  .responsiveRoot[data-guide-line-variant="zen"]
+    :global([data-project-site-composition-guide-lines]),
+  .responsiveRoot[data-guide-line-variant="zen"]
+    :global([data-project-site-composition-masterplan-wrapper]) {
+    width: min(51.18vw, 46.0625rem);
+    max-width: none;
+    flex-shrink: 0;
+  }
+
+  .responsiveRoot[data-guide-line-variant="el-salva"]
+    :global([data-project-site-composition-guide-lines]),
+  .responsiveRoot[data-guide-line-variant="el-salva"]
+    :global([data-project-site-composition-masterplan-wrapper]) {
+    width: min(77.7vw, 69.9375rem);
+    max-width: none;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 1439px) {
+  .responsiveRoot :global([data-project-site-composition-container]) {
+    min-width: 0;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-description-wrapper]) {
+    overflow-wrap: break-word;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-compass]) {
+    left: 0;
+  }
+}
+@media (max-width: 1279px) {
+  .responsiveRoot :global([data-project-site-composition-container]) {
+    min-height: 0;
+    row-gap: clamp(3.5rem, 7vw, 5rem);
+  }
+
+  .responsiveRoot :global([data-project-site-composition-masterplan-area]) {
+    min-height: clamp(31rem, 68vw, 44rem);
+  }
+
+  .responsiveRoot :global([data-project-site-composition-right-content]) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 4rem);
+    width: 100%;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-specification-group]) {
+    min-width: 0;
+  }
+}
+@media (max-width: 1023px) {
+
+  .responsiveRoot :global([data-project-site-composition-left-content]) {
+    max-width: 30rem;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-description-wrapper] p) {
+    max-width: 30rem;
+  }
+}
+@media (max-width: 767px) {
+
+  .responsiveRoot :global([data-project-site-composition-container]) {
+    padding-block: 4.5rem;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-masterplan-area]) {
+    min-height: clamp(22rem, 105vw, 32rem);
+  }
+
+  .responsiveRoot :global([data-project-site-composition-right-content]) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.75rem;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-compass]) {
+    bottom: -1rem;
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 374px) {
+
+  .responsiveRoot :global([data-project-site-composition-container]) {
+    padding-inline: 1.25rem;
+  }
+}

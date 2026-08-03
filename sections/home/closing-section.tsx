@@ -1,4 +1,4 @@
-import { ButtonLink } from "@/components/ui/button-link";
+import { CTA } from "@/components/ui/cta";
 import { Container } from "@/components/ui/container";
 
 export function ClosingSection() {
@@ -17,9 +17,13 @@ export function ClosingSection() {
             scrolling, and route-level storytelling while preserving this
             section structure.
           </p>
-          <ButtonLink href="mailto:hello@example.com" variant="light" className="mt-10">
+          <CTA
+            className="mt-10 inline-flex min-h-12 items-center justify-center rounded-soft border border-bone/70 px-6 text-[0.78rem] font-semibold uppercase tracking-[0.16em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
+            href="mailto:hello@example.com"
+            variant="light"
+          >
             Request brochure
-          </ButtonLink>
+          </CTA>
         </div>
       </Container>
     </section>

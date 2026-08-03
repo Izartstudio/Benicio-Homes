@@ -1,0 +1,30 @@
+/* Matches the vertically flipped Figma alpha mask in videohero.svg. */
+.videoMask {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #737373 0%,
+    #737373 50%,
+    rgb(217 217 217 / 0%) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #737373 0%,
+    #737373 50%,
+    rgb(217 217 217 / 0%) 100%
+  );
+}
+
+@media (max-width: 1023px) {
+
+  .responsiveRoot:global([data-section="textured-hero"]) {
+    max-width: 100%;
+  }
+}@media (max-width: 767px) {
+
+  .responsiveRoot:global([data-section="textured-hero"]) {
+    min-height: 52.75rem;
+  }
+  .responsiveRoot:global([data-section="textured-hero"]) {
+    min-height: min(52.75rem, 100svh);
+  }
+}

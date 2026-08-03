@@ -1,22 +1,27 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect } from "react";
+import responsiveStyles from "./featured-projects-section.responsive.module.css";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BlendScope } from "@/components/ui/blend-scope";
+import { CdnImage } from "@/components/ui/cdn-image";
+import { CTA } from "@/components/ui/cta";
+import { OrangeBlock } from "@/components/ui/orange-block";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const texturePath = "/assets/textures/concrete-background-textures-09-1.svg";
+const texturePath = "/assets/textures/concrete-background-textures-09-1.webp";
+const MOBILE_SCROLL_CANVAS_RATIO_PER_TRANSITION = 0.68;
 
 const projects = [
   {
     id: "majorda",
-    title: "MAJORDA",
-    image: "/assets/projects/majorda-front-view.png",
+    title: "NAYAN",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-villa1.webp",
     imageAlt: "Majorda villa front elevation",
     description:
-      "Majorda is a tropical residence that adapts to Goa's climate with overhangs, courtyards, and spaces for natural light and ventilation.",
+      "Nayan Villas is a collection of six tropical 4 bedroom private pool Villas, each set on an independent plot within an exclusive gated community in Majorda, South Goa.",
     metadata: [
       ["Built Up Area", "3408 sqft."],
       ["Saleable Area", "3518 sqft."],
@@ -25,219 +30,291 @@ const projects = [
   },
   {
     id: "casa-verde",
-    title: "CASA VERDE",
-    image: "/assets/projects/casa-verde-front-view.png",
+    title: "VANAM",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-villa2.webp",
     imageAlt: "Casa Verde villa exterior with arched facade",
     description:
-      "Majorda is a tropical residence that adapts to Goa's climate with overhangs, courtyards, and spaces for natural light and ventilation.",
+      "Vanam Villas features six tropical residences in Anjuna's lush landscape. Each villa balances privacy, architecture, and nature for a serene retreat.",
     metadata: [
-      ["Built Up Area", "3120 sqft."],
-      ["Saleable Area", "3285 sqft."],
-      ["Villa Configuration", "3BHK"],
+      ["Built Up Area", "3408 sqft."],
+      ["Saleable Area", "3518 sqft."],
+      ["Villa Configuration", "4BHK"],
     ],
   },
   {
     id: "palm-house",
-    title: "PALM HOUSE",
-    image: "/assets/projects/majorda-front-view.png",
-    loading: 'eager',
+    title: "ZEN VILLA II",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-section-villa3.webp",
     imageAlt: "Palm House villa exterior with tropical landscape",
     description:
-      "Majorda is a tropical residence that adapts to Goa's climate with overhangs, courtyards, and spaces for natural light and ventilation.",
+      "An architectural sanctuary of modern design, Zen Villa II offers a secluded retreat defined by contemporary elegance and luxury. ",
     metadata: [
-      ["Built Up Area", "3650 sqft."],
-      ["Saleable Area", "3820 sqft."],
-      ["Villa Configuration", "4BHK"],
+      ["Built Up Area", "339 sqft."],
+      ["Saleable Area", "351 sqft."],
+      ["Villa Configuration", "3BHK"],
     ],
   },
 ] as const;
 
 const imageStateClasses = [
-  "left-0 top-[21.78%] z-30 h-[51.46%] w-[64.24%] opacity-100",
-  "bottom-[-3.5%] left-[5.56%] z-20 h-[23.5%] w-[50.7%] scale-[0.96] opacity-40 blur-[3px]",
-  "bottom-[-14%] left-[19%] z-10 h-[21%] w-[45%] scale-[0.9] opacity-0 blur-[4px]",
+  "left-0 top-[19.65%] z-20 h-[51.46%] w-[64.24%] opacity-100",
+  "invisible left-0 top-[19.65%] z-10 h-[51.46%] w-[64.24%] opacity-0",
+  "invisible left-0 top-[19.65%] z-0 h-[51.46%] w-[64.24%] opacity-0",
 ] as const;
 
 export function FeaturedProjectsSection() {
-  useEffect(() => {
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      return;
-    }
+  const sectionRef = useRef<HTMLElement>(null);
 
-    const section = document.querySelector<HTMLElement>(
-      '[data-section="featured-projects"]',
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const scrollContainer = section?.querySelector<HTMLElement>(
+      "[data-featured-scroll-container]",
     );
     const canvas = section?.querySelector<HTMLElement>(
       "[data-featured-animation-canvas]",
     );
 
-    if (!section || !canvas) {
+    if (!section || !scrollContainer || !canvas) {
       return;
     }
 
-    const ctx = gsap.context(() => {
-      const images = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-image]",
-        canvas,
-      );
-      const titles = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-floating-title]",
-        canvas,
-      );
-      const contentGroups = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-project-content]",
-        canvas,
-      );
-      const progressFills = gsap.utils.toArray<HTMLElement>(
-        "[data-featured-progress-fill]",
-        canvas,
-      );
+    const media = gsap.matchMedia();
 
-      if (
-        images.length < projects.length ||
-        titles.length < projects.length ||
-        contentGroups.length < projects.length
-      ) {
-        return;
-      }
-
-      const activeImageState = {
-        left: "0%",
-        top: "21.78%",
-        bottom: "auto",
-        width: "64.24%",
-        height: "51.46%",
-      };
-
-      gsap.set(images, { transformOrigin: "50% 50%" });
-      gsap.set(images, { clipPath: "inset(0% 0% 0% 0%)" });
-      gsap.set(titles, { y: 16 });
-      gsap.set(titles[0], { autoAlpha: 0.55, y: 0 });
-      gsap.set(titles.slice(1), { autoAlpha: 0 });
-      gsap.set(contentGroups[0], { autoAlpha: 1, y: 0 });
-      gsap.set(contentGroups.slice(1), { autoAlpha: 0, y: 18 });
-      gsap.set(progressFills, { width: "33%" });
-
-      const timeline = gsap.timeline({
-        defaults: {
-          ease: "power3.inOut",
-        },
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=300%",
-          pin: true,
-          scrub: 0.85,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      const transitionToProject = (fromIndex: number, toIndex: number) => {
-        const position = toIndex;
-        const progressWidth = `${((toIndex + 1) / projects.length) * 100}%`;
-
-        timeline
-          .set(images[toIndex], { zIndex: 40 }, position)
-          .set(images[fromIndex], { zIndex: 30 }, position)
-          .set(
-            images[toIndex],
-            {
-              ...activeImageState,
-              autoAlpha: 1,
-              scale: 1,
-              y: 0,
-              filter: "blur(0px)",
-              clipPath: "inset(100% 0% 0% 0%)",
-            },
-            position,
-          )
-          .set(
-            images[fromIndex],
-            {
-              ...activeImageState,
-              autoAlpha: 1,
-              scale: 1,
-              y: 0,
-              filter: "blur(0px)",
-              clipPath: "inset(0% 0% 0% 0%)",
-            },
-            position,
-          )
-          .to(
-            images[toIndex],
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 0.66,
-            },
-            position,
-          )
-          .set(images[fromIndex], { autoAlpha: 0, zIndex: 20 }, position + 0.67)
-          .to(
-            titles[fromIndex],
-            {
-              autoAlpha: 0,
-              y: -18,
-              duration: 0.46,
-            },
-            position,
-          )
-          .to(
-            titles[toIndex],
-            {
-              autoAlpha: 0.55,
-              y: 0,
-              duration: 0.58,
-            },
-            position + 0.1,
-          )
-          .to(
-            contentGroups[fromIndex],
-            {
-              autoAlpha: 0,
-              y: -18,
-              duration: 0.5,
-            },
-            position,
-          )
-          .to(
-            contentGroups[toIndex],
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.62,
-            },
-            position + 0.08,
-          )
-          .to(
-            progressFills,
-            {
-              width: progressWidth,
-              duration: 0.58,
-            },
-            position + 0.08,
+    media.add(
+      {
+        desktop: "(min-width: 1200px)",
+        tablet: "(min-width: 768px) and (max-width: 1199px)",
+        mobile:
+          "(max-width: 767px), (pointer: coarse), ((max-width: 1199px) and (max-height: 500px))",
+        reduceMotion: "(prefers-reduced-motion: reduce)",
+      },
+      (context) => {
+        const ctx = gsap.context(() => {
+          const isMobile = Boolean(context.conditions?.mobile);
+          const reduceMotion = Boolean(context.conditions?.reduceMotion);
+          const titleTravel = reduceMotion ? 0 : isMobile ? 5 : 8;
+          const contentTravel = reduceMotion ? 0 : 18;
+          const images = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-image]",
+            canvas,
           );
-      };
+          const titles = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-floating-title]",
+            canvas,
+          );
+          const contentGroups = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-project-content]",
+            canvas,
+          );
+          const progressFills = gsap.utils.toArray<HTMLElement>(
+            "[data-featured-progress-fill]",
+            canvas,
+          );
 
-      timeline.to({}, { duration: 1 });
-      transitionToProject(0, 1);
-      timeline.to({}, { duration: 0.75 });
-      transitionToProject(1, 2);
-      timeline.to({}, { duration: 1 });
-    }, section);
+          if (
+            images.length < projects.length ||
+            titles.length < projects.length ||
+            contentGroups.length < projects.length
+          ) {
+            return;
+          }
 
-    ScrollTrigger.refresh();
+          const activeImageState = isMobile
+            ? {
+                left: "clamp(1.5rem, 8.974vw, 2.1875rem)",
+                right: "clamp(1.5rem, 8.974vw, 2.1875rem)",
+                top: "6.6875rem",
+                bottom: "auto",
+                width: "auto",
+                height: "min(70.513vw, 17.1875rem)",
+              }
+            : {
+                left: "0%",
+                top: "19.65%",
+                bottom: "auto",
+                width: "64.24%",
+                height: "51.46%",
+              };
 
-    return () => {
-      ctx.revert();
-    };
+          gsap.set(images, {
+            ...activeImageState,
+            autoAlpha: 0,
+            clipPath: "inset(100% 0% 0% 0%)",
+            willChange: "clip-path, opacity",
+          });
+          gsap.set(images[0], {
+            ...activeImageState,
+            autoAlpha: 1,
+            clipPath: "inset(0% 0% 0% 0%)",
+          });
+          gsap.set(titles, {
+            autoAlpha: 0,
+            y: titleTravel,
+            force3D: true,
+          });
+          gsap.set(titles[0], {
+            autoAlpha: 1,
+            y: 0,
+          });
+          gsap.set(contentGroups[0], {
+            autoAlpha: 1,
+            force3D: true,
+            y: 0,
+          });
+          gsap.set(contentGroups.slice(1), {
+            autoAlpha: 0,
+            force3D: true,
+            y: contentTravel,
+          });
+          gsap.set(progressFills, { width: "33%" });
+
+          const timeline = gsap.timeline({
+            defaults: {
+              ease: "power3.inOut",
+            },
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: isMobile
+                ? () =>
+                    `+=${Math.round(
+                      canvas.offsetHeight *
+                        Math.max(projects.length - 1, 1) *
+                        MOBILE_SCROLL_CANVAS_RATIO_PER_TRANSITION,
+                    )}`
+                : "+=300%",
+              // Keep every visual layer together by pinning the complete
+              // internal shell. The outer section remains in document flow.
+              pin: scrollContainer,
+              pinSpacing: true,
+              scrub: reduceMotion ? true : 0.25,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              // This upstream pin must establish its spacer before Journal measures.
+              // Responsive matchMedia callbacks can otherwise recreate the two pins
+              // in listener order instead of document order.
+              refreshPriority: 20,
+            },
+          });
+
+          const transitionToProject = (
+            fromIndex: number,
+            toIndex: number,
+          ) => {
+            const position = toIndex;
+            const progressWidth = `${((toIndex + 1) / projects.length) * 100}%`;
+            const titleTransitionDuration = reduceMotion ? 0.01 : 0.52;
+            const imageTransitionDuration = reduceMotion ? 0.01 : 0.66;
+            const contentTransitionDuration = reduceMotion ? 0.01 : 0.5;
+
+            timeline
+              .set(images[toIndex], { zIndex: 20 }, position)
+              .set(images[fromIndex], { zIndex: 19 }, position)
+              .set(
+                images[toIndex],
+                {
+                  ...activeImageState,
+                  autoAlpha: 1,
+                  clipPath: "inset(100% 0% 0% 0%)",
+                },
+                position,
+              )
+              .set(
+                images[fromIndex],
+                {
+                  ...activeImageState,
+                  autoAlpha: 1,
+                  clipPath: "inset(0% 0% 0% 0%)",
+                },
+                position,
+              )
+              .to(
+                images[toIndex],
+                {
+                  clipPath: "inset(0% 0% 0% 0%)",
+                  duration: imageTransitionDuration,
+                },
+                position,
+              )
+              .set(
+                images[fromIndex],
+                { autoAlpha: 0, zIndex: 10 },
+                position + imageTransitionDuration + 0.01,
+              )
+              .to(
+                titles[fromIndex],
+                {
+                  autoAlpha: 0,
+                  y: -titleTravel,
+                  duration: titleTransitionDuration,
+                  ease: "power2.inOut",
+                },
+                position,
+              )
+              .to(
+                titles[toIndex],
+                {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: titleTransitionDuration,
+                  ease: "power2.inOut",
+                },
+                position,
+              )
+              .to(
+                contentGroups[fromIndex],
+                {
+                  autoAlpha: 0,
+                  y: -contentTravel,
+                  duration: contentTransitionDuration,
+                },
+                position,
+              )
+              .to(
+                contentGroups[toIndex],
+                {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: reduceMotion ? 0.01 : 0.62,
+                },
+                position + (reduceMotion ? 0 : 0.08),
+              )
+              .to(
+                progressFills,
+                {
+                  width: progressWidth,
+                  duration: reduceMotion ? 0.01 : 0.58,
+                },
+                position + (reduceMotion ? 0 : 0.08),
+              );
+          };
+
+          timeline.to({}, { duration: 1 });
+          projects.slice(1).forEach((_, index) => {
+            const toIndex = index + 1;
+            transitionToProject(toIndex - 1, toIndex);
+
+            if (toIndex < projects.length - 1) {
+              timeline.to({}, { duration: 0.75 });
+            }
+          });
+          timeline.to({}, { duration: isMobile ? 0.35 : 1 });
+        }, section);
+
+        return () => ctx.revert();
+      },
+    );
+
+    return () => media.revert();
   }, []);
 
   return (
-    <section
+    <BlendScope
+      as="section"
       aria-labelledby="featured-projects-title"
-      className="relative isolate overflow-hidden bg-graphite text-bone"
+      className={`overflow-hidden bg-graphite text-bone ${responsiveStyles.responsiveRoot}`}
       data-section="featured-projects"
+      ref={sectionRef}
     >
       <div
         className="relative min-h-[860px] lg:h-[clamp(860px,71.111vw,1024px)]"
@@ -249,13 +326,17 @@ export function FeaturedProjectsSection() {
           data-featured-background-layer
         >
           <div
-            className="absolute inset-0 bg-[linear-gradient(180deg,#464646_10%,#2d2d2d_100%)]"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#464646_0%,#2d2d2d_100%)] mix-blend-multiply"
             data-featured-gradient-overlay
           />
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-90 mix-blend-overlay"
+            className="pointer-events-none absolute inset-0 select-none bg-cover bg-center opacity-90 mix-blend-overlay"
             data-featured-texture-layer
             style={{ backgroundImage: `url("${texturePath}")` }}
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 top-[73.24%] bg-[linear-gradient(180deg,rgba(70,70,70,0)_0%,#464646_100%)]"
+            data-featured-lower-gradient-overlay
           />
         </div>
 
@@ -264,7 +345,28 @@ export function FeaturedProjectsSection() {
           data-featured-animation-canvas
         >
           <div
-            className="absolute inset-0 z-20"
+            aria-hidden="true"
+            data-featured-mobile-progress-rail
+          >
+            <p
+              className="shrink-0 font-display font-semibold text-bone"
+              data-featured-panel-kicker
+            >
+              Featured
+            </p>
+            <div
+              className="relative h-px flex-1 bg-[#fafafa]"
+              data-featured-progress-track
+            >
+              <div
+                className="absolute inset-y-0 left-0 h-px w-[33%] bg-[#d45231]"
+                data-featured-progress-fill
+              />
+            </div>
+          </div>
+
+          <div
+            className="pointer-events-none absolute inset-0 z-20"
             data-featured-image-stack
           >
             {projects.map((project, index) => (
@@ -274,8 +376,8 @@ export function FeaturedProjectsSection() {
                 data-featured-image={project.id}
                 data-featured-image-index={index + 1}
               >
-                <Image
-                  src={project.image}
+                <CdnImage
+                  src={project.url}
                   alt={project.imageAlt}
                   fill
                   priority={index === 0}
@@ -288,14 +390,14 @@ export function FeaturedProjectsSection() {
 
           <div
             aria-hidden="true"
-            className="absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden"
+            className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden mix-blend-difference"
             data-featured-floating-title-stack
           >
             {projects.map((project, index) => (
               <p
                 key={project.id}
-                className={`absolute left-0 top-[14.2%] w-full whitespace-nowrap bg-[linear-gradient(180deg,rgba(255,255,255,0.68)_0%,rgba(185,185,185,0.28)_52%,rgba(255,255,255,0.12)_100%)] bg-clip-text text-center font-display text-[clamp(5rem,9.5vw,8.75rem)] font-normal uppercase leading-[0.82] tracking-[0.04em] text-transparent mix-blend-screen [-webkit-text-stroke:1px_rgba(255,255,255,0.16)] [text-shadow:0_1px_22px_rgba(255,255,255,0.08)] ${
-                  index === 0 ? "opacity-55" : "opacity-0"
+                className={`absolute left-0 top-[12.8%] w-full whitespace-nowrap text-center font-display font-light uppercase leading-[135%] tracking-[0] text-white ${
+                  index === 0 ? "visible" : "invisible"
                 }`}
                 data-featured-floating-title={project.id}
                 data-featured-title-index={index + 1}
@@ -318,122 +420,137 @@ export function FeaturedProjectsSection() {
                 Featured Projects
               </h2>
               <div
-                className="relative h-full overflow-hidden"
-                data-featured-project-content-stack
+                className="relative h-full"
+                data-featured-project-content-shell
               >
-                {projects.map((project, index) => (
-                  <article
-                    key={project.id}
-                    className={`absolute inset-0 grid h-full content-start gap-[clamp(3.5rem,6vh,4.75rem)] ${
-                      index === 0 ? "opacity-100" : "opacity-0"
-                    }`}
-                    data-featured-project-content={project.id}
-                    data-featured-content-index={index + 1}
+                <div
+                  className="relative h-full overflow-visible"
+                  data-featured-project-content-stack
+                >
+                  <div
+                    className="absolute inset-x-0 top-0 z-20 flex h-5 w-full items-center gap-3"
+                    data-featured-desktop-progress-rail
+                    data-featured-progress-rail
                   >
+                    <p
+                      className="shrink-0 font-display text-sm font-semibold text-bone"
+                      data-featured-panel-kicker
+                    >
+                      Featured
+                    </p>
                     <div
-                      className="grid gap-[clamp(4rem,7vh,5rem)]"
-                      data-featured-header-block
-                      data-featured-header-region
+                      aria-hidden="true"
+                      className="relative h-px flex-1 bg-[#fafafa]"
+                      data-featured-progress-track
                     >
                       <div
-                        className="flex w-full items-center gap-3"
-                        data-featured-progress-rail
+                        className="absolute inset-y-0 left-0 h-px w-[33%] bg-[#d45231]"
+                        data-featured-progress-fill
+                      />
+                    </div>
+                  </div>
+
+                  {projects.map((project, index) => (
+                    <article
+                      key={project.id}
+                      className={`absolute inset-0 grid h-full content-start gap-[clamp(3.5rem,6vh,4.75rem)] ${
+                        index === 0 ? "opacity-100" : "opacity-0"
+                      }`}
+                      data-featured-project-content={project.id}
+                      data-featured-content-index={index + 1}
+                    >
+                      <h3 className="sr-only">{project.title}</h3>
+                      <div
+                        className="grid gap-[clamp(4rem,7vh,5rem)]"
+                        data-featured-header-block
+                        data-featured-header-region
                       >
+                        <div
+                          aria-hidden="true"
+                          className="h-5 w-full"
+                          data-featured-progress-spacer
+                        />
+
+                        <div
+                          aria-hidden="true"
+                          className="h-px w-full bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
+                          data-featured-decorative-line="panel-top"
+                        />
+
                         <p
-                          className="shrink-0 font-display text-sm font-semibold text-bone"
-                          data-featured-panel-kicker
+                          className="max-w-[19.5rem] font-display text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.42] text-bone"
+                          data-featured-description={project.id}
                         >
-                          Featured
+                          {project.description}
                         </p>
-                        <div
-                          aria-hidden="true"
-                          className="h-px w-[18%] bg-laterite"
-                          data-featured-progress-fill
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="h-px flex-1 bg-silver/70"
-                          data-featured-progress-track
-                        />
+                      </div>
+
+                      <dl
+                        className="font-display text-sm"
+                        data-featured-metadata={project.id}
+                        data-featured-metadata-region
+                      >
+                        {project.metadata.map(([label, value]) => (
+                          <div
+                            key={label}
+                            className="grid grid-cols-[1fr_auto] gap-6 border-b border-transparent bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)] bg-[length:100%_1px] bg-bottom bg-no-repeat py-3"
+                            data-featured-metadata-row
+                          >
+                            <dt>{label}</dt>
+                            <dd className="text-right text-silver">{value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+
+                      <div
+                        className="flex items-start"
+                        data-featured-cta-region
+                      >
+                        <CTA
+                          arrowClassName="translate-y-[0.18rem] text-2xl leading-none"
+                          className="inline-flex h-[4.5rem] w-full max-w-[20rem] items-center justify-between px-8 font-display text-[1.0625rem]"
+                          darkBackground="#333333"
+                          data-featured-cta={project.id}
+                          href="#"
+                          variant="dark"
+                        >
+                          View Project
+                        </CTA>
                       </div>
 
                       <div
                         aria-hidden="true"
                         className="h-px w-full bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
-                        data-featured-decorative-line="panel-top"
+                        data-featured-decorative-line="panel-bottom"
                       />
-
-                      <p
-                        className="max-w-[19.5rem] font-display text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.42] text-bone"
-                        data-featured-description={project.id}
-                      >
-                        {project.description}
-                      </p>
-                    </div>
-
-                    <dl
-                      className="font-display text-sm"
-                      data-featured-metadata={project.id}
-                      data-featured-metadata-region
-                    >
-                      {project.metadata.map(([label, value]) => (
-                        <div
-                          key={label}
-                          className="grid grid-cols-[1fr_auto] gap-6 border-b border-transparent bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)] bg-[length:100%_1px] bg-bottom bg-no-repeat py-3"
-                          data-featured-metadata-row
-                        >
-                          <dt>{label}</dt>
-                          <dd className="text-right text-silver">{value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-
-                    <div
-                      className="flex items-start"
-                      data-featured-cta-region
-                    >
-                      <a
-                        href="#"
-                        className="inline-flex h-[4.5rem] w-full max-w-[20rem] items-center justify-between bg-[#333333] px-8 font-display text-[1.0625rem] text-bone"
-                        data-featured-cta={project.id}
-                      >
-                        View Project
-                        <span
-                          aria-hidden="true"
-                          className="translate-y-[0.18rem] text-2xl leading-none text-bone"
-                        >
-                          &rsaquo;
-                        </span>
-                      </a>
-                    </div>
-
-                    <div
-                      aria-hidden="true"
-                      className="h-px w-full bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
-                      data-featured-decorative-line="panel-bottom"
-                    />
-                  </article>
-                ))}
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
           </aside>
 
           <div
             aria-hidden="true"
-            className="absolute inset-0 z-[35]"
+            className="pointer-events-none absolute inset-0 z-[35]"
             data-featured-decorative-layer
           >
             <div
-              className="absolute left-[64.24%] top-[6.25%] h-[84.9%] w-px bg-[linear-gradient(180deg,rgba(185,185,185,0)_0%,#b9b9b9_25%,#b9b9b9_75%,rgba(185,185,185,0)_100%)]"
-              data-featured-decorative-line="vertical-panel"
-            />
-            <div
-              className="absolute left-[62.5%] top-[45.7%] size-[clamp(38px,3.47vw,50px)] bg-[url('/assets/blocks/orange-block.svg')] bg-cover bg-center"
-              data-featured-decorative-accent="laterite-square"
-            />
+              className="absolute bottom-[8.85%] left-[64.24%] top-[6.25%] w-px"
+              data-featured-line-wrapper="vertical-panel"
+            >
+              <div
+                className="absolute inset-0 bg-[linear-gradient(180deg,rgba(83,83,83,0)_0%,#b9b9b9_10%,#b9b9b9_90%,rgba(83,83,83,0)_100%)]"
+                data-featured-decorative-line="vertical-panel"
+              />
+              <OrangeBlock
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                data-featured-decorative-accent="laterite-square"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </BlendScope>
   );
 }

@@ -1,27 +1,30 @@
 "use client";
 
+import responsiveStyles from "./legacy-gallery-section.responsive.module.css";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { setupSectionReveals } from "@/utils/setup-section-reveals";
+import { CdnImage } from "@/components/ui/cdn-image";
+import { ParallaxMedia } from "@/components/ui/parallax-media";
 
 
 const galleryImages = [
   {
-    src: "/assets/legacy/legacy-1.svg",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section1.webp",
     alt: "Covered concrete passage opening to a preserved landscape",
   },
   {
-    src: "/assets/legacy/legacy-2.svg",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section2.webp",
     alt: "Concrete villa facade framed by mature planting",
   },
   {
-    src: "/assets/legacy/legacy-3.svg",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section3.webp",
     alt: "Stepping stones through dense tropical landscape",
   },
 ] as const;
 
 export function LegacyGallerySection() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = document.querySelector<HTMLElement>(
       '[data-section="legacy-gallery"]',
     );
@@ -36,68 +39,77 @@ export function LegacyGallerySection() {
   return (
     <section
       aria-label="Legacy gallery"
-      className="overflow-hidden bg-[#2D2D2D] text-[#b9b9b9]"
+      className={`overflow-hidden bg-[#2D2D2D] text-[#b9b9b9] ${responsiveStyles.responsiveRoot}`}
       data-section="legacy-gallery"
     >
       <div
         className="mx-auto w-full max-w-[1440px] px-[5.2%] pt-[clamp(4.5rem,6.25vw,5.625rem)]"
         data-gallery-content
       >
-        <div data-gallery-intro>
-          <div data-reveal-child data-gallery-intro-reveal>
-            <p className="max-w-[43rem] font-display text-[clamp(1rem,1.45vw,1.25rem)] leading-[1.35] tracking-[0.01em] text-[#9c9a9a]">
-              Preservation begins with respect. Every restoration is an
-              opportunity to protect the architectural character of Goa,
-              carrying its materials, craftsmanship, and stories forward for
-              generations to come.
-            </p>
+        <div data-gallery-composition>
+          <div data-gallery-intro>
+            <div data-reveal-child data-gallery-intro-reveal>
+              <p
+                className="max-w-[43rem] font-display text-[clamp(1rem,1.45vw,1.25rem)] leading-[1.35] tracking-[0.01em] text-[#9c9a9a]"
+                data-gallery-copy
+              >
+                Preservation begins with respect. Every restoration is an
+                opportunity to protect the architectural character of Goa,
+                carrying its materials, craftsmanship, and stories forward for
+                generations to come.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="mt-[clamp(5rem,7.1vw,6.4rem)]" data-gallery-region>
-          <div
-            className="grid grid-cols-[1.46fr_1fr_1fr] items-start gap-[clamp(1.5rem,2.1vw,2rem)]"
-            data-reveal-child
-            data-gallery
-          >
-            <figure
-              className="relative mt-[clamp(7.5rem,11.4vw,10.25rem)] aspect-[522/338] overflow-hidden"
-              data-gallery-image="1"
+          <div className="mt-[clamp(5rem,7.1vw,6.4rem)]" data-gallery-region>
+            <div
+              className="grid grid-cols-[1.46fr_1fr_1fr] items-start gap-[clamp(1.5rem,2.1vw,2rem)]"
+              data-reveal-child
+              data-gallery
             >
-              <Image
-                src={galleryImages[0].src}
-                alt={galleryImages[0].alt}
-                fill
-                sizes="(min-width: 1024px) 38vw, 90vw"
-                className="object-cover"
-              />
-            </figure>
+              <figure
+                className="relative mt-[clamp(7.5rem,11.4vw,10.25rem)] aspect-[522/338] overflow-hidden"
+                data-gallery-image="1"
+              >
+                <ParallaxMedia amount={3}>
+                  <CdnImage
+                    src={galleryImages[0].url}
+                    alt={galleryImages[0].alt}
+                    fill
+                    sizes="(min-width: 1024px) 38vw, 90vw"
+                    className="object-cover"
+                  />
+                </ParallaxMedia>
+              </figure>
 
-            <figure
-              className="relative mt-[clamp(7.5rem,11.4vw,10.25rem)] aspect-[359/338] overflow-hidden"
-              data-gallery-image="2"
-            >
-              <Image
-                src={galleryImages[1].src}
-                alt={galleryImages[1].alt}
-                fill
-                sizes="(min-width: 1024px) 25vw, 90vw"
-                className="object-cover"
-              />
-            </figure>
+              <figure
+                className="relative mt-[clamp(7.5rem,11.4vw,10.25rem)] aspect-[359/338] overflow-hidden"
+                data-gallery-image="2"
+              >
+                <CdnImage
+                  src={galleryImages[1].url}
+                  alt={galleryImages[1].alt}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 90vw"
+                  className="object-cover"
+                />
+              </figure>
 
-            <figure
-              className="relative aspect-[358/537] overflow-hidden"
-              data-gallery-image="3"
-            >
-              <Image
-                src={galleryImages[2].src}
-                alt={galleryImages[2].alt}
-                fill
-                sizes="(min-width: 1024px) 25vw, 90vw"
-                className="object-cover"
-              />
-            </figure>
+              <figure
+                className="relative aspect-[358/537] overflow-hidden"
+                data-gallery-image="3"
+              >
+                <ParallaxMedia amount={4}>
+                  <CdnImage
+                    src={galleryImages[2].url}
+                    alt={galleryImages[2].alt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 90vw"
+                    className="object-cover"
+                  />
+                </ParallaxMedia>
+              </figure>
+            </div>
           </div>
         </div>
 
@@ -122,35 +134,28 @@ export function LegacyGallerySection() {
 
       <div
         className="relative h-[6.9375rem] w-full overflow-hidden"
-        data-reveal-child
         data-gallery-texture-stack
       >
         <figure
-          className="absolute inset-0 z-0"
-          data-gallery-texture-bottom
+          className="pointer-events-none absolute inset-y-0 left-[-4px] w-[calc(100%+4px)] select-none"
+          data-gallery-texture
         >
           <Image
-            src="/assets/textures/texturebg-legacy.svg"
+            src="/assets/textures/legacy-texture.webp"
             alt=""
             fill
+            draggable={false}
             unoptimized
             sizes="100vw"
-            className="object-cover"
+            className="object-fill [-webkit-user-drag:none]"
           />
         </figure>
-        <figure
-          className="absolute inset-0 z-10"
-          data-gallery-texture-top
-        >
-          <Image
-            src="/assets/textures/texture-legacy.svg"
-            alt=""
-            fill
-            unoptimized
-            sizes="100vw"
-            className="object-cover"
-          />
-        </figure>
+
+        <div
+          aria-hidden="true"
+          className={responsiveStyles.legacyRestorationBlend}
+          data-gallery-restoration-blend
+        />
       </div>
     </section>
   );

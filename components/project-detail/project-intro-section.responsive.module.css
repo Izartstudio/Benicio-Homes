@@ -1,0 +1,26 @@
+@media (max-width: 1439px) {
+  .responsiveRoot :global([data-project-intro-container]) {
+    min-width: 0;
+  }
+
+  .responsiveRoot :global([data-project-intro-copy]) {
+    overflow-wrap: break-word;
+  }
+}
+@media (max-width: 767px) {
+
+  .responsiveRoot :global([data-project-intro-container]) {
+    padding-bottom: clamp(6rem, 24vw, 8rem);
+    padding-top: clamp(6rem, 24vw, 8rem);
+  }
+
+  .responsiveRoot :global([data-project-intro-copy]) {
+    font-size: clamp(1.35rem, 6.2vw, 1.75rem);
+  }
+}
+@media (max-width: 374px) {
+
+  .responsiveRoot :global([data-project-intro-container]) {
+    padding-inline: 1.25rem;
+  }
+}

@@ -1,4 +1,8 @@
 import { Reveal } from "@/components/ui/reveal";
+import { DifferenceText } from "@/components/ui/difference-text";
+import responsiveStyles from "./project-specifications-section.responsive.module.css";
+import type { CSSProperties } from "react";
+import { PDP_MEDIA_URLS } from "./pdp-texture";
 
 type ProjectSpecificationGroup = {
   items: readonly string[];
@@ -15,17 +19,18 @@ export function ProjectSpecificationsSection({
   return (
     <section
       aria-label="Project specifications"
-      className="relative isolate overflow-hidden bg-[#343434] text-bone"
+      className={`relative isolate overflow-hidden bg-[#343434] text-bone ${responsiveStyles.responsiveRoot}`}
       data-project-specifications-section
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 bg-[#343434] bg-[url('/assets/textures/concrete-background-textures-09-1.svg')] bg-cover bg-center bg-blend-overlay"
+        className="absolute inset-0 z-0 bg-[#343434] bg-cover bg-center bg-blend-overlay"
         data-project-specifications-background-texture
+        style={{ backgroundImage: `url('${PDP_MEDIA_URLS.concreteTexture}')` }}
       />
 
       <div
-        className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-[4.5rem] px-[clamp(1.5rem,5.208vw,4.6875rem)] py-[clamp(5rem,5.833vw,5.25rem)] lg:grid-cols-[minmax(0,28.125rem)_minmax(0,31.4375rem)] lg:justify-between lg:gap-0"
+        className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-[4.5rem] px-[clamp(1.5rem,5.208vw,4.6875rem)] py-[clamp(5rem,5.833vw,5.25rem)] lg:grid-cols-[minmax(0,28.125rem)_minmax(0,31.4375rem)] lg:justify-between lg:gap-0"
         data-project-specifications-container
       >
         <div
@@ -35,9 +40,14 @@ export function ProjectSpecificationsSection({
           {groups.map((group, groupIndex) => (
             <section
               aria-label={`${group.title} specifications`}
-              className="overflow-hidden lg:min-h-[12.5625rem] lg:last:min-h-0"
+              className={`overflow-hidden lg:min-h-[12.5625rem] lg:last:min-h-0 ${responsiveStyles.specificationGroup}`}
               data-project-specification-group
               key={group.title}
+              style={
+                {
+                  "--specification-order": groupIndex * 2 + 2,
+                } as CSSProperties
+              }
             >
               <Reveal
                 delay={0.14}
@@ -77,9 +87,16 @@ export function ProjectSpecificationsSection({
         >
           {groups.map((group, groupIndex) => (
             <div
-              className="overflow-hidden lg:min-h-[12.5625rem] lg:last:min-h-0"
+              className={`overflow-hidden lg:min-h-[12.5625rem] lg:last:min-h-0 ${responsiveStyles.categoryHeading} ${
+                groupIndex === 0 ? responsiveStyles.firstCategory : ""
+              }`}
               data-project-specification-category-heading
               key={group.title}
+              style={
+                {
+                  "--specification-order": groupIndex * 2 + 1,
+                } as CSSProperties
+              }
             >
               <Reveal
                 className="flex items-start gap-[1.125rem] pt-px"
@@ -92,12 +109,16 @@ export function ProjectSpecificationsSection({
               >
                 <span
                   aria-hidden="true"
-                  className="mt-[-0.0625rem] block size-[0.625rem] shrink-0 bg-[url('/assets/blocks/orange-block.svg')] bg-cover bg-center"
+                  className="mt-[-0.0625rem] block size-[0.625rem] shrink-0 bg-cover bg-center"
                   data-project-specification-category-accent
+                  style={{ backgroundImage: `url('${PDP_MEDIA_URLS.orangeBlock}')` }}
                 />
-                <h2 className="shrink-0 font-display text-[0.875rem] font-normal uppercase leading-none text-bone/50">
+                <DifferenceText
+                  as="h2"
+                  className="relative z-10 shrink-0 font-display text-[0.875rem] font-normal uppercase leading-none"
+                >
                   {group.title}
-                </h2>
+                </DifferenceText>
                 <span
                   aria-hidden="true"
                   className="mt-[0.25rem] h-px min-w-0 flex-1 bg-[#838383]"
@@ -107,6 +128,52 @@ export function ProjectSpecificationsSection({
             </div>
           ))}
         </div>
+      </div>
+
+      <div
+        className="relative z-10 hidden px-[1.5rem] py-[4.5rem]"
+        data-project-specifications-mobile-accordion
+      >
+        {groups.map((group, groupIndex) => (
+          <details
+            className="group border-b border-bone/30"
+            data-project-specification-mobile-group
+            key={group.title}
+            open={groupIndex === 0}
+          >
+            <summary className="flex cursor-pointer list-none items-center gap-[1.125rem] py-[1.25rem] [&::-webkit-details-marker]:hidden">
+              <span
+                aria-hidden="true"
+                className="block size-[0.625rem] shrink-0 bg-cover bg-center"
+                style={{ backgroundImage: `url('${PDP_MEDIA_URLS.orangeBlock}')` }}
+              />
+              <DifferenceText
+                as="h2"
+                className="shrink-0 font-display text-[0.875rem] font-normal uppercase leading-none"
+              >
+                {group.title}
+              </DifferenceText>
+              
+              <span
+                aria-hidden="true"
+                className="relative block size-3 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:-translate-y-1/2 before:bg-bone after:absolute after:left-1/2 after:top-0 after:h-full after:w-px after:-translate-x-1/2 after:bg-bone group-open:after:hidden"
+              />
+            </summary>
+            <ul className="m-0 list-none pb-[1.25rem] pl-[1.75rem] pr-0">
+              {group.items.map((item, itemIndex) => (
+                <li
+                  className="font-serif text-[0.9375rem] font-normal leading-[1.25] text-bone"
+                  key={item}
+                >
+                  <span>{item}</span>
+                  {itemIndex < group.items.length - 1 ? (
+                    <span aria-hidden="true" className="my-[0.625rem] block h-px w-full bg-white/30" />
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
       </div>
     </section>
   );

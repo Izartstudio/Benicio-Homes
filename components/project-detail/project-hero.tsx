@@ -1,136 +1,352 @@
 "use client";
 
-import Image, { type ImageProps } from "next/image";
-import { useLayoutEffect, useRef } from "react";
+import type { ImageProps } from "next/image";
+import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CdnImage } from "@/components/ui/cdn-image";
 import { Reveal } from "@/components/ui/reveal";
+import { ProjectTitleTexture } from "./project-title-texture";
+import styles from "./project-hero.responsive.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export type ProjectHeroImage = {
+type ProjectHeroImage = {
   alt: string;
   src: ImageProps["src"];
 };
 
-export type ProjectHeroProps = {
+export type ProjectHeroMedia = {
+  background: ProjectHeroImage;
+  continuation: ProjectHeroImage;
+  foreground?: ProjectHeroImage;
+  objectPosition?: {
+    desktop?: string;
+    mobile?: string;
+    tablet?: string;
+  };
+  scale?: {
+    continuation?: number;
+    desktop?: number;
+    mobile?: number;
+    tablet?: number;
+  };
+};
+
+export type ProjectHeroSequenceProps = {
+  continuationStatement: string;
   description: string;
-  heroImage: ProjectHeroImage;
+  layout?: "default" | "el-salva" | "nayan" | "zen";
+  media: ProjectHeroMedia;
   title: string;
 };
 
-export function ProjectHero({
+export function ProjectHeroSequence({
+  continuationStatement,
   description,
-  heroImage,
+  layout = "default",
+  media,
   title,
-}: ProjectHeroProps) {
-  const heroRef = useRef<HTMLElement | null>(null);
+}: ProjectHeroSequenceProps) {
+  const backgroundRef = useRef<HTMLDivElement | null>(null);
+  const backgroundImageRef = useRef<HTMLImageElement | null>(null);
+  const continuationStatementRef = useRef<HTMLDivElement | null>(null);
+  const foregroundRef = useRef<HTMLDivElement | null>(null);
+  const sequenceRef = useRef<HTMLElement | null>(null);
+  const titleRef = useRef<HTMLDivElement | null>(null);
+  const objectPosition = media.objectPosition;
+  const titleLines =
+    layout === "nayan"
+      ? ["Nayan", "Villas"]
+      : layout === "el-salva"
+        ? ["Villa", "El Salva"]
+        : null;
+  const stageStyle = {
+    "--continuation-media-scale": media.scale?.continuation ?? 1,
+    "--hero-media-scale-desktop": media.scale?.desktop ?? 1,
+    "--hero-media-scale-mobile":
+      media.scale?.mobile ?? media.scale?.tablet ?? 1,
+    "--hero-media-scale-tablet":
+      media.scale?.tablet ?? media.scale?.desktop ?? 1,
+    "--hero-object-position-desktop": objectPosition?.desktop ?? "50% 50%",
+    "--hero-object-position-mobile":
+      objectPosition?.mobile ?? objectPosition?.tablet ?? "50% 50%",
+    "--hero-object-position-tablet":
+      objectPosition?.tablet ?? objectPosition?.desktop ?? "50% 50%",
+  } as CSSProperties;
 
   useLayoutEffect(() => {
-    const hero = heroRef.current;
-    const image = hero?.querySelector<HTMLImageElement>(
-      "[data-project-hero-image] img",
-    );
+    const sequence = sequenceRef.current;
+    const background = backgroundRef.current;
+    const backgroundImage = backgroundImageRef.current;
+    const continuationStatement = continuationStatementRef.current;
+    const foreground = foregroundRef.current;
+    const title = titleRef.current;
+    const hasStitchedContinuation = sequence?.dataset.heroLayout !== "default";
 
-    if (!hero || !image) {
+    if (
+      !sequence ||
+      !background ||
+      !backgroundImage ||
+      !continuationStatement ||
+      !title
+    ) {
       return;
     }
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
+    let context: gsap.Context | null = null;
+    let mediaMatcher: gsap.MatchMedia | null = null;
+    let disposed = false;
+
+    const initialize = () => {
+      if (disposed || context) {
+        return;
+      }
+
+      context = gsap.context(() => {
+        mediaMatcher = gsap.matchMedia();
+        mediaMatcher.add(
+          {
+            desktop: "(min-width: 1024px)",
+            mobile: "(max-width: 1023px)",
+            reduceMotion: "(prefers-reduced-motion: reduce)",
+          },
+          (matchContext) => {
+            const conditions = matchContext.conditions as {
+              desktop: boolean;
+              mobile: boolean;
+              reduceMotion: boolean;
+            };
+            const animatedMedia = [background, foreground, title].filter(
+              Boolean,
+            );
+
+            if (conditions.reduceMotion) {
+              gsap.set([...animatedMedia, continuationStatement], {
+                clearProps: "opacity,transform,visibility,willChange",
+              });
+              return;
+            }
+
+            gsap.set(continuationStatement, {
+              autoAlpha: 0,
+              y: conditions.desktop ? 24 : 16,
+            });
+
+            const setWillChange = (active: boolean) => {
+              animatedMedia.forEach((element) => {
+                if (element instanceof HTMLElement) {
+                  element.style.willChange = active ? "transform" : "";
+                }
+              });
+            };
+
+            const timeline = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: sequence,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: conditions.desktop ? 0.8 : 0.45,
+                invalidateOnRefresh: true,
+                onEnter: () => setWillChange(true),
+                onEnterBack: () => setWillChange(true),
+                onLeave: () => setWillChange(false),
+                onLeaveBack: () => setWillChange(false),
+              },
+            });
+
+            const heroMediaLayers = [background, foreground].filter(Boolean);
+            const mediaShift = hasStitchedContinuation
+              ? conditions.desktop
+                ? 8
+                : 4
+              : conditions.desktop
+                ? 4
+                : 2;
+
+            timeline.to(
+              heroMediaLayers,
+              {
+                // The background and foreground are two crops of the same
+                // source composition. Moving them as a single transform group
+                // keeps every pixel aligned throughout the parallax motion.
+                // Stitched heroes also grow by the translation amount so their
+                // lower edge stays locked to the static continuation image.
+                scaleY: hasStitchedContinuation ? 1 + mediaShift / 100 : 1,
+                transformOrigin: "50% 0%",
+                yPercent: -mediaShift,
+              },
+              0,
+            );
+
+            timeline
+              .to(
+                title,
+                {
+                  yPercent: conditions.desktop ? -3 : -1.5,
+                },
+                0,
+              )
+              .to(
+                continuationStatement,
+                {
+                  autoAlpha: 1,
+                  duration: 0.18,
+                  y: 0,
+                },
+                0.5,
+              );
+
+            return () => {
+              setWillChange(false);
+              timeline.kill();
+              gsap.set([...animatedMedia, continuationStatement], {
+                clearProps:
+                  "opacity,transform,transformOrigin,visibility,willChange",
+              });
+            };
+          },
+        );
+      }, sequence);
+    };
+
+    if (backgroundImage.complete && backgroundImage.naturalWidth > 0) {
+      initialize();
+    } else {
+      backgroundImage.addEventListener("load", initialize, { once: true });
     }
-
-    const ctx = gsap.context(() => {
-      gsap.set(image, {
-        scale: 1.06,
-        transformOrigin: "50% 50%",
-        yPercent: -1.5,
-      });
-
-      const imageScrollTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      imageScrollTimeline.to(image, {
-        ease: "none",
-        yPercent: 1.5,
-      });
-    }, hero);
-
-    ScrollTrigger.refresh();
 
     return () => {
-      ctx.revert();
+      disposed = true;
+      backgroundImage.removeEventListener("load", initialize);
+      mediaMatcher?.revert();
+      context?.revert();
     };
   }, []);
 
   return (
     <section
-      aria-labelledby="project-hero-title"
-      className="relative isolate h-[100svh] overflow-hidden bg-[#232323] text-bone"
-      data-project-hero
-      ref={heroRef}
+      className={styles.heroSequence}
+      data-hero-layout={layout}
+      ref={sequenceRef}
+      style={stageStyle}
     >
-      <div
-        className="absolute inset-0 z-0"
-        data-project-hero-image-wrapper
+      <section
+        aria-labelledby="project-hero-title"
+        className={styles.hero}
+        data-project-hero
       >
-        <div className="absolute inset-0" data-project-hero-image>
-          <Image
-            alt={heroImage.alt}
-            className="object-cover"
-            fill
-            priority
-            sizes="100vw"
-            src={heroImage.src}
-          />
+        <div className={styles.heroVisualStage}>
+          <div
+            className={`${styles.heroMediaLayer} ${styles.heroBackgroundMedia}`}
+            data-hero-background
+            ref={backgroundRef}
+          >
+            <CdnImage
+              alt={media.background.alt}
+              className={styles.heroMediaImage}
+              fill
+              loading="eager"
+              preload
+              quality={90}
+              ref={backgroundImageRef}
+              sizes="100vw"
+              src={media.background.src}
+            />
+          </div>
+
+          <div
+            className={styles.heroTitleLayer}
+            data-hero-title-layer
+            ref={titleRef}
+          >
+            <Reveal
+              className={styles.heroTitleReveal}
+              delay={0.12}
+              duration={0.92}
+              fade={false}
+              revealId="project-hero-title"
+              revealMode="mount"
+              y={36}
+            >
+              <ProjectTitleTexture
+                className={styles.heroTitle}
+                id="project-hero-title"
+              >
+                {titleLines
+                  ? titleLines.map((line, index) => (
+                      <span
+                        className={styles.heroTitleLine}
+                        data-hero-title-line={index + 1}
+                        key={line}
+                      >
+                        {line}
+                      </span>
+                    ))
+                  : title}
+              </ProjectTitleTexture>
+            </Reveal>
+          </div>
+
+          {media.foreground ? (
+            <div
+              aria-hidden="true"
+              className={`${styles.heroMediaLayer} ${styles.heroForegroundMedia}`}
+              data-hero-foreground
+              ref={foregroundRef}
+            >
+              <CdnImage
+                alt={media.foreground.alt}
+                className={styles.heroMediaImage}
+                fill
+                quality={90}
+                sizes="100vw"
+                src={media.foreground.src}
+              />
+            </div>
+          ) : null}
         </div>
 
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-black/25"
-          data-project-hero-image-overlay
-        />
-      </div>
+        <div className={styles.heroContent}>
+          <Reveal
+            className={styles.heroDescriptionReveal}
+            duration={0.82}
+            revealId="project-hero-description"
+            revealMode="mount"
+            y={18}
+          >
+            <p className={styles.heroDescription}>{description}</p>
+          </Reveal>
+        </div>
+      </section>
 
-      <div
-        className="relative z-20 mx-auto flex h-full w-full max-w-[1440px] flex-col px-[clamp(1.5rem,5.28vw,4.75rem)] pb-[clamp(2.5rem,5.7vh,4.25rem)] pt-[clamp(8rem,17vh,11rem)]"
-        data-project-hero-content
+      <section
+        aria-label="Project introduction"
+        className={styles.continuation}
+        data-project-hero-continuation
       >
-        <Reveal
-          className="max-w-[30rem]"
-          data-project-hero-description-wrapper
-          revealId="project-hero-description"
-        >
-          <p
-            className="font-display text-[clamp(1rem,1.35vw,1.25rem)] leading-[1.4] tracking-[0.01em] text-bone"
-            data-project-hero-description
-          >
-            {description}
-          </p>
-        </Reveal>
+        <div className={styles.continuationMedia} data-continuation-media>
+          <CdnImage
+            alt={media.continuation.alt}
+            className={styles.continuationImage}
+            fill
+            sizes="100vw"
+            src={media.continuation.src}
+          />
+        </div>
+        <div aria-hidden="true" className={styles.continuationShade} />
 
-        <Reveal
-          className="mt-auto w-full"
-          data-project-hero-title-wrapper
-          delay={0.12}
-          revealId="project-hero-title"
+        <div
+          className={styles.continuationContent}
+          ref={continuationStatementRef}
         >
-          <h1
-            className="whitespace-pre-line font-display text-[clamp(4rem,10.8vw,9.75rem)] font-normal uppercase leading-[0.78] tracking-[0.01em] text-bone"
-            id="project-hero-title"
-            data-project-hero-heading
-          >
-            {title}
-          </h1>
-        </Reveal>
-      </div>
+          <span aria-hidden="true" className={styles.continuationAccent} />
+          <p className={styles.continuationStatement}>
+            {continuationStatement}
+          </p>
+        </div>
+      </section>
     </section>
   );
 }

@@ -2,6 +2,7 @@ import { createSign } from "node:crypto";
 
 type ContactSubmission = {
   email: string;
+  interestedProject: string;
   location: string;
   message: string;
   name: string;
@@ -94,7 +95,7 @@ async function getGoogleAccessToken() {
 
 export async function appendContactSubmission(submission: ContactSubmission) {
   const sheetId = requiredEnv("GOOGLE_SHEET_ID");
-  const range = process.env.GOOGLE_SHEET_RANGE || "Submissions!A:F";
+  const range = process.env.GOOGLE_SHEET_RANGE || "Submissions!A:G";
   const accessToken = await getGoogleAccessToken();
   const endpoint = new URL(
     `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(
@@ -114,6 +115,7 @@ export async function appendContactSubmission(submission: ContactSubmission) {
           submission.phone,
           submission.email,
           submission.location,
+          submission.interestedProject,
           submission.message,
         ],
       ],

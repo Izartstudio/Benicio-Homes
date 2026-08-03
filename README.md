@@ -18,3 +18,12 @@ TypeScript, Tailwind CSS, `next/font`, and a section-driven homepage structure.
 - `lib/animation/` is reserved for future GSAP and Lenis integration.
 - `assets/` stores editable source assets.
 - `public/assets/` stores browser-served optimized assets.
+- `lib/storage/r2.ts` is the server-only Cloudflare R2 storage boundary for media.
+
+## Cloudflare R2 media
+
+Copy `.env.example` to `.env.local` and provide the R2 credentials and public URL.
+The `POST /api/upload` route accepts `multipart/form-data` with `file` and `folder`
+fields, validates supported image types and a 10 MB maximum size, and returns the
+generated object key and public URL. Use the storage helpers directly from trusted
+server code for CMS integrations; do not call Cloudflare from components or pages.

@@ -1,0 +1,23 @@
+@media (max-width: 1439px) {
+  .responsiveRoot :global([data-project-moodboard-container]) {
+    min-width: 0;
+  }
+
+  .responsiveRoot :global([data-project-moodboard-intro]) {
+    overflow-wrap: break-word;
+  }
+}@media (max-width: 767px) {
+
+  .responsiveRoot :global([data-project-moodboard-container]) {
+    padding-block: 4rem 2.5rem;
+  }
+
+  .responsiveRoot :global([data-project-moodboard-reveal]) {
+    display: none;
+  }
+
+  .responsiveRoot :global([data-project-moodboard-mobile-reveal]) {
+    display: block;
+    margin-top: 2.5rem;
+  }
+}

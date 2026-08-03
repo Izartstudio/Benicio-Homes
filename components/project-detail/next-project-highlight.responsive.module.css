@@ -1,0 +1,103 @@
+@media (max-width: 1439px) {
+  .responsiveRoot :global([data-next-project-highlight-content-grid]) {
+    min-width: 0;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-description]) {
+    overflow-wrap: break-word;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-cta]) {
+    min-height: 2.75rem;
+    padding-block: 0.5rem;
+  }
+}
+@media (max-width: 1279px) {
+
+  .layout {
+    height: auto;
+    padding: 4rem 3rem 0;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-heading-layer]) {
+    position: relative;
+    inset: auto;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-content-grid]) {
+    position: relative;
+    inset: auto;
+    display: grid;
+    height: auto;
+    margin-top: 0rem;
+    grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+    align-items: center;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-left-panel]) {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    min-height: 21.8125rem;
+    padding: 4rem 3rem;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-right-panel]) {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 925 / 538;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-spacer]) {
+    height: 6rem;
+  }
+   .responsiveRoot :global([data-next-project-highlight-accent-square]) {
+    left:2.105rem
+  }
+}
+@media (max-width: 1023px) {
+
+  .responsiveRoot :global([data-next-project-highlight-content-grid]) {
+    grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+  }
+}
+@media (max-width: 767px) {
+  .responsiveRoot :global(#next-project-highlight-title) {
+    font-size: clamp(1.75rem, 9.5vw, 3.25rem);
+    mix-blend-mode: difference;
+  }
+
+
+  .layout {
+    padding: 4rem 1.5rem 0;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-content-grid]) {
+    margin-top: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-left-panel]) {
+    order: 2;
+    min-height: 21rem;
+    padding: 3.5rem 2rem;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-right-panel]) {
+    order: 1;
+    grid-column: auto;
+  }
+
+  .responsiveRoot :global([data-next-project-highlight-heading-layer]) {
+    margin-bottom: -4.75vw;
+  }
+}
+@media (max-width: 374px) {
+
+  .responsiveRoot :global([data-next-project-highlight-left-panel]) {
+    padding-inline: 1.5rem;
+  }
+}

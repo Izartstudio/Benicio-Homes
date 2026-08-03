@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
+import { Roboto_Slab } from "next/font/google";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/navbar/navbar";
+import { LenisProvider } from "@/components/providers/lenis-provider";
 import "./globals.css";
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
+const robotoSlab = Roboto_Slab({
+  variable: "--font-roboto-slab",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 const bahnschrift = localFont({
   src: "./fonts/bahnschrift.ttf",
   variable: "--font-bahnschrift",
+  weight: "300 700",
   display: "swap",
 });
 
@@ -34,9 +36,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bahnschrift.variable} ${ibmPlexMono.variable} antialiased`}>
-        <Navbar />
-        {children}
+      <body className={`${bahnschrift.variable} ${robotoSlab.variable} antialiased`}>
+        <LenisProvider>
+          <Navbar />
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );

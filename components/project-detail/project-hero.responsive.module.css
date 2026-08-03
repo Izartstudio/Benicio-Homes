@@ -1,0 +1,483 @@
+.heroSequence {
+  --hero-background-mask: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.55) 0%,
+    rgb(0 0 0 / 0.68) 17%,
+    rgb(0 0 0 / 0.88) 57%,
+    #000 100%
+  );
+  --hero-object-position: var(--hero-object-position-desktop);
+  --hero-media-scale: var(--hero-media-scale-desktop);
+  position: relative;
+  overflow: clip;
+  background: #050505;
+  color: var(--color-bone);
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: clip;
+  background: #232323;
+}
+
+.heroVisualStage {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.heroMediaLayer {
+  position: absolute;
+  inset: 0 0 -8%;
+}
+
+.heroMediaImage,
+.continuationImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroMediaImage {
+  object-position: var(--hero-object-position);
+  transform: scale(var(--hero-media-scale));
+  transform-origin: 50% 0%;
+}
+
+.heroBackgroundMedia {
+  z-index: 1;
+  -webkit-mask-image: var(--hero-background-mask);
+  mask-image: var(--hero-background-mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.heroTitleLayer {
+  position: absolute;
+  z-index: 2;
+  inset: clamp(10rem, 19svh, 10.75rem) clamp(1.5rem, 5.28vw, 4.75rem) auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 24%;
+  pointer-events: none;
+}
+
+.heroTitleReveal {
+  flex: none;
+  width: calc(100% + clamp(1.5rem, 5.28vw, 4.75rem));
+  overflow: clip;
+  overflow-clip-margin: 1.5rem;
+}
+
+.heroTitle {
+  width: 100%;
+  color: var(--color-bone);
+  font-family: var(--font-bahnschrift), sans-serif;
+  font-size: clamp(5rem, 13.6444vw, 12.28rem);
+  font-weight: 300;
+  line-height: 0.78;
+  letter-spacing: 0.005em;
+  text-align: left;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.heroForegroundMedia {
+  --hero-foreground-lower-mask: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 41%,
+    #000 46%,
+    #000 100%
+  );
+  --hero-foreground-palm-mask: radial-gradient(
+    ellipse 8% 26% at 43.5% 22%,
+    #000 0%,
+    #000 58%,
+    transparent 100%
+  );
+  z-index: 3;
+  pointer-events: none;
+  -webkit-mask-image:
+    var(--hero-foreground-palm-mask), var(--hero-foreground-lower-mask);
+  mask-image:
+    var(--hero-foreground-palm-mask), var(--hero-foreground-lower-mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroMediaLayer,
+.heroSequence[data-hero-layout="el-salva"] .heroMediaLayer,
+.heroSequence[data-hero-layout="zen"] .heroMediaLayer {
+  inset: 0;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroForegroundMedia,
+.heroSequence[data-hero-layout="el-salva"] .heroForegroundMedia,
+.heroSequence[data-hero-layout="zen"] .heroForegroundMedia {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroTitleLayer,
+.heroSequence[data-hero-layout="el-salva"] .heroTitleLayer {
+  inset: 0;
+  min-height: 0;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroTitleReveal,
+.heroSequence[data-hero-layout="el-salva"] .heroTitleReveal {
+  width: 100%;
+  height: 100%;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroTitle,
+.heroSequence[data-hero-layout="el-salva"] .heroTitle {
+  position: relative;
+  height: 100%;
+  font-size: clamp(5rem, 13.6444vw, 12.28rem);
+  line-height: 0.78;
+  white-space: nowrap;
+}
+
+.heroSequence[data-hero-layout="el-salva"] .heroTitle {
+  font-size: clamp(5rem, 12.5vw, 11.25rem);
+}
+
+.heroTitleLine {
+  position: absolute;
+  display: block;
+}
+
+.heroSequence[data-hero-layout="nayan"]
+  .heroTitleLine[data-hero-title-line="1"],
+.heroSequence[data-hero-layout="el-salva"]
+  .heroTitleLine[data-hero-title-line="1"] {
+  top: 18.4444%;
+  left: 4.6528%;
+}
+
+.heroSequence[data-hero-layout="nayan"]
+  .heroTitleLine[data-hero-title-line="2"],
+.heroSequence[data-hero-layout="el-salva"]
+  .heroTitleLine[data-hero-title-line="2"] {
+  top: 38%;
+  left: 42.3611%;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroContent,
+.heroSequence[data-hero-layout="el-salva"] .heroContent,
+.heroSequence[data-hero-layout="zen"] .heroContent {
+  padding: 0;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroDescriptionReveal {
+  position: absolute;
+  top: 41.6667%;
+  left: 4.6528%;
+  width: min(30rem, 33.3333vw);
+}
+
+.heroSequence[data-hero-layout="el-salva"] .heroDescriptionReveal {
+  position: absolute;
+  top: 60.5%;
+  right: 5.2778%;
+  left: 42.3611%;
+  width: auto;
+}
+
+.heroSequence[data-hero-layout="zen"] .heroDescriptionReveal {
+  position: absolute;
+  top: 60.5%;
+  right: 5.2778%;
+  width: min(36rem, 44vw);
+  text-align: right;
+}
+
+.heroSequence[data-hero-layout="nayan"] .heroDescription,
+.heroSequence[data-hero-layout="el-salva"] .heroDescription,
+.heroSequence[data-hero-layout="zen"] .heroDescription {
+  width: 100%;
+}
+
+.heroSequence[data-hero-layout="nayan"] .continuationMedia,
+.heroSequence[data-hero-layout="el-salva"] .continuationMedia,
+.heroSequence[data-hero-layout="zen"] .continuationMedia {
+  inset: 0 auto auto 0;
+  width: 100%;
+}
+
+.heroSequence[data-hero-layout="nayan"] .continuationMedia,
+.heroSequence[data-hero-layout="el-salva"] .continuationMedia {
+  aspect-ratio: 12 / 5;
+}
+
+.heroSequence[data-hero-layout="zen"] .continuationMedia {
+  aspect-ratio: 36 / 11;
+}
+
+.heroSequence[data-hero-layout="nayan"] .continuationMedia {
+  transform: translateY(-20%);
+}
+
+.heroSequence[data-hero-layout="nayan"] .continuationImage,
+.heroSequence[data-hero-layout="el-salva"] .continuationImage,
+.heroSequence[data-hero-layout="zen"] .continuationImage {
+  object-position: 50% 0%;
+  transform: none;
+}
+
+@media (min-width: 1024px) {
+  .heroSequence[data-hero-layout="nayan"] .hero,
+  .heroSequence[data-hero-layout="el-salva"] .hero,
+  .heroSequence[data-hero-layout="nayan"] .heroContent,
+  .heroSequence[data-hero-layout="el-salva"] .heroContent {
+    min-height: 0;
+    height: 62.5vw;
+  }
+
+  .heroSequence[data-hero-layout="zen"] .hero,
+  .heroSequence[data-hero-layout="zen"] .heroContent {
+    min-height: 0;
+    height: 62.5vw;
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 4;
+  width: min(100%, 90rem);
+  min-height: 100vh;
+  min-height: 100svh;
+  margin-inline: auto;
+  padding: clamp(6rem, 10svh, 6.25rem) clamp(1.5rem, 5.28vw, 4.75rem)
+    clamp(2.5rem, 6svh, 4.5rem);
+  pointer-events: none;
+}
+
+.heroDescription {
+  width: min(31rem, 44vw);
+  margin: 0;
+  font-family: var(--font-bahnschrift), sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 18px rgb(0 0 0 / 0.28);
+}
+
+.heroDescriptionReveal {
+  width: min(31rem, 44vw);
+}
+
+.heroDescriptionReveal .heroDescription {
+  width: 100%;
+}
+
+.continuation {
+  position: relative;
+  min-height: clamp(39rem, 78svh, 58rem);
+  margin-top: 0;
+  overflow: clip;
+  background: #050505;
+}
+
+.continuationMedia {
+  position: absolute;
+  z-index: 1;
+  inset: -4% 0;
+}
+
+.continuationImage {
+  object-position: var(--hero-object-position);
+  transform: scale(var(--continuation-media-scale));
+  transform-origin: 50% 100%;
+}
+
+.continuationShade {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(5 5 5 / 0.28) 0%,
+    rgb(5 5 5 / 0.36) 18%,
+    rgb(5 5 5 / 0.58) 62%,
+    #050505 100%
+  );
+}
+
+.continuationContent {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 90rem);
+  margin-inline: auto;
+  padding: clamp(8rem, 19svh, 14rem) clamp(1.5rem, 5.28vw, 4.75rem)
+    clamp(8rem, 14vw, 13rem);
+}
+
+.continuationAccent {
+  display: block;
+  width: 1.25rem;
+  aspect-ratio: 1;
+  background: var(--color-laterite);
+}
+
+.continuationStatement {
+  width: min(42rem, 68vw);
+  margin: clamp(1.75rem, 2.8vw, 2.5rem) 0 0;
+  font-family: var(--font-bahnschrift), sans-serif;
+  font-size: clamp(1.5rem, 2.15vw, 1.95rem);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 1023px) {
+  .heroSequence {
+    --hero-media-scale: var(--hero-media-scale-tablet);
+    --hero-object-position: var(--hero-object-position-tablet);
+  }
+
+  .heroTitleLayer {
+    min-height: 28%;
+  }
+
+  .heroTitle {
+    font-size: clamp(4rem, 12.5vw, 8rem);
+  }
+
+  .heroDescription {
+    width: min(28rem, 58vw);
+  }
+
+  .heroDescriptionReveal {
+    width: min(28rem, 58vw);
+  }
+
+  .heroSequence[data-hero-layout="nayan"] .continuationMedia,
+  .heroSequence[data-hero-layout="el-salva"] .continuationMedia {
+    height: max(28rem, 66.6667svh);
+    aspect-ratio: auto;
+  }
+
+  .heroSequence[data-hero-layout="zen"] .continuationMedia {
+    height: max(20.533rem, 48.8889svh);
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .heroSequence {
+    --hero-media-scale: var(--hero-media-scale-mobile);
+    --hero-object-position: var(--hero-object-position-mobile);
+  }
+
+  .hero {
+    min-height: max(42rem, 100svh);
+  }
+
+  .heroTitleLayer {
+    inset-block-start: clamp(13rem, 27svh, 14.25rem);
+    inset-inline: 1.5rem;
+    align-items: flex-start;
+    min-height: 0;
+    padding-inline-end: 0;
+  }
+
+  /* The default hero keeps its description in the content flow above the
+     title. Give the two blocks independent vertical lanes on short/narrow
+     phones so translated browser chrome and text wrapping cannot overlap. */
+  .heroSequence[data-hero-layout="default"] .heroTitleLayer {
+    inset-block-start: clamp(16rem, 34svh, 18rem);
+  }
+
+  .heroTitle {
+    font-size: clamp(2.65rem, 11.4vw, 3.5rem);
+    line-height: 0.82;
+    white-space: nowrap;
+  }
+
+  .heroTitleReveal {
+    width: calc(100% + 1.5rem);
+  }
+
+  .heroSequence[data-hero-layout="nayan"] .heroTitleLayer,
+  .heroSequence[data-hero-layout="el-salva"] .heroTitleLayer {
+    inset-block-start: clamp(13rem, 27svh, 14.25rem);
+    inset-inline: 1.5rem;
+  }
+
+  .heroSequence[data-hero-layout="nayan"] .heroTitleReveal,
+  .heroSequence[data-hero-layout="el-salva"] .heroTitleReveal {
+    width: 100%;
+    height: auto;
+  }
+
+  .heroSequence[data-hero-layout="nayan"] .heroTitle,
+  .heroSequence[data-hero-layout="el-salva"] .heroTitle {
+    height: auto;
+    font-size: clamp(2.65rem, 11.4vw, 3.5rem);
+    line-height: 0.86;
+  }
+
+  .heroSequence[data-hero-layout="nayan"] .heroTitleLine,
+  .heroSequence[data-hero-layout="el-salva"] .heroTitleLine {
+    position: static;
+  }
+
+  .heroSequence[data-hero-layout="nayan"]
+    .heroTitleLine[data-hero-title-line="2"],
+  .heroSequence[data-hero-layout="el-salva"]
+    .heroTitleLine[data-hero-title-line="2"] {
+    margin-inline-start: 20%;
+  }
+
+  .heroSequence[data-hero-layout="nayan"] .heroDescriptionReveal,
+  .heroSequence[data-hero-layout="el-salva"] .heroDescriptionReveal,
+  .heroSequence[data-hero-layout="zen"] .heroDescriptionReveal {
+    top: clamp(20rem, 42svh, 24rem);
+    right: 1.5rem;
+    left: 1.5rem;
+    width: auto;
+  }
+
+  .heroSequence[data-hero-layout="zen"] .heroDescriptionReveal {
+    text-align: right;
+  }
+
+  .heroContent {
+    min-height: max(42rem, 100svh);
+    padding: clamp(7rem, 18svh, 9rem) 1.5rem 3rem;
+  }
+
+  .heroDescription {
+    width: min(24rem, 100%);
+    font-size: clamp(0.95rem, 4.25vw, 1.08rem);
+  }
+
+  .heroDescriptionReveal {
+    width: min(24rem, 100%);
+  }
+
+  .continuation {
+    min-height: max(38rem, 74svh);
+  }
+
+  .continuationContent {
+    padding: clamp(7rem, 18svh, 10rem) 1.5rem 8rem;
+  }
+
+  .continuationStatement {
+    width: min(100%, 32rem);
+    font-size: clamp(1.35rem, 6.2vw, 1.75rem);
+  }
+}

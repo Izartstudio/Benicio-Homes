@@ -1,10 +1,14 @@
 "use client";
 
+import responsiveStyles from "./restoration-showcase-section.responsive.module.css";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DifferenceText } from "@/components/ui/difference-text";
+import { CdnImage } from "@/components/ui/cdn-image";
+import { OrangeBlock } from "@/components/ui/orange-block";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,24 +19,24 @@ const restorationSlides = [
     leftLabel: "Heritage Value",
     rightLabel: "Portuguese-Inspired Architecture",
     number: "Restoration 001 -",
-    src: "/assets/Restoration/carousel-1.svg",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/restoration-showcase-villa1.webp",
     alt: "Restored Goan villa interior opening into tropical landscape",
   },
   {
     id: "villa-el-salva-02",
-    heading: "VILLA EL SALVA",
+    heading: "VILLA PEROLA",
     leftLabel: "Heritage Value",
     rightLabel: "Portuguese-Inspired Architecture",
     number: "Restoration 002 -",
-    src: "/assets/projects/majorda-front-view.png",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section-villa2.webp",
     alt: "Restoration project facade with warm laterite material",
   },
 ] as const;
 
-const orangeBlockPath = "/assets/blocks/orange-block.svg";
 
 export function RestorationShowcaseSection() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const leftLabelRef = useRef<HTMLParagraphElement | null>(null);
   const rightLabelRef = useRef<HTMLParagraphElement | null>(null);
@@ -41,10 +45,8 @@ export function RestorationShowcaseSection() {
 
   const activeSlide = restorationSlides[activeSlideIndex];
 
-  useEffect(() => {
-    const section = document.querySelector<HTMLElement>(
-      '[data-section="restoration-showcase"]',
-    );
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
     const carousel = section?.querySelector<HTMLElement>(
       "[data-restoration-carousel]",
     );
@@ -77,11 +79,9 @@ export function RestorationShowcaseSection() {
 
       gsap.set(slideImages, {
         autoAlpha: (index: number) => (index === 0 ? 1 : 0),
-        filter: (index: number) =>
-          index === 0 ? "blur(0px)" : "blur(10px)",
         xPercent: 0,
       });
-      gsap.set(heading, { autoAlpha: 1, filter: "blur(0px)", y: 0 });
+      gsap.set(heading, { autoAlpha: 1, y: 0 });
       gsap.set(supportingTextElements, { autoAlpha: 1, y: 0 });
       gsap.set(pagination, {
         autoAlpha: 1,
@@ -107,7 +107,6 @@ export function RestorationShowcaseSection() {
               autoAlpha: 0,
               duration: 1.25,
               ease: "power2.inOut",
-              filter: "blur(10px)",
             },
             transitionStart,
           )
@@ -117,7 +116,6 @@ export function RestorationShowcaseSection() {
               autoAlpha: 1,
               duration: 1.25,
               ease: "power2.inOut",
-              filter: "blur(0px)",
             },
             transitionStart,
           )
@@ -127,7 +125,6 @@ export function RestorationShowcaseSection() {
               autoAlpha: 0,
               duration: 0.48,
               ease: "power2.inOut",
-              filter: "blur(8px)",
             },
             transitionStart,
           )
@@ -157,7 +154,6 @@ export function RestorationShowcaseSection() {
               });
               gsap.set(heading, {
                 autoAlpha: 0,
-                filter: "blur(8px)",
                 y: 0,
               });
               gsap.set(supportingTextElements, { autoAlpha: 0, y: 26 });
@@ -174,7 +170,6 @@ export function RestorationShowcaseSection() {
               autoAlpha: 1,
               duration: 0.62,
               ease: "power2.out",
-              filter: "blur(0px)",
             },
             transitionStart + 0.52,
           )
@@ -202,14 +197,21 @@ export function RestorationShowcaseSection() {
       ScrollTrigger.create({
         trigger: section,
         start: "top 84%",
-        once: true,
+        end: "bottom top",
         onEnter: () => {
           timeline.play(0);
         },
+        onEnterBack: () => {
+          timeline.resume();
+        },
+        onLeave: () => {
+          timeline.pause();
+        },
+        onLeaveBack: () => {
+          timeline.pause();
+        },
       });
     }, section);
-
-    ScrollTrigger.refresh();
 
     return () => {
       ctx.revert();
@@ -219,35 +221,37 @@ export function RestorationShowcaseSection() {
   return (
     <section
       aria-labelledby="restoration-showcase-title"
-      className="relative isolate overflow-hidden bg-[#FAFAFA] text-[#232323]"
+      className={`relative isolate overflow-hidden bg-[#FAFAFA] text-[#232323] ${responsiveStyles.responsiveRoot}`}
       data-section="restoration-showcase"
+      ref={sectionRef}
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-70 mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 z-0 select-none bg-cover bg-center opacity-70 mix-blend-multiply"
         data-restoration-background
         style={{
-          backgroundImage: 'url("/assets/textures/footer-texture.svg")',
+          backgroundImage: 'url("/assets/textures/heritage-texture.webp")',
         }}
       />
 
       <div
-        className="relative z-10 mx-auto h-[44.875rem] w-full max-w-[1440px] px-[5.28%]"
+        className="relative mx-auto h-[44.875rem] w-full max-w-[1440px] px-[5.28%]"
         data-restoration-content
       >
         <div
-          className="pointer-events-none absolute left-0 right-0 top-[8.25rem] z-30 px-[5.28%]"
+          className="pointer-events-none absolute left-0 right-0 top-[8.25rem] px-[5.28%]"
           data-restoration-heading-wrapper
           data-restoration-animation-group="heading"
         >
-          <h2
+          <DifferenceText
+            as="h2"
             id="restoration-showcase-title"
             ref={headingRef}
-            className="text-center font-display text-[clamp(5.5rem,12.2vw,10.9375rem)] font-normal uppercase leading-[0.78] tracking-[0] text-[#B9B9B9]"
+            className="relative z-30 text-center font-display text-[clamp(5.5rem,12.2vw,10.9375rem)] font-light uppercase leading-[0.78] tracking-[0]"
             data-restoration-heading
           >
             {activeSlide.heading}
-          </h2>
+          </DifferenceText>
         </div>
 
         <div
@@ -268,25 +272,25 @@ export function RestorationShowcaseSection() {
           data-restoration-stage
           data-restoration-animation-group="showcase-stage"
         >
-          <div
-            aria-hidden="true"
-            className="size-[1.3125rem] justify-self-start bg-cover bg-center"
+          <OrangeBlock
+            className="justify-self-start"
             data-restoration-accent-block="left"
-            style={{ backgroundImage: `url("${orangeBlockPath}")` }}
           />
 
           <div
             className="relative aspect-[535/342] w-full overflow-hidden"
             data-restoration-carousel
           >
-            {restorationSlides.map((slide) => (
+            {restorationSlides.map((slide, index) => (
               <figure
-                className="absolute inset-0 h-full w-full overflow-hidden"
+                className={`absolute inset-0 h-full w-full overflow-hidden ${
+                  index === 0 ? "visible opacity-100" : "invisible opacity-0"
+                }`}
                 data-restoration-slide
                 key={slide.id}
               >
-                <Image
-                  src={slide.src}
+                <CdnImage
+                  src={slide.url}
                   alt={slide.alt}
                   fill
                   sizes="65vw"
@@ -297,11 +301,9 @@ export function RestorationShowcaseSection() {
             ))}
           </div>
 
-          <div
-            aria-hidden="true"
-            className="size-[1.3125rem] justify-self-end bg-cover bg-center"
+          <OrangeBlock
+            className="justify-self-end"
             data-restoration-accent-block="right"
-            style={{ backgroundImage: `url("${orangeBlockPath}")` }}
           />
         </div>
 

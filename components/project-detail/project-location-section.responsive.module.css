@@ -1,0 +1,55 @@
+@media (max-width: 1439px) {
+  .responsiveRoot :global([data-project-location-content]) {
+    min-width: 0;
+  }
+
+  .responsiveRoot :global([data-project-location-copy-wrapper]) {
+    overflow-wrap: break-word;
+  }
+}
+@media (max-width: 1023px) {
+
+  .responsiveRoot :global([data-project-location-decorative-image-wrapper]) {
+    right: -2rem;
+    top: -3rem;
+    width: min(34rem, 58vw);
+  }
+}
+@media (max-width: 767px) {
+
+  .responsiveRoot :global([data-project-location-top-gradient]) {
+    height: 12rem;
+  }
+
+  .responsiveRoot :global([data-project-location-decorative-image-wrapper]) {
+    right: -1.5rem;
+    top: -1.5rem;
+    height: 14rem;
+    width: 62vw;
+  }
+
+  .responsiveRoot :global([data-project-location-row]) {
+    gap: 1rem;
+  }
+
+  .responsiveRoot :global([data-project-location-divider]) {
+    min-width: 0;
+    width: auto;
+    flex: 1;
+  }
+
+  .responsiveRoot :global([data-project-location-feature-image-reveal]) {
+    height: clamp(8rem, 40vw, 9.5rem);
+  }
+
+  .responsiveRoot :global([data-project-location-copy-wrapper]) {
+    max-width: none;
+  }
+}
+@media (max-width: 374px) {
+
+  .responsiveRoot :global([data-project-location-row]),
+.responsiveRoot :global([data-project-location-text-row]) {
+    padding-inline: 1.25rem;
+  }
+}

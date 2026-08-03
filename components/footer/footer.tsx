@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FooterColumn } from "@/components/footer/footer-column";
 import { FooterLink } from "@/components/footer/footer-link";
 import { Reveal } from "@/components/ui/reveal";
+import styles from "./footer.module.css";
 
 const navigationLinks = [
   { href: "#featured-projects", label: "Projects" },
@@ -27,24 +28,32 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer
-      className="relative isolate h-[26.875rem] overflow-hidden bg-[#b9b9b9] text-[#232323]"
+      className={`relative isolate h-[26.875rem] overflow-hidden bg-[#b9b9b9] text-[#232323] ${styles.footer}`}
       data-section="footer"
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-[length:100%_auto] md:bg-top"
         data-footer-background
         style={{
-          backgroundImage: 'url("/assets/footer/footer-texture.svg")',
+          backgroundImage: 'url("/assets/footer/footer-texture.webp")',
         }}
       />
 
       <div
-        className="relative z-10 grid h-full grid-cols-[minmax(24rem,34.5rem)_minmax(9rem,12rem)_minmax(12rem,14rem)_minmax(14rem,16rem)] gap-[clamp(3rem,5.8vw,5.25rem)] px-[5.208vw] pt-[6.25rem]"
+        className={`relative grid h-full grid-cols-[minmax(24rem,34.5rem)_minmax(9rem,12rem)_minmax(12rem,14rem)_minmax(14rem,16rem)] gap-[clamp(3rem,5.8vw,5.25rem)] px-[5.208vw] pt-[6.25rem] ${styles.content}`}
         data-footer-content
       >
-        <div>
-          <Reveal revealId="footer-brand">
+        <div className={styles.brandSocialGroup}>
+          <Reveal
+            className={styles.brandReveal}
+            delay={0.08}
+            duration={0.46}
+            revealId="footer-brand"
+            start="top 92%"
+            triggerClosest="footer"
+            y={12}
+          >
             <section aria-label="Benicio footer brand" data-footer-brand>
               <Link
                 aria-label="Benicio home"
@@ -52,6 +61,7 @@ export function Footer() {
                 href="/"
               >
                 <Image
+                  className={styles.brandLogo}
                   src="/assets/footer/Logo-footer.svg"
                   alt="Benicio"
                   width={75}
@@ -60,7 +70,9 @@ export function Footer() {
                 />
               </Link>
 
-              <p className="mt-[2.875rem] max-w-[21rem] font-display text-[1.125rem] leading-[1.35]">
+              <p
+                className={`mt-[2.875rem] max-w-[21rem] font-display text-[1.125rem] leading-[1.35] ${styles.brandTagline}`}
+              >
                 Building Bespoke, Eco-conscious and Immersive Tropical Luxury
                 Holiday Homes
               </p>
@@ -71,20 +83,28 @@ export function Footer() {
             </section>
           </Reveal>
 
-          <Reveal className="mt-[1.625rem]" revealId="footer-social">
+          <Reveal
+            className={`mt-[1.625rem] ${styles.socialReveal}`}
+            delay={0.1}
+            duration={0.42}
+            revealId="footer-social"
+            start="top 92%"
+            triggerClosest="footer"
+            y={10}
+          >
             <section aria-labelledby="footer-social-title" data-footer-social>
               <h2 id="footer-social-title" className="sr-only">
                 Social
               </h2>
               <ul
                 aria-label="Social links"
-                className="flex items-center gap-[1.5rem]"
+                className={`flex items-center gap-[1.5rem] ${styles.socialList}`}
               >
                 {socialLinks.map((item) => (
                   <li key={item.label}>
                     <FooterLink
                       aria-label={item.label}
-                      className="grid size-5 place-items-center opacity-100 transition-opacity duration-300 hover:opacity-70"
+                      className={`grid size-5 place-items-center opacity-100 transition-opacity duration-300 hover:opacity-70 ${styles.socialLink}`}
                       href={item.href}
                       rel="noreferrer"
                       target="_blank"
@@ -104,10 +124,17 @@ export function Footer() {
           </Reveal>
         </div>
 
-        <Reveal revealId="footer-navigation">
+        <Reveal
+          className={styles.navigationReveal}
+          duration={0.4}
+          revealId="footer-navigation"
+          start="top 92%"
+          triggerClosest="footer"
+          y={10}
+        >
           <nav aria-label="Footer navigation" data-footer-navigation>
             <FooterColumn title="Quick Links">
-              <ul className="grid gap-[1.625rem]">
+              <ul className={`grid gap-[1.625rem] ${styles.columnList}`}>
                 {navigationLinks.map((item) => (
                   <li key={item.href}>
                     <FooterLink href={item.href}>
@@ -120,10 +147,18 @@ export function Footer() {
           </nav>
         </Reveal>
 
-        <Reveal revealId="footer-legal">
+        <Reveal
+          className={styles.legalReveal}
+          delay={0.04}
+          duration={0.4}
+          revealId="footer-legal"
+          start="top 92%"
+          triggerClosest="footer"
+          y={10}
+        >
           <nav aria-label="Legal links" data-footer-legal>
             <FooterColumn title="Legal">
-              <ul className="grid gap-[1.625rem]">
+              <ul className={`grid gap-[1.625rem] ${styles.columnList}`}>
                 <li>
                   <FooterLink href="/terms">Terms &amp; Conditions</FooterLink>
                 </li>
@@ -135,25 +170,35 @@ export function Footer() {
           </nav>
         </Reveal>
 
-        <Reveal revealId="footer-contact">
+        <Reveal
+          className={styles.contactReveal}
+          delay={0.08}
+          duration={0.42}
+          revealId="footer-contact"
+          start="top 92%"
+          triggerClosest="footer"
+          y={10}
+        >
           <section aria-label="Contact" data-footer-contact>
             <FooterColumn title="Contact">
               <address className="not-italic">
-                <ul className="grid gap-[1.625rem]">
+                <ul className={`grid gap-[1.625rem] ${styles.columnList}`}>
                   <li>
                     <FooterLink href="tel:+91921013324">
                       +91 92101 3324
                     </FooterLink>
                   </li>
                   <li>
-                    <FooterLink href="mailto:info@beniciohomes.co.in">
-                      info@beniciohomes.co.in
+                    <FooterLink href="mailto:info@benicio.co.in">
+                      info@benicio.co.in
                     </FooterLink>
                   </li>
                   <li>
-                    <p className="max-w-[12.5rem] text-[#575757]">
-                      Benicio Homes, 123 Beach Road, Candolim, Goa, 403515,
-                      India
+                    <p
+                      className={`max-w-[12.5rem] text-[#575757] ${styles.contactAddress}`}
+                    >
+                     Benicio Homes, 55-58, Aldeia Aurino, Porvorim
+                      North Goa - 403501
                     </p>
                   </li>
                 </ul>

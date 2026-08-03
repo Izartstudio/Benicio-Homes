@@ -1,0 +1,112 @@
+@media (max-width: 1439px) {
+  .responsiveRoot :global([data-project-floor-plan-container]) {
+    min-width: 0;
+  }
+}
+
+.responsiveRoot[data-layout="mirrored"]
+  :global([data-project-floor-plan-axis-line-upper]) {
+  top: -8.5rem;
+  height: 15.341rem;
+}
+
+@media (max-width: 1023px) {
+  .responsiveRoot :global([data-project-floor-plan-container]) {
+    padding-top: 5rem;
+    gap: clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-left-content]),
+  .responsiveRoot :global([data-project-floor-plan-right-content]) {
+    width: 100%;
+    max-width: 36rem;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-copy-wrapper] p) {
+    max-width: 36rem;
+    text-align: left;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-area]) {
+    width: 100%;
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-specification-row]) {
+    height: auto;
+    min-height: 2.5625rem;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-specification-row] > div) {
+    padding-bottom: 0.75rem;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-specification-divider]) {
+    bottom: 0.625rem;
+    top: auto;
+  }
+}
+@media (max-width: 767px) {
+  .responsiveRoot[data-layout="mirrored"]
+    :global([data-project-floor-plan-area]) {
+    order: 1;
+  }
+
+  .responsiveRoot[data-layout="mirrored"]
+    :global([data-project-floor-plan-left-content]) {
+    order: 2;
+  }
+
+  .responsiveRoot[data-layout="mirrored"]
+    :global([data-project-floor-plan-right-content]) {
+    order: 3;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-area]) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    padding-left: 3.5rem;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-vertical-axis]) {
+    display: block;
+    inset: 0 auto 0 0;
+    width: 3rem;
+    transform: none;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-axis-line-upper]) {
+    top: 0;
+    height: 12%;
+  }
+
+  .responsiveRoot[data-layout="mirrored"]
+    :global([data-project-floor-plan-axis-line-upper]) {
+    top: -5rem;
+    height: calc(12% + 5rem);
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-axis-line-lower]) {
+    top: 18%;
+    height: 75%;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-villa-marker]) {
+    top: 12%;
+    width: 3rem;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-bottom-marker]) {
+    width: 3rem;
+  }
+}
+@media (max-width: 374px) {
+  .responsiveRoot :global([data-project-floor-plan-container]) {
+    padding-inline: 1.25rem;
+  }
+
+  .responsiveRoot :global([data-project-floor-plan-area]) {
+    padding-left: 3.125rem;
+  }
+}

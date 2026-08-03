@@ -1,0 +1,117 @@
+.legacyStage {
+  position: absolute;
+  inset: 0;
+}
+
+@media (max-width: 1023px) {
+
+  .responsiveRoot:global([data-section="legacy"]) {
+    max-width: 100%;
+  }
+
+  .responsiveRoot :global([data-legacy-canvas]) {
+    min-height: clamp(41rem, 75vw, 48rem);
+  }
+
+  .responsiveRoot :global([data-legacy-intro]) {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 30%);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .responsiveRoot :global([data-legacy-heading]),
+.responsiveRoot :global([data-legacy-copy]),
+.responsiveRoot :global([data-legacy-title]) {
+    overflow-wrap: break-word;
+  }
+
+  .responsiveRoot :global([data-legacy-title]) {
+    max-width: calc(100vw - 4rem);
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsiveRoot :global([data-legacy-vertical-divider]) {
+    top: 0;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .responsiveRoot :global([data-legacy-canvas]) {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .responsiveRoot :global([data-legacy-intro]) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3.75rem 2.1875rem 0;
+  }
+
+  .responsiveRoot :global([data-legacy-heading]) {
+    font-size: 1.8rem;
+  }
+
+  .responsiveRoot :global([data-legacy-copy-group]) {
+    padding-left: 0;
+  }
+
+  .responsiveRoot :global([data-legacy-vertical-divider]) {
+    display: none;
+  }
+
+  .responsiveRoot :global([data-legacy-title]) {
+    padding-inline: 2rem;
+    font-size: clamp(1.85rem, 8vw, 2.35rem);
+    line-height: 1.1;
+  }
+
+  .responsiveRoot :global([data-legacy-intro]) {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: clamp(1.25rem, 7vw, 2.1875rem);
+  }
+
+  .responsiveRoot :global([data-legacy-copy]) {
+    max-width: min(22rem, 100%);
+  }
+
+  .responsiveRoot :global([data-legacy-cta]) {
+    max-width: calc(100vw - 2.5rem);
+  }
+
+  .responsiveRoot :global([data-legacy-title]) {
+    max-width: calc(100vw - 3rem);
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .legacyStage {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(20rem, 88vw, 23rem);
+    margin-top: clamp(3rem, 12vw, 4.5rem);
+    flex: none;
+  }
+
+  .responsiveRoot :global([data-legacy-staircase]) {
+    transform: none;
+  }
+
+  .responsiveRoot :global([data-legacy-orange-square="left"]) {
+    left: clamp(1.25rem, 8.97vw, 2.1875rem);
+  }
+
+  .responsiveRoot :global([data-legacy-orange-square="right"]) {
+    right: clamp(1.25rem, 8.97vw, 2.1875rem);
+  }
+}
+
+@media (max-width: 374px) {
+  .responsiveRoot :global([data-legacy-intro]) {
+    padding-inline: 1.25rem;
+  }
+}

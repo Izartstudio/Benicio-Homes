@@ -1,0 +1,105 @@
+@media (max-width: 1439px) {
+  .responsiveRoot :global([data-project-site-showcase-canvas]) {
+    min-width: 0;
+  }
+}
+@media (max-width: 1023px) {
+
+  .responsiveRoot :global([data-project-site-showcase-right-content]) {
+    width: min(45%, 22rem);
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-copy-wrapper]) {
+    padding-right: clamp(1.5rem, 4vw, 3rem);
+  }
+}
+@media (max-width: 767px) {
+  .responsiveRoot
+    :global([data-project-site-showcase-background-texture]) {
+    display: none;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-canvas]) {
+    height: clamp(48rem, 216.41vw, 52.75rem);
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-left-header]),
+  .responsiveRoot :global([data-project-site-showcase-floating-accent]) {
+    display: none;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-steps]) {
+    display: block;
+    inset-inline: 0;
+    top: 7.8125rem;
+    height: 9.8125rem;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-steps])::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.389%;
+    height: 100%;
+    background: #343434;
+    content: "";
+  }
+
+  .responsiveRoot
+    :global([data-project-site-showcase-steps] [data-stair-index="1"]) {
+    top: 0;
+    left: 72.29%;
+    width: 27.71%;
+    height: 25.303%;
+  }
+
+  .responsiveRoot
+    :global([data-project-site-showcase-steps] [data-stair-index="2"]) {
+    top: 0;
+    left: 65.832%;
+    width: 6.458%;
+    height: 46.447%;
+  }
+
+  .responsiveRoot
+    :global([data-project-site-showcase-steps] [data-stair-index="3"]) {
+    top: 0;
+    left: 20.347%;
+    width: 45.485%;
+    height: 52.166%;
+  }
+
+  .responsiveRoot
+    :global([data-project-site-showcase-steps] [data-stair-index="4"]) {
+    top: 0;
+    left: 1.389%;
+    width: 18.958%;
+    height: 61.872%;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-right-content]) {
+    z-index: 2;
+    top: 2.414rem;
+    right: 1.25rem;
+    left: 1.25rem;
+    width: auto;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-copy-wrapper]) {
+    padding-right: 0;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-copy-wrapper] p) {
+    max-width: 17rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-cta-wrapper]) {
+    margin-top: 0.9375rem;
+  }
+
+  .responsiveRoot :global([data-project-site-showcase-image-wrapper]) {
+    top: 10.1875rem;
+  }
+}

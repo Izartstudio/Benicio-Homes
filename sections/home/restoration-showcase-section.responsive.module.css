@@ -1,0 +1,151 @@
+@media (max-width: 1023px) {
+  .responsiveRoot:global([data-section="restoration-showcase"]) {
+    max-width: 100%;
+  }
+
+  .responsiveRoot :global([data-restoration-heading]) {
+    font-size: clamp(4.6rem, 11.5vw, 8rem);
+  }
+
+  .responsiveRoot :global([data-restoration-stage]) {
+    grid-template-columns: minmax(1.5rem, 1fr) minmax(22rem, 33.4375rem) minmax(1.5rem, 1fr);
+    gap: clamp(1.25rem, 3vw, 3rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .responsiveRoot:global([data-section="restoration-showcase"] [data-restoration-content]) {
+    height: clamp(46rem, 68vw, 51rem);
+  }
+
+  .responsiveRoot :global([data-restoration-heading-wrapper]) {
+    top: 6.5rem;
+  }
+
+  .responsiveRoot :global([data-restoration-stage]) {
+    top: 10.5rem;
+    grid-template-columns:
+      minmax(1.25rem, 1fr)
+      clamp(26rem, 58vw, 41rem)
+      minmax(1.25rem, 1fr);
+  }
+
+  .responsiveRoot :global([data-restoration-top-labels]) {
+    top: clamp(33rem, 57vw, 39rem);
+    gap: 2rem;
+  }
+
+  .responsiveRoot :global([data-restoration-label]) {
+    max-width: 15rem;
+    line-height: 1.2;
+  }
+
+  .responsiveRoot :global([data-restoration-label="right"]) {
+    text-align: right;
+  }
+
+  .responsiveRoot :global([data-restoration-meta-row]) {
+    top: clamp(38rem, 62vw, 43rem);
+  }
+
+  .responsiveRoot :global([data-restoration-progress]) {
+    top: clamp(42.25rem, 68vw, 47.5rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .responsiveRoot :global([data-restoration-heading]) {
+    font-size: clamp(5rem, 10.5vw, 7.5rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .responsiveRoot:global([data-section="restoration-showcase"] [data-restoration-content]) {
+    height: 41.25rem;
+    padding-inline: 0;
+  }
+
+  .responsiveRoot :global([data-restoration-heading-wrapper]) {
+    top: calc(6.75rem - clamp(0.9rem, 4.485vw, 1.17rem));
+    padding-inline: 1.25rem;
+  }
+
+  .responsiveRoot :global([data-restoration-heading]) {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(2rem, 11.5vw, 3rem);
+    line-height: 0.78;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .responsiveRoot :global([data-restoration-stage]) {
+    left: 2.1875rem;
+    right: 2.1875rem;
+    top: 6.75rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .responsiveRoot :global([data-restoration-carousel]) {
+    width: 20rem;
+    height: 17.1875rem;
+    max-width: 100%;
+    justify-self: center;
+  }
+
+  .responsiveRoot :global([data-restoration-accent-block]) {
+    position: absolute;
+    left: 50%;
+    display: block;
+    transform: translateX(-50%);
+  }
+
+  .responsiveRoot :global([data-restoration-accent-block="left"]) {
+    top: -4.5625rem;
+  }
+
+  .responsiveRoot :global([data-restoration-accent-block="right"]) {
+    top: 21.25rem;
+  }
+
+  .responsiveRoot :global([data-restoration-meta-row]) {
+    top: 31.25rem;
+  }
+
+  .responsiveRoot :global([data-restoration-progress]) {
+    top: 34.5rem;
+  }
+
+  .responsiveRoot :global([data-restoration-pagination]) {
+    width: 16rem;
+  }
+
+  .responsiveRoot :global([data-restoration-top-labels]) {
+    left: 2.1875rem;
+    right: 2.1875rem;
+    top: 36.25rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.6875rem;
+    line-height: 1.2;
+  }
+
+  .responsiveRoot :global([data-restoration-label]) {
+    max-width: 8.75rem;
+  }
+
+  .responsiveRoot :global([data-restoration-label="right"]) {
+    text-align: right;
+  }
+}
+
+@media (max-width: 374px) {
+  .responsiveRoot :global([data-restoration-stage]),
+  .responsiveRoot :global([data-restoration-top-labels]) {
+    left: 1.25rem;
+    right: 1.25rem;
+  }
+}

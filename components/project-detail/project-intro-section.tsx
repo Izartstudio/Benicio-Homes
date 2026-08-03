@@ -1,4 +1,6 @@
-import Image, { type ImageProps } from "next/image";
+import type { ImageProps } from "next/image";
+import { CdnImage } from "@/components/ui/cdn-image";
+import responsiveStyles from "./project-intro-section.responsive.module.css";
 
 export type ProjectIntroSectionProps = {
   backgroundImage: {
@@ -15,14 +17,14 @@ export function ProjectIntroSection({
   return (
     <section
       aria-label="Project introduction"
-      className="relative z-20 -mt-px overflow-hidden bg-[#050505] text-bone"
+      className={`relative z-20 -mt-px overflow-hidden bg-[#050505] text-bone ${responsiveStyles.responsiveRoot}`}
       data-project-intro-section
     >
       <div
         className="absolute inset-0 z-0"
         data-project-intro-background-image
       >
-        <Image
+        <CdnImage
           alt={backgroundImage.alt}
           className="object-cover object-center"
           fill

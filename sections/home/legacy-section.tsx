@@ -1,65 +1,77 @@
 "use client";
 
+import responsiveStyles from "./legacy-section.responsive.module.css";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
-import { useEffect } from "react";
+import Image from "next/image";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CTA } from "@/components/ui/cta";
 import { setupSectionReveals } from "@/utils/setup-section-reveals";
+import { OrangeBlock } from "@/components/ui/orange-block";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const texturePath = "/assets/textures/concrete-background-textures-09-1.svg";
-const orangeBlockPath = "/assets/blocks/orange-block.svg";
 
 export function LegacySection() {
-  useEffect(() => {
-    const section = document.querySelector<HTMLElement>('[data-section="legacy"]');
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
 
     if (!section) {
       return;
     }
 
-    const cleanupReveals = setupSectionReveals(section);
-    const stairs = gsap.utils.toArray<HTMLElement>(
-      "[data-architectural-stair]",
-      section,
-    );
+    let cleanupReveals = () => {};
+    let stairs: HTMLElement[] = [];
+    const ctx = gsap.context(() => {
+      cleanupReveals = setupSectionReveals(section);
+      stairs = gsap.utils.toArray<HTMLElement>(
+        "[data-architectural-stair]",
+        section,
+      );
 
-    if (stairs.length === 0) {
-      return cleanupReveals;
-    }
+      if (stairs.length === 0) {
+        return;
+      }
 
-    gsap.set(stairs, { autoAlpha: 0, y: 20 });
+      gsap.set(stairs, { autoAlpha: 0, y: 20 });
+      stairs.forEach((stair) => {
+        stair.dataset.revealInitialized = "";
+      });
 
-    const stairTimeline = gsap.timeline({
-      paused: true,
-      defaults: {
-        duration: 0.78,
-        ease: "power3.out",
-      },
-    });
+      const stairTimeline = gsap.timeline({
+        paused: true,
+        defaults: {
+          duration: 0.78,
+          ease: "power3.out",
+        },
+      });
 
-    stairTimeline.to(stairs, {
-      autoAlpha: 1,
-      y: 0,
-      stagger: 0.08,
-    });
+      stairTimeline.to(
+        stairs,
+        {
+          autoAlpha: 1,
+          clearProps: "opacity,visibility,transform",
+          stagger: 0.08,
+          y: 0,
+        },
+      );
 
-    const stairTrigger = ScrollTrigger.create({
-      trigger: section,
-      start: "top 68%",
-      once: true,
-      onEnter: () => {
-        stairTimeline.play(0);
-      },
-    });
-
-    ScrollTrigger.refresh();
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 68%",
+        once: true,
+        onEnter: () => {
+          stairTimeline.play(0);
+        },
+      });
+    }, section);
 
     return () => {
       cleanupReveals();
-      stairTrigger.kill();
-      stairTimeline.kill();
+      ctx.revert();
       gsap.set(stairs, { clearProps: "opacity,visibility,transform" });
     };
   }, []);
@@ -67,8 +79,9 @@ export function LegacySection() {
   return (
     <section
       aria-labelledby="legacy-section-title"
-      className="relative isolate overflow-hidden bg-[#b9b9b9] text-[#232323]"
+      className={`relative isolate overflow-hidden bg-[#2d2d2d] text-[#1A1A1A] ${responsiveStyles.responsiveRoot}`}
       data-section="legacy"
+      ref={sectionRef}
     >
       <div
         className="relative min-h-[clamp(40rem,53.333vw,48rem)]"
@@ -79,11 +92,17 @@ export function LegacySection() {
           className="absolute inset-0 z-0"
           data-legacy-background-layer
         >
-          <div className="absolute inset-0 bg-[#b9b9b9]" data-legacy-background-fill />
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-multiply"
+          <div className="absolute inset-0 bg-[#2d2d2d]" data-legacy-background-fill />
+          <Image
+            src="/assets/textures/cta-section-texture.webp"
+            alt=""
+            aria-hidden="true"
+            width={1440}
+            height={411}
+            draggable={false}
+            unoptimized
+            className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover opacity-100 [-webkit-user-drag:none]"
             data-legacy-background-texture
-            style={{ backgroundImage: `url("${texturePath}")` }}
           />
         </div>
 
@@ -116,61 +135,62 @@ export function LegacySection() {
               landscape, and everyday living come together to leave a lasting
               legacy.
             </p>
-            <a
-              href="#projects"
-              className="mt-[clamp(1.75rem,2.7vw,2.5rem)] inline-flex h-[3.125rem] w-[11rem] items-center justify-between bg-[#464646] px-3 font-display text-[0.95rem] text-bone"
+            <CTA
+              arrowClassName="translate-y-[0.1rem] text-lg"
+              className="mt-[clamp(1.75rem,2.7vw,2.5rem)] inline-flex h-[3.125rem] w-[11rem] items-center justify-between px-3 font-display text-[0.95rem]"
+              darkBackground="#464646"
               data-legacy-cta
+              href="/#featured-projects-title"
+              variant="dark"
             >
               View All Projects
-              <span aria-hidden="true" className="translate-y-[0.1rem] text-lg">
-                &rsaquo;
-              </span>
-            </a>
+            </CTA>
           </div>
         </div>
 
         <div
-          className="absolute inset-0 z-10"
-          data-legacy-reveal="2"
-          data-legacy-staircase
+          className={responsiveStyles.legacyStage}
+          data-legacy-stage
         >
-          <ArchitecturalStairs
-            variant="descending"
-            stairClassName="bg-[#2D2D2D]"
-          />
-        </div>
-
-        <div
-          className="pointer-events-none absolute inset-x-0 top-[76%] z-30 text-center"
-          data-reveal-child
-          data-legacy-reveal="3"
-        >
-          <p
-            className="font-display text-[clamp(2rem,3.5vw,3rem)] font-normal uppercase leading-none tracking-[0.04em] text-bone"
-            data-legacy-title
+          <div
+            className="absolute inset-0 z-10"
+            data-legacy-reveal="2"
+            data-legacy-staircase
           >
-            PRESERVING GOA&apos;S LEGACY
-          </p>
-        </div>
+            <ArchitecturalStairs
+              variant="descending"
+              stairClassName="bg-[#2D2D2D]"
+            />
+          </div>
 
-        <div
-          className="absolute inset-0 z-40"
-          data-reveal-child
-          data-legacy-reveal="4"
-          data-legacy-marker-layer
-        >
           <div
-            aria-hidden="true"
-            className="absolute left-[5.28%] top-[77.5%] size-[clamp(18px,2vw,28px)] bg-cover bg-center"
-            data-legacy-orange-square="left"
-            style={{ backgroundImage: `url("${orangeBlockPath}")` }}
-          />
+            className="pointer-events-none absolute inset-x-0 top-[76%] z-30 text-center"
+            data-reveal-child
+            data-legacy-reveal="3"
+          >
+            <p
+            className="font-display text-[clamp(2rem,3.5vw,48px)] font-normal uppercase leading-normal tracking-[0.04em] text-[#eee] lg:text-[48px]"
+              data-legacy-title
+            >
+              PRESERVING GOA&apos;S LEGACY
+            </p>
+          </div>
+
           <div
-            aria-hidden="true"
-            className="absolute right-[5.28%] top-[77.5%] size-[clamp(18px,2vw,28px)] bg-cover bg-center"
-            data-legacy-orange-square="right"
-            style={{ backgroundImage: `url("${orangeBlockPath}")` }}
-          />
+            className="pointer-events-none absolute inset-0 z-40"
+            data-reveal-child
+            data-legacy-reveal="4"
+            data-legacy-marker-layer
+          >
+            <OrangeBlock
+              className="absolute left-[5.28%] top-[77.5%]"
+              data-legacy-orange-square="left"
+            />
+            <OrangeBlock
+              className="absolute right-[5.28%] top-[77.5%]"
+              data-legacy-orange-square="right"
+            />
+          </div>
         </div>
       </div>
     </section>

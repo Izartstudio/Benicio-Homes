@@ -1,0 +1,103 @@
+@media (min-width: 768px) {
+  .storyHeroMedia {
+    top: 0 !important;
+    bottom: -12% !important;
+  }
+}
+
+@media (max-width: 1023px) {
+
+  .responsiveRoot:global([data-section="story"]) {
+    max-width: 100%;
+  }
+
+  .responsiveRoot :global([data-story-intro]),
+.responsiveRoot :global([data-story-copy]) {
+    max-width: 100%;
+  }
+
+  .responsiveRoot :global([data-story-copy]) {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.75fr);
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .responsiveRoot :global([data-story-copy-heading]),
+.responsiveRoot :global([data-story-copy-paragraph]) {
+    overflow-wrap: break-word;
+  }
+
+  .responsiveRoot :global([data-story-hero-image]) {
+    height: clamp(24rem, 50vw, 30rem);
+  }
+}
+
+@media (max-width: 767px) {
+
+  .responsiveRoot:global([data-section="story"] [data-story-intro]) {
+    padding: 3.25rem 2.1875rem 0;
+    font-size: 0.85rem;
+  }
+
+  .responsiveRoot :global([data-story-copy]) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 5rem 2.1875rem 0;
+  }
+
+  .responsiveRoot :global([data-story-copy-heading]) {
+    font-size: 1.8rem;
+  }
+
+  .responsiveRoot :global([data-story-copy-paragraph]) {
+    margin-left: 0;
+    max-width: 19rem;
+    font-size: 0.95rem;
+  }
+
+  .responsiveRoot :global([data-story-upper-image]) {
+    margin-top: 2.25rem;
+    width: 6.75rem;
+  }
+
+  .responsiveRoot :global([data-story-grey-block]) {
+    height: 8.5rem;
+    width: 6.75rem;
+  }
+
+  .responsiveRoot :global([data-story-hero-image]) {
+    height: 23rem;
+    margin-top: 0;
+  }
+
+  .responsiveRoot :global([data-story-intro]) {
+    padding-inline: clamp(1.25rem, 7vw, 2.1875rem);
+  }
+
+  .responsiveRoot :global([data-story-copy]) {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: clamp(1.25rem, 7vw, 2.1875rem);
+  }
+
+  .responsiveRoot :global([data-story-copy-paragraph]) {
+    max-width: min(22rem, 100%);
+  }
+
+  .responsiveRoot :global([data-story-upper-image]) {
+    width: clamp(5.75rem, 27vw, 6.75rem);
+  }
+
+  .responsiveRoot :global([data-story-grey-block]) {
+    width: clamp(5.75rem, 27vw, 6.75rem);
+    height: clamp(7.25rem, 34vw, 8.5rem);
+  }
+
+  .responsiveRoot :global([data-story-hero-image]) {
+    height: clamp(18rem, 82vw, 23rem);
+  }
+}
+
+@media (max-width: 374px) {
+  .responsiveRoot :global([data-story-copy]) {
+    padding-inline: 1.25rem;
+  }
+}

@@ -1,0 +1,139 @@
+.section,
+.section :global([data-contact-intro-static]),
+.section :global([data-contact-form-static]) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.form {
+  --contact-form-text-size: 1.125rem;
+  font-family: var(--font-roboto-slab);
+  font-weight: 300;
+}
+
+.form :where(button, input, label, option, p, select, span, textarea) {
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+@media (max-width: 1439px) {
+  .section {
+    height: auto;
+    min-height: 63.75rem;
+  }
+
+  .container {
+    min-width: 0;
+    height: auto;
+    min-height: 63.75rem;
+    grid-template-columns: minmax(0, 1fr) minmax(28rem, 34rem);
+    gap: clamp(2.5rem, 4vw, 4rem);
+    padding: 5rem clamp(3rem, 5.208vw, 4.6875rem) 8rem;
+  }
+
+  .copyBlock {
+    overflow-wrap: break-word;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 37.9375rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .section {
+    min-height: 0;
+    max-width: 100%;
+  }
+
+  .container {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    padding: 5rem clamp(2.5rem, 7vw, 4rem) 8rem;
+  }
+
+  .leftColumn {
+    max-width: 39rem;
+  }
+
+  .card {
+    justify-self: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .section {
+    min-height: 63.75rem;
+  }
+
+  .container {
+    min-height: 63.75rem;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 46vw);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    padding: 5rem clamp(2rem, 4vw, 3.5rem) 8rem;
+  }
+
+  .leftColumn {
+    max-width: 39rem;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 37.9375rem;
+    justify-self: end;
+  }
+
+  .form {
+    padding-inline: clamp(1.75rem, 3.5vw, 2.625rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .section :global([data-contact-background]) {
+    background-position: center;
+    background-size: 100% 100%;
+  }
+
+  .container {
+    display: grid;
+    height: auto;
+    grid-template-columns: 1fr;
+    padding: 4rem clamp(1.25rem, 7vw, 1.75rem) 6rem;
+  }
+
+  .copyBlock {
+    max-width: min(31rem, 100%);
+  }
+
+  .heading {
+    overflow-wrap: break-word;
+    font-size: clamp(2rem, 10vw, 2.5rem);
+  }
+
+  .card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    min-height: 48rem;
+  }
+
+  .form {
+    --contact-form-text-size: 1rem;
+    min-height: 48rem;
+    padding: 2.5rem clamp(1.25rem, 6vw, 1.75rem);
+  }
+}
+
+@media (max-width: 374px) {
+  .container {
+    padding-inline: 1.25rem;
+  }
+
+  .form {
+    --contact-form-text-size: 0.9375rem;
+  }
+}
