@@ -18,9 +18,9 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
     siteComposition: "/assets/projects/vanam-masterplan.png",
     moodboardDesktop:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/moodboard-collage.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-moodboard-desktop.webp",
     moodboardMobile:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/moodboar-collage-mobile.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-moodboard-mobile.webp",
     architecture: "/assets/projects/vanam-site-showcase.png",
     floorPlan01Ground: "/assets/projects/villatype01-1.svg",
     floorPlan01First: "/assets/projects/villatype01-2.svg",

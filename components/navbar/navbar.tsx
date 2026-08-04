@@ -285,7 +285,7 @@ export function Navbar() {
               </button>
 
               <div
-                className={`absolute left-1/2 top-[calc(100%+1rem)] w-[13.5rem] -translate-x-1/2 border border-white/15 bg-[#151515]/70 p-2 shadow-2xl backdrop-blur-xl transition-[opacity,transform,visibility] duration-200 ${
+                className={`absolute left-1/2 top-[calc(100%+1rem)] w-[13.5rem] -translate-x-1/2 border border-white/15 bg-[#151515]/70 shadow-2xl backdrop-blur-xl transition-[opacity,transform,visibility] duration-200 ${
                   isProjectsOpen
                     ? "visible translate-y-0 opacity-100"
                     : "invisible -translate-y-2 opacity-0"
@@ -304,7 +304,7 @@ export function Navbar() {
                       key={project.slug}
                     >
                       <FooterLink
-                        className="block px-4 py-3 !text-white hover:bg-white/10 hover:!text-white"
+                        className="!block !w-full px-4 py-3 !text-white hover:bg-white/10 hover:!text-white"
                         href={`/projects/${project.slug}`}
                         onClick={() => setIsProjectsOpen(false)}
                       >
