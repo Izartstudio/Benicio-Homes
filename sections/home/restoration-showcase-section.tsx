@@ -1,16 +1,12 @@
 "use client";
 
 import responsiveStyles from "./restoration-showcase-section.responsive.module.css";
-import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DifferenceText } from "@/components/ui/difference-text";
 import { CdnImage } from "@/components/ui/cdn-image";
 import { OrangeBlock } from "@/components/ui/orange-block";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const restorationSlides = [
   {
@@ -41,7 +37,8 @@ export function RestorationShowcaseSection() {
   const leftLabelRef = useRef<HTMLParagraphElement | null>(null);
   const rightLabelRef = useRef<HTMLParagraphElement | null>(null);
   const numberRef = useRef<HTMLParagraphElement | null>(null);
-  const paginationRef = useRef<HTMLImageElement | null>(null);
+  const activeSlideIndexRef = useRef(0);
+  const transitionRef = useRef<gsap.core.Timeline | null>(null);
 
   const activeSlide = restorationSlides[activeSlideIndex];
 
@@ -55,13 +52,14 @@ export function RestorationShowcaseSection() {
       return;
     }
 
+    let handleRestorationSelect: EventListener | null = null;
+    let autoplayTimer: number | undefined;
     const ctx = gsap.context(() => {
       const slideImages = gsap.utils.toArray<HTMLElement>(
         "[data-restoration-slide]",
         carousel,
       );
       const heading = headingRef.current;
-      const pagination = paginationRef.current;
       const supportingTextElements = [
         leftLabelRef.current,
         rightLabelRef.current,
@@ -71,7 +69,6 @@ export function RestorationShowcaseSection() {
       if (
         slideImages.length < restorationSlides.length ||
         !heading ||
-        !pagination ||
         supportingTextElements.length < 3
       ) {
         return;
@@ -83,24 +80,38 @@ export function RestorationShowcaseSection() {
       });
       gsap.set(heading, { autoAlpha: 1, y: 0 });
       gsap.set(supportingTextElements, { autoAlpha: 1, y: 0 });
-      gsap.set(pagination, {
-        autoAlpha: 1,
-        scaleX: 1,
-        clipPath: "inset(0% 0% 0% 0%)",
-        transformOrigin: "0% 50%",
-      });
+      const scheduleAutoplay = () => {
+        window.clearTimeout(autoplayTimer);
+        autoplayTimer = window.setTimeout(() => {
+          selectSlide(
+            (activeSlideIndexRef.current + 1) % restorationSlides.length,
+          );
+        }, 4200);
+      };
 
-      const timeline = gsap.timeline({
-        paused: true,
-        repeat: -1,
-      });
+      function selectSlide(nextIndex: number) {
+        const currentIndex = activeSlideIndexRef.current;
 
-      restorationSlides.forEach((_, currentIndex) => {
-        const nextIndex = (currentIndex + 1) % restorationSlides.length;
-        const transitionStart = timeline.duration() + 2.6;
+        window.clearTimeout(autoplayTimer);
+
+        if (nextIndex === currentIndex) {
+          scheduleAutoplay();
+          return;
+        }
+
+        if (transitionRef.current?.isActive()) {
+          return;
+        }
+
+        const timeline = gsap.timeline({
+          onComplete: () => {
+            transitionRef.current = null;
+            scheduleAutoplay();
+          },
+        });
+        transitionRef.current = timeline;
 
         timeline
-          .to({}, { duration: 2.6 })
           .to(
             slideImages[currentIndex],
             {
@@ -108,7 +119,7 @@ export function RestorationShowcaseSection() {
               duration: 1.25,
               ease: "power2.inOut",
             },
-            transitionStart,
+            0,
           )
           .to(
             slideImages[nextIndex],
@@ -117,7 +128,7 @@ export function RestorationShowcaseSection() {
               duration: 1.25,
               ease: "power2.inOut",
             },
-            transitionStart,
+            0,
           )
           .to(
             heading,
@@ -126,7 +137,7 @@ export function RestorationShowcaseSection() {
               duration: 0.48,
               ease: "power2.inOut",
             },
-            transitionStart,
+            0,
           )
           .to(
             supportingTextElements,
@@ -136,19 +147,11 @@ export function RestorationShowcaseSection() {
               ease: "power3.inOut",
               y: -26,
             },
-            transitionStart,
-          )
-          .to(
-            pagination,
-            {
-              clipPath: "inset(0% 100% 0% 0%)",
-              duration: 0.01,
-              ease: "none",
-            },
-            transitionStart,
+            0,
           )
           .call(
             () => {
+              activeSlideIndexRef.current = nextIndex;
               flushSync(() => {
                 setActiveSlideIndex(nextIndex);
               });
@@ -157,12 +160,9 @@ export function RestorationShowcaseSection() {
                 y: 0,
               });
               gsap.set(supportingTextElements, { autoAlpha: 0, y: 26 });
-              gsap.set(pagination, {
-                scaleX: 1,
-              });
             },
             undefined,
-            transitionStart + 0.46,
+            0.46,
           )
           .to(
             heading,
@@ -171,7 +171,7 @@ export function RestorationShowcaseSection() {
               duration: 0.62,
               ease: "power2.out",
             },
-            transitionStart + 0.52,
+            0.52,
           )
           .to(
             supportingTextElements,
@@ -181,42 +181,35 @@ export function RestorationShowcaseSection() {
               ease: "power3.out",
               y: 0,
             },
-            transitionStart + 0.52,
-          )
-          .to(
-            pagination,
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 0.74,
-              ease: "power2.out",
-            },
-            transitionStart + 0.08,
+            0.52,
           );
-      });
+      }
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 84%",
-        end: "bottom top",
-        onEnter: () => {
-          timeline.play(0);
-        },
-        onEnterBack: () => {
-          timeline.resume();
-        },
-        onLeave: () => {
-          timeline.pause();
-        },
-        onLeaveBack: () => {
-          timeline.pause();
-        },
-      });
+      handleRestorationSelect = ((event: CustomEvent<number>) => {
+        selectSlide(event.detail);
+      }) as EventListener;
+      section.addEventListener("restoration-select", handleRestorationSelect);
+      scheduleAutoplay();
     }, section);
 
     return () => {
+      window.clearTimeout(autoplayTimer);
+      if (handleRestorationSelect) {
+        section.removeEventListener(
+          "restoration-select",
+          handleRestorationSelect,
+        );
+      }
+      transitionRef.current?.kill();
       ctx.revert();
     };
   }, []);
+
+  const selectSlide = (index: number) => {
+    sectionRef.current?.dispatchEvent(
+      new CustomEvent<number>("restoration-select", { detail: index }),
+    );
+  };
 
   return (
     <section
@@ -283,11 +276,14 @@ export function RestorationShowcaseSection() {
           >
             {restorationSlides.map((slide, index) => (
               <figure
+                aria-hidden={activeSlideIndex !== index}
                 className={`absolute inset-0 h-full w-full overflow-hidden ${
                   index === 0 ? "visible opacity-100" : "invisible opacity-0"
                 }`}
                 data-restoration-slide
+                id={`restoration-panel-${slide.id}`}
                 key={slide.id}
+                role="tabpanel"
               >
                 <CdnImage
                   src={slide.url}
@@ -326,16 +322,36 @@ export function RestorationShowcaseSection() {
           data-restoration-progress
           data-restoration-animation-group="progress"
         >
-          <Image
-            src="/assets/Restoration/pagination.svg"
-            alt=""
-            loading="eager"
-            width={104}
-            height={6}
-            className="h-auto w-[clamp(4.5rem,7.2vw,6.5rem)]"
+          <div
+            aria-label="Choose a restoration"
+            className="-my-[0.875rem] grid w-[clamp(6.5rem,9vw,8rem)] grid-cols-2 gap-2"
             data-restoration-pagination
-            ref={paginationRef}
-          />
+            data-restoration-tabs
+            role="tablist"
+          >
+            {restorationSlides.map((slide, index) => (
+              <button
+                aria-controls={`restoration-panel-${slide.id}`}
+                aria-label={`Show ${slide.heading}`}
+                aria-selected={activeSlideIndex === index}
+                className="group flex h-8 w-full items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laterite"
+                data-restoration-tab={index}
+                key={slide.id}
+                onClick={() => selectSlide(index)}
+                role="tab"
+                type="button"
+              >
+                <span
+                  aria-hidden="true"
+                  className={`block h-1 w-full rounded-full transition-[background-color,transform] duration-300 ${
+                    activeSlideIndex === index
+                      ? "scale-x-100 bg-laterite"
+                      : "scale-x-95 bg-[#232323]/25 group-hover:bg-[#232323]/50"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
