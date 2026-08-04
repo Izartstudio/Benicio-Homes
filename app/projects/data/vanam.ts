@@ -64,6 +64,7 @@ export const vanamProject = {
       src: media.siteComposition,
       alt: "Masterplan of Vanam Villas showing six residences",
     },
+    masterplanVariant: "vanam-large",
     compass: "N",
     textureSrc: PROJECT_MEDIA.shared.siteCompositionTexture,
     specifications: [

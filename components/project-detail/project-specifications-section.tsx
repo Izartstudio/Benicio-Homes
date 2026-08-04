@@ -141,7 +141,7 @@ export function ProjectSpecificationsSection({
             key={group.title}
             open={groupIndex === 0}
           >
-            <summary className="flex cursor-pointer list-none items-center gap-[1.125rem] py-[1.25rem] [&::-webkit-details-marker]:hidden">
+            <summary className="flex min-w-0 cursor-pointer list-none items-center gap-[1.125rem] py-[1.25rem] [&::-webkit-details-marker]:hidden">
               <span
                 aria-hidden="true"
                 className="block size-[0.625rem] shrink-0 bg-cover bg-center"
@@ -149,14 +149,14 @@ export function ProjectSpecificationsSection({
               />
               <DifferenceText
                 as="h2"
-                className="shrink-0 font-display text-[0.875rem] font-normal uppercase leading-none"
+                className="min-w-0 font-display text-[0.875rem] font-normal uppercase leading-none"
               >
                 {group.title}
               </DifferenceText>
               
               <span
                 aria-hidden="true"
-                className="relative block size-3 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:-translate-y-1/2 before:bg-bone after:absolute after:left-1/2 after:top-0 after:h-full after:w-px after:-translate-x-1/2 after:bg-bone group-open:after:hidden"
+                className="relative ml-auto block size-3 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:-translate-y-1/2 before:bg-bone after:absolute after:left-1/2 after:top-0 after:h-full after:w-px after:-translate-x-1/2 after:bg-bone group-open:after:hidden"
               />
             </summary>
             <ul className="m-0 list-none pb-[1.25rem] pl-[1.75rem] pr-0">

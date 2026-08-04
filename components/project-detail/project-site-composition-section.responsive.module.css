@@ -87,6 +87,25 @@
     max-width: none;
     flex-shrink: 0;
   }
+
+  .responsiveRoot[data-guide-line-variant="default"]
+    :global([data-project-site-composition-guide-lines]),
+  .responsiveRoot[data-guide-line-variant="default"]
+    :global([data-project-site-composition-masterplan-wrapper]) {
+    width: min(54vw, 48.7rem);
+    max-width: none;
+    flex-shrink: 0;
+  }
+
+  .responsiveRoot[data-guide-line-variant="el-salva"]
+    :global([data-project-site-composition-right-content]) {
+    padding-block-start: clamp(19rem, 22vw, 23rem);
+  }
+
+  .responsiveRoot[data-masterplan-variant="vanam-large"]
+    :global([data-project-site-composition-masterplan-image]) {
+    transform: scale(1.2);
+  }
 }
 
 @media (max-width: 1439px) {

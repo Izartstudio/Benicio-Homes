@@ -42,6 +42,7 @@ export type ProjectSiteCompositionData = {
   guideLineVariant?: "default" | "el-salva" | "zen";
   heading: string;
   masterplanImage: ProjectImage;
+  masterplanVariant?: "default" | "vanam-large";
   specifications: readonly {
     items: readonly {
       label: string;

@@ -175,6 +175,9 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-overlay pointer-events-none text-[#cccccc] ${responsiveStyles.responsiveRoot}`}
       data-mobile-open={isMobileMenuOpen ? "" : undefined}
+      data-mobile-projects-open={
+        isMobileMenuOpen && isMobileProjectsOpen ? "" : undefined
+      }
       data-navbar
       data-navbar-wrapper
       ref={wrapperRef}

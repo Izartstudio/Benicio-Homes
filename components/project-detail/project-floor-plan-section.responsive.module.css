@@ -4,6 +4,13 @@
   }
 }
 
+@media (min-width: 1441px) {
+  .responsiveRoot :global([data-project-floor-plan-top-editorial-layout]),
+  .responsiveRoot :global([data-project-floor-plan-container]) {
+    max-width: none;
+  }
+}
+
 .responsiveRoot[data-layout="mirrored"]
   :global([data-project-floor-plan-axis-line-upper]) {
   top: -8.5rem;

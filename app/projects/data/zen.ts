@@ -206,7 +206,7 @@ export const zenVillas2Project = {
         src: media.floorPlan03,
         alt: "Terrace floor plan for Zen Villa II",
       },
-      specifications: [{ label: "Staircase", value: "1" }],
+      specifications: [{ label: "", value: "" }],
     },
   ],
   gallery: {

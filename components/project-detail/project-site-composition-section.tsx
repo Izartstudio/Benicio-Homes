@@ -78,6 +78,7 @@ export type ProjectSiteCompositionSectionProps = {
   guideLineVariant?: GuideLineVariant;
   heading: string;
   masterplanImage: SiteCompositionImage;
+  masterplanVariant?: "default" | "vanam-large";
   specifications: readonly SiteCompositionSpecificationGroup[];
   textureSrc: string;
 };
@@ -88,6 +89,7 @@ export function ProjectSiteCompositionSection({
   guideLineVariant = "default",
   heading,
   masterplanImage,
+  masterplanVariant = "default",
   specifications,
   textureSrc,
 }: ProjectSiteCompositionSectionProps) {
@@ -220,7 +222,7 @@ export function ProjectSiteCompositionSection({
             .to(
               guideLines,
               {
-                duration: 0.48,
+                duration: 0.72,
                 ease: "none",
                 stagger: 0.04,
                 strokeDashoffset: 0,
@@ -231,10 +233,10 @@ export function ProjectSiteCompositionSection({
               masterplanElement,
               {
                 clipPath: "inset(0% 0% 0% 0%)",
-                duration: 0.68,
+                duration: 1.18,
                 ease: "power2.inOut",
               },
-              0.18,
+              0.3,
             )
             .to(
               accentElement,
@@ -244,7 +246,7 @@ export function ProjectSiteCompositionSection({
                 ease: "power1.out",
                 y: 0,
               },
-              0.18,
+              0.34,
             )
             .to(
               specificationElements,
@@ -255,7 +257,7 @@ export function ProjectSiteCompositionSection({
                 stagger: 0.04,
                 y: 0,
               },
-              0.22,
+              0.42,
             )
             .to(
               compassElement,
@@ -264,7 +266,7 @@ export function ProjectSiteCompositionSection({
                 duration: 0.22,
                 ease: "power1.out",
               },
-              0.26,
+              0.5,
             );
 
           return () => {
@@ -291,6 +293,7 @@ export function ProjectSiteCompositionSection({
       aria-labelledby="project-site-composition-title"
       className={`relative isolate overflow-hidden bg-[#343434] text-bone ${responsiveStyles.responsiveRoot}`}
       data-guide-line-variant={guideLineVariant}
+      data-masterplan-variant={masterplanVariant}
       data-project-site-composition-section
       ref={sectionRef}
       style={sectionStyle}

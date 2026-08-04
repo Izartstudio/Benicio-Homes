@@ -44,5 +44,5 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  return <ProductDetailPage project={project} />;
+  return <ProductDetailPage key={project.slug} project={project} />;
 }

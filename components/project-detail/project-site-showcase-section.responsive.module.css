@@ -3,6 +3,12 @@
     min-width: 0;
   }
 }
+
+@media (min-width: 1441px) {
+  .responsiveRoot :global([data-project-site-showcase-canvas]) {
+    max-width: none;
+  }
+}
 @media (max-width: 1023px) {
 
   .responsiveRoot :global([data-project-site-showcase-right-content]) {

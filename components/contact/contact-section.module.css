@@ -92,6 +92,10 @@
 }
 
 @media (max-width: 767px) {
+  .section {
+    margin-top: -1px;
+  }
+
   .section :global([data-contact-background]) {
     background-position: center;
     background-size: 100% 100%;

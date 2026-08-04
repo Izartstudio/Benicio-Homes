@@ -90,6 +90,14 @@ export function ProjectStackedFloorPlanSection({
       "[data-stacked-floor-plan-marker-line]",
       section,
     );
+    const stairs = gsap.utils.toArray<HTMLElement>(
+      "[data-architectural-stair]",
+      section,
+    );
+    const drawings = gsap.utils.toArray<HTMLElement>(
+      "[data-stacked-floor-plan-drawing]",
+      section,
+    );
 
     if (lines.length === 0) {
       return;
@@ -97,10 +105,30 @@ export function ProjectStackedFloorPlanSection({
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.set(lines, { scaleY: 1 });
+      gsap.set(stairs, { autoAlpha: 1, y: 0 });
+      gsap.set(drawings, { clipPath: "inset(0% 0% 0% 0%)" });
       return;
     }
 
     const context = gsap.context(() => {
+      gsap.set(stairs, { autoAlpha: 0, y: 20 });
+
+      gsap.to(stairs, {
+        autoAlpha: 1,
+        duration: 0.78,
+        ease: "power3.out",
+        stagger: {
+          each: 0.12,
+          from: "end",
+        },
+        scrollTrigger: {
+          trigger: section,
+          start: "top 78%",
+          once: true,
+        },
+        y: 0,
+      });
+
       lines.forEach((line) => {
         const item = line.closest<HTMLElement>(
           "[data-stacked-floor-plan-item]",
@@ -115,16 +143,39 @@ export function ProjectStackedFloorPlanSection({
           transformOrigin: "top center",
         });
 
-        gsap.to(line, {
-          duration: 1.65,
-          ease: "power2.inOut",
-          scaleY: 1,
+        const drawing = item.querySelector<HTMLElement>(
+          "[data-stacked-floor-plan-drawing]",
+        );
+
+        if (drawing) {
+          gsap.set(drawing, { clipPath: "inset(100% 0% 0% 0%)" });
+        }
+
+        const timeline = gsap.timeline({
           scrollTrigger: {
             trigger: item,
             start: "top 78%",
             once: true,
           },
         });
+
+        timeline.to(line, {
+          duration: 1.65,
+          ease: "power2.inOut",
+          scaleY: 1,
+        });
+
+        if (drawing) {
+          timeline.to(
+            drawing,
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 0.95,
+              ease: "power2.inOut",
+            },
+            0.72,
+          );
+        }
       });
     }, section);
 
@@ -209,12 +260,11 @@ export function ProjectStackedFloorPlanSection({
 
                 <Reveal
                   className={styles.drawing}
-                  delay={0.28}
+                  data-stacked-floor-plan-drawing
                   fade={false}
                   revealId={`stacked-floor-plan-drawing-${planIndex}`}
-                  start="top 80%"
-                  triggerClosest="[data-stacked-floor-plan-item]"
-                  y={20}
+                  revealMode="manual"
+                  y={0}
                 >
                   <CdnImage
                     alt={plan.leftDrawing.alt}

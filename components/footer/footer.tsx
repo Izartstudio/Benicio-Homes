@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FooterColumn } from "@/components/footer/footer-column";
 import { FooterLink } from "@/components/footer/footer-link";
-import { Reveal } from "@/components/ui/reveal";
 import styles from "./footer.module.css";
 
 const navigationLinks = [
@@ -45,15 +44,7 @@ export function Footer() {
         data-footer-content
       >
         <div className={styles.brandSocialGroup}>
-          <Reveal
-            className={styles.brandReveal}
-            delay={0.08}
-            duration={0.46}
-            revealId="footer-brand"
-            start="top 92%"
-            triggerClosest="footer"
-            y={12}
-          >
+          <div className={styles.brandReveal}>
             <section aria-label="Benicio footer brand" data-footer-brand>
               <Link
                 aria-label="Benicio home"
@@ -81,17 +72,9 @@ export function Footer() {
                 © {new Date().getFullYear()} Benicio Homes.
               </p>
             </section>
-          </Reveal>
+          </div>
 
-          <Reveal
-            className={`mt-[1.625rem] ${styles.socialReveal}`}
-            delay={0.1}
-            duration={0.42}
-            revealId="footer-social"
-            start="top 92%"
-            triggerClosest="footer"
-            y={10}
-          >
+          <div className={`mt-[1.625rem] ${styles.socialReveal}`}>
             <section aria-labelledby="footer-social-title" data-footer-social>
               <h2 id="footer-social-title" className="sr-only">
                 Social
@@ -121,17 +104,10 @@ export function Footer() {
                 ))}
               </ul>
             </section>
-          </Reveal>
+          </div>
         </div>
 
-        <Reveal
-          className={styles.navigationReveal}
-          duration={0.4}
-          revealId="footer-navigation"
-          start="top 92%"
-          triggerClosest="footer"
-          y={10}
-        >
+        <div className={styles.navigationReveal}>
           <nav aria-label="Footer navigation" data-footer-navigation>
             <FooterColumn title="Quick Links">
               <ul className={`grid gap-[1.625rem] ${styles.columnList}`}>
@@ -145,17 +121,9 @@ export function Footer() {
               </ul>
             </FooterColumn>
           </nav>
-        </Reveal>
+        </div>
 
-        <Reveal
-          className={styles.legalReveal}
-          delay={0.04}
-          duration={0.4}
-          revealId="footer-legal"
-          start="top 92%"
-          triggerClosest="footer"
-          y={10}
-        >
+        <div className={styles.legalReveal}>
           <nav aria-label="Legal links" data-footer-legal>
             <FooterColumn title="Legal">
               <ul className={`grid gap-[1.625rem] ${styles.columnList}`}>
@@ -168,17 +136,9 @@ export function Footer() {
               </ul>
             </FooterColumn>
           </nav>
-        </Reveal>
+        </div>
 
-        <Reveal
-          className={styles.contactReveal}
-          delay={0.08}
-          duration={0.42}
-          revealId="footer-contact"
-          start="top 92%"
-          triggerClosest="footer"
-          y={10}
-        >
+        <div className={styles.contactReveal}>
           <section aria-label="Contact" data-footer-contact>
             <FooterColumn title="Contact">
               <address className="not-italic">
@@ -205,7 +165,7 @@ export function Footer() {
               </address>
             </FooterColumn>
           </section>
-        </Reveal>
+        </div>
 
        
       </div>

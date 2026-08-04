@@ -129,7 +129,7 @@ export function ProjectLocationSection({
       </div>
 
       <div
-        className="relative mx-auto w-full max-w-[1440px] pb-[clamp(7rem,9vw,8rem)] pt-[clamp(7.5rem,9vw,8.125rem)]"
+        className="relative mx-auto w-full max-w-[1440px] min-[1441px]:max-w-none pb-[clamp(7rem,9vw,8rem)] pt-[clamp(7.5rem,9vw,8.125rem)]"
         data-project-location-content
       >
         <Reveal
@@ -156,7 +156,7 @@ export function ProjectLocationSection({
         </Reveal>
 
         <div
-          className="relative z-30 mt-[2.5rem] h-[9.5rem] w-full overflow-hidden"
+          className="relative z-30 mt-[2.5rem] h-[9.5rem] w-full overflow-hidden min-[1441px]:left-1/2 min-[1441px]:w-screen min-[1441px]:-translate-x-1/2"
           data-project-location-feature-image-reveal
         >
           <div

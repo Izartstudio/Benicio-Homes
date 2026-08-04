@@ -179,6 +179,7 @@
   .responsiveRoot {
     transition:
       top 200ms ease,
+      height 320ms cubic-bezier(0.22, 1, 0.36, 1),
       padding 200ms ease,
       background-color 200ms ease;
   }
@@ -220,6 +221,10 @@
     background-color: #434343;
     backdrop-filter: blur(1.125rem);
     -webkit-backdrop-filter: blur(1.125rem);
+  }
+
+  .responsiveRoot[data-mobile-open][data-mobile-projects-open] {
+    height: 43.0625rem;
   }
 
   .responsiveRoot[data-mobile-open]::before {
@@ -295,11 +300,19 @@
     padding: 1.09375rem 1.5625rem 0;
     background: transparent;
     box-shadow: none;
+    transition:
+      height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 200ms ease,
+      transform 200ms ease,
+      visibility 200ms ease;
+  }
+
+  .responsiveRoot[data-mobile-projects-open] .mobilePanel {
+    height: 38.6875rem;
   }
 
   .mobileMenuList {
-    display: grid;
-    grid-template-rows: repeat(3, 4.3125rem) 3.125rem;
+    display: block;
     margin: 0;
     padding: 0;
     color: #cccccc;
@@ -312,6 +325,7 @@
 
   .mobileMenuRow {
     display: flex;
+    min-height: 4.3125rem;
     align-items: center;
     border-bottom: 1px solid rgb(217 217 217 / 0.15);
   }
@@ -322,6 +336,8 @@
 
   .mobileProjectsRow {
     position: relative;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .mobileMenuLink {
@@ -333,6 +349,7 @@
   }
 
   .mobileProjectsTrigger {
+    min-height: 4.3125rem;
     justify-content: space-between;
     border: 0;
     background: transparent;
@@ -352,31 +369,27 @@
   }
 
   .mobileProjectsDropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 2;
+    position: relative;
+    display: grid;
+    grid-template-rows: 0fr;
     width: 100%;
-    background: #434343;
     transition:
-      opacity 200ms ease,
-      transform 200ms ease,
-      visibility 200ms ease;
+      grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 220ms ease;
   }
 
   .mobileProjectsDropdownOpen {
-    visibility: visible;
-    transform: translateY(0);
+    grid-template-rows: 1fr;
     opacity: 1;
   }
 
   .mobileProjectsDropdownClosed {
-    visibility: hidden;
-    transform: translateY(-0.5rem);
     opacity: 0;
   }
 
   .mobileProjectsList {
+    min-height: 0;
+    overflow: hidden;
     margin: 0;
     padding: 0;
     list-style: none;

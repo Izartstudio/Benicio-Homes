@@ -15,6 +15,7 @@ export function SiteCompositionSection({
       guideLineVariant={data.guideLineVariant}
       heading={data.heading}
       masterplanImage={data.masterplanImage}
+      masterplanVariant={data.masterplanVariant}
       specifications={data.specifications}
       textureSrc={data.textureSrc}
     />

@@ -10,6 +10,7 @@ import {
 } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePathname } from "next/navigation";
 import { isSafariBrowser } from "@/utils/is-safari-browser";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,6 +49,7 @@ export function Reveal({
   y = 22,
   ...props
 }: RevealProps) {
+  const pathname = usePathname();
   const elementRef = useRef<HTMLElement | null>(null);
   const setElementRef = (node: HTMLElement | null) => {
     elementRef.current = node;
@@ -153,6 +155,7 @@ export function Reveal({
     triggerClosest,
     triggerSelector,
     y,
+    pathname,
   ]);
 
   const revealProps = {
