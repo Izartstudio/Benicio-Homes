@@ -152,7 +152,7 @@ export const PROJECT_MEDIA = {
     location: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/perola-horizontal.webp",
     locationDecorative: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
     editorialSiteComposition: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/perolashowcase.webp",
-    editorialSiteCompositionTexture: "/assets/textures/concrete-background-textures-09-1.webp",
+    editorialSiteCompositionTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/texture-completeprojects.webp",
     editorialMoodboard: [
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/imageshowcase2-perola.webp",
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/imageshowcase3-perola.webp",
@@ -179,7 +179,7 @@ export const PROJECT_MEDIA = {
     location: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1-horizontal.webp",
     locationDecorative: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
     editorialSiteComposition: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1showcase.webp",
-    editorialSiteCompositionTexture: "/assets/textures/concrete-background-textures-09-1.webp",
+    editorialSiteCompositionTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/texture-completeprojects.webp",
     editorialMoodboard: [
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1moodboard1.webp",
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1moodboard3.webp",
@@ -200,6 +200,7 @@ export const PROJECT_MEDIA = {
     restorationTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zentexture.webp",
   },
   shared: {
+    brochurePdf: "",
     concreteTexture: "/assets/textures/concrete-background-textures-09-1.webp",
     nextProjectTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/next-project-texture.webp",
     orangeBlock: "/assets/blocks/orange-block.svg",

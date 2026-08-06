@@ -10,7 +10,7 @@
 
 .site { aspect-ratio: 1440 / 940; background-color: #fafafa; background-image: var(--editorial-site-texture); background-position: center; background-size: cover; }
 .siteMedia { position: absolute; z-index: 0; left: -.14%; top: 11.915%; width: 100.14%; height: 98.72%; }
-.siteSteps { position: absolute; z-index: 2; inset: 0; pointer-events: none; background-color: #343434; background-image: var(--editorial-site-texture); background-position: center top; background-size: cover; background-blend-mode: overlay; clip-path: polygon(0 0, 100% 0, 100% 47.234%, 98.61% 47.234%, 98.61% 29.225%, 79.652% 29.225%, 79.652% 24.641%, 34.166% 24.641%, 34.166% 21.939%, 27.708% 21.939%, 27.708% 11.952%, 0 11.952%); }
+.siteSteps { position: absolute; z-index: 2; inset: 0; pointer-events: none; background-color: #343434; background-image: var(--editorial-steps-texture); background-position: center; background-size: cover; background-blend-mode: overlay; clip-path: polygon(0 0, 100% 0, 100% 47.234%, 98.61% 47.234%, 98.61% 29.225%, 79.652% 29.225%, 79.652% 24.641%, 34.166% 24.641%, 34.166% 21.939%, 27.708% 21.939%, 27.708% 11.952%, 0 11.952%); }
 .siteSteps i { display: none; }
 
 .moodboard { aspect-ratio: 1440 / 1554; background-color: #fafafa; background-image: var(--editorial-moodboard-texture); background-position: center; background-size: cover; }
@@ -20,6 +20,7 @@
 .moodLabelVertical { left: 94.3%; top: 36.7%; width: 30%; transform: rotate(-90deg); transform-origin: left top; font-size: clamp(2rem, 4.45vw, 4rem); }
 .moodLabelFooter { left: 5.208%; top: 80.37%; font-size: clamp(2.25rem, 4.45vw, 4rem); }
 .moodGrid { position: absolute; inset: 0; }
+.moodAccent { display: none; }
 .moodGrid .frame { position: absolute; }
 .mood1 { left: 5.208%; top: 21.751%; width: 36.528%; height: 16.924%; }
 .mood2 { left: 5.208%; top: 39.961%; width: 89.584%; height: 37.001%; }
@@ -68,6 +69,104 @@
   .galleryItem { position: relative; inset: auto; width: 92%; }
   .gallery2 { margin: 4rem 0 0 auto; }
   .galleryMedia { aspect-ratio: 4 / 3; }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodboard {
+    aspect-ratio: 390 / 1185;
+    padding: 0;
+    background-color: #b9b9b9;
+    background-image: var(--editorial-site-texture);
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .showcase {
+    background-image: var(--editorial-site-texture);
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodLabels {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: block;
+    margin: 0;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodLabels span {
+    position: absolute;
+    display: block;
+    color: rgb(26 26 26 / 15%);
+    line-height: 1;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodLabelPrimary {
+    top: 3.8%;
+    left: 9.23%;
+    font-size: 14.87vw;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodLabelVertical {
+    top: 19.83%;
+    right: 6.41%;
+    left: auto;
+    width: auto;
+    transform: none;
+    font-size: 8.97vw !important;
+    writing-mode: vertical-rl;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodLabelFooter {
+    top: 74.6%;
+    left: 12.82%;
+    font-size: 13.54vw !important;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodGrid {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodGrid .frame {
+    position: absolute;
+    z-index: 3;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .mood1 {
+    top: 2.9536%;
+    left: 62.0513%;
+    width: 31.5385%;
+    height: 15.5274%;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .mood2 {
+    top: 24.2194%;
+    left: 6.4103%;
+    width: 58.9744%;
+    height: 12.9114%;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .mood3 {
+    top: 49.9578%;
+    left: 6.4103%;
+    width: 87.1795%;
+    height: 19.1561%;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .mood4 {
+    top: 83.4599%;
+    left: 17.1795%;
+    width: 76.4103%;
+    height: 12.5738%;
+  }
+
+  .editorialRoot[data-mobile-layout="perola"] .moodAccent {
+    position: absolute;
+    z-index: 4;
+    top: 43.1224%;
+    left: 47.4359%;
+    display: block;
+    width: 5.1282%;
+    aspect-ratio: 1;
+    background: var(--color-laterite);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

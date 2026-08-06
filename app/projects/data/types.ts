@@ -119,11 +119,13 @@ export type ProjectContactData = {
 };
 
 export type ProjectEditorialVariantsData = {
+  mobileLayout?: "perola";
   textures?: {
     gallery?: string;
     moodboard?: string;
     showcase?: string;
     siteComposition?: string;
+    steps?: string;
   };
   siteComposition: {
     image: ProjectImage;

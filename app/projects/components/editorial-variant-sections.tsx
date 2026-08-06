@@ -38,10 +38,17 @@ export function EditorialVariantSections({ data }: EditorialVariantSectionsProps
     "--editorial-site-texture": data.textures?.siteComposition
       ? `url("${data.textures.siteComposition}")`
       : "none",
+    "--editorial-steps-texture": data.textures?.steps
+      ? `url("${data.textures.steps}")`
+      : "var(--editorial-site-texture)",
   } as CSSProperties;
 
   return (
-    <div className={styles.editorialRoot} style={textureStyle}>
+    <div
+      className={styles.editorialRoot}
+      data-mobile-layout={data.mobileLayout}
+      style={textureStyle}
+    >
       <section className={`${styles.section} ${styles.site}`} data-pdp-variant="site-composition">
         <div className={styles.siteSteps} aria-hidden="true">
           <i /><i /><i /><i /><i />
@@ -66,6 +73,7 @@ export function EditorialVariantSections({ data }: EditorialVariantSectionsProps
             </Reveal>
           ))}
         </div>
+        <span aria-hidden="true" className={styles.moodAccent} />
       </section>
 
       <section className={`${styles.section} ${styles.showcase}`} data-pdp-variant="showcase">

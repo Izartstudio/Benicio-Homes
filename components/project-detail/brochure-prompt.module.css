@@ -1,0 +1,66 @@
+.section {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(18rem, 27rem) 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  min-height: 18rem;
+  padding: clamp(3.5rem, 6vw, 5.5rem) 5.208vw;
+  color: #232323;
+  background: #b9b9b9;
+}
+
+.copyBlock p {
+  max-width: 25rem;
+  margin: 0;
+  font-family: var(--font-bahnschrift), sans-serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+.cta { width: 15.5rem; height: 3.5rem; margin-top: 1.5rem; padding-inline: .875rem; }
+.rule { display: flex; align-items: flex-start; padding-top: 4rem; }
+.rule span { width: 1.25rem; height: 1.25rem; flex: none; background: var(--color-laterite); }
+.rule i { width: 100%; height: 1px; margin-top: .625rem; background: rgb(35 35 35 / .25); }
+
+.backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgb(185 185 185 / .38);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dialog { position: relative; width: min(100%, 37.9375rem); max-height: calc(100dvh - 3rem); overflow: auto; box-shadow: 0 1.5rem 5rem rgb(0 0 0 / .28); }
+.close { position: absolute; z-index: 5; top: 1.5rem; right: 1.75rem; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 0; color: #232323; background: transparent; font-size: 1.25rem; font-weight: 600; line-height: 1; }
+
+.brochureForm { position: relative; min-height: 41.125rem; overflow: hidden; color: #232323; background: #fafafa; }
+.formTexture { position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: url("/assets/textures/formbgtexture.webp"); background-position: center; background-size: cover; opacity: .5; mix-blend-mode: multiply; }
+.formContent { position: relative; z-index: 1; display: flex; min-height: 41.125rem; flex-direction: column; padding: 3.75rem 3.125rem 3.125rem; font-family: var(--font-roboto-slab), serif; }
+.formContent header h3 { max-width: 27rem; margin: 0; font-family: var(--font-bahnschrift), sans-serif; font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.15; }
+.fields { display: grid; gap: 3.5rem; margin-top: 4rem; }
+.field { position: relative; border-bottom: 1px solid rgb(70 70 70 / .15); padding-bottom: .75rem; }
+.field label { display: block; color: #464646; font-size: 1rem; font-weight: 300; }
+.field input { display: block; width: 100%; margin-top: .45rem; border: 0; outline: 0; color: #232323; background: transparent; font: inherit; }
+.error, .formError, .success { margin: .4rem 0 0; font-size: .75rem; line-height: 1.25; }
+.error, .formError { color: var(--color-laterite); }
+.success { color: #343434; }
+.submit { display: flex; width: 100%; height: 3.125rem; align-items: center; justify-content: space-between; margin-top: auto; border: 0; padding: 0 .875rem; color: #fafafa; background: #4e4e4e; font-family: var(--font-roboto-slab), serif; font-size: 1rem; }
+.submit:disabled { cursor: wait; opacity: .65; }
+
+@media (max-width: 767px) {
+  .section { grid-template-columns: 1fr; min-height: 0; padding: 3.5rem 1.5rem; }
+  .rule { order: -1; padding-top: 0; }
+  .cta { width: min(100%, 15.5rem); }
+  .backdrop { padding: .75rem; }
+  .dialog { max-height: calc(100svh - 1.5rem); }
+  .close { top: .75rem; right: .75rem; }
+  .brochureForm, .formContent { min-height: min(41.125rem, calc(100svh - 1.5rem)); }
+  .formContent { padding: 3.25rem 1.5rem 1.5rem; }
+  .fields { gap: 1.2rem; margin-top: 2rem; }
+}

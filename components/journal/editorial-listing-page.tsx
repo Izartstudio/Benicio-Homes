@@ -94,7 +94,7 @@ export function EditorialListingPage({
   } as CSSProperties;
 
   return (
-    <main className="bg-[#343434] text-[#d8d6cf]" data-editorial-listing style={style}>
+    <main className="bg-[#343434] text-[#d8d6cf]" data-editorial-listing data-editorial-variant={variant} style={style}>
       <section className="journal-intro relative min-h-[40.625rem] overflow-hidden px-[5.208vw] pb-28 pt-48 text-[var(--editorial-intro-text)]">
         <div className="journal-paper absolute inset-0" aria-hidden="true" />
         <div className="relative z-10 max-w-[50rem]">

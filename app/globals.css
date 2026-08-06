@@ -130,6 +130,44 @@ html[data-scroll-engine="safari-native"]
   background-size: 100vw auto;
 }
 
+[data-editorial-variant="projects"] .journal-listing-section {
+  background-image: none;
+}
+
+[data-editorial-variant="projects"] .journal-listing-section::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--journal-featured-texture, none);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 34%,
+    rgb(0 0 0 / 0.86) 46%,
+    rgb(0 0 0 / 0.48) 62%,
+    transparent 82%,
+    transparent 100%
+  );
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 34%,
+    rgb(0 0 0 / 0.86) 46%,
+    rgb(0 0 0 / 0.48) 62%,
+    transparent 82%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  content: "";
+}
+
 .editorial-contact-transition {
   height: min(42rem, 52%);
   background: var(

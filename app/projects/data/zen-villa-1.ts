@@ -40,8 +40,10 @@ export const zenVillas1Project = {
     copy: "Whether you're exploring a Benicio residence, considering a restoration opportunity, or simply want to understand our philosophy, we'd be pleased to hear from you. Every meaningful project begins with a conversation.",
   },
   editorialVariants: {
+    mobileLayout: "perola",
     textures: {
       siteComposition: media.editorialSiteCompositionTexture,
+      steps: PROJECT_MEDIA.shared.concreteTexture,
       moodboard: "",
       showcase: "",
       gallery: media.restorationTexture,

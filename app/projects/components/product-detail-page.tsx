@@ -11,6 +11,7 @@ import { SiteCompositionSection } from "@/app/projects/components/site-compositi
 import { SpecificationSection } from "@/app/projects/components/specification-section";
 import { Footer } from "@/components/footer/footer";
 import { EditorialVariantSections } from "@/app/projects/components/editorial-variant-sections";
+import { BrochurePrompt } from "@/components/project-detail/brochure-prompt";
 
 type ProductDetailPageProps = {
   project: ProjectDetailData;
@@ -22,7 +23,10 @@ export function ProductDetailPage({ project }: ProductDetailPageProps) {
       <HeroSection data={project.hero} intro={project.intro} />
       <LocationSection data={project.location} />
       {project.editorialVariants ? (
-        <EditorialVariantSections data={project.editorialVariants} />
+        <>
+          <EditorialVariantSections data={project.editorialVariants} />
+          <BrochurePrompt />
+        </>
       ) : (
         <>
           <SiteCompositionSection data={project.siteComposition} />
@@ -31,6 +35,7 @@ export function ProductDetailPage({ project }: ProductDetailPageProps) {
           <SpecificationSection data={project.specifications} />
           <FloorPlanCollection layout={project.floorPlanLayout} plans={project.floorPlans} />
           <GallerySection data={project.gallery} />
+          <BrochurePrompt />
           <NextProjectSection data={project.nextProject} />
         </>
       )}

@@ -276,7 +276,7 @@ export function Navbar() {
           <li className={responsiveStyles.mobileMenuRow}>
             <FooterLink
               className={responsiveStyles.mobileMenuLink}
-              href="/#about"
+              href="/about"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               The Practice

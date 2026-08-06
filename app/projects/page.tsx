@@ -105,7 +105,7 @@ export default function ProjectsPage() {
         };
       })}
       listingBackgroundColor="#b9b9b9"
-      listingTexture="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Journal/texture-journal.webp"
+      listingTexture="/assets/projects/texture-listing.webp"
       listingHeading="Homes With A Sense Of Place"
       loadMoreLabel="Load More Projects"
       sectionLabel="Benicio projects"
