@@ -22,15 +22,9 @@ export const vanamProject = {
       src: media.heroForeground,
       alt: "",
     },
-    mediaScale: {
-      desktop: 1.45,
-      tablet: 1.18,
-      mobile: 1.08,
-    },
-    objectPosition: {
-      desktop: "50% 50%",
-      tablet: "50% 50%",
-      mobile: "44% 50%",
+    mediaCanvas: {
+      aspectRatio: 1440 / 1500,
+      foregroundCanvasHeightRatio: 900 / 1500,
     },
   },
   intro: {

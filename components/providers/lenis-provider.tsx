@@ -78,7 +78,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     const instance = new Lenis({
       anchors: {
         duration: 0.8,
-        offset: -112,
+        offset: 0,
       },
       autoRaf: false,
       duration: 1.2,
@@ -129,6 +129,23 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    window.history.scrollRestoration = "manual";
+
+    const scrollFrame = requestAnimationFrame(() => {
+      const hash = window.location.hash;
+      const target = hash
+        ? document.getElementById(decodeURIComponent(hash.slice(1)))
+        : null;
+
+      if (target) {
+        lenisRef.current?.scrollTo(target, { immediate: true, offset: 0 });
+        target.scrollIntoView({ block: "start" });
+      } else {
+        lenisRef.current?.scrollTo(0, { immediate: true });
+        window.scrollTo({ left: 0, top: 0, behavior: "auto" });
+      }
+    });
+
     let active = true;
     const refreshWhenReady = () => {
       void document.fonts.ready.then(() => {
@@ -145,6 +162,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     }
 
     return () => {
+      cancelAnimationFrame(scrollFrame);
       active = false;
       window.removeEventListener("load", refreshWhenReady);
 

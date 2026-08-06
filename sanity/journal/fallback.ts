@@ -8,7 +8,7 @@ export const fallbackJournalArticles: readonly JournalArticle[] = [
     excerpt:
       "How thoughtful restoration protects the details, materials, and stories that give Goan architecture its enduring character.",
     publishedAt: "2026-03-03T00:00:00.000Z",
-    category: "Heritage",
+    category: "ARCHITECTURE",
     location: "Goa",
     author: "Author Name",
     image: {
@@ -19,7 +19,7 @@ export const fallbackJournalArticles: readonly JournalArticle[] = [
   {
     number: "Journal 002",
     slug: "why-climate-shapes-every-benicio-home",
-    title: "Why Climate Shapes Every Benicio Home",
+    title: "How Heritage Homes Find New Life",
     excerpt:
       "A look at how monsoon, shade, airflow, and tropical planting shape homes made specifically for life in Goa.",
     publishedAt: "2026-02-02T00:00:00.000Z",

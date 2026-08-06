@@ -14,10 +14,11 @@ export function HeroSection({ data, intro }: HeroSectionProps) {
       layout={data.layout}
       media={{
         background: data.image,
-        continuation: intro.backgroundImage,
+        focalPosition: data.mediaCanvas.focalPosition,
         foreground: data.foregroundImage,
-        scale: data.mediaScale,
-        objectPosition: data.objectPosition,
+        foregroundCanvasHeightRatio:
+          data.mediaCanvas.foregroundCanvasHeightRatio,
+        mediaAspectRatio: data.mediaCanvas.aspectRatio,
       }}
       title={data.title}
     />

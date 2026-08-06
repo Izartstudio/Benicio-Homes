@@ -5,14 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { projectList } from "@/app/projects/data";
 import { FooterLink } from "@/components/footer/footer-link";
 import { useLenis } from "@/components/providers/lenis-provider";
 import { CTA } from "@/components/ui/cta";
 
 const navigationLinks = [
-  { href: "/#about", label: "The Practice" },
-  { href: "/#journal", label: "Journal" },
+  { href: "/about", label: "The Practice" },
+  { href: "/journal", label: "Journal" },
 ] as const;
 
 type LenisScrollEvent = {
@@ -22,12 +21,7 @@ type LenisScrollEvent = {
 
 export function Navbar() {
   const wrapperRef = useRef<HTMLElement | null>(null);
-  const projectsItemRef = useRef<HTMLLIElement | null>(null);
-  const projectsMenuRef = useRef<HTMLUListElement | null>(null);
-  const projectsTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobileProjectsOpen, setIsMobileProjectsOpen] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
@@ -133,27 +127,6 @@ export function Navbar() {
   }, [lenis]);
 
   useEffect(() => {
-    if (!isProjectsOpen) {
-      return;
-    }
-
-    const handlePointerDown = (event: PointerEvent) => {
-      if (
-        event.target instanceof Node &&
-        !projectsItemRef.current?.contains(event.target)
-      ) {
-        setIsProjectsOpen(false);
-      }
-    };
-
-    document.addEventListener("pointerdown", handlePointerDown);
-
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-    };
-  }, [isProjectsOpen]);
-
-  useEffect(() => {
     if (!isMobileMenuOpen) {
       return;
     }
@@ -175,9 +148,6 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-overlay pointer-events-none text-[#cccccc] ${responsiveStyles.responsiveRoot}`}
       data-mobile-open={isMobileMenuOpen ? "" : undefined}
-      data-mobile-projects-open={
-        isMobileMenuOpen && isMobileProjectsOpen ? "" : undefined
-      }
       data-navbar
       data-navbar-wrapper
       ref={wrapperRef}
@@ -232,88 +202,14 @@ export function Navbar() {
               </FooterLink>
             </li>
 
-            <li
-              className="relative"
-              onBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) {
-                  setIsProjectsOpen(false);
-                }
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Escape") {
-                  setIsProjectsOpen(false);
-                  projectsTriggerRef.current?.focus();
-                }
-
-                if (
-                  event.key === "ArrowDown" &&
-                  event.target === projectsTriggerRef.current
-                ) {
-                  event.preventDefault();
-                  setIsProjectsOpen(true);
-                  requestAnimationFrame(() => {
-                    projectsMenuRef.current
-                      ?.querySelector<HTMLAnchorElement>("a")
-                      ?.focus();
-                  });
-                }
-              }}
-              onMouseEnter={() => setIsProjectsOpen(true)}
-              onMouseLeave={() => setIsProjectsOpen(false)}
-              ref={projectsItemRef}
-            >
-              <button
-                aria-controls="navbar-projects-menu"
-                aria-expanded={isProjectsOpen}
-                aria-haspopup="true"
-                className="inline-flex items-center gap-2 text-[#cccccc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#cccccc]"
+            <li>
+              <FooterLink
+                className="!text-[#cccccc] hover:!text-[#cccccc]"
                 data-navbar-link
-                data-navbar-projects-trigger
-                onClick={() => setIsProjectsOpen((isOpen) => !isOpen)}
-                ref={projectsTriggerRef}
-                type="button"
+                href="/projects"
               >
                 Projects
-                <span
-                  aria-hidden="true"
-                  className={`text-[0.8rem] transition-transform duration-200 ${
-                    isProjectsOpen ? "rotate-180" : "rotate-0"
-                  }`}
-                >
-                  &#8964;
-                </span>
-              </button>
-
-              <div
-                className={`absolute left-1/2 top-[calc(100%+1rem)] w-[13.5rem] -translate-x-1/2 border border-white/15 bg-[#151515]/70 shadow-2xl backdrop-blur-xl transition-[opacity,transform,visibility] duration-200 ${
-                  isProjectsOpen
-                    ? "visible translate-y-0 opacity-100"
-                    : "invisible -translate-y-2 opacity-0"
-                }`}
-                data-navbar-projects-menu
-              >
-                <ul
-                  aria-label="Projects"
-                  className="grid"
-                  id="navbar-projects-menu"
-                  ref={projectsMenuRef}
-                >
-                  {projectList.map((project) => (
-                    <li
-                      className={responsiveStyles.desktopProjectItem}
-                      key={project.slug}
-                    >
-                      <FooterLink
-                        className="!block !w-full px-4 py-3 !text-white hover:bg-white/10 hover:!text-white"
-                        href={`/projects/${project.slug}`}
-                        onClick={() => setIsProjectsOpen(false)}
-                      >
-                        {project.hero.title}
-                      </FooterLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </FooterLink>
             </li>
 
             <li>
@@ -349,7 +245,6 @@ export function Navbar() {
           data-navbar-mobile-menu
           onClick={() => {
             setIsMobileMenuOpen((isOpen) => !isOpen);
-            setIsMobileProjectsOpen(false);
           }}
           type="button"
         >
@@ -387,69 +282,19 @@ export function Navbar() {
               The Practice
             </FooterLink>
           </li>
-          <li
-            className={`${responsiveStyles.mobileMenuRow} ${responsiveStyles.mobileProjectsRow}`}
-          >
-            <button
-              aria-controls="navbar-mobile-projects-menu"
-              aria-expanded={isMobileProjectsOpen}
-              aria-haspopup="true"
-              className={`${responsiveStyles.mobileMenuLink} ${responsiveStyles.mobileProjectsTrigger}`}
-              onClick={() =>
-                setIsMobileProjectsOpen((isOpen) => !isOpen)
-              }
-              type="button"
+          <li className={responsiveStyles.mobileMenuRow}>
+            <FooterLink
+              className={responsiveStyles.mobileMenuLink}
+              href="/projects"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Projects
-              <span
-                aria-hidden="true"
-                className={`${responsiveStyles.mobileProjectsChevron} ${
-                  isMobileProjectsOpen
-                    ? responsiveStyles.mobileProjectsChevronOpen
-                    : ""
-                }`}
-              >
-                &#8964;
-              </span>
-            </button>
-
-            <div
-              aria-hidden={!isMobileProjectsOpen}
-              className={`${responsiveStyles.mobileProjectsDropdown} ${
-                isMobileProjectsOpen
-                  ? responsiveStyles.mobileProjectsDropdownOpen
-                  : responsiveStyles.mobileProjectsDropdownClosed
-              }`}
-            >
-              <ul
-                aria-label="Projects"
-                className={responsiveStyles.mobileProjectsList}
-                id="navbar-mobile-projects-menu"
-              >
-                {projectList.map((project) => (
-                  <li
-                    className={responsiveStyles.mobileProjectItem}
-                    key={project.slug}
-                  >
-                    <FooterLink
-                      className={responsiveStyles.mobileProjectLink}
-                      href={`/projects/${project.slug}`}
-                      onClick={() => {
-                        setIsMobileProjectsOpen(false);
-                        setIsMobileMenuOpen(false);
-                      }}
-                    >
-                      {project.hero.title}
-                    </FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            </FooterLink>
           </li>
           <li className={responsiveStyles.mobileMenuRow}>
             <FooterLink
               className={responsiveStyles.mobileMenuLink}
-              href="/#journal"
+              href="/journal"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Journal

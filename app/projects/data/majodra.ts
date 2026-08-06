@@ -24,6 +24,10 @@ export const nayanVillaProject = {
       src: media.heroForeground,
       alt: "",
     },
+    mediaCanvas: {
+      aspectRatio: 1400 / 1500,
+      foregroundCanvasHeightRatio: 955 / 1500,
+    },
   },
   intro: {
     intro:

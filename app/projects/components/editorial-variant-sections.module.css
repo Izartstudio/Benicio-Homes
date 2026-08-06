@@ -1,0 +1,75 @@
+.editorialRoot { position: relative; }
+.section {
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+}
+
+.frame { position: relative; overflow: hidden; margin: 0; background: #d8d8d4; }
+.image { object-fit: cover; }
+
+.site { aspect-ratio: 1440 / 940; background-color: #fafafa; background-image: var(--editorial-site-texture); background-position: center; background-size: cover; }
+.siteMedia { position: absolute; z-index: 0; left: -.14%; top: 11.915%; width: 100.14%; height: 98.72%; }
+.siteSteps { position: absolute; z-index: 2; inset: 0; pointer-events: none; background-color: #343434; background-image: var(--editorial-site-texture); background-position: center top; background-size: cover; background-blend-mode: overlay; clip-path: polygon(0 0, 100% 0, 100% 47.234%, 98.61% 47.234%, 98.61% 29.225%, 79.652% 29.225%, 79.652% 24.641%, 34.166% 24.641%, 34.166% 21.939%, 27.708% 21.939%, 27.708% 11.952%, 0 11.952%); }
+.siteSteps i { display: none; }
+
+.moodboard { aspect-ratio: 1440 / 1554; background-color: #fafafa; background-image: var(--editorial-moodboard-texture); background-position: center; background-size: cover; }
+.moodLabels { position: absolute; z-index: 2; inset: 0; color: rgb(26 26 26 / 15%); font-family: Bahnschrift, Arial, sans-serif; font-weight: 300; line-height: 1; pointer-events: none; }
+.moodLabels span { position: absolute; display: block; white-space: nowrap; }
+.moodLabelPrimary { left: 5.208%; top: 10.75%; font-size: clamp(2.75rem, 6.67vw, 6rem); }
+.moodLabelVertical { left: 94.3%; top: 36.7%; width: 30%; transform: rotate(-90deg); transform-origin: left top; font-size: clamp(2rem, 4.45vw, 4rem); }
+.moodLabelFooter { left: 5.208%; top: 80.37%; font-size: clamp(2.25rem, 4.45vw, 4rem); }
+.moodGrid { position: absolute; inset: 0; }
+.moodGrid .frame { position: absolute; }
+.mood1 { left: 5.208%; top: 21.751%; width: 36.528%; height: 16.924%; }
+.mood2 { left: 5.208%; top: 39.961%; width: 89.584%; height: 37.001%; }
+.mood3 { left: 43.472%; top: 4.826%; width: 24.861%; height: 33.848%; }
+.mood4 { left: 58.264%; top: 78.25%; width: 36.528%; height: 16.924%; }
+
+.showcase { aspect-ratio: 1440 / 1300; background-color: #fafafa; background-image: var(--editorial-showcase-texture); background-position: center; background-size: cover; }
+.showcaseHero { position: absolute; left: 5.208%; top: 5.769%; width: 89.584%; height: 62.539%; }
+.showcaseStrip { position: absolute; left: 5.208%; top: 71.154%; width: 89.584%; height: 24.231%; display: grid; grid-template-columns: 308fr 308fr 308fr 307fr; gap: 1.389%; }
+.showcaseStrip .frame { height: 100%; }
+
+.gallery { min-height: min(62.5vw, 56.25rem); padding: 6.9vw 5.2vw 1.7vw; color: #292929; background-color: #f1f1ef; background-image: var(--editorial-gallery-texture); background-position: center; background-size: cover; }
+.restorationTransition { position: absolute; z-index: 1; inset: auto 0 0; height: min(20rem, 36%); pointer-events: none; background: linear-gradient(180deg, rgb(185 185 185 / 0) 0%, rgb(185 185 185 / .7) 58%, #b9b9b9 100%); }
+.watermark { position: absolute; z-index: 1; left: 0; top: 33.2%; width: 100%; margin: 0; color: rgb(255 255 255 / 20%); font-family: var(--font-display, Georgia, serif); font-size: 28.78vw; font-weight: 300; line-height: .72; letter-spacing: .01em; text-align: center; text-transform: uppercase; white-space: nowrap; }
+.galleryItem { position: absolute; margin: 0; width: 45.4%; }
+.galleryItem { z-index: 2; }
+.gallery1 { left: 5.2%; top: 11.1%; }
+.gallery2 { right: 5.2%; bottom: 2.7%; }
+.gallery2 { display: flex; flex-direction: column; }
+.galleryMedia { aspect-ratio: 654 / 366; }
+.caption { display: flex; gap: .75rem; align-items: center; padding-top: .8rem; font-family: Georgia, serif; font-size: .72rem; }
+.caption span { width: .7rem; height: .7rem; flex: 0 0 auto; background: #c85a37; }
+.gallery2 .caption { justify-content: flex-end; order: -1; padding: 0 0 .8rem; }
+
+@media (max-width: 767px) {
+  .site { aspect-ratio: 4 / 5; }
+  .siteMedia { top: 11.915%; height: 88.085%; }
+  .moodboard, .showcase { aspect-ratio: auto; padding: 1.25rem; }
+  .moodLabels { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 1.25rem; align-items: end; margin-bottom: 1.25rem; }
+  .moodLabels span { position: relative; inset: auto; transform: none; font-size: clamp(2rem, 12vw, 3.5rem); }
+  .moodLabelVertical { grid-column: 2; grid-row: 1; font-size: clamp(1.25rem, 7vw, 2rem) !important; }
+  .moodLabelFooter { grid-column: 1 / -1; font-size: clamp(1.5rem, 9vw, 2.5rem) !important; }
+  .moodGrid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: .75rem; }
+  .moodGrid { position: relative; display: grid; }
+  .moodGrid .frame { position: relative; inset: auto; width: auto; height: auto; }
+  .mood1, .mood3, .mood4 { aspect-ratio: 1 / 1; }
+  .mood2 { grid-column: 1 / -1; grid-row: 2; aspect-ratio: 16 / 9; }
+  .mood3 { grid-column: 2; grid-row: 1; }
+  .showcaseHero { aspect-ratio: 4 / 5; }
+  .showcaseHero { position: relative; inset: auto; width: auto; height: auto; }
+  .showcaseStrip { grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: .75rem; }
+  .showcaseStrip { position: relative; inset: auto; width: auto; height: auto; }
+  .showcaseStrip .frame { aspect-ratio: 1 / 1; }
+  .gallery { min-height: auto; padding: 5rem 1.25rem; }
+  .watermark { top: 34.76%; font-size: 28.78vw; }
+  .galleryItem { position: relative; inset: auto; width: 92%; }
+  .gallery2 { margin: 4rem 0 0 auto; }
+  .galleryMedia { aspect-ratio: 4 / 3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image { transform: none !important; }
+}

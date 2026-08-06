@@ -41,6 +41,44 @@ export const journalPost = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "body",
+      title: "Article body",
+      type: "array",
+      description:
+        "Add headings, paragraphs, quotes, and images in the order they should appear.",
+      of: [
+        {
+          type: "block",
+          styles: [
+            { title: "Paragraph", value: "normal" },
+            { title: "Section heading", value: "h2" },
+            { title: "Subheading", value: "h3" },
+            { title: "Pull quote", value: "blockquote" },
+          ],
+          lists: [],
+        },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alternative text",
+              type: "string",
+              validation: (rule) => rule.required().max(120),
+            }),
+            defineField({
+              name: "caption",
+              title: "Caption",
+              type: "string",
+              validation: (rule) => rule.max(180),
+            }),
+          ],
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
       name: "altText",
       title: "Image alt text",
       type: "string",

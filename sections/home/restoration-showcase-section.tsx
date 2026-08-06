@@ -8,7 +8,17 @@ import { DifferenceText } from "@/components/ui/difference-text";
 import { CdnImage } from "@/components/ui/cdn-image";
 import { OrangeBlock } from "@/components/ui/orange-block";
 
-const restorationSlides = [
+export type RestorationSlide = {
+  id: string;
+  heading: string;
+  leftLabel: string;
+  rightLabel: string;
+  number: string;
+  url: string;
+  alt: string;
+};
+
+const defaultRestorationSlides: readonly RestorationSlide[] = [
   {
     id: "villa-el-salva-01",
     heading: "VILLA EL SALVA",
@@ -30,7 +40,21 @@ const restorationSlides = [
 ] as const;
 
 
-export function RestorationShowcaseSection() {
+type RestorationShowcaseSectionProps = {
+  backgroundTexture?: string;
+  designSource?: string;
+  smoothContactTransition?: boolean;
+  slides?: readonly RestorationSlide[];
+};
+
+export function RestorationShowcaseSection({
+  backgroundTexture = "/assets/textures/heritage-texture.webp",
+  designSource,
+  smoothContactTransition = false,
+  slides = defaultRestorationSlides,
+}: RestorationShowcaseSectionProps = {}) {
+  const restorationSlides = slides.length > 0 ? slides : defaultRestorationSlides;
+  const restorationSlideCount = restorationSlides.length;
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const sectionRef = useRef<HTMLElement | null>(null);
   const headingRef = useRef<HTMLHeadingElement | null>(null);
@@ -67,7 +91,7 @@ export function RestorationShowcaseSection() {
       ].filter(Boolean) as HTMLElement[];
 
       if (
-        slideImages.length < restorationSlides.length ||
+        slideImages.length < restorationSlideCount ||
         !heading ||
         supportingTextElements.length < 3
       ) {
@@ -203,7 +227,7 @@ export function RestorationShowcaseSection() {
       transitionRef.current?.kill();
       ctx.revert();
     };
-  }, []);
+  }, [restorationSlideCount]);
 
   const selectSlide = (index: number) => {
     sectionRef.current?.dispatchEvent(
@@ -214,7 +238,8 @@ export function RestorationShowcaseSection() {
   return (
     <section
       aria-labelledby="restoration-showcase-title"
-      className={`relative isolate overflow-hidden bg-[#FAFAFA] text-[#232323] ${responsiveStyles.responsiveRoot}`}
+      className={`relative isolate overflow-hidden bg-[#FAFAFA] text-[#232323] ${responsiveStyles.responsiveRoot} ${designSource ? "min-h-[50rem] max-md:min-h-0" : ""}`}
+      data-design-source={designSource}
       data-section="restoration-showcase"
       ref={sectionRef}
     >
@@ -223,9 +248,16 @@ export function RestorationShowcaseSection() {
         className="pointer-events-none absolute inset-0 z-0 select-none bg-cover bg-center opacity-70 mix-blend-multiply"
         data-restoration-background
         style={{
-          backgroundImage: 'url("/assets/textures/heritage-texture.webp")',
+          backgroundImage: `url("${backgroundTexture}")`,
         }}
       />
+
+      {smoothContactTransition ? (
+        <div
+          aria-hidden="true"
+          data-restoration-contact-transition
+        />
+      ) : null}
 
       <div
         className="relative mx-auto h-[44.875rem] w-full max-w-[1440px] px-[5.28%]"
@@ -324,10 +356,13 @@ export function RestorationShowcaseSection() {
         >
           <div
             aria-label="Choose a restoration"
-            className="-my-[0.875rem] grid w-[clamp(6.5rem,9vw,8rem)] grid-cols-2 gap-2"
+            className="-my-[0.875rem] grid w-[clamp(6.5rem,9vw,8rem)] gap-2"
             data-restoration-pagination
             data-restoration-tabs
             role="tablist"
+            style={{
+              gridTemplateColumns: `repeat(${restorationSlides.length}, minmax(0, 1fr))`,
+            }}
           >
             {restorationSlides.map((slide, index) => (
               <button

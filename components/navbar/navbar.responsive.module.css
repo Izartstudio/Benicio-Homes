@@ -349,8 +349,17 @@
   }
 
   .mobileProjectsTrigger {
+    display: flex;
     min-height: 4.3125rem;
+    align-items: stretch;
     justify-content: space-between;
+  }
+
+  .mobileProjectsToggle {
+    display: grid;
+    width: 3rem;
+    flex: 0 0 3rem;
+    place-items: center;
     border: 0;
     background: transparent;
     padding: 0;

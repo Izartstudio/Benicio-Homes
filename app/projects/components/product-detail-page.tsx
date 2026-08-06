@@ -10,6 +10,7 @@ import { NextProjectSection } from "@/app/projects/components/next-project-secti
 import { SiteCompositionSection } from "@/app/projects/components/site-composition-section";
 import { SpecificationSection } from "@/app/projects/components/specification-section";
 import { Footer } from "@/components/footer/footer";
+import { EditorialVariantSections } from "@/app/projects/components/editorial-variant-sections";
 
 type ProductDetailPageProps = {
   project: ProjectDetailData;
@@ -20,16 +21,19 @@ export function ProductDetailPage({ project }: ProductDetailPageProps) {
     <main className="bg-[#232323]">
       <HeroSection data={project.hero} intro={project.intro} />
       <LocationSection data={project.location} />
-      <SiteCompositionSection data={project.siteComposition} />
-      <MoodboardSection data={project.moodboard} />
-      <ArchitectureImageSection data={project.architectureImage} />
-      <SpecificationSection data={project.specifications} />
-      <FloorPlanCollection
-        layout={project.floorPlanLayout}
-        plans={project.floorPlans}
-      />
-      <GallerySection data={project.gallery} />
-      <NextProjectSection data={project.nextProject} />
+      {project.editorialVariants ? (
+        <EditorialVariantSections data={project.editorialVariants} />
+      ) : (
+        <>
+          <SiteCompositionSection data={project.siteComposition} />
+          <MoodboardSection data={project.moodboard} />
+          <ArchitectureImageSection data={project.architectureImage} />
+          <SpecificationSection data={project.specifications} />
+          <FloorPlanCollection layout={project.floorPlanLayout} plans={project.floorPlans} />
+          <GallerySection data={project.gallery} />
+          <NextProjectSection data={project.nextProject} />
+        </>
+      )}
       <ContactSection data={project.contact} />
       <Footer />
     </main>

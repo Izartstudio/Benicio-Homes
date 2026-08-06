@@ -8,7 +8,7 @@ const navigationLinks = [
   { href: "#featured-projects", label: "Projects" },
   { href: "#about", label: "About Us" },
   { href: "#contact", label: "Get In Touch" },
-  { href: "#journal", label: "Journal" },
+  { href: "/journal", label: "Journal" },
 ] as const;
 
 const socialLinks = [

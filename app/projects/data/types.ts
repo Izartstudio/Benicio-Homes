@@ -10,16 +10,14 @@ export type ProjectHeroData = {
   foregroundImage?: ProjectImage;
   image: ProjectImage;
   layout?: "default" | "el-salva" | "nayan" | "zen";
-  mediaScale?: {
-    continuation?: number;
-    desktop?: number;
-    mobile?: number;
-    tablet?: number;
-  };
-  objectPosition?: {
-    desktop?: string;
-    mobile?: string;
-    tablet?: string;
+  mediaCanvas: {
+    aspectRatio: number;
+    focalPosition?: {
+      desktop?: number;
+      mobile?: number;
+      tablet?: number;
+    };
+    foregroundCanvasHeightRatio?: number;
   };
   title: string;
 };
@@ -120,12 +118,44 @@ export type ProjectContactData = {
   heading: string;
 };
 
-export type ProjectDetailData = {
-  architectureImage: ProjectArchitectureImageData;
+export type ProjectEditorialVariantsData = {
+  textures?: {
+    gallery?: string;
+    moodboard?: string;
+    showcase?: string;
+    siteComposition?: string;
+  };
+  siteComposition: {
+    image: ProjectImage;
+  };
+  moodboard: {
+    images: readonly [ProjectImage, ProjectImage, ProjectImage, ProjectImage];
+    labels?: {
+      footer: string;
+      primary: string;
+      vertical: string;
+    };
+  };
+  showcase: {
+    images: readonly [
+      ProjectImage,
+      ProjectImage,
+      ProjectImage,
+      ProjectImage,
+      ProjectImage,
+    ];
+  };
+  gallery: {
+    items: readonly [
+      { caption: string; image: ProjectImage },
+      { caption: string; image: ProjectImage },
+    ];
+    watermark: string;
+  };
+};
+
+type ProjectDetailBase = {
   contact: ProjectContactData;
-  floorPlans: readonly ProjectFloorPlanData[];
-  floorPlanLayout: ProjectFloorPlanLayout;
-  gallery: ProjectGalleryData;
   hero: ProjectHeroData;
   intro: ProjectIntroData;
   location: ProjectLocationData;
@@ -133,9 +163,21 @@ export type ProjectDetailData = {
     description: string;
     title: string;
   };
-  moodboard: ProjectMoodboardData;
-  nextProject: ProjectNextProjectData;
-  siteComposition: ProjectSiteCompositionData;
   slug: string;
-  specifications: ProjectSpecificationsData;
 };
+
+export type ProjectDetailData = ProjectDetailBase &
+  (
+    | { editorialVariants: ProjectEditorialVariantsData }
+    | {
+        architectureImage: ProjectArchitectureImageData;
+        editorialVariants?: undefined;
+        floorPlans: readonly ProjectFloorPlanData[];
+        floorPlanLayout: ProjectFloorPlanLayout;
+        gallery: ProjectGalleryData;
+        moodboard: ProjectMoodboardData;
+        nextProject: ProjectNextProjectData;
+        siteComposition: ProjectSiteCompositionData;
+        specifications: ProjectSpecificationsData;
+      }
+  );

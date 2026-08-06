@@ -27,3 +27,17 @@ export function getJournalImageUrl(
     .quality(85)
     .url();
 }
+
+export function getJournalDetailImageUrl(
+  source: SanityImageSource | null | undefined,
+) {
+  if (!imageBuilder || !source) return null;
+
+  return imageBuilder
+    .image(source)
+    .width(1800)
+    .fit("max")
+    .auto("format")
+    .quality(88)
+    .url();
+}

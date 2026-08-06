@@ -1,3 +1,39 @@
+.responsiveRoot :global([data-restoration-contact-transition]) {
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  height: clamp(10rem, 18vw, 16rem);
+  background-color: #b9b9b9;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgb(185 185 185 / 0) 0%,
+      rgb(185 185 185 / 0.38) 48%,
+      rgb(185 185 185 / 0.82) 76%,
+      #b9b9b9 100%
+    ),
+    url("/assets/textures/contact-texture.webp");
+  background-position: center, center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 100%, cover;
+  background-blend-mode: normal, multiply;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.35) 30%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.35) 30%,
+    #000 100%
+  );
+}
+
 @media (max-width: 1023px) {
   .responsiveRoot:global([data-section="restoration-showcase"]) {
     max-width: 100%;

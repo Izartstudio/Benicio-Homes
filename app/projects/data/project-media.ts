@@ -10,9 +10,9 @@
  */
 export const PROJECT_MEDIA = {
   vanamVillas: {
-    hero: "/assets/projects/vanam-hero-background.webp",
-    heroForeground: "/assets/projects/vanam-hero-foreground.webp",
-    intro: "/assets/projects/vanam-hero-continuation.webp",
+    hero: "/assets/projects/bgvanam.png",
+    heroForeground: "/assets/projects/vanam-hero-foreground.png",
+    intro: "/assets/projects/bgvanam.png",
     location: "/assets/storysection/story-hero.webp",
     locationDecorative:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
@@ -39,7 +39,7 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/next-project.webp",
   },
   nayanVilla: {
-    hero: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-villa-bg.webp",
+    hero: "/assets/projects/villanayanbg.png",
     heroForeground:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-villas-foreground.webp",
     intro:
@@ -73,11 +73,11 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-next-project.webp",
   },
   zenVillas2: {
-    hero: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-background.webp",
+    hero: "/assets/projects/villazenbg.png",
     heroForeground:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-foreground.webp",
+      "/assets/projects/zen-foreground.webp",
     intro:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-intro.webp",
+      "",
     location:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-horizontal.webp",
     locationDecorative:
@@ -111,11 +111,11 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-nextproject.webp",
   },
   elSalvaVilla: {
-    hero: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalvavilla-background.webp",
+    hero: "/assets/projects/villaelsalvabg.png",
     heroForeground:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalva-foreground.webp",
+      "/assets/projects/elsalva-foreground.png",
     intro:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalva-continuous.webp",
+      "",
     location:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/elsalva/elsalva-horizontal.webp",
     locationDecorative:
@@ -144,6 +144,60 @@ export const PROJECT_MEDIA = {
     ],
     nextProject:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-background.webp",
+  },
+  villaPerola: {
+    hero: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/villaperolabg.webp",
+    heroForeground: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/villaperola-foreground.webp",
+    intro: "/images/placeholders/responsive-media-fallback.webp",
+    location: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/perola-horizontal.webp",
+    locationDecorative: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
+    editorialSiteComposition: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/perolashowcase.webp",
+    editorialSiteCompositionTexture: "/assets/textures/concrete-background-textures-09-1.webp",
+    editorialMoodboard: [
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/imageshowcase2-perola.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/imageshowcase3-perola.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/imageshowcase1-perola.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/imageshowcase4-perola.webp",
+    ],
+    editorialShowcase: [
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/gallery-perola.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/gallerysmall1.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/gallerysmall2.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/gallerysmall3.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/gallerysmall4.webp",
+    ],
+    editorialGallery: [
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/restoration-image1.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/restorationimage2.webp",
+    ],
+    restorationTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perolatexture.webp",
+  },
+  zenVilla1: {
+    hero: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/image%2060458.webp",
+    heroForeground: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/image%2060458%202.webp",
+    intro: "/images/placeholders/responsive-media-fallback.webp",
+    location: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1-horizontal.webp",
+    locationDecorative: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
+    editorialSiteComposition: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1showcase.webp",
+    editorialSiteCompositionTexture: "/assets/textures/concrete-background-textures-09-1.webp",
+    editorialMoodboard: [
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1moodboard1.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1moodboard3.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1moodboard2.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1moodboard4.webp",
+    ],
+    editorialShowcase: [
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1gallery1.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1gallery1-small.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1gallery2-small.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1gallery3-small.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1gallery4-small.webp",
+    ],
+    editorialGallery: [
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/restorationzen1.webp",
+      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/restorationzen2.webp",
+    ],
+    restorationTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zentexture.webp",
   },
   shared: {
     concreteTexture: "/assets/textures/concrete-background-textures-09-1.webp",

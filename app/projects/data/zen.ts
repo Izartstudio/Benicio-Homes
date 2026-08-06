@@ -24,6 +24,10 @@ export const zenVillas2Project = {
       src: media.heroForeground,
       alt: "",
     },
+    mediaCanvas: {
+      aspectRatio: 2222 / 2000,
+      foregroundCanvasHeightRatio: 1500 / 1500,
+    },
   },
   intro: {
     intro:

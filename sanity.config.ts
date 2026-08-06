@@ -5,8 +5,8 @@ import { schemaTypes } from "./sanity/schemaTypes";
 export default defineConfig({
   name: "default",
   title: "Benicio",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? "jio3xvjs",
+dataset: process.env.SANITY_STUDIO_DATASET ?? "production",
   plugins: [structureTool()],
   schema: {
     types: schemaTypes,

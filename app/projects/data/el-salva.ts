@@ -24,6 +24,9 @@ export const elSalvaVillaProject = {
       src: media.heroForeground,
       alt: "",
     },
+    mediaCanvas: {
+      aspectRatio: 1435 / 1500,
+    },
   },
   intro: {
     intro:

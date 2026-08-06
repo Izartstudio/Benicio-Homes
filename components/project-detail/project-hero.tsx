@@ -1,16 +1,16 @@
 "use client";
 
 import type { ImageProps } from "next/image";
-import { useLayoutEffect, useRef, type CSSProperties } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CdnImage } from "@/components/ui/cdn-image";
 import { Reveal } from "@/components/ui/reveal";
+import {
+  ProjectHeroBackground,
+  type ProjectHeroFocalPosition,
+} from "./project-hero-background";
 import { ProjectTitleTexture } from "./project-title-texture";
 import { isSafariBrowser } from "@/utils/is-safari-browser";
 import styles from "./project-hero.responsive.module.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type ProjectHeroImage = {
   alt: string;
@@ -19,19 +19,10 @@ type ProjectHeroImage = {
 
 export type ProjectHeroMedia = {
   background: ProjectHeroImage;
-  continuation: ProjectHeroImage;
+  focalPosition?: ProjectHeroFocalPosition;
   foreground?: ProjectHeroImage;
-  objectPosition?: {
-    desktop?: string;
-    mobile?: string;
-    tablet?: string;
-  };
-  scale?: {
-    continuation?: number;
-    desktop?: number;
-    mobile?: number;
-    tablet?: number;
-  };
+  foregroundCanvasHeightRatio?: number;
+  mediaAspectRatio: number;
 };
 
 export type ProjectHeroSequenceProps = {
@@ -49,47 +40,29 @@ export function ProjectHeroSequence({
   media,
   title,
 }: ProjectHeroSequenceProps) {
-  const backgroundRef = useRef<HTMLDivElement | null>(null);
   const backgroundImageRef = useRef<HTMLImageElement | null>(null);
   const continuationStatementRef = useRef<HTMLDivElement | null>(null);
-  const foregroundRef = useRef<HTMLDivElement | null>(null);
+  const mediaMotionRef = useRef<HTMLDivElement | null>(null);
   const sequenceRef = useRef<HTMLElement | null>(null);
   const titleRef = useRef<HTMLDivElement | null>(null);
-  const objectPosition = media.objectPosition;
+  const titleWords = title.trim().split(/\s+/);
   const titleLines =
-    layout === "nayan"
-      ? ["Nayan", "Villas"]
-      : layout === "el-salva"
-        ? ["Villa", "El Salva"]
-        : null;
-  const stageStyle = {
-    "--continuation-media-scale": media.scale?.continuation ?? 1,
-    "--hero-media-scale-desktop": media.scale?.desktop ?? 1,
-    "--hero-media-scale-mobile":
-      media.scale?.mobile ?? media.scale?.tablet ?? 1,
-    "--hero-media-scale-tablet":
-      media.scale?.tablet ?? media.scale?.desktop ?? 1,
-    "--hero-object-position-desktop": objectPosition?.desktop ?? "50% 50%",
-    "--hero-object-position-mobile":
-      objectPosition?.mobile ?? objectPosition?.tablet ?? "50% 50%",
-    "--hero-object-position-tablet":
-      objectPosition?.tablet ?? objectPosition?.desktop ?? "50% 50%",
-  } as CSSProperties;
-
+    layout === "nayan" || layout === "el-salva"
+      ? titleWords.length > 1
+        ? [titleWords[0], titleWords.slice(1).join(" ")]
+        : [title]
+      : null;
   useLayoutEffect(() => {
     const sequence = sequenceRef.current;
-    const background = backgroundRef.current;
     const backgroundImage = backgroundImageRef.current;
     const continuationStatement = continuationStatementRef.current;
-    const foreground = foregroundRef.current;
+    const mediaMotion = mediaMotionRef.current;
     const title = titleRef.current;
-    const hasStitchedContinuation = sequence?.dataset.heroLayout !== "default";
-
     if (
       !sequence ||
-      !background ||
       !backgroundImage ||
       !continuationStatement ||
+      !mediaMotion ||
       !title
     ) {
       return;
@@ -109,18 +82,18 @@ export function ProjectHeroSequence({
         mediaMatcher.add(
           {
             desktop: "(min-width: 1024px)",
-            mobile: "(max-width: 1023px)",
+            tablet: "(min-width: 768px) and (max-width: 1023px)",
+            mobile: "(max-width: 767px)",
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (matchContext) => {
             const conditions = matchContext.conditions as {
               desktop: boolean;
               mobile: boolean;
+              tablet: boolean;
               reduceMotion: boolean;
             };
-            const animatedMedia = [background, foreground, title].filter(
-              Boolean,
-            );
+            const animatedMedia = [mediaMotion, title];
 
             if (conditions.reduceMotion) {
               gsap.set([...animatedMedia, continuationStatement], {
@@ -138,7 +111,11 @@ export function ProjectHeroSequence({
             // scrubbed catch-up transform makes the image and title chase the
             // viewport on mobile, which reads as jitter. Keep a lightweight
             // one-shot statement reveal while leaving the hero layers stable.
-            if (conditions.mobile || isSafariBrowser()) {
+            if (
+              conditions.mobile ||
+              conditions.tablet ||
+              isSafariBrowser()
+            ) {
               const statementTween = gsap.to(continuationStatement, {
                 autoAlpha: 1,
                 duration: 0.48,
@@ -182,26 +159,12 @@ export function ProjectHeroSequence({
               },
             });
 
-            const heroMediaLayers = [background, foreground].filter(Boolean);
-            const mediaShift = hasStitchedContinuation
-              ? conditions.desktop
-                ? 8
-                : 4
-              : conditions.desktop
-                ? 4
-                : 2;
-
             timeline.to(
-              heroMediaLayers,
+              mediaMotion,
               {
-                // The background and foreground are two crops of the same
-                // source composition. Moving them as a single transform group
-                // keeps every pixel aligned throughout the parallax motion.
-                // Stitched heroes also grow by the translation amount so their
-                // lower edge stays locked to the static continuation image.
-                scaleY: hasStitchedContinuation ? 1 + mediaShift / 100 : 1,
-                transformOrigin: "50% 0%",
-                yPercent: -mediaShift,
+                force3D: true,
+                scale: 1.035,
+                yPercent: -1.25,
               },
               0,
             );
@@ -256,80 +219,53 @@ export function ProjectHeroSequence({
       className={styles.heroSequence}
       data-hero-layout={layout}
       ref={sequenceRef}
-      style={stageStyle}
     >
       <section
         aria-labelledby="project-hero-title"
         className={styles.hero}
         data-project-hero
       >
-        <div className={styles.heroVisualStage}>
-          <div
-            className={`${styles.heroMediaLayer} ${styles.heroBackgroundMedia}`}
-            data-hero-background
-            ref={backgroundRef}
-          >
-            <CdnImage
-              alt={media.background.alt}
-              className={styles.heroMediaImage}
-              fill
-              loading="eager"
-              preload
-              ref={backgroundImageRef}
-              sizes="100vw"
-              src={media.background.src}
-            />
-          </div>
+        <ProjectHeroBackground
+          backgroundImage={media.background}
+          backgroundImageRef={backgroundImageRef}
+          focalPosition={media.focalPosition}
+          foregroundCanvasHeightRatio={media.foregroundCanvasHeightRatio}
+          foregroundImage={media.foreground}
+          mediaAspectRatio={media.mediaAspectRatio}
+          ref={mediaMotionRef}
+        />
 
-          <div
-            className={styles.heroTitleLayer}
-            data-hero-title-layer
-            ref={titleRef}
+        <div
+          className={styles.heroTitleLayer}
+          data-hero-title-layer
+          ref={titleRef}
+        >
+          <Reveal
+            className={styles.heroTitleReveal}
+            delay={0.12}
+            duration={0.92}
+            fade={false}
+            revealId="project-hero-title"
+            revealMode="mount"
+            y={36}
           >
-            <Reveal
-              className={styles.heroTitleReveal}
-              delay={0.12}
-              duration={0.92}
-              fade={false}
-              revealId="project-hero-title"
-              revealMode="mount"
-              y={36}
+            <ProjectTitleTexture
+              className={styles.heroTitle}
+              id="project-hero-title"
             >
-              <ProjectTitleTexture
-                className={styles.heroTitle}
-                id="project-hero-title"
-              >
-                {titleLines
-                  ? titleLines.map((line, index) => (
-                      <span
-                        className={styles.heroTitleLine}
-                        data-hero-title-line={index + 1}
-                        key={line}
-                      >
-                        {line}
-                      </span>
-                    ))
-                  : title}
-              </ProjectTitleTexture>
-            </Reveal>
-          </div>
-
-          {media.foreground ? (
-            <div
-              aria-hidden="true"
-              className={`${styles.heroMediaLayer} ${styles.heroForegroundMedia}`}
-              data-hero-foreground
-              ref={foregroundRef}
-            >
-              <CdnImage
-                alt={media.foreground.alt}
-                className={styles.heroMediaImage}
-                fill
-                sizes="100vw"
-                src={media.foreground.src}
-              />
-            </div>
-          ) : null}
+              {titleLines
+                ? titleLines.map((line, index) => (
+                    <span
+                      className={styles.heroTitleLine}
+                      data-hero-title-line={index + 1}
+                      key={line}
+                    >
+                      {line}
+                    </span>
+                  ))
+                : title}
+            </ProjectTitleTexture>
+          </Reveal>
         </div>
 
         <div className={styles.heroContent}>
@@ -343,26 +279,10 @@ export function ProjectHeroSequence({
             <p className={styles.heroDescription}>{description}</p>
           </Reveal>
         </div>
-      </section>
-
-      <section
-        aria-label="Project introduction"
-        className={styles.continuation}
-        data-project-hero-continuation
-      >
-        <div className={styles.continuationMedia} data-continuation-media>
-          <CdnImage
-            alt={media.continuation.alt}
-            className={styles.continuationImage}
-            fill
-            sizes="100vw"
-            src={media.continuation.src}
-          />
-        </div>
-        <div aria-hidden="true" className={styles.continuationShade} />
 
         <div
           className={styles.continuationContent}
+          data-project-hero-continuation
           ref={continuationStatementRef}
         >
           <span aria-hidden="true" className={styles.continuationAccent} />
