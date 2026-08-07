@@ -25,6 +25,10 @@
   pointer-events: none;
 }
 
+.heroSequence[data-hero-title-layering="front"] .heroTitleLayer {
+  z-index: 6;
+}
+
 .heroTitleReveal {
   flex: none;
   width: calc(100% + clamp(1.5rem, 5.28vw, 4.75rem));
@@ -251,7 +255,7 @@
      title. Give the two blocks independent vertical lanes on short/narrow
      phones so translated browser chrome and text wrapping cannot overlap. */
   .heroSequence[data-hero-layout="default"] .heroTitleLayer {
-    inset-block-start: clamp(16rem, 34svh, 18rem);
+    inset-block-start: clamp(11rem, 24svh, 13.5rem);
   }
 
   .heroTitle {
@@ -338,5 +342,24 @@
   .continuationStatement {
     width: min(100%, 32rem);
     font-size: clamp(1.35rem, 6.2vw, 1.75rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heroSequence[data-hero-layout="el-salva"]
+    .heroTitleLine[data-hero-title-line="2"] {
+    top: 31%;
+  }
+
+  .heroSequence[data-hero-layout="el-salva"] .heroDescriptionReveal {
+    top: 22%;
+    right: auto;
+    left: 42.3611%;
+    width: min(31rem, 52.3611vw);
+  }
+
+  .heroSequence[data-hero-layout="el-salva"][data-hero-title-layering="front"]
+    .heroDescriptionReveal {
+    top: 15%;
   }
 }

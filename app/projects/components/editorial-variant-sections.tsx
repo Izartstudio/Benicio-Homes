@@ -50,9 +50,16 @@ export function EditorialVariantSections({ data }: EditorialVariantSectionsProps
       style={textureStyle}
     >
       <section className={`${styles.section} ${styles.site}`} data-pdp-variant="site-composition">
-        <div className={styles.siteSteps} aria-hidden="true">
+        <Reveal
+          aria-hidden="true"
+          className={styles.siteSteps}
+          duration={0.9}
+          fade={false}
+          revealId="editorial-site-steps"
+          y={18}
+        >
           <i /><i /><i /><i /><i />
-        </div>
+        </Reveal>
         <Reveal as="figure" className={`${styles.frame} ${styles.siteMedia}`} y={16}>
           <Media image={data.siteComposition.image} />
         </Reveal>
@@ -91,7 +98,9 @@ export function EditorialVariantSections({ data }: EditorialVariantSectionsProps
 
       <section className={`${styles.section} ${styles.gallery}`} data-pdp-variant="gallery">
         <div aria-hidden="true" className={styles.restorationTransition} />
-        <p className={styles.watermark} aria-hidden="true">{data.gallery.watermark}</p>
+        {!data.gallery.hideWatermark ? (
+          <p className={styles.watermark} aria-hidden="true">{data.gallery.watermark}</p>
+        ) : null}
         {data.gallery.items.map((item, index) => (
           <Reveal as="figure" className={`${styles.galleryItem} ${styles[`gallery${index + 1}`]}`} delay={index * 0.08} key={item.caption} y={16}>
             <div className={`${styles.frame} ${styles.galleryMedia}`}><Media image={item.image} /></div>

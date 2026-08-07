@@ -12,10 +12,10 @@ import { RestorationShowcaseSection } from "@/sections/home/restoration-showcase
 import { StepsSection } from "@/sections/home/steps-section";
 import { StorySection } from "@/sections/home/story-section";
 import { TexturedHeroSection } from "@/sections/home/textured-hero-section";
-import { getHomepageJournalArticles } from "@/sanity/lib/journal";
+import { getJournalArticles } from "@/sanity/lib/journal";
 
 export default async function Home() {
-  const journalArticles = await getHomepageJournalArticles();
+  const journalArticles = await getJournalArticles();
 
   return (
     <HomepageInteractionGuard>

@@ -31,6 +31,7 @@ export type ProjectHeroSequenceProps = {
   layout?: "default" | "el-salva" | "nayan" | "zen";
   media: ProjectHeroMedia;
   title: string;
+  titleLayer?: "behind" | "front";
 };
 
 export function ProjectHeroSequence({
@@ -39,9 +40,11 @@ export function ProjectHeroSequence({
   layout = "default",
   media,
   title,
+  titleLayer = "behind",
 }: ProjectHeroSequenceProps) {
   const backgroundImageRef = useRef<HTMLImageElement | null>(null);
   const continuationStatementRef = useRef<HTMLDivElement | null>(null);
+  const foregroundMotionRef = useRef<HTMLDivElement | null>(null);
   const mediaMotionRef = useRef<HTMLDivElement | null>(null);
   const sequenceRef = useRef<HTMLElement | null>(null);
   const titleRef = useRef<HTMLDivElement | null>(null);
@@ -93,7 +96,7 @@ export function ProjectHeroSequence({
               tablet: boolean;
               reduceMotion: boolean;
             };
-            const animatedMedia = [mediaMotion, title];
+            const animatedMedia = [mediaMotion, foregroundMotionRef.current, title].filter(Boolean);
 
             if (conditions.reduceMotion) {
               gsap.set([...animatedMedia, continuationStatement], {
@@ -160,7 +163,7 @@ export function ProjectHeroSequence({
             });
 
             timeline.to(
-              mediaMotion,
+              [mediaMotion, foregroundMotionRef.current].filter(Boolean),
               {
                 force3D: true,
                 scale: 1.035,
@@ -218,6 +221,7 @@ export function ProjectHeroSequence({
     <section
       className={styles.heroSequence}
       data-hero-layout={layout}
+      data-hero-title-layering={titleLayer}
       ref={sequenceRef}
     >
       <section
@@ -231,6 +235,7 @@ export function ProjectHeroSequence({
           focalPosition={media.focalPosition}
           foregroundCanvasHeightRatio={media.foregroundCanvasHeightRatio}
           foregroundImage={media.foreground}
+          foregroundMotionRef={foregroundMotionRef}
           mediaAspectRatio={media.mediaAspectRatio}
           ref={mediaMotionRef}
         />

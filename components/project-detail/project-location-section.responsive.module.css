@@ -11,7 +11,7 @@
 
   .responsiveRoot :global([data-project-location-decorative-image-wrapper]) {
     right: -2rem;
-    top: -3rem;
+    top: 0;
     width: min(34rem, 58vw);
   }
 }
@@ -23,7 +23,7 @@
 
   .responsiveRoot :global([data-project-location-decorative-image-wrapper]) {
     right: -1.5rem;
-    top: -1.5rem;
+    top: 0;
     height: 14rem;
     width: 62vw;
   }

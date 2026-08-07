@@ -16,6 +16,7 @@
   opacity: 0.5;
   mix-blend-mode: multiply;
   pointer-events: none;
+  background-color: #343434;
 }
 
 .stairs {
@@ -26,6 +27,16 @@
   height: 22.8125rem;
   transform: translateX(-50%);
   pointer-events: none;
+  background-image: var(--stacked-floor-plan-concrete);
+  background-position: left top;
+  background-size: 1440px 365px;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  clip-path: polygon(0 0, 72.2917% 0, 72.2917% 15.3425%, 65.8333% 15.3425%, 65.8333% 24.3836%, 20.3472% 24.3836%, 20.3472% 39.726%, 1.3889% 39.726%, 1.3889% 100%, 0 100%);
+}
+
+.stairs :global([data-architectural-stair]) {
+  background: transparent;
 }
 
 .items {

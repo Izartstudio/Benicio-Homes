@@ -4,15 +4,14 @@
     --project-hero-focal-translate-desktop
   );
   position: absolute;
-  z-index: 0;
   inset: 0;
-  isolation: isolate;
   overflow: clip;
   pointer-events: none;
 }
 
 .mediaPositioner {
   position: absolute;
+  z-index: 0;
   top: 0;
   left: var(--project-hero-focal-x);
   width: max(
@@ -21,6 +20,25 @@
   );
   aspect-ratio: var(--project-media-aspect-ratio);
   translate: var(--project-hero-focal-translate) 0;
+}
+
+.foregroundPositioner {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: var(--project-hero-focal-x);
+  width: max(
+    100%,
+    calc(var(--project-hero-height) * var(--project-media-aspect-ratio))
+  );
+  aspect-ratio: var(--project-media-aspect-ratio);
+  translate: var(--project-hero-focal-translate) 0;
+}
+
+.foregroundMotion {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 38%;
 }
 
 .mediaMotion {
@@ -79,7 +97,7 @@
 
 .lowerMultiplyLayer {
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   inset: 50% 0 0;
   pointer-events: none;
   background: linear-gradient(

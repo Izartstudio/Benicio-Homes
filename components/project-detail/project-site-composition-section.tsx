@@ -192,8 +192,8 @@ export function ProjectSiteCompositionSection({
             },
             scrollTrigger: {
               trigger: section,
-              start: useLightweightMotion ? "top 90%" : "top 76%",
-              end: conditions.desktop ? "top 30%" : "top 48%",
+              start: useLightweightMotion ? "top 82%" : "top 72%",
+              end: conditions.desktop ? "bottom 35%" : "bottom 50%",
               once: useLightweightMotion,
               scrub: useLightweightMotion ? false : 0.4,
               invalidateOnRefresh: true,
@@ -217,26 +217,28 @@ export function ProjectSiteCompositionSection({
                 ease: "power1.out",
                 y: 0,
               },
-              0.04,
-            )
-            .to(
-              guideLines,
+              0.18,
+            );
+          guideLines.forEach((line, index) => {
+            timeline.to(
+              line,
               {
-                duration: 0.72,
+                duration: 0.75,
                 ease: "none",
-                stagger: 0.04,
                 strokeDashoffset: 0,
               },
-              0.04,
-            )
-            .to(
+              index === 0 ? 0.45 : ">",
+            );
+          });
+
+          timeline.to(
               masterplanElement,
               {
                 clipPath: "inset(0% 0% 0% 0%)",
-                duration: 1.18,
-                ease: "power2.inOut",
+                duration: 0.42,
+                ease: "power3.out",
               },
-              0.3,
+              ">+=0.18",
             )
             .to(
               accentElement,
@@ -246,7 +248,7 @@ export function ProjectSiteCompositionSection({
                 ease: "power1.out",
                 y: 0,
               },
-              0.34,
+              ">-=0.2",
             )
             .to(
               specificationElements,
@@ -257,7 +259,7 @@ export function ProjectSiteCompositionSection({
                 stagger: 0.04,
                 y: 0,
               },
-              0.42,
+              ">-=0.1",
             )
             .to(
               compassElement,
@@ -266,7 +268,7 @@ export function ProjectSiteCompositionSection({
                 duration: 0.22,
                 ease: "power1.out",
               },
-              0.5,
+              ">-=0.08",
             );
 
           return () => {

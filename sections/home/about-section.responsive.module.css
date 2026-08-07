@@ -59,6 +59,12 @@
     min-height: clamp(53.125rem, 78vw, 59.375rem);
   }
 
+  .responsiveRoot :global([data-about-collage]) {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
   .responsiveRoot :global([data-about-heading]) {
     left: 50%;
     top: -3.95vw;

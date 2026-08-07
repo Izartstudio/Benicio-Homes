@@ -58,6 +58,21 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  .responsiveRoot :global([data-gallery-composition]) {
+    display: block;
+  }
+
+  .responsiveRoot :global([data-gallery-region]) {
+    margin-top: clamp(4rem, 7vw, 5.5rem);
+  }
+
+  .responsiveRoot :global([data-gallery-image="1"]),
+  .responsiveRoot :global([data-gallery-image="2"]) {
+    margin-top: clamp(4rem, 7vw, 5.5rem);
+  }
+}
+
 @media (max-width: 1023px) {
 
   .responsiveRoot:global([data-section="legacy-gallery"]) {

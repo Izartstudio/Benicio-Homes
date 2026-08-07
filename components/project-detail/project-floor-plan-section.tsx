@@ -110,9 +110,8 @@ export function ProjectFloorPlanSection({
       return;
     }
 
-    const stairs = gsap.utils.toArray<HTMLElement>(
-      "[data-architectural-stair]",
-      section,
+    const stairs = section.querySelector<HTMLElement>(
+      "[data-project-floor-plan-top-editorial-layout]",
     );
     const upperAxisLine = section.querySelector<HTMLElement>(
       "[data-project-floor-plan-axis-line-upper]",
@@ -128,7 +127,7 @@ export function ProjectFloorPlanSection({
     );
 
     if (
-      stairs.length === 0 ||
+      !stairs ||
       !upperAxisLine ||
       !lowerAxisLine ||
       !leftDrawing ||
@@ -171,10 +170,6 @@ export function ProjectFloorPlanSection({
             autoAlpha: 1,
             duration: 0.78,
             ease: "power3.out",
-            stagger: {
-              each: 0.12,
-              from: "end",
-            },
             y: 0,
           },
           "stepsReveal",
@@ -247,14 +242,14 @@ export function ProjectFloorPlanSection({
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute left-1/2 top-0 z-10 hidden h-[22.8125rem] w-full max-w-[1440px] -translate-x-1/2",
+          "pointer-events-none absolute left-1/2 top-0 z-10 hidden h-[22.8125rem] w-full max-w-[1440px] -translate-x-1/2 bg-[#343434] bg-[length:1440px_365px] bg-left-top bg-no-repeat bg-blend-overlay [background-image:var(--pdp-concrete-texture)] [clip-path:polygon(0_0,72.2917%_0,72.2917%_15.3425%,65.8333%_15.3425%,65.8333%_24.3836%,20.3472%_24.3836%,20.3472%_39.726%,1.3889%_39.726%,1.3889%_100%,0_100%)]",
           !mirrored && "lg:block",
         )}
         data-project-floor-plan-top-editorial-layout
       >
         <ArchitecturalStairs
           className="[&>[data-stair-index='1']]:left-0 [&>[data-stair-index='1']]:top-0 [&>[data-stair-index='1']]:h-full [&>[data-stair-index='1']]:w-[1.3889%] [&>[data-stair-index='2']]:left-0 [&>[data-stair-index='2']]:top-0 [&>[data-stair-index='2']]:h-[39.726%] [&>[data-stair-index='2']]:w-[20.3472%] [&>[data-stair-index='3']]:left-0 [&>[data-stair-index='3']]:top-0 [&>[data-stair-index='3']]:h-[24.3836%] [&>[data-stair-index='3']]:w-[65.8333%] [&>[data-stair-index='4']]:left-0 [&>[data-stair-index='4']]:top-0 [&>[data-stair-index='4']]:h-[15.3425%] [&>[data-stair-index='4']]:w-[72.2917%]"
-          stairClassName="[background-image:var(--pdp-concrete-texture)] bg-[length:1440px_365px] bg-left-top bg-no-repeat bg-blend-overlay"
+          stairClassName="bg-transparent"
           variant="ascending"
         />
       </div>

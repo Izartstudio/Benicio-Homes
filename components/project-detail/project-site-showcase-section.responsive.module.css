@@ -4,6 +4,11 @@
   }
 }
 
+.responsiveRoot :global([data-project-site-showcase-steps]) {
+  background-color: #343434;
+  clip-path: polygon(0 0, 100% 0, 100% 54.667%, 98.611% 54.667%, 98.611% 30.222%, 79.653% 30.222%, 79.653% 24%, 34.167% 24%, 34.167% 20.333%, 27.71% 20.333%, 27.71% 6.778%, 0 6.778%);
+}
+
 @media (min-width: 1441px) {
   .responsiveRoot :global([data-project-site-showcase-canvas]) {
     max-width: none;
@@ -39,6 +44,7 @@
     inset-inline: 0;
     top: 7.8125rem;
     height: 9.8125rem;
+    clip-path: polygon(0 0, 100% 0, 100% 25.303%, 72.29% 25.303%, 72.29% 46.447%, 65.832% 46.447%, 65.832% 52.166%, 20.347% 52.166%, 20.347% 61.872%, 1.389% 61.872%, 1.389% 100%, 0 100%);
   }
 
   .responsiveRoot :global([data-project-site-showcase-steps])::before {
@@ -47,7 +53,7 @@
     left: 0;
     width: 1.389%;
     height: 100%;
-    background: #343434;
+    background: transparent;
     content: "";
   }
 

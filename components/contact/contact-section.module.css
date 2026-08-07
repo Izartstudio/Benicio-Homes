@@ -66,14 +66,14 @@
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .section {
-    min-height: 63.75rem;
+    min-height: 0;
   }
 
   .container {
-    min-height: 63.75rem;
-    grid-template-columns: minmax(0, 1fr) minmax(20rem, 46vw);
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    padding: 5rem clamp(2rem, 4vw, 3.5rem) 8rem;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    padding: 5rem clamp(2.5rem, 7vw, 4rem) 8rem;
   }
 
   .leftColumn {
@@ -83,7 +83,7 @@
   .card {
     width: 100%;
     max-width: 37.9375rem;
-    justify-self: end;
+    justify-self: center;
   }
 
   .form {

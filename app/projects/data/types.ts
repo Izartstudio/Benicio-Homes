@@ -20,6 +20,7 @@ export type ProjectHeroData = {
     foregroundCanvasHeightRatio?: number;
   };
   title: string;
+  titleLayer?: "behind" | "front";
 };
 
 export type ProjectIntroData = {
@@ -153,6 +154,7 @@ export type ProjectEditorialVariantsData = {
       { caption: string; image: ProjectImage },
     ];
     watermark: string;
+    hideWatermark?: boolean;
   };
 };
 

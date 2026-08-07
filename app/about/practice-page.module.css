@@ -38,14 +38,14 @@
 .respectTexture { position: absolute; inset: 0; z-index: -1; background:  url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/about-section2.webp") center/cover;  }
 .respectHeading { position: absolute; left: 5.2%; top: 11.5%; }
 .respectHeading h2 { font-size: clamp(2.2rem,3vw,2.75rem); font-weight: 300; line-height: 1.2; }
-.respectBand { position: absolute; left: 50%; top: 17.4375rem; width: min(100%,90rem); height: 8.25rem; display: grid; grid-template-columns: minmax(0,37.8125rem) minmax(0,14.375rem) minmax(0,37.8125rem); overflow: hidden; transform: translateX(-50%); }
+.respectBand { position: absolute; left: 50%; top: 17.4375rem; width: 100vw; max-width: none; height: 8.25rem; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,14.375rem) minmax(0,1fr); overflow: hidden; transform: translateX(-50%); }
 .respectBandImage { position: relative; min-width: 0; height: 100%; overflow: hidden; }
 .respectLogoBlock { display: grid; place-items: center; background: transparent; }
 .respectLogo { position: relative; z-index: 1; width: 9.5rem; height: auto; }
 .respectCopy { position: absolute; left: 63.65%; top: 66.8%; width: 30%; max-width: 26rem; }
 .respectCopy p { font: 300 .75rem/1.45 var(--font-roboto-slab); }
 .texturedOrangeBar { position: relative; display: block; width: 15.125rem; height: .3125rem; margin-bottom: 1.35rem; overflow: hidden; background: #d45231; }
-.texturedOrangeBar img { object-fit: cover; mix-blend-mode: multiply; filter: saturate(.45) contrast(1.15); }
+.texturedOrangeBar img { object-fit: cover; }
 
 /* Artboard 03 — Section -3 about.svg, 1440 × 900 */
 
@@ -141,12 +141,14 @@
 
   .manifestoCopy { left: 3rem; width: 44%; }
   .manifestoBody { margin-top: 4rem !important; }
+  .manifestoCrosshair { transform: translateY(-17%); }
   .founderPortrait { left: 56%; width: 40%; }
 
   .sketches { left: 3rem; width: 59%; }
   .servicesIntro { left: 67%; width: 27%; }
   .servicesGrid { gap: 2rem; }
   .servicesPanel { left: 3rem; right: 3rem; }
+  .servicesCrosshair i:first-child { width: 66%; }
 
   .vision { height: auto; min-height: 71.875rem; padding-inline: 3rem; }
   .peopleGrid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3rem 2rem; }

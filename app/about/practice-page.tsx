@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
+import { CTA } from "@/components/ui/cta";
 import { Reveal } from "@/components/ui/reveal";
 import { AboutPageAnimations } from "./about-page-animations";
 import styles from "./practice-page.module.css";
@@ -10,6 +10,7 @@ const texturePlaceholder = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/
 const founderimage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/founder-image.webp";
 const horizontalbandimage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/horizontalbandleft.webp";
 const horizontalBandRightImage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/horizontalbandright.webp";
+const orangeBarImage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/orangeblock.webp";
 
 const services = [
   {
@@ -80,7 +81,7 @@ function HorizontalLinePair({ className }: { className?: string }) {
 function TexturedOrangeBar() {
   return (
     <span aria-hidden="true" className={styles.texturedOrangeBar}>
-      <Image src={horizontalbandimage} alt="" fill sizes="15.125rem" />
+      <Image src={orangeBarImage} alt="" fill sizes="15.125rem" />
     </span>
   );
 }
@@ -107,7 +108,7 @@ export function AboutPracticePage() {
         </Reveal>
         <Reveal className={styles.heroStatement} revealMode="manual">
           <p>Every Benicio home begins with an understanding of place. From heritage restorations to contemporary tropical villas, our work celebrates craftsmanship, climate, and a slower way of living.</p>
-          <Link href="/projects">Explore Projects <span aria-hidden="true">›</span></Link>
+          <CTA href="/projects" variant="light">Explore Projects</CTA>
         </Reveal>
       </section>
 
@@ -122,13 +123,13 @@ export function AboutPracticePage() {
         </Reveal>
         <div className={styles.respectBand} data-respect-media-band>
           <figure className={styles.respectBandImage}>
-            <Image src={horizontalbandimage} alt="Architecture in its landscape" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 37.8125rem" className={styles.cover} />
+            <Image src={horizontalbandimage} alt="Architecture in its landscape" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 50vw" className={styles.cover} />
           </figure>
           <div className={styles.respectLogoBlock}>
             <Image src="/assets/NavBar/Logo-NavBar.svg" alt="Benicio" width={188} height={143} className={styles.respectLogo} style={{ height: "auto" }} />
           </div>
           <figure className={styles.respectBandImage}>
-            <Image src={horizontalBandRightImage} alt="Goan landscape placeholder" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 37.8125rem" className={styles.cover} />
+            <Image src={horizontalBandRightImage} alt="Goan landscape placeholder" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 50vw" className={styles.cover} />
           </figure>
         </div>
         <Reveal className={styles.respectCopy} revealMode="manual">
@@ -175,7 +176,7 @@ export function AboutPracticePage() {
           </Reveal>
           <Reveal className={styles.servicesIntro} revealMode="manual">
             <p>From new developments to restorations, every project is approached with commitment to design, craftsmanship, and quality.</p>
-            <Link href="/#contact">Get in Touch <span aria-hidden="true">›</span></Link>
+            <CTA href="/#contact" variant="light">Get in Touch</CTA>
           </Reveal>
         </div>
         <div className={styles.serviceSteps} aria-hidden="true">

@@ -67,6 +67,9 @@ export function EditorialListingPage({
   const resolvedCardTexture = getCdnAsset(cardTexture);
   const resolvedListingTexture = getCdnAsset(listingTexture);
   const resolvedStepTexture = getCdnAsset(stepTexture ?? listingTexture);
+  const introTextureOrigin = resolvedIntroTexture?.startsWith("http")
+    ? new URL(resolvedIntroTexture).origin
+    : null;
   const style = {
     "--editorial-accent-color": accentColor,
     "--editorial-card-author-color": cardAuthorColor,
@@ -95,9 +98,20 @@ export function EditorialListingPage({
 
   return (
     <main className="bg-[#343434] text-[#d8d6cf]" data-editorial-listing data-editorial-variant={variant} style={style}>
+      {introTextureOrigin ? (
+        <link crossOrigin="anonymous" href={introTextureOrigin} rel="preconnect" />
+      ) : null}
+      {resolvedIntroTexture ? (
+        <link
+          as="image"
+          fetchPriority="high"
+          href={resolvedIntroTexture}
+          rel="preload"
+        />
+      ) : null}
       <section className="journal-intro relative min-h-[40.625rem] overflow-hidden px-[5.208vw] pb-28 pt-48 text-[var(--editorial-intro-text)]">
         <div className="journal-paper absolute inset-0" aria-hidden="true" />
-        <div className="relative z-10 max-w-[50rem]">
+        <div className="editorial-intro-copy relative z-10 max-w-[50rem]">
           <Reveal as="h1" className="font-display text-[clamp(2rem,4.4vw,4rem)] font-light leading-[1.05] tracking-[0.01em]" revealMode="mount">
             {heading}
           </Reveal>

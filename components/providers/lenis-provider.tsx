@@ -27,6 +27,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const refreshFrameRef = useRef<number | null>(null);
   const refreshTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
+  const previousPathnameRef = useRef(pathname);
 
   const scheduleRefresh = useCallback(() => {
     if (refreshTimerRef.current !== null) {
@@ -129,7 +130,10 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    window.history.scrollRestoration = "manual";
+    window.history.scrollRestoration = "auto";
+
+    const isClientNavigation = previousPathnameRef.current !== pathname;
+    previousPathnameRef.current = pathname;
 
     const scrollFrame = requestAnimationFrame(() => {
       const hash = window.location.hash;
@@ -140,7 +144,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       if (target) {
         lenisRef.current?.scrollTo(target, { immediate: true, offset: 0 });
         target.scrollIntoView({ block: "start" });
-      } else {
+      } else if (isClientNavigation) {
         lenisRef.current?.scrollTo(0, { immediate: true });
         window.scrollTo({ left: 0, top: 0, behavior: "auto" });
       }

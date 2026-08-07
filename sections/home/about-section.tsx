@@ -59,8 +59,7 @@ export function AboutSection() {
           ? [
               "[data-about-heading-reveal]",
               '[data-about-reveal="2"]',
-              "[data-about-image]",
-              "[data-about-logo]",
+              '[data-about-reveal="3"]',
               '[data-about-reveal="4"]',
               '[data-about-reveal="5"]',
             ].join(", ")

@@ -24,6 +24,7 @@ export type ProjectHeroBackgroundProps = {
   focalPosition?: ProjectHeroFocalPosition;
   foregroundCanvasHeightRatio?: number;
   foregroundImage?: ProjectHeroBackgroundImage;
+  foregroundMotionRef?: Ref<HTMLDivElement>;
   mediaAspectRatio: number;
 };
 
@@ -38,6 +39,7 @@ export const ProjectHeroBackground = forwardRef<
       focalPosition,
       foregroundCanvasHeightRatio = 1,
       foregroundImage,
+      foregroundMotionRef,
       mediaAspectRatio,
     },
     mediaMotionRef,
@@ -85,7 +87,12 @@ export const ProjectHeroBackground = forwardRef<
 
             <div className={styles.upperMaskLayer} />
 
-            {foregroundImage ? (
+          </div>
+        </div>
+
+        {foregroundImage ? (
+          <div className={styles.foregroundPositioner}>
+            <div className={styles.foregroundMotion} ref={foregroundMotionRef}>
               <div className={styles.foregroundLayer}>
                 <CdnImage
                   alt={foregroundImage.alt}
@@ -96,9 +103,9 @@ export const ProjectHeroBackground = forwardRef<
                   src={foregroundImage.src}
                 />
               </div>
-            ) : null}
+            </div>
           </div>
-        </div>
+        ) : null}
 
         <div className={styles.lowerMultiplyLayer} />
       </div>

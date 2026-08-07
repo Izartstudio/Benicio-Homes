@@ -74,6 +74,7 @@ export const villaPerolaProject = {
       ],
     },
     gallery: {
+      hideWatermark: true,
       watermark: "Villa Perola",
       items: [
         { caption: "Comfort, Framed By Nature.", image: { src: media.editorialGallery[0], alt: "Villa Perola gallery image 1" } },

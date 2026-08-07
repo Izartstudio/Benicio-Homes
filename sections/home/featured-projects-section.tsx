@@ -18,6 +18,7 @@ const projects = [
   {
     id: "majorda",
     title: "NAYAN",
+    href: "/projects/nayan-villa",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-villa1.webp",
     imageAlt: "Majorda villa front elevation",
     description:
@@ -31,6 +32,7 @@ const projects = [
   {
     id: "casa-verde",
     title: "VANAM",
+    href: "/projects/vanam-villas",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-villa2.webp",
     imageAlt: "Casa Verde villa exterior with arched facade",
     description:
@@ -44,6 +46,7 @@ const projects = [
   {
     id: "palm-house",
     title: "ZEN VILLA II",
+    href: "/projects/zen-villas-2",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-section-villa3.webp",
     imageAlt: "Palm House villa exterior with tropical landscape",
     description:
@@ -57,9 +60,9 @@ const projects = [
 ] as const;
 
 const imageStateClasses = [
-  "left-0 top-[19.65%] z-20 h-[51.46%] w-[64.24%] opacity-100",
-  "invisible left-0 top-[19.65%] z-10 h-[51.46%] w-[64.24%] opacity-0",
-  "invisible left-0 top-[19.65%] z-0 h-[51.46%] w-[64.24%] opacity-0",
+  "left-0 top-[19.65%] z-20 h-[clamp(32rem,42vw,50rem)] w-[64.24%] opacity-100",
+  "invisible left-0 top-[19.65%] z-10 h-[clamp(32rem,42vw,50rem)] w-[64.24%] opacity-0",
+  "invisible left-0 top-[19.65%] z-0 h-[clamp(32rem,42vw,50rem)] w-[64.24%] opacity-0",
 ] as const;
 
 export function FeaturedProjectsSection() {
@@ -85,7 +88,7 @@ export function FeaturedProjectsSection() {
         desktop: "(min-width: 1200px)",
         tablet: "(min-width: 768px) and (max-width: 1199px)",
         mobile:
-          "(max-width: 767px), (pointer: coarse), ((max-width: 1199px) and (max-height: 500px))",
+          "(max-width: 767px), ((max-width: 1199px) and (max-height: 500px))",
         reduceMotion: "(prefers-reduced-motion: reduce)",
       },
       (context) => {
@@ -133,7 +136,7 @@ export function FeaturedProjectsSection() {
                 top: "19.65%",
                 bottom: "auto",
                 width: "64.24%",
-                height: "51.46%",
+                height: "clamp(32rem, 42vw, 50rem)",
               };
 
           gsap.set(images, {
@@ -182,7 +185,10 @@ export function FeaturedProjectsSection() {
                         Math.max(projects.length - 1, 1) *
                         MOBILE_SCROLL_CANVAS_RATIO_PER_TRANSITION,
                     )}`
-                : "+=300%",
+                : () =>
+                    `+=${Math.round(
+                      canvas.offsetHeight * Math.max(projects.length - 1, 1),
+                    )}`,
               // Keep every visual layer together by pinning the complete
               // internal shell. The outer section remains in document flow.
               pin: scrollContainer,
@@ -511,7 +517,7 @@ export function FeaturedProjectsSection() {
                           className="inline-flex h-[4.5rem] w-full max-w-[20rem] items-center justify-between px-8 font-display text-[1.0625rem]"
                           darkBackground="#333333"
                           data-featured-cta={project.id}
-                          href="#"
+                          href={project.href}
                           variant="dark"
                         >
                           View Project

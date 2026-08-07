@@ -64,7 +64,7 @@ export function JournalGrid({
                 <span className="project-listing-image relative block h-[31.25rem] w-full overflow-hidden">
                   <CdnImage
                     alt={article.image.alt}
-                    className="object-cover transition-[filter] duration-300 group-hover:blur-[5px]"
+                    className="object-cover transition-[filter] duration-300 min-[1200px]:group-hover:blur-[5px]"
                     fill
                     sizes="(min-width: 768px) 44vw, calc(100vw - 3rem)"
                     src={article.image.src}
@@ -77,7 +77,7 @@ export function JournalGrid({
                 </span>
                 <span className="project-listing-copy grid h-[15.25rem] grid-cols-[minmax(0,1fr)_minmax(13rem,1fr)] gap-10 bg-[rgb(185_185_185_/_0.25)] bg-[image:var(--editorial-card-texture)] bg-[length:100%_100%] bg-center bg-no-repeat bg-blend-overlay px-9 py-10 text-[var(--editorial-card-title-color)]">
                   <span className="min-w-0">
-                    <span className="block break-words font-display text-[clamp(1.5rem,2vw,2rem)] font-medium uppercase leading-tight">
+                    <span className="project-listing-title block break-words font-display text-[clamp(1.5rem,2vw,2rem)] font-medium uppercase leading-tight">
                       {article.title}
                     </span>
                     {article.description ? (
@@ -116,7 +116,7 @@ export function JournalGrid({
                     <span className="journal-card-image relative block h-[28.125rem] w-full overflow-hidden">
                   <CdnImage
                     alt={article.image.alt}
-                    className="object-cover transition-[filter] duration-300 group-hover:blur-[5px]"
+                    className="object-cover transition-[filter] duration-300 min-[1200px]:group-hover:blur-[5px]"
                     fill
                     sizes="(min-width: 768px) 32.1875rem, calc(100vw - 5rem)"
                     src={article.image.src}
@@ -139,7 +139,7 @@ export function JournalGrid({
       </button>
       <span
         aria-hidden="true"
-        className={`pointer-events-none fixed left-0 top-0 z-[200] hidden md:block ${cursor.visible ? "opacity-100" : "opacity-0"}`}
+        className={`pointer-events-none fixed left-0 top-0 z-[200] hidden min-[1200px]:block ${cursor.visible ? "opacity-100" : "opacity-0"}`}
         style={{ transform: `translate3d(${cursor.x + 18}px, ${cursor.y - 25}px, 0)` }}
       >
         {variant === "journal" ? (

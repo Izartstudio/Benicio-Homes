@@ -2,6 +2,7 @@
 
 import responsiveStyles from "./journal-section.responsive.module.css";
 import Image from "next/image";
+import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,7 +21,7 @@ type JournalSectionProps = {
 export function JournalSection({
   articles = fallbackJournalArticles,
 }: JournalSectionProps) {
-  const visibleJournalArticles = [...articles, ...articles];
+  const visibleJournalArticles = articles;
   const sectionRef = useRef<HTMLElement | null>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
@@ -115,17 +116,9 @@ export function JournalSection({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[calc(clamp(4.75rem,5.85vw,5.25rem)+39.75rem)] overflow-hidden bg-[#FAFAFA]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[calc(clamp(4.75rem,5.85vw,5.25rem)+39.75rem)] overflow-hidden bg-[#b9b9b9]"
         data-journal-restoration-texture
-      >
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-multiply"
-          data-journal-restoration-texture-image
-          style={{
-            backgroundImage: 'url("/assets/textures/heritage-texture.webp")',
-          }}
-        />
-      </div>
+      />
 
       <div
         aria-hidden="true"
@@ -206,13 +199,15 @@ export function JournalSection({
             data-journal-track
           >
             {visibleJournalArticles.map((article, index) => (
-              <article
+              <Link
+                aria-label={`Read ${article.title}`}
                 className={`min-w-[18rem] w-[calc((100vw-clamp(22rem,27.777vw,25rem)-clamp(0.9rem,1.1vw,1rem)-clamp(0.55rem,0.7vw,0.625rem)-clamp(0.55rem,0.7vw,0.625rem))/3)] shrink-0 ${
                   index >= articles.length
                     ? responsiveStyles.duplicateCard
                     : ""
                 }`}
                 data-journal-card
+                href={`/journal/${article.slug}`}
                 key={`${article.slug}-${index}`}
               >
                 <figure
@@ -279,7 +274,7 @@ export function JournalSection({
                     </p>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>

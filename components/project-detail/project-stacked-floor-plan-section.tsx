@@ -90,9 +90,8 @@ export function ProjectStackedFloorPlanSection({
       "[data-stacked-floor-plan-marker-line]",
       section,
     );
-    const stairs = gsap.utils.toArray<HTMLElement>(
-      "[data-architectural-stair]",
-      section,
+    const stairs = section.querySelector<HTMLElement>(
+      "[data-stacked-floor-plan-stairs]",
     );
     const drawings = gsap.utils.toArray<HTMLElement>(
       "[data-stacked-floor-plan-drawing]",
@@ -105,29 +104,27 @@ export function ProjectStackedFloorPlanSection({
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.set(lines, { scaleY: 1 });
-      gsap.set(stairs, { autoAlpha: 1, y: 0 });
+      if (stairs) gsap.set(stairs, { autoAlpha: 1, y: 0 });
       gsap.set(drawings, { clipPath: "inset(0% 0% 0% 0%)" });
       return;
     }
 
     const context = gsap.context(() => {
-      gsap.set(stairs, { autoAlpha: 0, y: 20 });
+      if (stairs) gsap.set(stairs, { autoAlpha: 0, y: 20 });
 
-      gsap.to(stairs, {
-        autoAlpha: 1,
-        duration: 0.78,
-        ease: "power3.out",
-        stagger: {
-          each: 0.12,
-          from: "end",
-        },
-        scrollTrigger: {
-          trigger: section,
-          start: "top 78%",
-          once: true,
-        },
-        y: 0,
-      });
+      if (stairs) {
+        gsap.to(stairs, {
+          autoAlpha: 1,
+          duration: 0.78,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 78%",
+            once: true,
+          },
+          y: 0,
+        });
+      }
 
       lines.forEach((line) => {
         const item = line.closest<HTMLElement>(
@@ -201,6 +198,7 @@ export function ProjectStackedFloorPlanSection({
       <div
         aria-hidden="true"
         className={styles.stairs}
+        data-stacked-floor-plan-stairs
         style={
           {
             "--stacked-floor-plan-concrete": `url('${PDP_MEDIA_URLS.concreteTexture}')`,

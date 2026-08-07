@@ -52,7 +52,12 @@ const showcaseImages = [
   },
 ] as const;
 
-const desktopLoopImages = [...showcaseImages, ...showcaseImages] as const;
+const desktopLoopImages = [
+  ...showcaseImages,
+  ...showcaseImages,
+  ...showcaseImages,
+  ...showcaseImages,
+] as const;
 
 const markers = [
   "left-edge",
@@ -412,7 +417,7 @@ export function ImageShowcaseSection() {
       </div>
 
       <div
-        className="relative mx-auto h-full w-full max-w-[1440px]"
+        className="relative h-full w-full"
         data-showcase-content
         data-showcase-desktop-layout
       >

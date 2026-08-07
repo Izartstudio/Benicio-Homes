@@ -92,7 +92,10 @@ export function StepsSection() {
       fourthDividerLine,
     ].filter(Boolean) as HTMLElement[];
 
-    gsap.set(stairs, { autoAlpha: 0, y: 20 });
+    const [firstStair, ...animatedStairs] = stairs;
+
+    gsap.set(firstStair, { autoAlpha: 1, y: 0 });
+    gsap.set(animatedStairs, { autoAlpha: 0, y: 20 });
     gsap.set(animatedDividerLines, { scaleX: 0 });
     if (firstDividerLine) {
       gsap.set(firstDividerLine, { transformOrigin: "left center" });
@@ -208,8 +211,10 @@ export function StepsSection() {
       paragraphTimeline?.play(0);
     };
 
-    const timelines = stairs.map(createStairTimeline);
-    timelines[0]?.call(playParagraph, [], 0.42);
+    const firstPhaseTimeline = gsap
+      .timeline({ paused: true })
+      .call(playParagraph, [], 0.42);
+    const timelines = animatedStairs.map(createStairTimeline);
 
     const playSecondPhase = () => {
       if (secondPhaseStarted) {
@@ -217,7 +222,7 @@ export function StepsSection() {
       }
 
       secondPhaseStarted = true;
-      timelines[1]?.play(0);
+      timelines[0]?.play(0);
       secondDividerTimeline?.play(0);
     };
 
@@ -236,7 +241,7 @@ export function StepsSection() {
       }
 
       thirdStairStarted = true;
-      timelines[2]?.play(0);
+      timelines[1]?.play(0);
     };
 
     const playFourthStair = () => {
@@ -245,7 +250,7 @@ export function StepsSection() {
       }
 
       fourthStairStarted = true;
-      timelines[3]?.play(0);
+      timelines[2]?.play(0);
     };
 
     const completeThirdDividerPhase = () => {
@@ -288,7 +293,7 @@ export function StepsSection() {
           start: "bottom 65%",
           once: true,
           onEnter: () => {
-            timelines[0].play(0);
+            firstPhaseTimeline.play(0);
           },
         }),
       );
@@ -339,6 +344,7 @@ export function StepsSection() {
     return () => {
       triggers.forEach((trigger) => trigger.kill());
       timelines.forEach((timeline) => timeline.kill());
+      firstPhaseTimeline.kill();
       paragraphTimeline?.kill();
       secondDividerTimeline?.kill();
       thirdDividerTimeline?.kill();

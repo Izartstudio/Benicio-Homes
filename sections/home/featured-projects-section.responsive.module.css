@@ -16,6 +16,10 @@
   contain: paint;
 }
 
+.responsiveRoot :global([data-featured-image-stack]) {
+  clip-path: inset(0 35.76% 0 0);
+}
+
 .responsiveRoot :global([data-featured-mobile-progress-rail]) {
   display: none;
 }
@@ -34,6 +38,10 @@
 }
 
 @media (min-width: 1200px) {
+  .responsiveRoot :global([data-featured-line-wrapper="vertical-panel"]) {
+    bottom: 28.89%;
+  }
+
   .responsiveRoot :global([data-featured-floating-title]) {
     font-size: 7.655rem;
   }
@@ -124,9 +132,17 @@
     padding-inline: clamp(1rem, 2vw, 1.5rem);
     font-size: clamp(0.85rem, 1.4vw, 1rem);
   }
+
+  .responsiveRoot :global([data-featured-line-wrapper="vertical-panel"]) {
+    bottom: 28.89%;
+  }
 }
 
 @media (max-width: 767px) {
+  .responsiveRoot :global([data-featured-image-stack]) {
+    clip-path: none;
+  }
+
   .responsiveRoot :global([data-featured-mobile-progress-rail]) {
     position: absolute;
     left: clamp(1.5rem, 8.974vw, 2.1875rem);

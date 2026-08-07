@@ -47,6 +47,20 @@
     text-decoration: none;
   }
 
+  :where(
+    a[href],
+    button:not(:disabled),
+    [role="button"],
+    summary,
+    label[for],
+    select,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"]
+  ) {
+    cursor: pointer;
+  }
+
   button,
   input,
   textarea,

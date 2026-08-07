@@ -21,6 +21,7 @@ export function HeroSection({ data, intro }: HeroSectionProps) {
         mediaAspectRatio: data.mediaCanvas.aspectRatio,
       }}
       title={data.title}
+      titleLayer={data.titleLayer}
     />
   );
 }

@@ -10,6 +10,7 @@ import { PDP_MEDIA_URLS } from "./pdp-texture";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import { Reveal } from "@/components/ui/reveal";
 import { ParallaxMedia } from "@/components/ui/parallax-media";
+import { OPEN_BROCHURE_FORM_EVENT } from "./brochure-prompt";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,9 +49,8 @@ export function ProjectSiteShowcaseSection({
       return;
     }
 
-    const stairs = gsap.utils.toArray<HTMLElement>(
-      "[data-architectural-stair]",
-      section,
+    const stairs = section.querySelector<HTMLElement>(
+      "[data-project-site-showcase-steps]",
     );
     const dividers = gsap.utils.toArray<HTMLElement>(
       "[data-project-site-showcase-left-divider]",
@@ -63,7 +63,7 @@ export function ProjectSiteShowcaseSection({
       SHOWCASE_REVEAL_TRIGGER,
     );
 
-    if (stairs.length === 0 || dividers.length === 0 || !imageWrapper) {
+    if (!stairs || dividers.length === 0 || !imageWrapper) {
       return;
     }
 
@@ -95,7 +95,6 @@ export function ProjectSiteShowcaseSection({
           autoAlpha: 1,
           duration: 0.78,
           ease: "power3.out",
-          stagger: 0.12,
           y: 0,
         });
 
@@ -179,7 +178,7 @@ export function ProjectSiteShowcaseSection({
 >
             <ArchitecturalStairs
               className="[&>[data-stair-index='1']]:left-0 [&>[data-stair-index='1']]:top-0 [&>[data-stair-index='1']]:h-[6.778%] [&>[data-stair-index='1']]:w-[27.710%] [&>[data-stair-index='2']]:left-[27.710%] [&>[data-stair-index='2']]:top-0 [&>[data-stair-index='2']]:h-[20.333%] [&>[data-stair-index='2']]:w-[6.458%] [&>[data-stair-index='3']]:left-[34.167%] [&>[data-stair-index='3']]:top-0 [&>[data-stair-index='3']]:h-[24%] [&>[data-stair-index='3']]:w-[45.486%] [&>[data-stair-index='4']]:left-[79.653%] [&>[data-stair-index='4']]:top-0 [&>[data-stair-index='4']]:h-[30.222%] [&>[data-stair-index='4']]:w-[18.958%]"
-              stairClassName="bg-[#343434]"
+              stairClassName="bg-transparent"
               variant="ascending"
             />
           </div>
@@ -241,10 +240,11 @@ export function ProjectSiteShowcaseSection({
               start={SHOWCASE_REVEAL_START}
               triggerSelector={SHOWCASE_REVEAL_TRIGGER}
             >
-              <a
+              <button
                 className="inline-flex h-[3.125rem] w-full items-center justify-between bg-[#575757] px-3 font-display text-[0.95rem] text-bone hover:bg-[#696969] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone"
                 data-project-site-showcase-cta
-                href={cta.href}
+                onClick={() => window.dispatchEvent(new Event(OPEN_BROCHURE_FORM_EVENT))}
+                type="button"
               >
                 {cta.label}
                 <span
@@ -253,7 +253,7 @@ export function ProjectSiteShowcaseSection({
                 >
                   &rsaquo;
                 </span>
-              </a>
+              </button>
               <span
                 aria-hidden="true"
                 className="absolute left-[22.25rem] top-[-1.1875rem] hidden h-px w-[4.25rem] bg-silver/25 md:block"

@@ -1,4 +1,5 @@
 .root {
+  border: 1px solid rgb(217 217 217 / 15%) !important;
   transition:
     background-color 250ms ease,
     color 250ms ease;
@@ -9,7 +10,7 @@
   color: #1b1b1b;
 }
 
-.light:hover {
+.light:is(:hover, :active) {
   background-color: #1b1b1b;
   color: #f2f2f2;
 }
@@ -19,7 +20,7 @@
   color: #f2f2f2;
 }
 
-.dark:hover {
+.dark:is(:hover, :active) {
   background-color: #f2f2f2;
   color: #1b1b1b;
 }

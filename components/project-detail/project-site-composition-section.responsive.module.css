@@ -151,6 +151,11 @@
   .responsiveRoot :global([data-project-site-composition-description-wrapper] p) {
     max-width: 30rem;
   }
+
+  .responsiveRoot :global([data-project-site-composition-right-content]) {
+    width: min(100%, 32rem);
+    margin-left: auto;
+  }
 }
 @media (max-width: 767px) {
 

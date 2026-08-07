@@ -13,6 +13,7 @@ import styles from "./brochure-prompt.module.css";
 
 const initialState: BrochureFormState = { status: "idle" };
 const brochurePdf: string = PROJECT_MEDIA.shared.brochurePdf;
+export const OPEN_BROCHURE_FORM_EVENT = "benicio:open-brochure-form";
 
 function BrochureField({
   autoComplete,
@@ -58,6 +59,12 @@ export function BrochurePrompt() {
   const dialogTitleId = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const [formState, formAction] = useActionState(submitBrochureForm, initialState);
+
+  useEffect(() => {
+    const openBrochureForm = () => setIsOpen(true);
+    window.addEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
+    return () => window.removeEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
+  }, []);
 
   useEffect(() => {
     if (formState.status !== "success") return;

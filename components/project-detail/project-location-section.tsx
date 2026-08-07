@@ -116,7 +116,7 @@ export function ProjectLocationSection({
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-[-5rem] top-[-7rem] z-20 h-[25rem] w-[min(44rem,52vw)] overflow-hidden [mask-image:linear-gradient(135deg,transparent_0%,black_26%,black_100%)]"
+        className="pointer-events-none absolute right-[-5rem] top-0 z-20 h-[25rem] w-[min(44rem,52vw)] overflow-hidden [mask-image:linear-gradient(135deg,transparent_0%,black_26%,black_100%)]"
         data-project-location-decorative-image-wrapper
       >
         <CdnImage
