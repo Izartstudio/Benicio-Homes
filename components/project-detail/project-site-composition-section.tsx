@@ -10,7 +10,6 @@ import { DifferenceText } from "@/components/ui/difference-text";
 import { getCdnAsset } from "@/lib/getCdnAsset";
 import { PDP_MEDIA_URLS } from "./pdp-texture";
 import { Reveal } from "@/components/ui/reveal";
-import { isSafariBrowser } from "@/utils/is-safari-browser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,9 +164,6 @@ export function ProjectSiteCompositionSection({
             mobile: boolean;
             reduceMotion: boolean;
           };
-          const useLightweightMotion =
-            conditions.mobile || isSafariBrowser();
-
           if (conditions.reduceMotion) {
             gsap.set(guideLines, { strokeDashoffset: 0 });
             gsap.set([masterplanElement, ...revealElements], {
@@ -192,10 +188,8 @@ export function ProjectSiteCompositionSection({
             },
             scrollTrigger: {
               trigger: section,
-              start: useLightweightMotion ? "top 82%" : "top 72%",
-              end: conditions.desktop ? "bottom 35%" : "bottom 50%",
-              once: useLightweightMotion,
-              scrub: useLightweightMotion ? false : 0.4,
+              start: "top 78%",
+              once: true,
               invalidateOnRefresh: true,
             },
           });
@@ -223,7 +217,7 @@ export function ProjectSiteCompositionSection({
             timeline.to(
               line,
               {
-                duration: 0.75,
+                duration: 0.3,
                 ease: "none",
                 strokeDashoffset: 0,
               },
@@ -235,10 +229,10 @@ export function ProjectSiteCompositionSection({
               masterplanElement,
               {
                 clipPath: "inset(0% 0% 0% 0%)",
-                duration: 0.42,
-                ease: "power3.out",
+                duration: 0.18,
+                ease: "power4.out",
               },
-              ">+=0.18",
+              ">+=0.05",
             )
             .to(
               accentElement,
@@ -256,7 +250,7 @@ export function ProjectSiteCompositionSection({
                 autoAlpha: 1,
                 duration: 0.24,
                 ease: "power1.out",
-                stagger: 0.04,
+                stagger: 0.03,
                 y: 0,
               },
               ">-=0.1",

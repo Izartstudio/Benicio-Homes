@@ -109,9 +109,9 @@ export default function ProjectsPage() {
       listingHeading="Homes With A Sense Of Place"
       loadMoreLabel="Load More Projects"
       sectionLabel="Benicio projects"
-      stepBackgroundColor="rgb(185 185 185 / 0.25)"
-      stepTexture="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/ListingPage/card-texture.webp"
-      stepTextureBlend
+      stepBackgroundColor="#b9b9b9"
+      stepTexture="/assets/projects/texture-listing.webp"
+      stepTextureBlend={false}
       variant="projects"
     />
   );

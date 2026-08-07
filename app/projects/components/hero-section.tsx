@@ -22,6 +22,7 @@ export function HeroSection({ data, intro }: HeroSectionProps) {
       }}
       title={data.title}
       titleLayer={data.titleLayer}
+      variant={data.variant}
     />
   );
 }

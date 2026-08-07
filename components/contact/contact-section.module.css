@@ -80,6 +80,12 @@
     max-width: 39rem;
   }
 
+  .section :global([data-contact-form-static]) {
+    display: grid;
+    width: 100%;
+    place-items: center;
+  }
+
   .card {
     width: 100%;
     max-width: 37.9375rem;

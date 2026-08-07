@@ -32,6 +32,7 @@ export type ProjectHeroSequenceProps = {
   media: ProjectHeroMedia;
   title: string;
   titleLayer?: "behind" | "front";
+  variant?: "vanam";
 };
 
 export function ProjectHeroSequence({
@@ -41,6 +42,7 @@ export function ProjectHeroSequence({
   media,
   title,
   titleLayer = "behind",
+  variant,
 }: ProjectHeroSequenceProps) {
   const backgroundImageRef = useRef<HTMLImageElement | null>(null);
   const continuationStatementRef = useRef<HTMLDivElement | null>(null);
@@ -222,6 +224,7 @@ export function ProjectHeroSequence({
       className={styles.heroSequence}
       data-hero-layout={layout}
       data-hero-title-layering={titleLayer}
+      data-hero-variant={variant}
       ref={sequenceRef}
     >
       <section

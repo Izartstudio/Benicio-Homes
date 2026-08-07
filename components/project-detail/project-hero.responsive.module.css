@@ -167,6 +167,10 @@
   pointer-events: none;
 }
 
+.heroSequence[data-hero-variant="vanam"] .heroContent {
+  padding-block-start: clamp(8.5rem, 16svh, 10rem);
+}
+
 .heroDescription {
   width: min(31rem, 44vw);
   margin: 0;
@@ -324,6 +328,10 @@
     height: var(--project-hero-upper-height);
     min-height: var(--project-hero-upper-height);
     padding: clamp(7rem, 18svh, 9rem) 1.5rem 3rem;
+  }
+
+  .heroSequence[data-hero-variant="vanam"] .heroContent {
+    padding-block-start: clamp(7.75rem, 16svh, 8.75rem);
   }
 
   .heroDescription {

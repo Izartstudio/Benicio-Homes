@@ -21,6 +21,7 @@ export type ProjectHeroData = {
   };
   title: string;
   titleLayer?: "behind" | "front";
+  variant?: "vanam";
 };
 
 export type ProjectIntroData = {

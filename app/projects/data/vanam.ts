@@ -11,6 +11,7 @@ export const vanamProject = {
       "Rooted in Goa's tropical landscape, Vanam Villas brings architecture, light, and nature together in a calm, private rhythm.",
   },
   hero: {
+    variant: "vanam",
     title: "Vanam Villas",
     description:
       "Rooted in Goa's tropical landscape, Vanam Villas brings architecture, light, and nature together in a calm, private rhythm.",

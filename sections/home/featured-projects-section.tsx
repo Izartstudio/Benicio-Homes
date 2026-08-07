@@ -189,9 +189,10 @@ export function FeaturedProjectsSection() {
                     `+=${Math.round(
                       canvas.offsetHeight * Math.max(projects.length - 1, 1),
                     )}`,
-              // Keep every visual layer together by pinning the complete
-              // internal shell. The outer section remains in document flow.
-              pin: scrollContainer,
+              // Pin the complete section so ScrollTrigger's spacer remains a
+              // sibling in normal flow instead of expanding an inner child and
+              // creating a blank-looking gap before the next section.
+              pin: section,
               pinSpacing: true,
               scrub: reduceMotion ? true : 0.25,
               anticipatePin: 1,
