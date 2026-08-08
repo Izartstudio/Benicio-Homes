@@ -53,8 +53,11 @@ export function JournalSection({
       "[data-journal-viewport]",
     );
     const track = section?.querySelector<HTMLElement>("[data-journal-track]");
+    const foreground = section?.querySelector<HTMLElement>(
+      "[data-journal-foreground]",
+    );
 
-    if (!section || !viewport || !track) {
+    if (!section || !viewport || !track || !foreground) {
       return;
     }
 
@@ -76,7 +79,10 @@ export function JournalSection({
             trigger: section,
             start: "top top",
             end: () => `+=${getScrollDistance()}`,
-            pin: true,
+            // Keep Journal as the normal-flow owner of its horizontal scroll
+            // distance. Contact must remain a sibling after Journal, never a
+            // sibling after an unpainted page-level pin spacer.
+            pin: foreground,
             pinSpacing: true,
             scrub: 0.25,
             anticipatePin: 1,

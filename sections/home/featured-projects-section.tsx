@@ -189,10 +189,11 @@ export function FeaturedProjectsSection() {
                     `+=${Math.round(
                       canvas.offsetHeight * Math.max(projects.length - 1, 1),
                     )}`,
-              // Pin the complete section so ScrollTrigger's spacer remains a
-              // sibling in normal flow instead of expanding an inner child and
-              // creating a blank-looking gap before the next section.
-              pin: section,
+              // The section remains the normal-flow owner of the complete scroll
+              // range. Pin only its visual canvas so the generated spacer is
+              // contained and painted by this section instead of sitting between
+              // Featured Projects and the following section.
+              pin: scrollContainer,
               pinSpacing: true,
               scrub: reduceMotion ? true : 0.25,
               anticipatePin: 1,
