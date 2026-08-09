@@ -149,6 +149,12 @@ export function ProjectSiteCompositionSection({
       compassElement,
       ...specificationElements,
     ];
+    const guideLineEndpoints = guideLines.map((line) => ({
+      x1: Number(line.getAttribute("x1")),
+      x2: Number(line.getAttribute("x2")),
+      y1: Number(line.getAttribute("y1")),
+      y2: Number(line.getAttribute("y2")),
+    }));
 
     const mm = gsap.matchMedia();
     const ctx = gsap.context(() => {
@@ -165,14 +171,26 @@ export function ProjectSiteCompositionSection({
             reduceMotion: boolean;
           };
           if (conditions.reduceMotion) {
-            gsap.set(guideLines, { strokeDashoffset: 0 });
+            guideLines.forEach((line, index) => {
+              gsap.set(line, { attr: guideLineEndpoints[index] });
+            });
             gsap.set([masterplanElement, ...revealElements], {
               clearProps: "clipPath,opacity,transform,visibility",
             });
             return;
           }
 
-          gsap.set(guideLines, { strokeDashoffset: 1 });
+          guideLines.forEach((line, index) => {
+            const endpoint = guideLineEndpoints[index];
+            gsap.set(line, {
+              attr: {
+                x1: endpoint.x1,
+                x2: endpoint.x1,
+                y1: endpoint.y1,
+                y2: endpoint.y1,
+              },
+            });
+          });
           gsap.set(masterplanElement, {
             clipPath: "inset(100% 0% 0% 0%)",
             y: 0,
@@ -188,8 +206,9 @@ export function ProjectSiteCompositionSection({
             },
             scrollTrigger: {
               trigger: section,
-              start: "top 78%",
-              once: true,
+              start: "top 72%",
+              end: "top top",
+              scrub: 0.8,
               invalidateOnRefresh: true,
             },
           });
@@ -198,8 +217,8 @@ export function ProjectSiteCompositionSection({
             .to(
               headingElement,
               {
-                duration: 0.22,
-                ease: "power1.out",
+                duration: 0.7,
+                ease: "power2.out",
                 y: 0,
               },
               0,
@@ -207,21 +226,25 @@ export function ProjectSiteCompositionSection({
             .to(
               descriptionElement,
               {
-                duration: 0.24,
-                ease: "power1.out",
+                duration: 0.8,
+                ease: "power2.out",
                 y: 0,
               },
-              0.18,
+              0.12,
             );
           guideLines.forEach((line, index) => {
+            const endpoint = guideLineEndpoints[index];
             timeline.to(
               line,
               {
-                duration: 0.3,
+                attr: {
+                  x2: endpoint.x2,
+                  y2: endpoint.y2,
+                },
+                duration: 1.15,
                 ease: "none",
-                strokeDashoffset: 0,
               },
-              index === 0 ? 0.45 : ">",
+              0.4 + index * 0.2,
             );
           });
 
@@ -229,45 +252,44 @@ export function ProjectSiteCompositionSection({
               masterplanElement,
               {
                 clipPath: "inset(0% 0% 0% 0%)",
-                duration: 0.18,
-                ease: "power4.out",
+                duration: 1.6,
+                ease: "power2.inOut",
               },
-              ">+=0.05",
+              0.45,
             )
             .to(
               accentElement,
               {
                 autoAlpha: 1,
-                duration: 0.2,
-                ease: "power1.out",
+                duration: 0.7,
+                ease: "power2.out",
                 y: 0,
               },
-              ">-=0.2",
+              1.55,
             )
             .to(
               specificationElements,
               {
                 autoAlpha: 1,
-                duration: 0.24,
-                ease: "power1.out",
-                stagger: 0.03,
+                duration: 0.85,
+                ease: "power2.out",
+                stagger: 0.08,
                 y: 0,
               },
-              ">-=0.1",
+              1.7,
             )
             .to(
               compassElement,
               {
                 autoAlpha: 1,
-                duration: 0.22,
-                ease: "power1.out",
+                duration: 0.7,
+                ease: "power2.out",
               },
-              ">-=0.08",
+              1.85,
             );
 
           return () => {
             timeline.kill();
-            gsap.set(guideLines, { clearProps: "strokeDashoffset" });
             gsap.set([masterplanElement, ...revealElements], {
               clearProps: "clipPath,opacity,transform,visibility",
             });
@@ -275,8 +297,6 @@ export function ProjectSiteCompositionSection({
         },
       );
     }, section);
-
-    ScrollTrigger.refresh();
 
     return () => {
       mm.revert();
@@ -381,10 +401,7 @@ export function ProjectSiteCompositionSection({
               <line
                 data-project-site-composition-guide-line
                 opacity="0.45"
-                pathLength="1"
                 stroke="url(#site-composition-zen-line-0)"
-                strokeDasharray="1"
-                strokeDashoffset="1"
                 strokeWidth="1"
                 vectorEffect="non-scaling-stroke"
                 x1={zenUnderlayLine.x1}
@@ -433,10 +450,7 @@ export function ProjectSiteCompositionSection({
                   data-project-site-composition-guide-line
                   key={`${guideLineVariant}-${index}`}
                   opacity="0.45"
-                  pathLength="1"
                   stroke={`url(#site-composition-${guideLineVariant}-line-${index})`}
-                  strokeDasharray="1"
-                  strokeDashoffset="1"
                   strokeWidth="1"
                   vectorEffect="non-scaling-stroke"
                   x1={line.x1}

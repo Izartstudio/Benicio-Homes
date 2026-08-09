@@ -231,7 +231,6 @@
   .heroDescriptionReveal {
     width: min(28rem, 58vw);
   }
-
 }
 
 @media (max-width: 767px) {
@@ -255,9 +254,6 @@
     padding-inline-end: 0;
   }
 
-  /* The default hero keeps its description in the content flow above the
-     title. Give the two blocks independent vertical lanes on short/narrow
-     phones so translated browser chrome and text wrapping cannot overlap. */
   .heroSequence[data-hero-layout="default"] .heroTitleLayer {
     inset-block-start: clamp(11rem, 24svh, 13.5rem);
   }
@@ -334,6 +330,10 @@
     padding-block-start: clamp(7.75rem, 16svh, 8.75rem);
   }
 
+  .heroSequence[data-hero-variant="vanam"] .heroTitleLayer {
+    inset-block-start: clamp(13rem, 28svh, 15rem);
+  }
+
   .heroDescription {
     width: min(24rem, 100%);
     font-size: clamp(0.95rem, 4.25vw, 1.08rem);
@@ -369,5 +369,9 @@
   .heroSequence[data-hero-layout="el-salva"][data-hero-title-layering="front"]
     .heroDescriptionReveal {
     top: 15%;
+  }
+
+  .heroSequence[data-hero-layout="el-salva"] .heroTitleReveal {
+    translate: 0 3rem;
   }
 }

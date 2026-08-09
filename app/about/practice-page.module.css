@@ -5,8 +5,8 @@
 /* Artboard 01 — Hero Section.svg, 1440 × 800 */
 .hero { position: relative; isolation: isolate; height: 50rem; overflow: hidden; background: #2d2d2d; }
 .heroConcrete,.heroShadow { position: absolute; inset: 0; z-index: -2; pointer-events: none; background-position: center; background-size: cover; }
-.heroShadow { z-index: -1;  }
-.heroConcrete { background-image: url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/image%2060453.webp"); }
+.heroShadow { z-index: -1; }
+.heroConcrete { background-image: url("/assets/textures/about-hero-texture-hq.webp"); }
 
 .sectionCrosshair { position: absolute; inset: 0; pointer-events: none; }
 .sectionCrosshair i { position: absolute; display: block; }
@@ -35,7 +35,7 @@
 
 /* Artboard 02 — Section -2about.svg, 1440 × 700 */
 .respect { position: relative; isolation: isolate; height: 43.75rem; overflow: hidden;; }
-.respectTexture { position: absolute; inset: 0; z-index: -1; background:  url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/about-section2.webp") center/cover;  }
+.respectTexture { position: absolute; inset: 0; z-index: -1; background: url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/aboutsection-2.webp") center/cover;  }
 .respectHeading { position: absolute; left: 5.2%; top: 11.5%; }
 .respectHeading h2 { font-size: clamp(2.2rem,3vw,2.75rem); font-weight: 300; line-height: 1.2; }
 .respectBand { position: absolute; left: 50%; top: 17.4375rem; width: 100vw; max-width: none; height: 8.25rem; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,14.375rem) minmax(0,1fr); overflow: hidden; transform: translateX(-50%); }
@@ -50,7 +50,7 @@
 /* Artboard 03 — Section -3 about.svg, 1440 × 900 */
 
 .manifesto { position: relative; isolation: isolate; height: 56.25rem; overflow: hidden; }
-.manifestoTexture { position: absolute; inset: 0; z-index: -1; background:  url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/about-3texture.webp") center/cover;  }
+.manifestoTexture { position: absolute; inset: 0; z-index: -1; background: url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/ourmanifesto-bg.webp") center/cover; }
 .manifestoCrosshair { z-index: 0; transform: translateY(-13.35%); }
 .manifestoCopy { position: absolute; left: 5.2%; top: 6%; width: 39%; height: 88%; }
 .manifestoKicker,.servicesKicker { display: flex; align-items: center; gap: 1rem; color: #d45231; font: 400 .72rem/1 var(--font-roboto-slab); }
@@ -111,6 +111,7 @@
 .servicesIntro a { width: 11rem; margin-top: 1rem; }
 .serviceSteps { position: absolute; inset: auto 0 0; height: 17.5rem; pointer-events: none; }
 .servicesPanel { position: absolute; inset: auto 3.45% 0; height: 17.5rem; z-index: 20; padding: 5.2rem 0 2rem; color: #232323; }
+.mobileServiceSteps { display: none; }
 .servicesKicker { position: absolute; left: 0; top: 2rem; }
 .servicesKicker i { width: 7.5rem; }
 .servicesGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 5rem; }
@@ -190,12 +191,13 @@
   .founderPortrait { position: relative; inset: auto; order: 5; width: 100%; height: 38rem; margin-top: 0; }
   .services { height: auto; min-height: 0; padding-top: 3rem; }
   .servicesTop { display: flex; height: auto; flex-direction: column; align-items: center; }
-  .sketches { position: relative; left: auto; top: auto; width: min(calc(100% - 3rem),32rem); height: 18rem; margin: 0 auto; }
+  .sketches { position: relative; left: auto; top: auto; order: 2; width: 100%; height: 18rem; margin: 3rem 0 0; }
   .sketches img { object-position: center; }
-  .servicesIntro { position: relative; left: auto; top: auto; width: calc(100% - 3rem); margin: 2.5rem auto 0; align-self: center; }
+  .servicesIntro { position: relative; left: auto; top: auto; order: 1; width: calc(100% - 3rem); margin: 0 auto; align-self: center; }
   .servicesCrosshair { display: none; }
   .serviceSteps { display: none; }
-  .servicesPanel { position: relative; inset: auto; height: auto; margin-top: 3rem; padding: 5rem 1.5rem 2rem; background: #dedede; }
+  .servicesPanel { position: relative; isolation: isolate; inset: auto; height: auto; margin-top: 0; padding: 6.25rem 1.5rem 2rem; background: transparent; }
+  .mobileServiceSteps { position: absolute; z-index: -1; inset: 0; display: block; pointer-events: none; }
   .servicesKicker { left: 1.5rem; }
   .servicesGrid { grid-template-columns: 1fr; gap: 2.5rem; }
   .service h3 { min-height: 0; }

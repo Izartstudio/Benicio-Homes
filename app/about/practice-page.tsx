@@ -183,6 +183,12 @@ export function AboutPracticePage() {
           <ArchitecturalStairs variant="practice" stairClassName="bg-[#E7E8E8]" />
         </div>
         <div className={styles.servicesPanel}>
+          <div className={styles.mobileServiceSteps} aria-hidden="true">
+            <ArchitecturalStairs
+              variant="practice-mobile"
+              stairClassName="bg-[#E7E8E8]"
+            />
+          </div>
           <div className={styles.servicesKicker}><span id="services-title">What We Build</span><i /></div>
           <div className={styles.servicesGrid}>
             {services.map((service) => (

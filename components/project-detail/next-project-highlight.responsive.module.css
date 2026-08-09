@@ -16,12 +16,13 @@
 
   .layout {
     height: auto;
-    padding: 4rem 3rem 0;
+    padding: 4rem 0 0;
   }
 
   .responsiveRoot :global([data-next-project-highlight-heading-layer]) {
     position: relative;
     inset: auto;
+    padding-inline: 3rem;
   }
 
   .responsiveRoot :global([data-next-project-highlight-content-grid]) {
@@ -72,7 +73,7 @@
 
 
   .layout {
-    padding: 4rem 1.5rem 0;
+    padding: 4rem 0 0;
   }
 
   .responsiveRoot :global([data-next-project-highlight-content-grid]) {
@@ -93,6 +94,7 @@
 
   .responsiveRoot :global([data-next-project-highlight-heading-layer]) {
     margin-bottom: -4.75vw;
+    padding-inline: 1.5rem;
   }
 }
 @media (max-width: 374px) {

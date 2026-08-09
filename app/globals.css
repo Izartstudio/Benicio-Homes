@@ -124,41 +124,10 @@ html[data-scroll-engine="safari-native"]
 
 .journal-listing-section {
   background-color: var(--editorial-listing-color, #343434);
-}
-
-[data-editorial-variant="journal"] .journal-listing-section::before {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: var(--journal-featured-texture, none);
-  background-position: center top;
-  background-repeat: repeat-y;
-  background-size: 100% auto;
-  mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 calc(100% - 22rem),
-    rgb(0 0 0 / 0.82) calc(100% - 15rem),
-    rgb(0 0 0 / 0.36) calc(100% - 8rem),
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 calc(100% - 22rem),
-    rgb(0 0 0 / 0.82) calc(100% - 15rem),
-    rgb(0 0 0 / 0.36) calc(100% - 8rem),
-    transparent 100%
-  );
-  content: "";
-}
-
-[data-editorial-variant="projects"] .journal-listing-section {
   background-image: none;
 }
 
-[data-editorial-variant="projects"] .journal-listing-section::before {
+.journal-listing-section::before {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -207,12 +176,6 @@ html[data-scroll-engine="safari-native"]
 }
 
 .editorial-listing-texture-scale {
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: 100vw auto;
-}
-
-[data-editorial-variant="projects"] .editorial-listing-texture-scale {
   background-color: var(--editorial-listing-color) !important;
   background-image: var(--journal-featured-texture) !important;
   background-position: center top;
@@ -341,6 +304,18 @@ html[data-scroll-engine="safari-native"]
   content: "";
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .journal-detail-hero {
+    width: min(65vw, 32rem);
+    height: auto;
+    aspect-ratio: 1190 / 615;
+  }
+
+  .journal-detail-stage {
+    height: calc(23.4375rem + 33.5924vw + 4rem);
+  }
+}
+
 @media (max-width: 767px) {
   .journal-intro { min-height: 35rem; }
   .journal-steps {
@@ -375,8 +350,11 @@ html[data-scroll-engine="safari-native"]
     top: 30rem;
   }
   .journal-detail-stage {
-    height: calc(51.6807vw + 35rem);
-    min-height: 55rem;
+    height: calc(51.6807vw + 31.5rem);
+    min-height: 0;
+  }
+  .journal-article-paper {
+    padding-top: 2.5rem !important;
   }
   .editorial-listing-heading {
     align-items: flex-start;

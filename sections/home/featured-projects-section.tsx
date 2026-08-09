@@ -12,8 +12,6 @@ import { OrangeBlock } from "@/components/ui/orange-block";
 gsap.registerPlugin(ScrollTrigger);
 
 const texturePath = "/assets/textures/concrete-background-textures-09-1.webp";
-const MOBILE_SCROLL_CANVAS_RATIO_PER_TRANSITION = 0.68;
-
 const projects = [
   {
     id: "majorda",
@@ -70,14 +68,11 @@ export function FeaturedProjectsSection() {
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    const scrollContainer = section?.querySelector<HTMLElement>(
-      "[data-featured-scroll-container]",
-    );
     const canvas = section?.querySelector<HTMLElement>(
       "[data-featured-animation-canvas]",
     );
 
-    if (!section || !scrollContainer || !canvas) {
+    if (!section || !canvas) {
       return;
     }
 
@@ -178,30 +173,12 @@ export function FeaturedProjectsSection() {
             scrollTrigger: {
               trigger: section,
               start: "top top",
-              end: isMobile
-                ? () =>
-                    `+=${Math.round(
-                      canvas.offsetHeight *
-                        Math.max(projects.length - 1, 1) *
-                        MOBILE_SCROLL_CANVAS_RATIO_PER_TRANSITION,
-                    )}`
-                : () =>
-                    `+=${Math.round(
-                      canvas.offsetHeight * Math.max(projects.length - 1, 1),
-                    )}`,
-              // The section remains the normal-flow owner of the complete scroll
-              // range. Pin only its visual canvas so the generated spacer is
-              // contained and painted by this section instead of sitting between
-              // Featured Projects and the following section.
-              pin: scrollContainer,
-              pinSpacing: true,
+              // Native sticky positioning holds the visual surface. The outer
+              // scene owns the complete distance, so Story cannot enter until
+              // the sticky interaction has cleanly released.
+              end: "bottom bottom",
               scrub: reduceMotion ? true : 0.25,
-              anticipatePin: 1,
               invalidateOnRefresh: true,
-              // This upstream pin must establish its spacer before Journal measures.
-              // Responsive matchMedia callbacks can otherwise recreate the two pins
-              // in listener order instead of document order.
-              refreshPriority: 20,
             },
           });
 
@@ -320,7 +297,7 @@ export function FeaturedProjectsSection() {
     <BlendScope
       as="section"
       aria-labelledby="featured-projects-title"
-      className={`overflow-hidden bg-graphite text-bone ${responsiveStyles.responsiveRoot}`}
+      className={`overflow-clip bg-graphite text-bone ${responsiveStyles.responsiveRoot}`}
       data-section="featured-projects"
       ref={sectionRef}
     >
@@ -458,6 +435,12 @@ export function FeaturedProjectsSection() {
                     </div>
                   </div>
 
+                  <div
+                    aria-hidden="true"
+                    className="h-px w-full bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
+                    data-featured-decorative-line="panel-top"
+                  />
+
                   {projects.map((project, index) => (
                     <article
                       key={project.id}
@@ -477,12 +460,6 @@ export function FeaturedProjectsSection() {
                           aria-hidden="true"
                           className="h-5 w-full"
                           data-featured-progress-spacer
-                        />
-
-                        <div
-                          aria-hidden="true"
-                          className="h-px w-full bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
-                          data-featured-decorative-line="panel-top"
                         />
 
                         <p
@@ -525,14 +502,14 @@ export function FeaturedProjectsSection() {
                           View Project
                         </CTA>
                       </div>
-
-                      <div
-                        aria-hidden="true"
-                        className="h-px w-full bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
-                        data-featured-decorative-line="panel-bottom"
-                      />
                     </article>
                   ))}
+
+                  <div
+                    aria-hidden="true"
+                    className="h-px w-full bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
+                    data-featured-decorative-line="panel-bottom"
+                  />
                 </div>
               </div>
             </div>

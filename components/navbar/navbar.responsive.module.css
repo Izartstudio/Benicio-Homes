@@ -350,6 +350,10 @@
     color: #cccccc !important;
   }
 
+  .mobileMenuLink:hover {
+    color: #d45231 !important;
+  }
+
   .mobileProjectsTrigger {
     display: flex;
     min-height: 4.3125rem;

@@ -11,6 +11,7 @@ import {
 } from "@/components/journal/project-status-tag";
 
 const PAGE_SIZE = 4;
+const JOURNAL_PAGE_SIZE = 2;
 
 export type EditorialListingItem = {
   author: string;
@@ -36,7 +37,8 @@ export function JournalGrid({
   loadMoreLabel = "Load More Blogs",
   variant = "journal",
 }: JournalGridProps) {
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const pageSize = variant === "journal" ? JOURNAL_PAGE_SIZE : PAGE_SIZE;
+  const [visibleCount, setVisibleCount] = useState(pageSize);
   const [cursor, setCursor] = useState({ visible: false, x: 0, y: 0 });
   const visibleArticles = articles.slice(0, visibleCount);
   const hasMore = visibleCount < articles.length;
@@ -129,14 +131,15 @@ export function JournalGrid({
           </Reveal>
         ))}
       </div>
-      <button
-          className="mx-auto mt-20 flex h-[3.125rem] min-w-[12.5rem] items-center justify-between bg-[var(--editorial-cta-background)] px-5 font-display text-sm text-[var(--editorial-cta-text)] disabled:cursor-default disabled:opacity-60"
-          disabled={!hasMore}
-          onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+      {hasMore ? (
+        <button
+          className="mx-auto mt-20 flex h-[3.125rem] min-w-[12.5rem] cursor-pointer items-center justify-between bg-[#575757] px-5 font-display text-sm text-white transition-colors duration-300 hover:bg-[#454545] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          onClick={() => setVisibleCount((count) => count + pageSize)}
           type="button"
         >
           {loadMoreLabel} <span aria-hidden="true">⌄</span>
-      </button>
+        </button>
+      ) : null}
       <span
         aria-hidden="true"
         className={`pointer-events-none fixed left-0 top-0 z-[200] hidden min-[1200px]:block ${cursor.visible ? "opacity-100" : "opacity-0"}`}

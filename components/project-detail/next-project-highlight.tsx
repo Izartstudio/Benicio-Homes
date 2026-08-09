@@ -31,7 +31,7 @@ export function NextProjectHighlight({
     <BlendScope
       as="section"
       aria-labelledby="next-project-highlight-title"
-      className={`-mt-px overflow-hidden bg-benicio-blend text-[#232323] ${responsiveStyles.responsiveRoot}`}
+      className={`-mt-px w-full overflow-hidden bg-benicio-blend text-[#232323] ${responsiveStyles.responsiveRoot}`}
       data-next-project-highlight
     >
       <div
@@ -41,7 +41,7 @@ export function NextProjectHighlight({
       />
 
       <div
-        className={`relative mx-auto flex w-full max-w-[90rem] flex-col overflow-visible px-[1.5rem] pt-[4rem] md:px-[3rem] lg:block lg:h-[41.8125rem] lg:px-0 lg:pt-0 ${responsiveStyles.layout}`}
+        className={`relative flex w-full max-w-none flex-col overflow-hidden pt-[4rem] lg:block lg:h-[41.8125rem] lg:pt-0 ${responsiveStyles.layout}`}
       >
         <div
           className="relative order-2 mt-[2.5rem] grid grid-cols-1 md:mt-[3rem] md:grid-cols-[42%_58%] md:items-center lg:absolute lg:inset-x-0 lg:top-[5.9375rem] lg:mt-0 lg:block lg:h-[34rem]"
@@ -98,7 +98,7 @@ export function NextProjectHighlight({
                   alt={image.alt}
                   className="object-cover"
                   fill
-                  sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1023px) 58vw, 64vw"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 58vw, 64vw"
                   src={image.src}
                 />
               </div>

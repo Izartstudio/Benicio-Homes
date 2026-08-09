@@ -56,8 +56,15 @@
 
 @media (min-width: 768px) {
   .responsiveRoot:global([data-section="journal"]) {
-    min-height: 100vh;
-    min-height: 100svh;
+    min-height: calc(
+      max(100svh, 50rem) + var(--journal-scroll-distance, 0px)
+    );
+  }
+
+  .responsiveRoot :global([data-journal-foreground]) {
+    position: sticky;
+    top: 0;
+    min-height: max(100svh, 50rem);
   }
 
   .responsiveRoot :global([data-journal-static-panel]) {

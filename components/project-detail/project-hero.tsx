@@ -9,7 +9,6 @@ import {
   type ProjectHeroFocalPosition,
 } from "./project-hero-background";
 import { ProjectTitleTexture } from "./project-title-texture";
-import { isSafariBrowser } from "@/utils/is-safari-browser";
 import styles from "./project-hero.responsive.module.css";
 
 type ProjectHeroImage = {
@@ -111,35 +110,6 @@ export function ProjectHeroSequence({
               autoAlpha: 0,
               y: conditions.desktop ? 24 : 16,
             });
-
-            // Native touch scrolling should track the finger exactly. A
-            // scrubbed catch-up transform makes the image and title chase the
-            // viewport on mobile, which reads as jitter. Keep a lightweight
-            // one-shot statement reveal while leaving the hero layers stable.
-            if (
-              conditions.mobile ||
-              conditions.tablet ||
-              isSafariBrowser()
-            ) {
-              const statementTween = gsap.to(continuationStatement, {
-                autoAlpha: 1,
-                duration: 0.48,
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: continuationStatement,
-                  start: "top 90%",
-                  once: true,
-                },
-                y: 0,
-              });
-
-              return () => {
-                statementTween.kill();
-                gsap.set(continuationStatement, {
-                  clearProps: "opacity,transform,visibility,willChange",
-                });
-              };
-            }
 
             const setWillChange = (active: boolean) => {
               animatedMedia.forEach((element) => {
@@ -280,6 +250,7 @@ export function ProjectHeroSequence({
           <Reveal
             className={styles.heroDescriptionReveal}
             duration={0.82}
+            fade={false}
             revealId="project-hero-description"
             revealMode="mount"
             y={18}

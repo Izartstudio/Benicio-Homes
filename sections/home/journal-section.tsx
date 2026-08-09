@@ -53,21 +53,36 @@ export function JournalSection({
       "[data-journal-viewport]",
     );
     const track = section?.querySelector<HTMLElement>("[data-journal-track]");
-    const foreground = section?.querySelector<HTMLElement>(
-      "[data-journal-foreground]",
-    );
 
-    if (!section || !viewport || !track || !foreground) {
+    if (!section || !viewport || !track) {
       return;
     }
 
     const media = gsap.matchMedia();
+    const getScrollDistance = () =>
+      Math.max(0, track.scrollWidth - viewport.clientWidth);
 
     media.add("(min-width: 768px)", () => {
-      const ctx = gsap.context(() => {
-        const getScrollDistance = () =>
-          Math.max(0, track.scrollWidth - viewport.clientWidth);
+      let lastScrollDistance = -1;
+      const syncScrollDistance = () => {
+        const distance = getScrollDistance();
 
+        if (Math.abs(distance - lastScrollDistance) < 1) {
+          return;
+        }
+
+        lastScrollDistance = distance;
+        section.style.setProperty(
+          "--journal-scroll-distance",
+          `${Math.round(distance)}px`,
+        );
+      };
+      const resizeObserver = new ResizeObserver(syncScrollDistance);
+      resizeObserver.observe(viewport);
+      resizeObserver.observe(track);
+      syncScrollDistance();
+
+      const ctx = gsap.context(() => {
         if (getScrollDistance() <= 1) {
           return;
         }
@@ -78,18 +93,12 @@ export function JournalSection({
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: () => `+=${getScrollDistance()}`,
-            // Keep Journal as the normal-flow owner of its horizontal scroll
-            // distance. Contact must remain a sibling after Journal, never a
-            // sibling after an unpainted page-level pin spacer.
-            pin: foreground,
-            pinSpacing: true,
+            // The section owns the horizontal travel as real layout height;
+            // native sticky holds the foreground until Contact is below the
+            // viewport and the scene has finished.
+            end: "bottom bottom",
             scrub: 0.25,
-            anticipatePin: 1,
             invalidateOnRefresh: true,
-            // Refresh after the upstream Featured Projects pin has finalized its
-            // responsive spacer, regardless of matchMedia recreation order.
-            refreshPriority: 10,
           },
         });
 
@@ -101,6 +110,8 @@ export function JournalSection({
       }, section);
 
       return () => {
+        resizeObserver.disconnect();
+        section.style.removeProperty("--journal-scroll-distance");
         scrollTriggerRef.current = null;
         ctx.revert();
       };
@@ -115,7 +126,7 @@ export function JournalSection({
   return (
     <section
       aria-labelledby="journal-section-title"
-      className={`relative isolate overflow-hidden bg-[#b9b9b9] text-[#232323] ${responsiveStyles.responsiveRoot}`}
+      className={`relative isolate overflow-clip bg-[#b9b9b9] text-[#232323] ${responsiveStyles.responsiveRoot}`}
       data-section="journal"
       id="journal"
       ref={sectionRef}

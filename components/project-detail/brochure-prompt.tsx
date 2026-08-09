@@ -128,6 +128,10 @@ export function BrochurePrompt() {
             if (event.target === event.currentTarget) setIsOpen(false);
           }}
           role="presentation"
+          style={{
+            backdropFilter: "blur(18px) saturate(0.85)",
+            WebkitBackdropFilter: "blur(18px) saturate(0.85)",
+          }}
         >
           <section
             aria-labelledby={dialogTitleId}

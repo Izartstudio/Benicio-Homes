@@ -47,6 +47,16 @@ const stairVariants = {
       className: "left-[56%] top-[12.5%] h-[87.5%] w-[40.5%]",
     },
   ],
+  "practice-mobile": [
+    {
+      id: "stair-01",
+      className: "left-0 top-[1.25rem] h-[calc(100%_-_1.25rem)] w-full",
+    },
+    {
+      id: "stair-02",
+      className: "left-0 top-0 h-full w-[58%]",
+    },
+  ],
   journal: [],
 } as const;
 

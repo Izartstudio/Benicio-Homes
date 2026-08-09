@@ -1,8 +1,15 @@
+"use client";
+
 import type { CSSProperties } from "react";
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ProjectEditorialVariantsData } from "@/app/projects/data";
 import { CdnImage } from "@/components/ui/cdn-image";
 import { Reveal } from "@/components/ui/reveal";
 import styles from "./editorial-variant-sections.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type EditorialVariantSectionsProps = {
   data: ProjectEditorialVariantsData;
@@ -25,6 +32,7 @@ function Media({ image, priority = false }: {
 }
 
 export function EditorialVariantSections({ data }: EditorialVariantSectionsProps) {
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const textureStyle = {
     "--editorial-gallery-texture": data.textures?.gallery
       ? `url("${data.textures.gallery}")`
@@ -43,23 +51,65 @@ export function EditorialVariantSections({ data }: EditorialVariantSectionsProps
       : "var(--editorial-site-texture)",
   } as CSSProperties;
 
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    const showcase = root?.querySelector<HTMLElement>(
+      '[data-pdp-variant="showcase"]',
+    );
+    const frames = showcase
+      ? gsap.utils.toArray<HTMLElement>(
+          "[data-editorial-showcase-frame]",
+          showcase,
+        )
+      : [];
+
+    if (!root || !showcase || frames.length === 0) return;
+    const contextRoot = root;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(frames, {
+        autoAlpha: 1,
+        clearProps: "clipPath,transform,visibility",
+      });
+      return;
+    }
+
+    const context = gsap.context(() => {
+      gsap.set(frames, {
+        autoAlpha: 1,
+        clipPath: "inset(100% 0% 0% 0%)",
+      });
+
+      gsap.to(frames, {
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1,
+        ease: "power2.inOut",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: showcase,
+          start: "top 88%",
+          once: true,
+        },
+      });
+    }, contextRoot);
+
+    return () => context.revert();
+  }, []);
+
   return (
     <div
       className={styles.editorialRoot}
       data-mobile-layout={data.mobileLayout}
+      ref={rootRef}
       style={textureStyle}
     >
       <section className={`${styles.section} ${styles.site}`} data-pdp-variant="site-composition">
-        <Reveal
+        <div
           aria-hidden="true"
           className={styles.siteSteps}
-          duration={0.9}
-          fade={false}
-          revealId="editorial-site-steps"
-          y={18}
         >
           <i /><i /><i /><i /><i />
-        </Reveal>
+        </div>
         <Reveal as="figure" className={`${styles.frame} ${styles.siteMedia}`} y={16}>
           <Media image={data.siteComposition.image} />
         </Reveal>
@@ -84,14 +134,14 @@ export function EditorialVariantSections({ data }: EditorialVariantSectionsProps
       </section>
 
       <section className={`${styles.section} ${styles.showcase}`} data-pdp-variant="showcase">
-        <Reveal as="figure" className={`${styles.frame} ${styles.showcaseHero}`} y={16}>
+        <figure className={`${styles.frame} ${styles.showcaseHero}`} data-editorial-showcase-frame>
           <Media image={data.showcase.images[0]} />
-        </Reveal>
+        </figure>
         <div className={styles.showcaseStrip}>
           {data.showcase.images.slice(1).map((image, index) => (
-            <Reveal as="figure" className={styles.frame} delay={index * 0.05} key={`${image.alt}-${index}`} y={12}>
+            <figure className={styles.frame} data-editorial-showcase-frame key={`${image.alt}-${index}`}>
               <Media image={image} />
-            </Reveal>
+            </figure>
           ))}
         </div>
       </section>

@@ -10,7 +10,7 @@
 
 .site { aspect-ratio: 1440 / 940; background-color: #fafafa; background-image: var(--editorial-site-texture); background-position: center; background-size: cover; }
 .siteMedia { position: absolute; z-index: 0; left: -.14%; top: 11.915%; width: 100.14%; height: 98.72%; }
-.siteSteps { position: absolute; z-index: 2; inset: 0; pointer-events: none; background-color: #343434; background-image: var(--editorial-steps-texture); background-position: center; background-size: cover; background-blend-mode: overlay; clip-path: polygon(0 0, 100% 0, 100% 47.234%, 98.61% 47.234%, 98.61% 29.225%, 79.652% 29.225%, 79.652% 24.641%, 34.166% 24.641%, 34.166% 21.939%, 27.708% 21.939%, 27.708% 11.952%, 0 11.952%); }
+.siteSteps { position: absolute; z-index: 2; inset: -1px 0 0; pointer-events: none; background-color: #343434; background-image: var(--editorial-steps-texture); background-position: center; background-size: cover; background-blend-mode: overlay; clip-path: polygon(0 0, 100% 0, 100% 47.234%, 98.61% 47.234%, 98.61% 29.225%, 79.652% 29.225%, 79.652% 24.641%, 34.166% 24.641%, 34.166% 21.939%, 27.708% 21.939%, 27.708% 11.952%, 0 11.952%); }
 .siteSteps i { display: none; }
 
 .moodboard { aspect-ratio: 1440 / 1554; background-color: #fafafa; background-image: var(--editorial-moodboard-texture); background-position: center; background-size: cover; }

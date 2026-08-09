@@ -18,7 +18,7 @@ export default async function JournalPage() {
       cardTitleColor="#ffffff"
       ctaBackgroundColor="#575757"
       ctaTextColor="#ffffff"
-      contactTransitionGradient="linear-gradient(180deg, rgba(52,52,52,0) 0%, rgba(82,82,82,0.38) 48%, rgba(135,135,135,0.72) 76%, #b9b9b9 100%)"
+      contactTransitionGradient="linear-gradient(180deg, rgba(52,52,68,0) 0%, rgba(92,92,92,0.38) 48%, rgba(135,135,135,0.92) 76%, #b9b9b9 100%)"
       description="Architecture is more than what is built. Explore insights on tropical living, heritage restoration, thoughtful design, and the ideas that continue to shape every Benicio home."
       descriptionTextColor="#575757"
       heading="Stories From The Places We Build"
@@ -36,7 +36,7 @@ export default async function JournalPage() {
       listingTexture="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Journal/featured-blogstexture.webp"
       loadMoreLabel="Load More Blogs"
       sectionLabel="Journal articles"
-      stepBackgroundColor="transparent"
+      stepBackgroundColor="#343434"
       stepTexture="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Journal/featured-blogstexture.webp"
       stepTextureBlend={false}
     />

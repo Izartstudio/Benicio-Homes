@@ -194,7 +194,7 @@ export function Navbar() {
           <ul className="flex items-center gap-[3.5rem] font-display text-[0.875rem] leading-none">
             <li>
               <FooterLink
-                className="!text-[#cccccc] hover:!text-[#cccccc]"
+                className="!text-[#cccccc] hover:!text-[#D45231]"
                 data-navbar-link
                 href={navigationLinks[0].href}
               >
@@ -204,7 +204,7 @@ export function Navbar() {
 
             <li>
               <FooterLink
-                className="!text-[#cccccc] hover:!text-[#cccccc]"
+                className="!text-[#cccccc] hover:!text-[#D45231]"
                 data-navbar-link
                 href="/projects"
               >
@@ -214,7 +214,7 @@ export function Navbar() {
 
             <li>
               <FooterLink
-                className="!text-[#cccccc] hover:!text-[#cccccc]"
+                className="!text-[#cccccc] hover:!text-[#D45231]"
                 data-navbar-link
                 href={navigationLinks[1].href}
               >
@@ -241,7 +241,7 @@ export function Navbar() {
           aria-label={
             isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
           }
-          className="hidden size-11 place-items-center justify-self-end text-[#cccccc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#cccccc]"
+          className="hidden size-11 cursor-pointer place-items-center justify-self-end text-[#cccccc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#cccccc]"
           data-navbar-mobile-menu
           onClick={() => {
             setIsMobileMenuOpen((isOpen) => !isOpen);
