@@ -1,3 +1,17 @@
+.responsiveRoot :global([data-project-specification-item]),
+.responsiveRoot :global([data-project-specification-mobile-item]) {
+  font-family: var(--font-roboto-slab), Georgia, serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.responsiveRoot :global([data-project-specification-category-heading] h2),
+.responsiveRoot :global([data-project-specification-mobile-category]) {
+  font-family: var(--font-heading-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
 @media (max-width: 1439px) {
   .responsiveRoot :global([data-project-specifications-container]) {
     min-width: 0;
@@ -9,6 +23,13 @@
   }
 }
 @media (max-width: 1023px) {
+
+  .responsiveRoot :global([data-project-specification-item]),
+  .responsiveRoot :global([data-project-specification-mobile-item]),
+  .responsiveRoot :global([data-project-specification-category-heading] h2),
+  .responsiveRoot :global([data-project-specification-mobile-category]) {
+    font-size: 0.8125rem;
+  }
 
   .responsiveRoot :global([data-project-specifications-container]) {
     display: grid;
@@ -41,6 +62,11 @@
   }
 }
 @media (max-width: 767px) {
+
+  .responsiveRoot :global([data-project-specification-mobile-item]),
+  .responsiveRoot :global([data-project-specification-mobile-category]) {
+    font-size: 0.75rem !important;
+  }
 
   .responsiveRoot :global([data-project-specifications-container]) {
     padding-block: 4.5rem;

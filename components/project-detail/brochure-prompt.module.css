@@ -14,8 +14,8 @@
   max-width: 25rem;
   margin: 0;
   font-family: var(--font-heading-family);
-  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
-  font-weight: 300;
+  font-size: 1.25rem;
+  font-weight: 350;
   line-height: 1.45;
 }
 
@@ -53,11 +53,13 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .section { grid-template-columns: minmax(18rem, 27rem) 1fr; align-items: start; }
+  .copyBlock p { font-size: 1.125rem; }
   .rule { padding-top: .5rem; }
 }
 
 @media (max-width: 767px) {
   .section { grid-template-columns: 1fr; min-height: 0; padding: 3.5rem 1.5rem; }
+  .copyBlock p { font-size: 1rem; }
   .rule { order: -1; padding-top: 0; }
   .cta { width: min(100%, 15.5rem); }
   .backdrop { padding: .75rem; }

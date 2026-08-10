@@ -7,6 +7,20 @@ html:not([data-scroll-engine="lenis"]) {
   scroll-behavior: smooth;
 }
 
+/* Preserve the homepage's original mixed type system. */
+[data-homepage-root] {
+  --font-sans: var(--font-bahnschrift);
+  --font-display: var(--font-bahnschrift);
+  --font-mono: var(--font-roboto-slab);
+  --font-serif: var(--font-roboto-slab);
+}
+
+body:has([data-homepage-root]) {
+  color: var(--color-ink);
+  font-family: var(--font-bahnschrift);
+  font-weight: 400;
+}
+
 [data-homepage-root],
 body:has([data-homepage-root]) [data-navbar] {
   -webkit-touch-callout: none;

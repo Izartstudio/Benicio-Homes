@@ -256,7 +256,9 @@ export function ProjectHeroSequence({
             revealMode="mount"
             y={18}
           >
-            <p className={styles.heroDescription}>{description}</p>
+            <p className={styles.heroDescription} data-project-hero-description>
+              {description}
+            </p>
           </Reveal>
         </div>
 
@@ -266,7 +268,10 @@ export function ProjectHeroSequence({
           ref={continuationStatementRef}
         >
           <span aria-hidden="true" className={styles.continuationAccent} />
-          <p className={styles.continuationStatement}>
+          <p
+            className={styles.continuationStatement}
+            data-project-hero-continuation-statement
+          >
             {continuationStatement}
           </p>
         </div>

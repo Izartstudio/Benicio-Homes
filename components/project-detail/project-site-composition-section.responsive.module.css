@@ -14,6 +14,32 @@
   --site-composition-plan-aspect-ratio: 1119 / 727;
 }
 
+/* PDP typography: site composition */
+.responsiveRoot :global([data-project-site-composition-heading-wrapper] h2) {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.responsiveRoot :global([data-project-site-composition-group-header] h3) {
+  color: #d45231;
+  font-family: var(--font-heading-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.responsiveRoot :global([data-project-site-composition-specification-row]) {
+  color: #eeeeee;
+  font-family: var(--font-roboto-slab), Georgia, serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.responsiveRoot :global([data-project-site-composition-specification-row] dd) {
+  color: #eeeeee;
+}
+
 .siteCompositionTexture {
   position: absolute;
   inset: 0;
@@ -144,6 +170,15 @@
 }
 @media (max-width: 1023px) {
 
+  .responsiveRoot :global([data-project-site-composition-heading-wrapper] h2) {
+    font-size: 1.75rem;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-group-header] h3),
+  .responsiveRoot :global([data-project-site-composition-specification-row]) {
+    font-size: 0.8125rem;
+  }
+
   .responsiveRoot :global([data-project-site-composition-left-content]) {
     max-width: 30rem;
   }
@@ -158,6 +193,15 @@
   }
 }
 @media (max-width: 767px) {
+
+  .responsiveRoot :global([data-project-site-composition-heading-wrapper] h2) {
+    font-size: 1.5rem;
+  }
+
+  .responsiveRoot :global([data-project-site-composition-group-header] h3),
+  .responsiveRoot :global([data-project-site-composition-specification-row]) {
+    font-size: 0.75rem;
+  }
 
   .responsiveRoot :global([data-project-site-composition-container]) {
     padding-block: 4.5rem;

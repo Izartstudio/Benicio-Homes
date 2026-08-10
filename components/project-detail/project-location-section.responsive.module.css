@@ -1,3 +1,11 @@
+/* PDP typography: location label */
+.responsiveRoot :global([data-project-location-label]) {
+  color: #d45231;
+  font-family: var(--font-roboto-slab), Georgia, serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
 @media (max-width: 1439px) {
   .responsiveRoot :global([data-project-location-content]) {
     min-width: 0;
@@ -9,6 +17,10 @@
 }
 @media (max-width: 1023px) {
 
+  .responsiveRoot :global([data-project-location-label]) {
+    font-size: 0.8125rem;
+  }
+
   .responsiveRoot :global([data-project-location-decorative-image-wrapper]) {
     right: -2rem;
     top: 0;
@@ -16,6 +28,10 @@
   }
 }
 @media (max-width: 767px) {
+
+  .responsiveRoot :global([data-project-location-label]) {
+    font-size: 0.75rem;
+  }
 
   .responsiveRoot :global([data-project-location-top-gradient]) {
     height: 12rem;

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto_Serif, Roboto_Slab } from "next/font/google";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/navbar/navbar";
+import { CameraDepthMotion } from "@/components/providers/camera-depth-motion";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import "./globals.css";
 
@@ -51,8 +52,9 @@ export default function RootLayout({
           <link href={cdnUrl} rel="dns-prefetch" />
         </head>
       ) : null}
-      <body className={`${bahnschrift.variable} ${robotoSlab.variable} ${robotoSerif.variable} antialiased`}>
+      <body className={`${bahnschrift.className} ${bahnschrift.variable} ${robotoSlab.variable} ${robotoSerif.variable} antialiased`}>
         <LenisProvider>
+          <CameraDepthMotion />
           <Navbar />
           {children}
         </LenisProvider>

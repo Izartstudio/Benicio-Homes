@@ -147,10 +147,11 @@ export function ProjectSpecificationsSection({
                 className="block size-[0.625rem] shrink-0 bg-cover bg-center"
                 style={{ backgroundImage: `url('${PDP_MEDIA_URLS.orangeBlock}')` }}
               />
-              <DifferenceText
-                as="h2"
-                className="min-w-0 font-display text-[0.875rem] font-normal uppercase leading-none"
-              >
+                <DifferenceText
+                  as="h2"
+                  className="min-w-0 font-display text-[0.875rem] font-normal uppercase leading-none"
+                  data-project-specification-mobile-category
+                >
                 {group.title}
               </DifferenceText>
               
@@ -163,6 +164,7 @@ export function ProjectSpecificationsSection({
               {group.items.map((item, itemIndex) => (
                 <li
                   className="font-serif text-[0.9375rem] font-normal leading-[1.25] text-bone"
+                  data-project-specification-mobile-item
                   key={item}
                 >
                   <span>{item}</span>

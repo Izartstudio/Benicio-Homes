@@ -1,5 +1,7 @@
 import responsiveStyles from "./textured-hero-section.responsive.module.css";
-import { MuxBackgroundVideo } from "@mux/mux-background-video/react";
+import MuxPlayer, {
+  type MuxPlayerCSSProperties,
+} from "@mux/mux-player-react";
 import { CdnVideo } from "@/components/ui/cdn-video";
 
 const fallbackHeroVideo = {
@@ -7,12 +9,14 @@ const fallbackHeroVideo = {
 } as const;
 
 const muxPlaybackId = process.env.NEXT_PUBLIC_MUX_HERO_PLAYBACK_ID?.trim();
-const muxPlaybackUrl = muxPlaybackId
-  ? `https://stream.mux.com/${muxPlaybackId}.m3u8`
-  : null;
 const muxPosterUrl = muxPlaybackId
   ? `https://image.mux.com/${muxPlaybackId}/thumbnail.webp?time=0&width=1920`
   : null;
+
+const muxPlayerStyle: MuxPlayerCSSProperties = {
+  "--controls": "none",
+  "--media-object-fit": "cover",
+};
 
 export function TexturedHeroSection() {
   return (
@@ -26,17 +30,22 @@ export function TexturedHeroSection() {
         className="absolute inset-0 z-0 bg-[#2d2d2d]"
         data-hero-background-fill
       />
-      {muxPlaybackUrl && muxPosterUrl ? (
-        <MuxBackgroundVideo
+      {muxPlaybackId && muxPosterUrl ? (
+        <MuxPlayer
           aria-hidden="true"
+          autoPlay
           className={`absolute inset-0 z-10 h-full w-full object-cover ${responsiveStyles.videoMask}`}
           data-hero-video
+          loop
           maxResolution="1080p"
+          muted
+          playbackId={muxPlaybackId}
+          playsInline
+          poster={muxPosterUrl}
           preload="auto"
-          src={muxPlaybackUrl}
-        >
-          <img alt="" aria-hidden="true" src={muxPosterUrl} />
-        </MuxBackgroundVideo>
+          streamType="on-demand"
+          style={muxPlayerStyle}
+        />
       ) : (
         <CdnVideo
           aria-hidden="true"

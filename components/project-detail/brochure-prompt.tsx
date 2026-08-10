@@ -102,7 +102,7 @@ export function BrochurePrompt() {
     <>
       <section className={styles.section} aria-label="Project brochure">
         <div className={styles.copyBlock}>
-          <p>
+          <p data-project-brochure-copy>
             Every aspect serves a reason. Discover the full concept behind
             Vanam Villas.
           </p>

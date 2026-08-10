@@ -2,7 +2,12 @@
 
 import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
-import { useState, type PointerEvent as ReactPointerEvent } from "react";
+import {
+  useState,
+  useSyncExternalStore,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
+import { createPortal } from "react-dom";
 import { Reveal } from "@/components/ui/reveal";
 import { CdnImage } from "@/components/ui/cdn-image";
 import {
@@ -12,6 +17,7 @@ import {
 
 const PAGE_SIZE = 4;
 const JOURNAL_PAGE_SIZE = 2;
+const subscribeToMount = () => () => {};
 
 export type EditorialListingItem = {
   author: string;
@@ -38,6 +44,11 @@ export function JournalGrid({
   variant = "journal",
 }: JournalGridProps) {
   const pageSize = variant === "journal" ? JOURNAL_PAGE_SIZE : PAGE_SIZE;
+  const isMounted = useSyncExternalStore(
+    subscribeToMount,
+    () => true,
+    () => false,
+  );
   const [visibleCount, setVisibleCount] = useState(pageSize);
   const [cursor, setCursor] = useState({ visible: false, x: 0, y: 0 });
   const visibleArticles = articles.slice(0, visibleCount);
@@ -140,20 +151,25 @@ export function JournalGrid({
           {loadMoreLabel} <span aria-hidden="true">⌄</span>
         </button>
       ) : null}
-      <span
-        aria-hidden="true"
-        className={`pointer-events-none fixed left-0 top-0 z-[200] hidden min-[1200px]:block ${cursor.visible ? "opacity-100" : "opacity-0"}`}
-        style={{ transform: `translate3d(${cursor.x + 18}px, ${cursor.y - 25}px, 0)` }}
-      >
-        {variant === "journal" ? (
-          <span className="flex h-[3.125rem] w-[11rem] items-center justify-between border border-[#696969] bg-[#232323] px-3 font-display text-[0.75rem] uppercase text-white">
-            <span>Read Blog</span>
-            <span aria-hidden="true">›</span>
-          </span>
-        ) : (
-          <Image alt="" height={50} src="/assets/cursors/listing-card-cta.svg" unoptimized width={176} />
-        )}
-      </span>
+      {isMounted
+        ? createPortal(
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none fixed left-0 top-0 z-[200] hidden min-[1200px]:block ${cursor.visible ? "opacity-100" : "opacity-0"}`}
+              style={{ transform: `translate3d(${cursor.x + 18}px, ${cursor.y - 25}px, 0)` }}
+            >
+              {variant === "journal" ? (
+                <span className="flex h-[3.125rem] w-[11rem] items-center justify-between border border-[#696969] bg-[#232323] px-3 font-display text-[0.75rem] uppercase text-white">
+                  <span>Read Blog</span>
+                  <span aria-hidden="true">›</span>
+                </span>
+              ) : (
+                <Image alt="" height={50} src="/assets/cursors/listing-card-cta.svg" unoptimized width={176} />
+              )}
+            </span>,
+            document.body,
+          )
+        : null}
     </>
   );
 }

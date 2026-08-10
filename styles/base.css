@@ -71,12 +71,13 @@
   }
 
   /* Semantic typography roles. Component styles keep control of layout and size. */
-  :where(h1, h2, h3, h4, h5, h6) {
+  body:not(:has([data-homepage-root])) :where(h1, h2, h3, h4, h5, h6) {
     font-family: var(--font-heading-family);
     font-weight: var(--font-heading-weight);
   }
 
-  :where(p, li, dd, blockquote, figcaption, label, input, textarea, select) {
+  body:not(:has([data-homepage-root]))
+    :where(p, li, dd, blockquote, figcaption, label, input, textarea, select) {
     font-family: var(--font-description-family);
     font-weight: var(--font-description-weight);
   }

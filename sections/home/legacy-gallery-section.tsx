@@ -10,15 +10,15 @@ import { ParallaxMedia } from "@/components/ui/parallax-media";
 
 const galleryImages = [
   {
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section1.webp",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacysection1.webp",
     alt: "Covered concrete passage opening to a preserved landscape",
   },
   {
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section2.webp",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacysection2.webp",
     alt: "Concrete villa facade framed by mature planting",
   },
   {
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section3.webp",
+    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacysection3.webp",
     alt: "Stepping stones through dense tropical landscape",
   },
 ] as const;

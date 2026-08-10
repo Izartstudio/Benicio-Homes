@@ -144,6 +144,7 @@ export function ProjectLocationSection({
           <DifferenceText
             as="h2"
             className="shrink-0 font-display text-[0.875rem] font-normal leading-none"
+            data-project-location-label
             id="project-location-title"
           >
             {location}

@@ -19,7 +19,7 @@ type ProductDetailPageProps = {
 
 export function ProductDetailPage({ project }: ProductDetailPageProps) {
   return (
-    <main className="bg-[#232323]">
+    <main className="bg-[#232323]" data-project-detail-page>
       <HeroSection data={project.hero} intro={project.intro} />
       <LocationSection data={project.location} />
       {project.editorialVariants ? (
