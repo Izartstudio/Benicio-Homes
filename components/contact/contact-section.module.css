@@ -8,13 +8,25 @@
 
 .form {
   --contact-form-text-size: 1.125rem;
-  font-family: var(--font-roboto-slab);
-  font-weight: 300;
+  font-family: var(--font-description-family);
+  font-weight: var(--font-description-weight);
 }
 
 .form :where(button, input, label, option, p, select, span, textarea) {
   font-family: inherit;
   font-weight: inherit;
+}
+
+.heading {
+  font-family: var(--font-heading-family) !important;
+  font-size: 2.5rem;
+  font-weight: var(--font-heading-weight) !important;
+}
+
+.copyBlock > p {
+  font-family: var(--font-description-family) !important;
+  font-size: 1rem;
+  font-weight: var(--font-description-weight) !important;
 }
 
 @media (max-width: 1439px) {
@@ -121,6 +133,10 @@
   .heading {
     overflow-wrap: break-word;
     font-size: clamp(2rem, 10vw, 2.5rem);
+  }
+
+  .copyBlock > p {
+    font-size: 0.9375rem;
   }
 
   .card {

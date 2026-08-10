@@ -88,6 +88,24 @@
   mask-size: 100% 100%;
 }
 
+.softUpperMaskLayer {
+  background: rgba(5, 5, 5, 0.202);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgb(217 217 217 / 0) 0%,
+    rgba(170, 170, 170, 0.9) 32%,
+    rgb(135 135 135 / 0.13) 68%,
+    rgba(115, 115, 115, 0.097) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgb(217 217 217 / 0) 0%,
+    rgba(170, 170, 170, 0.17) 32%,
+    rgb(135 135 135 / 0.13) 68%,
+    rgba(115, 115, 115, 0.063) 100%
+  );
+}
+
 .foregroundLayer {
   z-index: 3;
   bottom: auto;

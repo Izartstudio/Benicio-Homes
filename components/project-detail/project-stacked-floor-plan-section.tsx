@@ -207,7 +207,7 @@ export function ProjectStackedFloorPlanSection({
       >
         <ArchitecturalStairs
           className="[&>[data-stair-index='1']]:left-0 [&>[data-stair-index='1']]:top-0 [&>[data-stair-index='1']]:h-full [&>[data-stair-index='1']]:w-[1.3889%] [&>[data-stair-index='2']]:left-0 [&>[data-stair-index='2']]:top-0 [&>[data-stair-index='2']]:h-[39.726%] [&>[data-stair-index='2']]:w-[20.3472%] [&>[data-stair-index='3']]:left-0 [&>[data-stair-index='3']]:top-0 [&>[data-stair-index='3']]:h-[24.3836%] [&>[data-stair-index='3']]:w-[65.8333%] [&>[data-stair-index='4']]:left-0 [&>[data-stair-index='4']]:top-0 [&>[data-stair-index='4']]:h-[15.3425%] [&>[data-stair-index='4']]:w-[72.2917%]"
-          stairClassName="bg-[#343434] [background-image:var(--stacked-floor-plan-concrete)] bg-[length:1440px_365px] bg-left-top bg-no-repeat bg-blend-overlay"
+          stairClassName="bg-transparent"
           variant="ascending"
         />
       </div>

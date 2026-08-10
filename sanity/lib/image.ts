@@ -41,3 +41,18 @@ export function getJournalDetailImageUrl(
     .quality(88)
     .url();
 }
+
+export function getTeamMemberImageUrl(
+  source: SanityImageSource | null | undefined,
+) {
+  if (!imageBuilder || !source) return null;
+
+  return imageBuilder
+    .image(source)
+    .width(900)
+    .height(960)
+    .fit("crop")
+    .auto("format")
+    .quality(88)
+    .url();
+}

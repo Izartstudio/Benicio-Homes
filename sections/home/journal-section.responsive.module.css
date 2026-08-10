@@ -274,13 +274,13 @@
     padding-inline: 0.8125rem 0.625rem;
     background-color: #464646;
     color: #fafafa;
-    font-family: var(--font-roboto-slab);
+    font-family: var(--font-description-family);
     font-size: 0.75rem;
     line-height: 1;
   }
 
   .responsiveRoot :global([data-journal-mobile-cta] span:last-child) {
-    font-family: var(--font-bahnschrift);
+    font-family: var(--font-heading-family);
     font-size: 1.125rem;
     line-height: 1;
   }

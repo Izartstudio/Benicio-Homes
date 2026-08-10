@@ -1,6 +1,7 @@
 "use client";
 
 import responsiveStyles from "./restoration-showcase-section.responsive.module.css";
+import Link from "next/link";
 import { useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import gsap from "gsap";
@@ -13,6 +14,7 @@ export type RestorationSlide = {
   heading: string;
   leftLabel: string;
   rightLabel: string;
+  href: string;
   number: string;
   url: string;
   alt: string;
@@ -24,6 +26,7 @@ const defaultRestorationSlides: readonly RestorationSlide[] = [
     heading: "VILLA EL SALVA",
     leftLabel: "Heritage Value",
     rightLabel: "Portuguese-Inspired Architecture",
+    href: "/projects/el-salva-villa",
     number: "Restoration 001 -",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/restoration-showcase-villa1.webp",
     alt: "Restored Goan villa interior opening into tropical landscape",
@@ -33,6 +36,7 @@ const defaultRestorationSlides: readonly RestorationSlide[] = [
     heading: "VILLA PEROLA",
     leftLabel: "Heritage Value",
     rightLabel: "Portuguese-Inspired Architecture",
+    href: "/projects/villa-perola",
     number: "Restoration 002 -",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/legacy-section-villa2.webp",
     alt: "Restoration project facade with warm laterite material",
@@ -43,6 +47,7 @@ const defaultRestorationSlides: readonly RestorationSlide[] = [
 type RestorationShowcaseSectionProps = {
   backgroundTexture?: string;
   designSource?: string;
+  labelFont?: "site" | "roboto-slab";
   smoothContactTransition?: boolean;
   slides?: readonly RestorationSlide[];
 };
@@ -50,6 +55,7 @@ type RestorationShowcaseSectionProps = {
 export function RestorationShowcaseSection({
   backgroundTexture = "/assets/textures/heritage-texture.webp",
   designSource,
+  labelFont = "roboto-slab",
   smoothContactTransition = false,
   slides = defaultRestorationSlides,
 }: RestorationShowcaseSectionProps = {}) {
@@ -108,7 +114,7 @@ export function RestorationShowcaseSection({
         window.clearTimeout(autoplayTimer);
         autoplayTimer = window.setTimeout(() => {
           selectSlide(
-            (activeSlideIndexRef.current + 1) % restorationSlides.length,
+            (activeSlideIndexRef.current + 1) % restorationSlideCount,
           );
         }, 4200);
       };
@@ -240,6 +246,7 @@ export function RestorationShowcaseSection({
       aria-labelledby="restoration-showcase-title"
       className={`relative isolate overflow-hidden bg-[#FAFAFA] text-[#232323] ${responsiveStyles.responsiveRoot} ${designSource ? "min-h-[50rem] max-md:min-h-0" : ""}`}
       data-design-source={designSource}
+      data-restoration-label-font={labelFont}
       data-section="restoration-showcase"
       ref={sectionRef}
     >
@@ -302,9 +309,12 @@ export function RestorationShowcaseSection({
             data-restoration-accent-block="left"
           />
 
-          <div
+          <Link
+            aria-label={`View ${activeSlide.heading}`}
             className="relative aspect-[535/342] w-full overflow-hidden"
             data-restoration-carousel
+            data-restoration-carousel-link
+            href={activeSlide.href}
           >
             {restorationSlides.map((slide, index) => (
               <figure
@@ -327,7 +337,7 @@ export function RestorationShowcaseSection({
                 />
               </figure>
             ))}
-          </div>
+          </Link>
 
           <OrangeBlock
             className="justify-self-end"

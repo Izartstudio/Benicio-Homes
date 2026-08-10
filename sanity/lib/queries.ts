@@ -1,5 +1,22 @@
 import { defineQuery } from "next-sanity";
 
+export const ABOUT_TEAM_SECTION_QUERY = defineQuery(`
+  *[
+    _type == "aboutTeamSection" &&
+    !(_id in path("drafts.**"))
+  ] | order(_updatedAt desc)[0] {
+    isVisible,
+    heading,
+    members[] {
+      _key,
+      name,
+      role,
+      altText,
+      image { asset, crop, hotspot }
+    }
+  }
+`);
+
 export const HOMEPAGE_JOURNAL_POSTS_QUERY = defineQuery(`
   *[
     _type == "journalPost" &&

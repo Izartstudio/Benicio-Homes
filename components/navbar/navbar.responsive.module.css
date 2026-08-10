@@ -74,7 +74,16 @@
 }
 
 .responsiveRoot :global([data-navbar-link]) {
+  font-family: var(--font-heading-family);
+  font-size: 0.875rem;
+  font-weight: var(--font-regular-weight);
   mix-blend-mode: difference;
+}
+
+.responsiveRoot :global([data-navbar-projects-menu]),
+.responsiveRoot :global([data-navbar-mobile-panel]) {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-regular-weight);
 }
 
 .responsiveRoot :global([data-navbar-projects-menu]) {
@@ -318,7 +327,7 @@
     margin: 0;
     padding: 0;
     color: #cccccc;
-    font-family: var(--font-bahnschrift);
+    font-family: var(--font-description-family);
     font-size: 1rem;
     font-weight: 400;
     line-height: 1;

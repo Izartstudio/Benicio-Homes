@@ -1,5 +1,8 @@
 .root {
   border: 1px solid rgb(217 217 217 / 15%) !important;
+  font-family: var(--font-heading-family) !important;
+  font-size: 1rem !important;
+  font-weight: var(--font-heading-weight) !important;
   transition:
     background-color 250ms ease,
     color 250ms ease;

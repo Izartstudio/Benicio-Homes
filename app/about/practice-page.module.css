@@ -26,10 +26,11 @@
 .heroTitle { position: absolute; left: 5.2%; top: 27.5%; }
 .heroTitle h1 { font-size: clamp(2.7rem,3.55vw,3.2rem); font-weight: 300; line-height: 1.1; letter-spacing: .01em; }
 .heroLocation { position: absolute; left: 5.2%; top: 59.4%; display: flex; flex-direction: column; gap: 1rem; }
-.heroLocation strong { color: #dc4c28; font-size: .9rem; font-weight: 400; }
-.heroLocation span { font: 300 .65rem/1 var(--font-roboto-slab); opacity: .56; }
+.heroLocation strong,.heroLocation span { font-family: var(--font-roboto-slab-family); font-size: 1.25rem; font-weight: var(--font-medium-weight); line-height: 1; }
+.heroLocation strong { color: #dc4c28; }
+.heroLocation span { opacity: .56; }
 .heroStatement { position: absolute; left: 64.4%; top: 56.4%; width: 31%; max-width: 27rem; }
-.heroStatement p { max-width: 26rem; font: 300 .82rem/1.45 var(--font-roboto-slab); }
+.heroStatement p { max-width: 26rem; font: 300 .82rem/1.45 var(--font-Bahnschrift-light); }
 .heroStatement a,.servicesIntro a { display: flex; align-items: center; justify-content: space-between; width: 11rem; height: 3.1rem; margin-top: 2.2rem; padding: 0 1rem; background: #d8d6cf; color: #232323; font-size: .75rem; }
 .heroStatement a span,.servicesIntro a span { font-size: 1rem; }
 
@@ -43,7 +44,7 @@
 .respectLogoBlock { display: grid; place-items: center; background: transparent; }
 .respectLogo { position: relative; z-index: 1; width: 9.5rem; height: auto; }
 .respectCopy { position: absolute; left: 63.65%; top: 66.8%; width: 30%; max-width: 26rem; }
-.respectCopy p { font: 300 .75rem/1.45 var(--font-roboto-slab); }
+.respectCopy p { font: var(--font-description-weight) .75rem/1.45 var(--font-description-family); }
 .texturedOrangeBar { position: relative; display: block; width: 15.125rem; height: .3125rem; margin-bottom: 1.35rem; overflow: hidden; background: #d45231; }
 .texturedOrangeBar img { object-fit: cover; }
 
@@ -53,18 +54,19 @@
 .manifestoTexture { position: absolute; inset: 0; z-index: -1; background: url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/ourmanifesto-bg.webp") center/cover; }
 .manifestoCrosshair { z-index: 0; transform: translateY(-13.35%); }
 .manifestoCopy { position: absolute; left: 5.2%; top: 6%; width: 39%; height: 88%; }
-.manifestoKicker,.servicesKicker { display: flex; align-items: center; gap: 1rem; color: #d45231; font: 400 .72rem/1 var(--font-roboto-slab); }
+.manifestoKicker,.servicesKicker { display: flex; align-items: center; gap: 1rem; color: #d45231; font-family: var(--font-roboto-serif-family); font-size: .875rem; font-weight: var(--font-medium-weight); line-height: 1; }
 .manifestoKicker i,.servicesKicker i { width: 12rem; height: 1px; background: #d45231; }
 .manifestoCopy h2 { margin-top: 3.6rem; font-size: 2rem; font-weight: 300; line-height: 1.3; }
-.manifestoLead { margin-top: 2rem !important; max-width: 29rem; font: 300 .8rem/1.5 var(--font-roboto-slab); }
-.manifestoBody { margin-top: 6.8rem !important; max-width: 31rem; font: 300 .78rem/1.55 var(--font-roboto-slab); opacity: .86; }
-.manifestoLines { position: absolute; left: 0; bottom: 6.5%; display: grid; gap: 1.5rem; font: 400 .8rem/1.45 var(--font-roboto-slab); }
+.manifestoLead { margin-top: 2rem !important; max-width: 29rem; font: var(--font-description-weight) .8rem/1.5 var(--font-description-family); }
+.manifestoBody { margin-top: 6.8rem !important; max-width: 31rem; font-family: var(--font-heading-family) !important; font-size: 1rem; font-weight: var(--font-regular-weight) !important; line-height: 1.55; opacity: .86; }
+.manifestoLines { position: absolute; left: 0; bottom: 6.5%; display: grid; gap: 1.5rem; font-family: var(--font-roboto-slab-family); font-size: 1.125rem; font-weight: var(--font-regular-weight); line-height: 1.45; }
+.manifestoLines p { font-family: var(--font-roboto-slab-family) !important; font-weight: var(--font-regular-weight) !important; }
 .founderPortrait { position: absolute; left: 65.3%; top: 5.5%; width: 31.2%; height: 88.5%; overflow: hidden; }
 .founderPortrait figcaption { position: absolute; left: 1.2%; right: 1.2%; bottom: 1.4%; min-height: 7.2rem; padding: 1.4rem 1.6rem; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto 1fr; gap: .6rem 1rem; align-items: center; background: rgb(216 214 207/.9) url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/next-project-texture.webp") center/cover;  color: #232323; }
-.founderPortrait figcaption span { color: #d45231; font: .7rem/1 var(--font-roboto-slab); }
+.founderPortrait figcaption span { color: #d45231; font: var(--font-description-weight) .7rem/1 var(--font-description-family); }
 .founderPortrait figcaption i { height: 1px; background: #d45231; }
 .founderPortrait figcaption b { width: .625rem; height: .625rem; background: #d45231; }
-.founderPortrait figcaption strong { grid-column: 1/4; align-self: end; font: 400 1rem/1 var(--font-roboto-slab); }
+.founderPortrait figcaption strong { grid-column: 1/4; align-self: end; font: var(--font-description-weight) 1rem/1 var(--font-description-family); }
 .manifestoCrosshair i:nth-child(1) {
   left: 40%;
   right: 50.1%;
@@ -107,7 +109,7 @@
 .servicesCrosshair i:last-child { left: 96.45%; top: 4.5rem; width: 3.45%; }
 .sketches { position: absolute; left: 3.45%; top: 5rem; width: 62%; height: 31.8rem; overflow: hidden; }
 .servicesIntro { position: absolute; left: 72%; top: 3.8rem; width: 22.7%; }
-.servicesIntro p { font: 300 .78rem/1.45 var(--font-roboto-slab); }
+.servicesIntro p { font: var(--font-description-weight) .78rem/1.45 var(--font-description-family); }
 .servicesIntro a { width: 11rem; margin-top: 1rem; }
 .serviceSteps { position: absolute; inset: auto 0 0; height: 17.5rem; pointer-events: none; }
 .servicesPanel { position: absolute; inset: auto 3.45% 0; height: 17.5rem; z-index: 20; padding: 5.2rem 0 2rem; color: #232323; }
@@ -115,17 +117,17 @@
 .servicesKicker { position: absolute; left: 0; top: 2rem; }
 .servicesKicker i { width: 7.5rem; }
 .servicesGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 5rem; }
-.service h3 { min-height: 2.2rem; font-size: .82rem; font-weight: 400; }
-.service p { margin-top: .85rem; max-width: 21rem; font: 300 .72rem/1.45 var(--font-roboto-slab); }
+.service h3 { min-height: 2.2rem; font-family: var(--font-heading-family) !important; font-size: 1rem; font-weight: var(--font-regular-weight) !important; }
+.service p { margin-top: .85rem; max-width: 21rem; font-family: var(--font-roboto-slab-family) !important; font-size: .875rem; font-weight: var(--font-regular-weight) !important; line-height: 1.45; }
 
 /* Artboard 05 — Section -5 about.svg, 1440 × 1150 */
-.vision { height: 71.875rem; overflow: hidden; padding: 5.7rem 5.2%; background: #E7E8E8  center/cover; background-blend-mode: screen; color: #232323; }
+.vision { min-height: 71.875rem; overflow: hidden; padding: 5.7rem 5.2%; background: #E7E8E8 center/cover; background-blend-mode: screen; color: #232323; }
 .vision h2 { font-size: 2rem; font-weight: 400; letter-spacing: .025em; }
 .peopleGrid { margin-top: 3rem; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); column-gap: 3.5rem; row-gap: 3.9rem; }
 .personCard { min-width: 0; height: 27.7rem; padding-right: 3rem; border-right: 1px solid rgb(35 35 35/.18); overflow: hidden; }
 .personCard figure { position: relative; width: 100%; height: 21.1rem; overflow: hidden; }
 .personMeta { padding-top: 1.25rem; display: grid; grid-template-columns: auto minmax(3rem,1fr); gap: .7rem 1rem; align-items: center; }
-.personMeta>span { color: #d45231; font: 400 .7rem/1 var(--font-roboto-slab); white-space: nowrap; }
+.personMeta>span { color: #d45231; font: var(--font-description-weight) .7rem/1 var(--font-description-family); white-space: nowrap; }
 .editorialRule { display: flex; align-items: center; gap: 2.3rem; min-width: 0; }
 .editorialRule span:first-child { width: 100%; height: 1px; background: #d45231; }
 .editorialRule span:last-child { width: .625rem; height: .625rem; flex: none; background: #d45231; }
@@ -136,18 +138,24 @@
   .heroTitle { left: 3rem; top: 20%; }
   .heroStatement { left: 58%; top: 61%; width: 37%; }
   .heroLocation { left: 3rem; }
+  .heroLocation strong,.heroLocation span { font-size: 1.125rem; }
 
   .respectHeading { left: 3rem; }
   .respectCopy { left: auto; right: 3rem; width: 40%; }
 
   .manifestoCopy { left: 3rem; width: 44%; }
   .manifestoBody { margin-top: 4rem !important; }
+  .manifestoKicker,.servicesKicker { font-size: .8125rem; }
+  .manifestoBody { font-size: .9375rem; }
+  .manifestoLines { font-size: 1rem; }
   .manifestoCrosshair { transform: translateY(-17%); }
   .founderPortrait { left: 56%; width: 40%; }
 
   .sketches { left: 3rem; width: 59%; }
   .servicesIntro { left: 67%; width: 27%; }
   .servicesGrid { gap: 2rem; }
+  .service h3 { font-size: .9375rem; }
+  .service p { font-size: .8125rem; }
   .servicesPanel { left: 3rem; right: 3rem; }
   .servicesCrosshair i:first-child { width: 66%; }
 
@@ -167,6 +175,7 @@
   .heroCrosshair i:nth-child(4) { left: 50%; top: 56%; bottom: 7%; }
   .heroCrosshair b { left: 50%; top: 52%; }
   .heroLocation { left: 1.5rem; top: 50.7%; gap: .7rem; }
+  .heroLocation strong,.heroLocation span { font-size: .875rem; }
   .heroStatement { left: auto; right: 1.5rem; top: 60%; width: calc(50% - 2rem); }
   .heroStatement p { font-size: .66rem; }
   .heroStatement a { width: 9rem; height: 2.75rem; }
@@ -182,12 +191,15 @@
   .manifestoCrosshair { display: none; }
   .manifestoCopy { display: contents; }
   .manifestoKicker { order: 1; }
+  .manifestoKicker,.servicesKicker { font-size: .75rem; }
   .manifestoCopy h2 { margin-top: 2.5rem; font-size: 1.8rem; }
   .manifestoCopy h2 { order: 2; }
   .manifestoLead { order: 3; }
   .manifestoBody { margin-top: 3rem !important; margin-bottom: 4rem !important; }
+  .manifestoBody { font-size: .875rem; }
   .manifestoBody { order: 4; }
   .manifestoLines { position: static; order: 6; margin-top: 3rem; }
+  .manifestoLines { font-size: .9375rem; }
   .founderPortrait { position: relative; inset: auto; order: 5; width: 100%; height: 38rem; margin-top: 0; }
   .services { height: auto; min-height: 0; padding-top: 3rem; }
   .servicesTop { display: flex; height: auto; flex-direction: column; align-items: center; }
@@ -201,6 +213,8 @@
   .servicesKicker { left: 1.5rem; }
   .servicesGrid { grid-template-columns: 1fr; gap: 2.5rem; }
   .service h3 { min-height: 0; }
+  .service h3 { font-size: .9375rem; }
+  .service p { font-size: .8125rem; }
   .vision { height: auto; padding: 5rem 1.5rem; }
   .peopleGrid { grid-template-columns: 1fr; gap: 2.5rem; }
   .personCard { height: auto; padding: 0 0 2rem; border-right: 0; border-bottom: 1px solid rgb(35 35 35/.18); }

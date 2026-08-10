@@ -31,7 +31,7 @@ export type ProjectHeroSequenceProps = {
   media: ProjectHeroMedia;
   title: string;
   titleLayer?: "behind" | "front";
-  variant?: "vanam";
+  variant?: "perola" | "vanam";
 };
 
 export function ProjectHeroSequence({
@@ -205,6 +205,7 @@ export function ProjectHeroSequence({
         <ProjectHeroBackground
           backgroundImage={media.background}
           backgroundImageRef={backgroundImageRef}
+          softenUpperGradient={variant === "perola"}
           focalPosition={media.focalPosition}
           foregroundCanvasHeightRatio={media.foregroundCanvasHeightRatio}
           foregroundImage={media.foreground}

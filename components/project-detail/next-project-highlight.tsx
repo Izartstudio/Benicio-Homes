@@ -1,4 +1,8 @@
+"use client";
+
 import type { ImageProps } from "next/image";
+import type { MouseEvent } from "react";
+import { useLenis } from "@/components/providers/lenis-provider";
 import responsiveStyles from "./next-project-highlight.responsive.module.css";
 import { BlendScope } from "@/components/ui/blend-scope";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -27,6 +31,24 @@ export function NextProjectHighlight({
   image,
   title,
 }: NextProjectHighlightProps) {
+  const lenis = useLenis();
+
+  const resetScrollBeforeNavigation = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    lenis?.scrollTo(0, { immediate: true });
+    window.scrollTo({ left: 0, top: 0, behavior: "auto" });
+  };
+
   return (
     <BlendScope
       as="section"
@@ -64,6 +86,7 @@ export function NextProjectHighlight({
                 className="mt-[1.5rem] !min-h-0 !justify-start !rounded-none !border-0 !bg-transparent !p-0 !font-serif !text-[1.125rem] !font-bold !normal-case !tracking-normal !text-laterite hover:!bg-transparent"
                 data-next-project-highlight-cta
                 href={ctaHref}
+                onClick={resetScrollBeforeNavigation}
               >
                 <span>{ctaLabel}</span>
                 <span aria-hidden="true" className="ml-[2rem] text-[0.875rem]">

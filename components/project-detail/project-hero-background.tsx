@@ -21,6 +21,7 @@ export type ProjectHeroFocalPosition = {
 export type ProjectHeroBackgroundProps = {
   backgroundImage: ProjectHeroBackgroundImage;
   backgroundImageRef?: Ref<HTMLImageElement>;
+  softenUpperGradient?: boolean;
   focalPosition?: ProjectHeroFocalPosition;
   foregroundCanvasHeightRatio?: number;
   foregroundImage?: ProjectHeroBackgroundImage;
@@ -36,6 +37,7 @@ export const ProjectHeroBackground = forwardRef<
     {
       backgroundImage,
       backgroundImageRef,
+      softenUpperGradient = false,
       focalPosition,
       foregroundCanvasHeightRatio = 1,
       foregroundImage,
@@ -85,7 +87,11 @@ export const ProjectHeroBackground = forwardRef<
               />
             </div>
 
-            <div className={styles.upperMaskLayer} />
+            <div
+              className={`${styles.upperMaskLayer} ${
+                softenUpperGradient ? styles.softUpperMaskLayer : ""
+              }`}
+            />
 
           </div>
         </div>

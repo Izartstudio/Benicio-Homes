@@ -3,9 +3,9 @@ import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import { CTA } from "@/components/ui/cta";
 import { Reveal } from "@/components/ui/reveal";
 import { AboutPageAnimations } from "./about-page-animations";
+import type { AboutTeamSection } from "@/sanity/lib/aboutTeam";
 import styles from "./practice-page.module.css";
 
-const mediaPlaceholder = "/images/placeholders/responsive-media-fallback.webp";
 const texturePlaceholder = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/sketch.webp";
 const founderimage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/founder-image.webp";
 const horizontalbandimage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/horizontalbandleft.webp";
@@ -25,17 +25,6 @@ const services = [
     title: "Architectural Design & Development",
     copy: "Thoughtful planning, refined design, and meticulous execution come together to create homes that endure for generations.",
   },
-] as const;
-
-// CMS fallback data. The card dimensions are deliberately independent of copy
-// length so future CMS entries cannot shift or break the six-card grid.
-const sharedVision = [
-  { role: "Head Of Marketing & Branding", name: "Priyanka Rohra", image: mediaPlaceholder },
-  { role: "Head Of Finance", name: "Ms. Kaneez", image: texturePlaceholder },
-  { role: "Head Of Admin", name: "Ms. Fatima", image: mediaPlaceholder },
-  { role: "Site Supervisor", name: "Afzal Khan", image: texturePlaceholder },
-  { role: "Head Of Legal Team", name: "Priyam Sheik", image: mediaPlaceholder },
-  { role: "Designation", name: "Name", image: texturePlaceholder },
 ] as const;
 
 function EditorialRule() {
@@ -86,7 +75,7 @@ function TexturedOrangeBar() {
   );
 }
 
-export function AboutPracticePage() {
+export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSection }) {
   return (
     <div className={styles.page} data-about-practice-root>
       <AboutPageAnimations />
@@ -200,23 +189,25 @@ export function AboutPracticePage() {
         </div>
       </section>
 
-      <section
-        aria-labelledby="vision-title"
-        className={styles.vision}
-        data-design-source="Section -5 about.svg"
-      >
-        <Reveal revealMode="manual"><h2 id="vision-title">Crafted By A Shared Vision</h2></Reveal>
-        <div className={styles.peopleGrid}>
-          {sharedVision.map((person, index) => (
-            <Reveal as="article" className={styles.personCard} key={`${person.name}-${index}`} revealMode="manual">
-              <figure><Image src={person.image} alt="" fill sizes="(max-width: 767px) 100vw, 33vw" className={styles.cover} /></figure>
-              <div className={styles.personMeta}>
-                <span>{person.role}</span><EditorialRule /><h3>{person.name}</h3>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      {teamSection.isVisible ? (
+        <section
+          aria-labelledby="vision-title"
+          className={styles.vision}
+          data-design-source="Section -5 about.svg"
+        >
+          <Reveal revealMode="manual"><h2 id="vision-title">{teamSection.heading}</h2></Reveal>
+          <div className={styles.peopleGrid}>
+            {teamSection.members.map((person) => (
+              <Reveal as="article" className={styles.personCard} key={person.id} revealMode="manual">
+                <figure><Image src={person.image} alt={person.altText} fill sizes="(max-width: 767px) 100vw, 33vw" className={styles.cover} /></figure>
+                <div className={styles.personMeta}>
+                  <span>{person.role}</span><EditorialRule /><h3>{person.name}</h3>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }

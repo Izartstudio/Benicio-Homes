@@ -1,4 +1,20 @@
 :root {
+  /*
+   * SITE-WIDE TYPOGRAPHY CONTROLS
+   * Change these values to update typography across the entire website.
+   * 1 = current size, 1.1 = 10% larger, 0.9 = 10% smaller.
+   */
+  --site-font-size-base: 16px;
+  --site-font-size-scale: 1;
+  --font-heading-family: var(--font-bahnschrift), "Arial Narrow", sans-serif;
+  --font-description-family: var(--font-bahnschrift), "Arial Narrow", sans-serif;
+  --font-roboto-slab-family: var(--font-roboto-slab), serif;
+  --font-roboto-serif-family: var(--font-roboto-serif), serif;
+  --font-heading-weight: 350; /* Bahnschrift SemiLight */
+  --font-description-weight: 300; /* Bahnschrift Light */
+  --font-regular-weight: 400;
+  --font-medium-weight: 500;
+
   --color-ink: #111111;
   --color-charcoal: #232323;
   --color-graphite: #343434;
@@ -63,10 +79,10 @@
   --color-brass: var(--color-brass);
   --color-white: var(--color-white);
 
-  --font-sans: var(--font-bahnschrift);
-  --font-display: var(--font-bahnschrift);
-  --font-mono: var(--font-roboto-slab);
-  --font-serif: var(--font-roboto-slab);
+  --font-sans: var(--font-description-family);
+  --font-display: var(--font-heading-family);
+  --font-mono: var(--font-description-family);
+  --font-serif: var(--font-description-family);
 
   --spacing-page-x: var(--space-page-x);
   --spacing-section-y: var(--space-section-y);

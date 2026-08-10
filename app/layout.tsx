@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto_Slab } from "next/font/google";
+import { Roboto_Serif, Roboto_Slab } from "next/font/google";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/navbar/navbar";
 import { LenisProvider } from "@/components/providers/lenis-provider";
@@ -9,6 +9,13 @@ const robotoSlab = Roboto_Slab({
   variable: "--font-roboto-slab",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const robotoSerif = Roboto_Serif({
+  variable: "--font-roboto-serif",
+  subsets: ["latin"],
+  weight: ["500"],
   display: "swap",
 });
 
@@ -37,14 +44,14 @@ export default function RootLayout({
   const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL?.trim().replace(/\/+$/, "");
 
   return (
-    <html lang="en">
+    <html data-scroll-behavior="smooth" lang="en">
       {cdnUrl ? (
         <head>
           <link crossOrigin="anonymous" href={cdnUrl} rel="preconnect" />
           <link href={cdnUrl} rel="dns-prefetch" />
         </head>
       ) : null}
-      <body className={`${bahnschrift.variable} ${robotoSlab.variable} antialiased`}>
+      <body className={`${bahnschrift.variable} ${robotoSlab.variable} ${robotoSerif.variable} antialiased`}>
         <LenisProvider>
           <Navbar />
           {children}

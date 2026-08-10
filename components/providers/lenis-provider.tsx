@@ -130,7 +130,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    window.history.scrollRestoration = "auto";
+    window.history.scrollRestoration = "manual";
 
     const isClientNavigation = previousPathnameRef.current !== pathname;
     previousPathnameRef.current = pathname;

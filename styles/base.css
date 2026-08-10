@@ -9,6 +9,7 @@
     background: var(--color-bone);
     color: var(--color-ink);
     scroll-behavior: auto;
+    font-size: calc(var(--site-font-size-base) * var(--site-font-size-scale));
   }
 
   body {
@@ -18,7 +19,8 @@
     overflow-x: clip;
     background: var(--color-bone);
     color: var(--color-ink);
-    font-family: var(--font-bahnschrift);
+    font-family: var(--font-description-family);
+    font-weight: var(--font-description-weight);
     text-rendering: geometricPrecision;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -66,6 +68,17 @@
   textarea,
   select {
     font: inherit;
+  }
+
+  /* Semantic typography roles. Component styles keep control of layout and size. */
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+  }
+
+  :where(p, li, dd, blockquote, figcaption, label, input, textarea, select) {
+    font-family: var(--font-description-family);
+    font-weight: var(--font-description-weight);
   }
 }
 
