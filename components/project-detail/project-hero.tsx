@@ -1,6 +1,7 @@
 "use client";
 
 import type { ImageProps } from "next/image";
+import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { Reveal } from "@/components/ui/reveal";
@@ -43,6 +44,7 @@ export function ProjectHeroSequence({
   titleLayer = "behind",
   variant,
 }: ProjectHeroSequenceProps) {
+  const pathname = usePathname();
   const backgroundImageRef = useRef<HTMLImageElement | null>(null);
   const continuationStatementRef = useRef<HTMLDivElement | null>(null);
   const foregroundMotionRef = useRef<HTMLDivElement | null>(null);
@@ -187,7 +189,7 @@ export function ProjectHeroSequence({
       mediaMatcher?.revert();
       context?.revert();
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <section

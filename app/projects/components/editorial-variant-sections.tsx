@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -32,6 +33,7 @@ function Media({ image, priority = false }: {
 }
 
 export function EditorialVariantSections({ data }: EditorialVariantSectionsProps) {
+  const pathname = usePathname();
   const rootRef = useRef<HTMLDivElement | null>(null);
   const textureStyle = {
     "--editorial-gallery-texture": data.textures?.gallery
@@ -94,7 +96,7 @@ export function EditorialVariantSections({ data }: EditorialVariantSectionsProps
     }, contextRoot);
 
     return () => context.revert();
-  }, []);
+  }, [pathname]);
 
   return (
     <div

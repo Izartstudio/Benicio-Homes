@@ -2,6 +2,7 @@
 
 import responsiveStyles from "./project-site-composition-section.responsive.module.css";
 import type { ImageProps } from "next/image";
+import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -92,6 +93,7 @@ export function ProjectSiteCompositionSection({
   specifications,
   textureSrc,
 }: ProjectSiteCompositionSectionProps) {
+  const pathname = usePathname();
   const sectionRef = useRef<HTMLElement | null>(null);
   const guideLineSet = GUIDE_LINE_SETS[guideLineVariant];
   const zenUnderlayLine =
@@ -302,7 +304,7 @@ export function ProjectSiteCompositionSection({
       mm.revert();
       ctx.revert();
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <section

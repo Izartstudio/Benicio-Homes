@@ -2,6 +2,7 @@
 
 import responsiveStyles from "./project-location-section.responsive.module.css";
 import type { ImageProps } from "next/image";
+import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -30,6 +31,7 @@ export function ProjectLocationSection({
   featureImage,
   location,
 }: ProjectLocationSectionProps) {
+  const pathname = usePathname();
   const sectionRef = useRef<HTMLElement | null>(null);
 
   useLayoutEffect(() => {
@@ -92,7 +94,7 @@ export function ProjectLocationSection({
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <section

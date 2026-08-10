@@ -5,6 +5,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type ReactNode,
@@ -19,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const LenisContext = createContext<Lenis | null>(null);
 const nativeScrollMediaQuery = "(max-width: 767px), (pointer: coarse)";
+const scrollStoragePrefix = "benicio-scroll-position:";
 
 /** The single document-level Lenis instance for public site routes. */
 export function LenisProvider({ children }: { children: ReactNode }) {
@@ -129,11 +131,16 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.history.scrollRestoration = "manual";
 
     const isClientNavigation = previousPathnameRef.current !== pathname;
     previousPathnameRef.current = pathname;
+    const navigationEntry = performance.getEntriesByType(
+      "navigation",
+    )[0] as PerformanceNavigationTiming | undefined;
+    const isReload = !isClientNavigation && navigationEntry?.type === "reload";
+    const scrollStorageKey = `${scrollStoragePrefix}${window.location.pathname}${window.location.search}`;
 
     const scrollFrame = requestAnimationFrame(() => {
       const hash = window.location.hash;
@@ -147,6 +154,15 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       } else if (isClientNavigation) {
         lenisRef.current?.scrollTo(0, { immediate: true });
         window.scrollTo({ left: 0, top: 0, behavior: "auto" });
+      } else if (isReload) {
+        const storedPosition = Number(
+          window.sessionStorage.getItem(scrollStorageKey),
+        );
+
+        if (Number.isFinite(storedPosition) && storedPosition > 0) {
+          lenisRef.current?.scrollTo(storedPosition, { immediate: true });
+          window.scrollTo({ left: 0, top: storedPosition, behavior: "auto" });
+        }
       }
     });
 
@@ -180,6 +196,52 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       }
     };
   }, [pathname, scheduleRefresh]);
+
+  useEffect(() => {
+    const storeScrollPosition = () => {
+      const key = `${scrollStoragePrefix}${window.location.pathname}${window.location.search}`;
+      window.sessionStorage.setItem(key, String(window.scrollY));
+    };
+
+    const resetBeforeInternalNavigation = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const target = event.target;
+      const anchor =
+        target instanceof Element
+          ? target.closest<HTMLAnchorElement>("a[href]")
+          : null;
+
+      if (!anchor || anchor.target || anchor.hasAttribute("download")) return;
+
+      const destination = new URL(anchor.href, window.location.href);
+      const isSameDocument =
+        destination.pathname === window.location.pathname &&
+        destination.search === window.location.search;
+
+      if (destination.origin !== window.location.origin || isSameDocument) return;
+
+      lenisRef.current?.scrollTo(0, { immediate: true });
+      window.scrollTo({ left: 0, top: 0, behavior: "auto" });
+    };
+
+    window.addEventListener("pagehide", storeScrollPosition);
+    document.addEventListener("click", resetBeforeInternalNavigation, true);
+
+    return () => {
+      window.removeEventListener("pagehide", storeScrollPosition);
+      document.removeEventListener("click", resetBeforeInternalNavigation, true);
+    };
+  }, []);
 
   useEffect(() => {
     let lastWidth = window.innerWidth;

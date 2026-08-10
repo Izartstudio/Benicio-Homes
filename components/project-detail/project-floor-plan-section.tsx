@@ -2,6 +2,7 @@
 
 import responsiveStyles from "./project-floor-plan-section.responsive.module.css";
 import type { ImageProps } from "next/image";
+import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -101,6 +102,7 @@ export function ProjectFloorPlanSection({
   specifications,
   villaLabel,
 }: ProjectFloorPlanSectionProps) {
+  const pathname = usePathname();
   const sectionRef = useRef<HTMLElement | null>(null);
 
   useLayoutEffect(() => {
@@ -217,7 +219,7 @@ export function ProjectFloorPlanSection({
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <section

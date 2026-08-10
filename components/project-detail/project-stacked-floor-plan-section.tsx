@@ -1,6 +1,7 @@
 "use client";
 
 import type { ProjectFloorPlanData } from "@/app/projects/data";
+import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -75,6 +76,7 @@ export function ProjectStackedFloorPlanSection({
   plans,
   variant,
 }: ProjectStackedFloorPlanSectionProps) {
+  const pathname = usePathname();
   const expectedCount = variant === "stacked-three" ? 3 : 2;
   const visiblePlans = plans.slice(0, expectedCount);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -179,7 +181,7 @@ export function ProjectStackedFloorPlanSection({
     return () => {
       context.revert();
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <section
@@ -192,6 +194,7 @@ export function ProjectStackedFloorPlanSection({
       <div
         aria-hidden="true"
         className={styles.texture}
+        data-project-stacked-floor-plan-background-texture
         style={{ backgroundImage: `url('${PDP_TEXTURE_URL}')` }}
       />
 

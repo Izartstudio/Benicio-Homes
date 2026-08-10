@@ -331,6 +331,33 @@ html[data-scroll-engine="safari-native"]
 }
 
 @media (max-width: 767px) {
+  /* One non-repeating texture, stretched across each taller mobile surface. */
+  [data-project-detail-page] :is(
+      [data-project-location-background-texture],
+      [data-project-site-composition-background-texture],
+      [data-project-moodboard-background-texture],
+      [data-project-site-showcase-background-texture],
+      [data-project-specifications-background-texture],
+      [data-project-floor-plan-background-texture],
+      [data-project-stacked-floor-plan-background-texture],
+      [data-project-gallery-editorial-background-texture],
+      [data-next-project-highlight-left-panel],
+      [data-pdp-variant="site-composition"],
+      [data-pdp-variant="moodboard"],
+      [data-pdp-variant="showcase"],
+      [data-pdp-variant="gallery"]
+    ) {
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+  }
+
+  [data-journal-detail] :is(.journal-detail-masthead, .journal-article-paper) {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
   .journal-intro { min-height: 35rem; }
   .journal-steps {
     width: 100%;
