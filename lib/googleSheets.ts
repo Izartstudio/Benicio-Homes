@@ -1,6 +1,4 @@
-import { createSign } from "node:crypto";
-
-type ContactSubmission = {
+export type ContactSubmission = {
   email: string;
   interestedProject: string;
   location: string;
@@ -10,10 +8,14 @@ type ContactSubmission = {
   timestamp: string;
 };
 
-type GoogleTokenResponse = {
-  access_token?: string;
+export type BrochureSubmission = Pick<
+  ContactSubmission,
+  "email" | "name" | "phone" | "timestamp"
+>;
+
+type AppsScriptResponse = {
   error?: string;
-  error_description?: string;
+  ok?: boolean;
 };
 
 function requiredEnv(name: string) {
@@ -26,109 +28,46 @@ function requiredEnv(name: string) {
   return value;
 }
 
-function base64Url(value: Buffer | string) {
-  const buffer = typeof value === "string" ? Buffer.from(value) : value;
-
-  return buffer
-    .toString("base64")
-    .replaceAll("+", "-")
-    .replaceAll("/", "_")
-    .replaceAll("=", "");
-}
-
-function createGoogleJwt() {
-  const serviceAccountEmail = requiredEnv("GOOGLE_SERVICE_ACCOUNT_EMAIL");
-  const privateKey = requiredEnv("GOOGLE_PRIVATE_KEY").replace(/\\n/g, "\n");
-  const now = Math.floor(Date.now() / 1000);
-
-  const header = {
-    alg: "RS256",
-    typ: "JWT",
-  };
-
-  const payload = {
-    aud: "https://oauth2.googleapis.com/token",
-    exp: now + 3600,
-    iat: now,
-    iss: serviceAccountEmail,
-    scope: "https://www.googleapis.com/auth/spreadsheets",
-  };
-
-  const unsignedToken = `${base64Url(JSON.stringify(header))}.${base64Url(
-    JSON.stringify(payload),
-  )}`;
-
-  const signature = createSign("RSA-SHA256")
-    .update(unsignedToken)
-    .sign(privateKey);
-
-  return `${unsignedToken}.${base64Url(signature)}`;
-}
-
-async function getGoogleAccessToken() {
-  const assertion = createGoogleJwt();
-  const body = new URLSearchParams({
-    assertion,
-    grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-  });
-
-  const response = await fetch("https://oauth2.googleapis.com/token", {
-    body,
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    method: "POST",
-  });
-
-  const data = (await response.json()) as GoogleTokenResponse;
-
-  if (!response.ok || !data.access_token) {
-    throw new Error(
-      data.error_description ||
-        data.error ||
-        "Unable to authorize Google Sheets request.",
-    );
-  }
-
-  return data.access_token;
-}
-
-export async function appendContactSubmission(submission: ContactSubmission) {
-  const sheetId = requiredEnv("GOOGLE_SHEET_ID");
-  const range = process.env.GOOGLE_SHEET_RANGE || "Submissions!A:G";
-  const accessToken = await getGoogleAccessToken();
-  const endpoint = new URL(
-    `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(
-      range,
-    )}:append`,
-  );
-
-  endpoint.searchParams.set("valueInputOption", "USER_ENTERED");
-  endpoint.searchParams.set("insertDataOption", "INSERT_ROWS");
-
+async function postToAppsScript(
+  urlEnvironmentVariable: string,
+  secretEnvironmentVariable: string,
+  submission: ContactSubmission | BrochureSubmission,
+) {
+  const endpoint = requiredEnv(urlEnvironmentVariable);
+  const secret = requiredEnv(secretEnvironmentVariable);
   const response = await fetch(endpoint, {
-    body: JSON.stringify({
-      values: [
-        [
-          submission.timestamp,
-          submission.name,
-          submission.phone,
-          submission.email,
-          submission.location,
-          submission.interestedProject,
-          submission.message,
-        ],
-      ],
-    }),
+    body: JSON.stringify({ ...submission, secret }),
+    cache: "no-store",
     headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
+      "Content-Type": "text/plain;charset=utf-8",
     },
     method: "POST",
+    redirect: "follow",
   });
 
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || "Unable to append submission to Google Sheet.");
+    throw new Error(`Google Apps Script returned HTTP ${response.status}.`);
   }
+
+  const result = (await response.json()) as AppsScriptResponse;
+
+  if (!result.ok) {
+    throw new Error(result.error || "Unable to save the form submission.");
+  }
+}
+
+export function appendContactSubmission(submission: ContactSubmission) {
+  return postToAppsScript(
+    "CONTACT_APPS_SCRIPT_URL",
+    "CONTACT_APPS_SCRIPT_SECRET",
+    submission,
+  );
+}
+
+export function appendBrochureSubmission(submission: BrochureSubmission) {
+  return postToAppsScript(
+    "BROCHURE_APPS_SCRIPT_URL",
+    "BROCHURE_APPS_SCRIPT_SECRET",
+    submission,
+  );
 }

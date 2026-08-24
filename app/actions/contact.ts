@@ -1,7 +1,6 @@
 "use server";
 
 import { appendContactSubmission } from "@/lib/googleSheets";
-import { sendContactNotification } from "@/lib/resend";
 
 export type ContactFormErrors = Partial<
   Record<
@@ -79,8 +78,6 @@ export async function submitContactForm(
       phone,
       timestamp: new Date().toISOString(),
     });
-
-    await sendContactNotification();
 
     return {
       message: "Thank you. Your enquiry has been sent.",

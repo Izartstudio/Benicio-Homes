@@ -228,7 +228,42 @@ export function LenisProvider({ children }: { children: ReactNode }) {
         destination.pathname === window.location.pathname &&
         destination.search === window.location.search;
 
-      if (destination.origin !== window.location.origin || isSameDocument) return;
+      if (destination.origin !== window.location.origin) return;
+
+      if (isSameDocument && destination.hash) {
+        let targetId: string;
+
+        try {
+          targetId = decodeURIComponent(destination.hash.slice(1));
+        } catch {
+          targetId = destination.hash.slice(1);
+        }
+
+        const hashTarget = document.getElementById(targetId);
+
+        if (!hashTarget) return;
+
+        event.preventDefault();
+
+        if (window.location.hash !== destination.hash) {
+          window.history.pushState(null, "", destination.hash);
+        }
+
+        requestAnimationFrame(() => {
+          lenisRef.current?.scrollTo(hashTarget, {
+            duration: 0.8,
+            offset: 0,
+          });
+
+          if (!lenisRef.current) {
+            hashTarget.scrollIntoView({ block: "start", behavior: "smooth" });
+          }
+        });
+
+        return;
+      }
+
+      if (isSameDocument) return;
 
       lenisRef.current?.scrollTo(0, { immediate: true });
       window.scrollTo({ left: 0, top: 0, behavior: "auto" });

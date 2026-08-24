@@ -25,7 +25,7 @@ export function ProductDetailPage({ project }: ProductDetailPageProps) {
       {project.editorialVariants ? (
         <>
           <EditorialVariantSections data={project.editorialVariants} />
-          <BrochurePrompt />
+          <BrochurePrompt projectSlug={project.slug} />
         </>
       ) : (
         <>
@@ -35,7 +35,7 @@ export function ProductDetailPage({ project }: ProductDetailPageProps) {
           <SpecificationSection data={project.specifications} />
           <FloorPlanCollection layout={project.floorPlanLayout} plans={project.floorPlans} />
           <GallerySection data={project.gallery} />
-          <BrochurePrompt />
+          <BrochurePrompt projectSlug={project.slug} />
           <NextProjectSection data={project.nextProject} />
         </>
       )}

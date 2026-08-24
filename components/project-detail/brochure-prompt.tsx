@@ -8,12 +8,14 @@ import {
   type BrochureFormState,
 } from "@/app/actions/brochure";
 import { CTA } from "@/components/ui/cta";
-import { PROJECT_MEDIA } from "@/app/projects/data/project-media";
 import styles from "./brochure-prompt.module.css";
 
 const initialState: BrochureFormState = { status: "idle" };
-const brochurePdf: string = PROJECT_MEDIA.shared.brochurePdf;
 export const OPEN_BROCHURE_FORM_EVENT = "benicio:open-brochure-form";
+
+type BrochurePromptProps = {
+  projectSlug: string;
+};
 
 function BrochureField({
   autoComplete,
@@ -54,32 +56,58 @@ function BrochureSubmitButton() {
   );
 }
 
-export function BrochurePrompt() {
-  const [isOpen, setIsOpen] = useState(false);
-  const dialogTitleId = useId();
+function BrochureForm({ projectSlug }: BrochurePromptProps) {
   const formRef = useRef<HTMLFormElement>(null);
-  const [formState, formAction] = useActionState(submitBrochureForm, initialState);
-
-  useEffect(() => {
-    const openBrochureForm = () => setIsOpen(true);
-    window.addEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
-    return () => window.removeEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
-  }, []);
+  const [formState, formAction] = useActionState(
+    submitBrochureForm,
+    initialState,
+  );
 
   useEffect(() => {
     if (formState.status !== "success") return;
 
     formRef.current?.reset();
 
-    if (brochurePdf) {
-      const downloadLink = document.createElement("a");
-      downloadLink.href = brochurePdf;
-      downloadLink.download = "vanam-villas-brochure.pdf";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      downloadLink.remove();
-    }
-  }, [formState.status]);
+    const downloadLink = document.createElement("a");
+    downloadLink.href = `/assets/pdf/${projectSlug}.pdf`;
+    downloadLink.download = `${projectSlug}-brochure.pdf`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+  }, [formState.status, formState.submissionId, projectSlug]);
+
+  return (
+    <form action={formAction} className={styles.brochureForm} ref={formRef}>
+      <div className={styles.formTexture} aria-hidden="true" />
+      <div className={styles.formContent}>
+        <header>
+          <h3>VANAM VILLAS</h3>
+        </header>
+        <div className={styles.fields}>
+          <BrochureField autoComplete="name" errors={formState.errors} label="Full Name" name="name" />
+          <BrochureField autoComplete="tel" errors={formState.errors} label="Phone Number" name="phone" type="tel" />
+          <BrochureField autoComplete="email" errors={formState.errors} label="Email Address" name="email" type="email" />
+        </div>
+        {formState.message ? (
+          <p className={formState.status === "success" ? styles.success : styles.formError} role={formState.status === "error" ? "alert" : "status"}>
+            {formState.message}
+          </p>
+        ) : null}
+        <BrochureSubmitButton />
+      </div>
+    </form>
+  );
+}
+
+export function BrochurePrompt({ projectSlug }: BrochurePromptProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dialogTitleId = useId();
+
+  useEffect(() => {
+    const openBrochureForm = () => setIsOpen(true);
+    window.addEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
+    return () => window.removeEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -150,25 +178,7 @@ export function BrochurePrompt() {
             >
               ×
             </button>
-            <form action={formAction} className={styles.brochureForm} ref={formRef}>
-              <div className={styles.formTexture} aria-hidden="true" />
-              <div className={styles.formContent}>
-                <header>
-                  <h3>VANAM VILLAS</h3>
-                </header>
-                <div className={styles.fields}>
-                  <BrochureField autoComplete="name" errors={formState.errors} label="Full Name" name="name" />
-                  <BrochureField autoComplete="tel" errors={formState.errors} label="Phone Number" name="phone" type="tel" />
-                  <BrochureField autoComplete="email" errors={formState.errors} label="Email Address" name="email" type="email" />
-                </div>
-                {formState.message ? (
-                  <p className={formState.status === "success" ? styles.success : styles.formError} role={formState.status === "error" ? "alert" : "status"}>
-                    {formState.message}
-                  </p>
-                ) : null}
-                <BrochureSubmitButton />
-              </div>
-            </form>
+            <BrochureForm projectSlug={projectSlug} />
           </section>
         </div>
       ) : null}

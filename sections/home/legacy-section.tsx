@@ -140,7 +140,7 @@ export function LegacySection() {
               className="mt-[clamp(1.75rem,2.7vw,2.5rem)] inline-flex h-[3.125rem] w-[11rem] items-center justify-between px-3 font-display text-[0.95rem]"
               darkBackground="#464646"
               data-legacy-cta
-              href="/#featured-projects-title"
+              href="/projects"
               variant="dark"
             >
               View All Projects

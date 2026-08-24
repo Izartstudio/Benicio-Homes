@@ -1,13 +1,13 @@
 "use server";
 
-import { appendContactSubmission } from "@/lib/googleSheets";
-import { sendContactNotification } from "@/lib/resend";
+import { appendBrochureSubmission } from "@/lib/googleSheets";
 
 export type BrochureFormErrors = Partial<
   Record<"email" | "name" | "phone", string>
 >;
 
 export type BrochureFormState = {
+  submissionId?: string;
   errors?: BrochureFormErrors;
   message?: string;
   status: "error" | "idle" | "success";
@@ -43,20 +43,17 @@ export async function submitBrochureForm(
   }
 
   try {
-    await appendContactSubmission({
+    await appendBrochureSubmission({
       email,
-      interestedProject: "Vanam Villas brochure",
-      location: "",
-      message: "Brochure download request",
       name,
       phone,
       timestamp: new Date().toISOString(),
     });
-    await sendContactNotification();
 
     return {
       message: "Thank you. Your brochure request has been received.",
       status: "success",
+      submissionId: crypto.randomUUID(),
     };
   } catch (error) {
     console.error("Brochure form submission failed:", error);

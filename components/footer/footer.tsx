@@ -5,7 +5,7 @@ import { FooterLink } from "@/components/footer/footer-link";
 import styles from "./footer.module.css";
 
 const navigationLinks = [
-  { href: "#featured-projects", label: "Projects" },
+  { href: "/projects", label: "Projects" },
   { href: "#about", label: "About Us" },
   { href: "#contact", label: "Get In Touch" },
   { href: "/journal", label: "Journal" },
