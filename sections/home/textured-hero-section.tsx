@@ -14,7 +14,7 @@ const mobilePlaybackId =
 export function TexturedHeroSection() {
   return (
     <section
-      aria-label="Benicio hero"
+      aria-labelledby="homepage-hero-title"
       className={`relative isolate h-[100svh] min-h-[640px] overflow-hidden bg-[#2d2d2d] ${responsiveStyles.responsiveRoot}`}
       data-section="textured-hero"
     >
@@ -29,6 +29,12 @@ export function TexturedHeroSection() {
         fallbackSrc={fallbackHeroVideo.url}
         mobilePlaybackId={mobilePlaybackId}
       />
+      <h1
+        className={responsiveStyles.heroTitle}
+        id="homepage-hero-title"
+      >
+        Where Architecture Meets Nature
+      </h1>
     </section>
   );
 }

@@ -198,6 +198,10 @@ html[data-scroll-engine="safari-native"]
   background-blend-mode: normal;
 }
 
+[data-editorial-variant="journal"] .journal-listing-section::before {
+  background-position: center -30.8333vw;
+}
+
 .journal-card {
   height: 49.5rem;
   width: 100%;
@@ -363,6 +367,9 @@ html[data-scroll-engine="safari-native"]
     width: 100%;
     height: 9rem;
     aspect-ratio: auto;
+  }
+  [data-editorial-variant="journal"] .journal-listing-section::before {
+    background-position: center -9rem;
   }
   .journal-grid { gap: 1rem; }
   .journal-card {
