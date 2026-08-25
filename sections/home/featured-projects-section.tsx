@@ -365,7 +365,6 @@ export function FeaturedProjectsSection() {
                   src={project.url}
                   alt={project.imageAlt}
                   fill
-                  priority={index === 0}
                   sizes="(min-width: 1024px) 65vw, 100vw"
                   className="object-cover"
                 />

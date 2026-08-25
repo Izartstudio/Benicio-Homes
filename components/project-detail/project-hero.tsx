@@ -10,6 +10,7 @@ import {
   type ProjectHeroFocalPosition,
 } from "./project-hero-background";
 import { ProjectTitleTexture } from "./project-title-texture";
+import { isSafariBrowser } from "@/utils/is-safari-browser";
 import styles from "./project-hero.responsive.module.css";
 
 type ProjectHeroImage = {
@@ -99,7 +100,10 @@ export function ProjectHeroSequence({
               tablet: boolean;
               reduceMotion: boolean;
             };
-            const animatedMedia = [mediaMotion, foregroundMotionRef.current, title].filter(Boolean);
+            const mediaLayers = isSafariBrowser()
+              ? []
+              : [mediaMotion, foregroundMotionRef.current].filter(Boolean);
+            const animatedMedia = [...mediaLayers, title].filter(Boolean);
 
             if (conditions.reduceMotion) {
               gsap.set([...animatedMedia, continuationStatement], {
@@ -136,15 +140,17 @@ export function ProjectHeroSequence({
               },
             });
 
-            timeline.to(
-              [mediaMotion, foregroundMotionRef.current].filter(Boolean),
-              {
-                force3D: true,
-                scale: 1.035,
-                yPercent: -1.25,
-              },
-              0,
-            );
+            if (mediaLayers.length > 0) {
+              timeline.to(
+                mediaLayers,
+                {
+                  force3D: true,
+                  scale: 1.035,
+                  yPercent: -1.25,
+                },
+                0,
+              );
+            }
 
             timeline
               .to(

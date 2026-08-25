@@ -1,7 +1,7 @@
 "use client";
 
 import responsiveStyles from "./story-section.responsive.module.css";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -172,7 +172,6 @@ export function StorySection() {
           src={storyImages.upper.url}
           alt={storyImages.upper.alt}
           fill
-          loading="eager"
           sizes="10vw"
           className="object-cover object-top"
         />
@@ -204,7 +203,6 @@ export function StorySection() {
               src={storyImages.hero.url}
               alt={storyImages.hero.alt}
               fill
-              loading="eager"
               sizes="100vw"
               className="object-cover object-center"
             />

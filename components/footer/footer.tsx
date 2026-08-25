@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import Link from "next/link";
 import { FooterColumn } from "@/components/footer/footer-column";
 import { FooterLink } from "@/components/footer/footer-link";
@@ -32,12 +32,18 @@ export function Footer() {
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-[length:100%_auto] md:bg-top"
+        className="absolute inset-0 z-0"
         data-footer-background
-        style={{
-          backgroundImage: 'url("/assets/footer/footer-texture.webp")',
-        }}
-      />
+      >
+        <Image
+          alt=""
+          className="object-cover object-center md:object-top"
+          fill
+          quality={75}
+          sizes="100vw"
+          src="/assets/footer/footer-texture.webp"
+        />
+      </div>
 
       <div
         className={`relative grid h-full grid-cols-[minmax(24rem,34.5rem)_minmax(9rem,12rem)_minmax(12rem,14rem)_minmax(14rem,16rem)] gap-[clamp(3rem,5.8vw,5.25rem)] px-[5.208vw] pt-[6.25rem] ${styles.content}`}
@@ -57,7 +63,6 @@ export function Footer() {
                   alt="Benicio"
                   width={75}
                   height={57}
-                  priority={false}
                 />
               </Link>
 

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { Reveal } from "@/components/ui/reveal";
 import type { JournalPost } from "@/sanity/journal/types";
 import { getJournalHeadingId } from "@/utils/journal-heading";

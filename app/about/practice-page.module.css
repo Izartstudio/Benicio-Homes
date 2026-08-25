@@ -36,7 +36,7 @@
 
 /* Artboard 02 — Section -2about.svg, 1440 × 700 */
 .respect { position: relative; isolation: isolate; height: 43.75rem; overflow: hidden;; }
-.respectTexture { position: absolute; inset: 0; z-index: -1; background: url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/aboutsection-2.webp") center/cover;  }
+.respectTexture { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .respectHeading { position: absolute; left: 5.2%; top: 11.5%; }
 .respectHeading h2 { font-size: clamp(2.2rem,3vw,2.75rem); font-weight: 300; line-height: 1.2; }
 .respectBand { position: absolute; left: 50%; top: 17.4375rem; width: 100vw; max-width: none; height: 8.25rem; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,14.375rem) minmax(0,1fr); overflow: hidden; transform: translateX(-50%); }
@@ -51,7 +51,7 @@
 /* Artboard 03 — Section -3 about.svg, 1440 × 900 */
 
 .manifesto { position: relative; isolation: isolate; height: 56.25rem; overflow: hidden; }
-.manifestoTexture { position: absolute; inset: 0; z-index: -1; background: url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/ourmanifesto-bg.webp") center/cover; }
+.manifestoTexture { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .manifestoCrosshair { z-index: 0; transform: translateY(-13.35%); }
 .manifestoCopy { position: absolute; left: 5.2%; top: 6%; width: 39%; height: 88%; }
 .manifestoKicker,.servicesKicker { display: flex; align-items: center; gap: 1rem; color: #d45231; font-family: var(--font-roboto-serif-family); font-size: .875rem; font-weight: var(--font-medium-weight); line-height: 1; }

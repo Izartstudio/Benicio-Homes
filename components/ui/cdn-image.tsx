@@ -1,6 +1,7 @@
-import Image, { type ImageProps } from "next/image";
+import type { ImageProps } from "next/image";
 import { forwardRef } from "react";
 import { getCdnAsset } from "@/lib/getCdnAsset";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 type CdnImageProps = Omit<ImageProps, "src"> & {
   src: ImageProps["src"] | null | undefined;
@@ -15,7 +16,9 @@ export const CdnImage = forwardRef<HTMLImageElement, CdnImageProps>(
       return null;
     }
 
-    return <Image {...props} alt={props.alt} ref={ref} src={resolvedSrc} />;
+    return (
+      <OptimizedImage {...props} alt={props.alt} ref={ref} src={resolvedSrc} />
+    );
   },
 );
 

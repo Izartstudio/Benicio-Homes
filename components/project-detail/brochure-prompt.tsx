@@ -8,6 +8,7 @@ import {
   type BrochureFormState,
 } from "@/app/actions/brochure";
 import { CTA } from "@/components/ui/cta";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import styles from "./brochure-prompt.module.css";
 
 const initialState: BrochureFormState = { status: "idle" };
@@ -78,7 +79,16 @@ function BrochureForm({ projectSlug }: BrochurePromptProps) {
 
   return (
     <form action={formAction} className={styles.brochureForm} ref={formRef}>
-      <div className={styles.formTexture} aria-hidden="true" />
+      <div className={styles.formTexture} aria-hidden="true">
+        <OptimizedImage
+          alt=""
+          className={styles.formTextureImage}
+          fill
+          quality={75}
+          sizes="(max-width: 767px) 100vw, 38rem"
+          src="/assets/textures/formbgtexture.webp"
+        />
+      </div>
       <div className={styles.formContent}>
         <header>
           <h3>VANAM VILLAS</h3>

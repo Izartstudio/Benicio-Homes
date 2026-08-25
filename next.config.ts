@@ -54,9 +54,12 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Extra small responsive candidates prevent phones and compact cards from
+    // downloading a 640px image when a 320/480px source is sufficient.
+    deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     formats: ["image/webp"],
     minimumCacheTTL: 31536000,
-    qualities: [75, 90],
+    qualities: [75, 85, 90],
     remotePatterns: [
       // Keep the server-side upload public URL supported for existing uploads.
       ...getRemotePattern(r2PublicUrl, "R2_PUBLIC_URL"),

@@ -2,7 +2,7 @@
 
 import responsiveStyles from "./legacy-section.responsive.module.css";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -100,7 +100,7 @@ export function LegacySection() {
             width={1440}
             height={411}
             draggable={false}
-            unoptimized
+            quality={75}
             className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover opacity-100 [-webkit-user-drag:none]"
             data-legacy-background-texture
           />

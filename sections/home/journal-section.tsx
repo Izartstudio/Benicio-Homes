@@ -1,7 +1,7 @@
 "use client";
 
 import responsiveStyles from "./journal-section.responsive.module.css";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
@@ -250,7 +250,7 @@ export function JournalSection({
                     aria-hidden="true"
                     fill
                     draggable={false}
-                    unoptimized
+                    quality={75}
                     sizes="(min-width: 1024px) 25vw, 78vw"
                     className="pointer-events-none select-none object-fill [-webkit-user-drag:none]"
                     data-journal-card-surface

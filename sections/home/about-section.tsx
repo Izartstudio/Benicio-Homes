@@ -1,7 +1,7 @@
 "use client";
 
 import responsiveStyles from "./about-section.responsive.module.css";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { useLayoutEffect } from "react";
 import { setupSectionReveals } from "@/utils/setup-section-reveals";
 import { CdnImage } from "@/components/ui/cdn-image";

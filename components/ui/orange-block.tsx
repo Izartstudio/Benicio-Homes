@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/utils/cn";
 

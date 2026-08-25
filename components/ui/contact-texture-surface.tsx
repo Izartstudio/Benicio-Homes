@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from "react";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { cn } from "@/utils/cn";
 
 type ContactTextureSurfaceProps = HTMLAttributes<HTMLDivElement>;
@@ -13,13 +14,18 @@ export function ContactTextureSurface({
       {...props}
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 z-0 select-none bg-cover bg-center bg-no-repeat md:bg-[length:100%_100%]",
+        "pointer-events-none absolute inset-0 z-0 select-none overflow-hidden",
         className,
       )}
-      style={{
-        backgroundImage: 'url("/assets/textures/contact-texture.webp")',
-        ...props.style,
-      }}
-    />
+    >
+      <OptimizedImage
+        alt=""
+        className="object-cover object-center md:object-fill"
+        fill
+        quality={75}
+        sizes="100vw"
+        src="/assets/textures/contact-texture.webp"
+      />
+    </div>
   );
 }

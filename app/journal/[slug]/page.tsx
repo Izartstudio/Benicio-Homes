@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { notFound } from "next/navigation";
 import { ContactSection } from "@/components/contact/contact-section";
 import { Footer } from "@/components/footer/footer";
@@ -61,7 +61,7 @@ export default async function JournalDetailPage({ params }: PageProps) {
 
         <div className="journal-detail-image-frame absolute inset-x-0 flex justify-center">
           <Reveal as="figure" className="journal-detail-hero relative overflow-hidden bg-[#aaa]" revealMode="mount">
-            <Image alt={post.image.alt} className="object-cover" fill priority sizes="(min-width: 1280px) 74.375rem, calc(100vw - 2rem)" src={post.image.src} />
+            <Image alt={post.image.alt} className="object-cover" fill preload sizes="(min-width: 1280px) 74.375rem, calc(100vw - 2rem)" src={post.image.src} />
           </Reveal>
         </div>
       </section>

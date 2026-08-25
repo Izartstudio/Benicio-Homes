@@ -1,6 +1,7 @@
 "use client";
 
-import Image, { type ImageProps } from "next/image";
+import type { ImageProps } from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import Link from "next/link";
 import {
   useState,

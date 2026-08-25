@@ -16,16 +16,14 @@ type EditorialVariantSectionsProps = {
   data: ProjectEditorialVariantsData;
 };
 
-function Media({ image, priority = false }: {
+function Media({ image }: {
   image: ProjectEditorialVariantsData["siteComposition"]["image"];
-  priority?: boolean;
 }) {
   return (
     <CdnImage
       alt={image.alt}
       className={styles.image}
       fill
-      priority={priority}
       sizes="(max-width: 767px) 100vw, 90vw"
       src={image.src}
     />

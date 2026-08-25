@@ -1,7 +1,7 @@
 "use client";
 
 import responsiveStyles from "./image-showcase-section.responsive.module.css";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import {
   useCallback,
   useEffect,
@@ -410,7 +410,7 @@ export function ImageShowcaseSection() {
           width={1440}
           height={411}
           draggable={false}
-          unoptimized
+          quality={75}
           className="pointer-events-none absolute inset-x-0 bottom-0 h-auto w-full select-none [-webkit-user-drag:none]"
           data-showcase-background-texture
         />

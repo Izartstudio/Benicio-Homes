@@ -252,18 +252,33 @@ export function RestorationShowcaseSection({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 select-none bg-cover bg-center opacity-70 mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden opacity-70 mix-blend-multiply"
         data-restoration-background
-        style={{
-          backgroundImage: `url("${backgroundTexture}")`,
-        }}
-      />
+      >
+        <CdnImage
+          alt=""
+          className="object-cover object-center"
+          fill
+          quality={75}
+          sizes="100vw"
+          src={backgroundTexture}
+        />
+      </div>
 
       {smoothContactTransition ? (
         <div
           aria-hidden="true"
           data-restoration-contact-transition
-        />
+        >
+          <CdnImage
+            alt=""
+            className="object-cover object-bottom"
+            fill
+            quality={75}
+            sizes="100vw"
+            src="/assets/textures/contact-texture.webp"
+          />
+        </div>
       ) : null}
 
       <div

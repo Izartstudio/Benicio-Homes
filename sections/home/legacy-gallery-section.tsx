@@ -1,7 +1,7 @@
 "use client";
 
 import responsiveStyles from "./legacy-gallery-section.responsive.module.css";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { useLayoutEffect } from "react";
 import { setupSectionReveals } from "@/utils/setup-section-reveals";
 import { CdnImage } from "@/components/ui/cdn-image";
@@ -145,7 +145,7 @@ export function LegacyGallerySection() {
             alt=""
             fill
             draggable={false}
-            unoptimized
+            quality={75}
             sizes="100vw"
             className="object-fill [-webkit-user-drag:none]"
           />
@@ -155,7 +155,16 @@ export function LegacyGallerySection() {
           aria-hidden="true"
           className={responsiveStyles.legacyRestorationBlend}
           data-gallery-restoration-blend
-        />
+        >
+          <Image
+            alt=""
+            className="object-cover object-center"
+            fill
+            quality={75}
+            sizes="100vw"
+            src="/assets/textures/heritage-texture.webp"
+          />
+        </div>
       </div>
     </section>
   );

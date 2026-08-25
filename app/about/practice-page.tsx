@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import { CTA } from "@/components/ui/cta";
 import { Reveal } from "@/components/ui/reveal";
@@ -106,7 +106,16 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
         className={styles.respect}
         data-design-source="Section -2about.svg"
       >
-        <div aria-hidden="true" className={styles.respectTexture} />
+        <div aria-hidden="true" className={styles.respectTexture}>
+          <Image
+            alt=""
+            className={styles.cover}
+            fill
+            quality={75}
+            sizes="100vw"
+            src="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/aboutsection-2.webp"
+          />
+        </div>
         <Reveal className={styles.respectHeading} revealMode="manual">
           <h2 id="respect-title">Every Home Begins With<br />Respect For Place</h2>
         </Reveal>
@@ -132,7 +141,16 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
         className={styles.manifesto}
         data-design-source="Section -3 about.svg"
       >
-        <div aria-hidden="true" className={styles.manifestoTexture} />
+        <div aria-hidden="true" className={styles.manifestoTexture}>
+          <Image
+            alt=""
+            className={styles.cover}
+            fill
+            quality={75}
+            sizes="100vw"
+            src="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/ourmanifesto-bg.webp"
+          />
+        </div>
         <SectionCrosshair className={styles.manifestoCrosshair} showMarker />
         <Reveal className={styles.manifestoCopy} revealMode="manual">
           <div className={styles.manifestoKicker}><span>Our Manifesto</span><i /></div>
@@ -161,7 +179,7 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
         <div className={styles.servicesTop}>
           <HorizontalLinePair className={styles.servicesCrosshair} />
           <Reveal as="figure" className={styles.sketches} revealMode="manual">
-            <Image src={texturePlaceholder} alt="Architectural sketches placeholder" fill sizes="(max-width: 767px) 100vw, 66vw" className={styles.cover} priority />
+            <Image src={texturePlaceholder} alt="Architectural sketches placeholder" fill sizes="(max-width: 767px) 100vw, 66vw" className={styles.cover} />
           </Reveal>
           <Reveal className={styles.servicesIntro} revealMode="manual">
             <p>From new developments to restorations, every project is approached with commitment to design, craftsmanship, and quality.</p>

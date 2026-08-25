@@ -24,8 +24,8 @@ export const vanamProject = {
       alt: "",
     },
     mediaCanvas: {
-      aspectRatio: 1440 / 1500,
-      foregroundCanvasHeightRatio: 900 / 1500,
+      aspectRatio: 1440 / 1600,
+      foregroundCanvasHeightRatio: 840 / 1500,
     },
   },
   intro: {

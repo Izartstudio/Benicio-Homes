@@ -1,7 +1,7 @@
 "use client";
 
 import responsiveStyles from "./navbar.responsive.module.css";
-import Image from "next/image";
+import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -185,7 +185,6 @@ export function Navbar() {
             alt="Benicio"
             width={75}
             height={57}
-            priority
             className="h-auto w-[3.75rem]"
           />
         </Link>

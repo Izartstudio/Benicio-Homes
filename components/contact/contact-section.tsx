@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/contact/contact-form";
 import { ContactTextureSurface } from "@/components/ui/contact-texture-surface";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import styles from "./contact-section.module.css";
 
 const defaultHeading = "Begin The Conversation.";
@@ -64,10 +65,16 @@ export function ContactSection({
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 z-0 select-none bg-cover bg-center opacity-50 mix-blend-multiply"
               data-contact-card-texture
-              style={{
-                backgroundImage: 'url("/assets/textures/formbgtexture.webp")',
-              }}
-            />
+            >
+              <OptimizedImage
+                alt=""
+                className="object-cover object-center"
+                fill
+                quality={75}
+                sizes="(max-width: 767px) 100vw, 38rem"
+                src="/assets/textures/formbgtexture.webp"
+              />
+            </div>
             <ContactForm />
           </div>
         </div>

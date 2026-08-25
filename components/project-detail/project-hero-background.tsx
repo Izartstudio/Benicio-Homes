@@ -81,7 +81,6 @@ export const ProjectHeroBackground = forwardRef<
                 className={styles.mediaImage}
                 data-project-hero-background-image
                 fill
-                loading="eager"
                 preload
                 quality={projectHeroImageQuality}
                 ref={backgroundImageRef}

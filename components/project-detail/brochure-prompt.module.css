@@ -38,7 +38,8 @@
 .close { position: absolute; z-index: 5; top: 1.5rem; right: 1.75rem; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 0; color: #232323; background: transparent; font-size: 1.25rem; font-weight: 600; line-height: 1; }
 
 .brochureForm { position: relative; min-height: 41.125rem; overflow: hidden; color: #232323; background: #fafafa; }
-.formTexture { position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: url("/assets/textures/formbgtexture.webp"); background-position: center; background-size: cover; opacity: .5; mix-blend-mode: multiply; }
+.formTexture { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: .5; mix-blend-mode: multiply; }
+.formTextureImage { object-fit: cover; object-position: center; }
 .formContent { position: relative; z-index: 1; display: flex; min-height: 41.125rem; flex-direction: column; padding: 3.75rem 3.125rem 3.125rem; font-family: var(--font-description-family); }
 .formContent header h3 { max-width: 27rem; margin: 0; font-family: var(--font-heading-family); font-size: clamp(2rem, 3vw, 2.5rem); font-weight: var(--font-heading-weight); line-height: 1.15; }
 .fields { display: grid; gap: 3.5rem; margin-top: 4rem; }
