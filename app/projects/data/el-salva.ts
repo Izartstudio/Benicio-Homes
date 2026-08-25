@@ -134,7 +134,7 @@ export const elSalvaVillaProject = {
         title: "Living",
         items: [
           "Five Spacious Bedrooms",
-          "Grand Living Room",
+          "Grand Living Room & Attic floor",
           "Modular Designer Kitchen",
           "Large Dining Area",
         ],

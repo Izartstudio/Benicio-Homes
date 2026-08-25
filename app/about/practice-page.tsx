@@ -7,7 +7,7 @@ import type { AboutTeamSection } from "@/sanity/lib/aboutTeam";
 import styles from "./practice-page.module.css";
 
 const texturePlaceholder = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/sketch.webp";
-const founderimage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/founder-image.webp";
+const founderimage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/Gemini_Generated_Image_t91y0mt91y0mt91y.png";
 const horizontalbandimage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/horizontalbandleft.webp";
 const horizontalBandRightImage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/horizontalbandright.webp";
 const orangeBarImage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/orangeblock.webp";

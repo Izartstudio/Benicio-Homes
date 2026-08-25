@@ -18,7 +18,7 @@ const projectListingDetails: Record<
   }
 > = {
   "vanam-villas": {
-    status: "for-sale",
+    status: "sold-out",
     description: "Gated community of six signature villas in Anjuna, Goa.",
     specifications: [
       { label: "Bedrooms", value: "4 BHK" },
@@ -31,7 +31,7 @@ const projectListingDetails: Record<
     description: "Gated community of six private-pool tropical villas in Majorda, South Goa.",
     specifications: [
       { label: "Bedrooms", value: "4 BHK" },
-      { label: "Plot Size", value: "2100 sq. m." },
+      { label: "Plot Size", value: "2400 sq. m." },
       { label: "Project Status", value: "Coming Soon" },
     ],
   },
@@ -39,8 +39,8 @@ const projectListingDetails: Record<
     status: "sold-out",
     description: "Gated community of six private-pool tropical villas in Majorda, South Goa.",
     specifications: [
-      { label: "Bedrooms", value: "4 BHK" },
-      { label: "Plot Size", value: "2100 sq. m." },
+      { label: "Bedrooms", value: "3 BHK" },
+      { label: "Plot Size", value: "260 sq. m." },
       { label: "Project Status", value: "Coming Soon" },
     ],
   },
@@ -49,7 +49,7 @@ const projectListingDetails: Record<
     description: "Standalone zen-style villas in Assagaon, Goa.",
     specifications: [
       { label: "Bedrooms", value: "3 BHK" },
-      { label: "Plot Size", value: "2600 sq. m." },
+      { label: "Plot Size", value: "251 sq. m." },
       { label: "Project Status", value: "Ongoing" },
     ],
   },
@@ -67,8 +67,8 @@ const projectListingDetails: Record<
     description: "An ancestral Goan home restored for contemporary life.",
     specifications: [
       { label: "Type", value: "Heritage Villa" },
-      { label: "Setting", value: "Goa" },
-      { label: "Project Status", value: "Ongoing" },
+      { label: "Plot Size", value: "700 sq. m." },
+      { label: "Project Status", value: "Sold Out" },
     ],
   },
 };

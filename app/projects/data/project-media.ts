@@ -39,9 +39,9 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/next-project.webp",
   },
   nayanVilla: {
-    hero: "/assets/projects/villanayanbg.png",
+    hero: "/assets/projects/NAYANBG.png",
     heroForeground:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-villas-foreground.webp",
+      "/assets/projects/NAYANFORE.png",
     intro:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-continuous.webp",
     location:
@@ -108,7 +108,7 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-imageshowcse6.webp",
     ],
     nextProject:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-nextproject.webp",
+      "/assets/projects/villaelsalvabg.png",
   },
   elSalvaVilla: {
     hero: "/assets/projects/villaelsalvabg.png",

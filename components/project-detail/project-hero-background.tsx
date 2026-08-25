@@ -7,6 +7,8 @@ import {
 import { CdnImage } from "@/components/ui/cdn-image";
 import styles from "./project-hero-background.module.css";
 
+const projectHeroImageQuality = 90;
+
 export type ProjectHeroBackgroundImage = {
   alt: string;
   src: ImageProps["src"];
@@ -81,6 +83,7 @@ export const ProjectHeroBackground = forwardRef<
                 fill
                 loading="eager"
                 preload
+                quality={projectHeroImageQuality}
                 ref={backgroundImageRef}
                 sizes="100vw"
                 src={backgroundImage.src}
@@ -105,6 +108,7 @@ export const ProjectHeroBackground = forwardRef<
                   className={styles.mediaImage}
                   fill
                   loading="eager"
+                  quality={projectHeroImageQuality}
                   sizes="100vw"
                   src={foregroundImage.src}
                 />

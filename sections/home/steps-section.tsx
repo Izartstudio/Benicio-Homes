@@ -423,9 +423,9 @@ export function StepsSection() {
             className="absolute left-[5.28%] top-[15.7%] max-w-[61rem] font-display text-[2rem] font-light leading-[1.42] tracking-[0.01em] text-[#eeeeee]"
             data-step-copy
           >
-            Every Benicio home begins by understanding what already exists.
-            From climate and landscape to light and materiality, our
-            architecture responds to place before it defines it.
+            Good Architecture should respect the climate of the land, and not stay apart from it
+            <br />
+            -Benicio Homes
           </p>
 
           <p

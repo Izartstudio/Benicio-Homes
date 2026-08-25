@@ -6,7 +6,7 @@ import styles from "./footer.module.css";
 
 const navigationLinks = [
   { href: "/projects", label: "Projects" },
-  { href: "#about", label: "About Us" },
+  { href: "/about", label: "About Us" },
   { href: "#contact", label: "Get In Touch" },
   { href: "/journal", label: "Journal" },
 ] as const;
@@ -18,7 +18,7 @@ const socialLinks = [
     src: "/assets/icons/facebookicon.svg",
   },
   {
-    href: "https://www.instagram.com/",
+    href: "https://www.instagram.com/benicio_homes_/",
     label: "Instagram",
     src: "/assets/icons/instagramicon.svg",
   },
@@ -64,8 +64,7 @@ export function Footer() {
               <p
                 className={`mt-[2.875rem] max-w-[21rem] font-display text-[1.125rem] leading-[1.35] ${styles.brandTagline}`}
               >
-                Building Bespoke, Eco-conscious and Immersive Tropical Luxury
-                Holiday Homes
+                Good Architecture should respect the climate of the land, and not stay apart from it.
               </p>
 
               <p className="sr-only">
@@ -144,8 +143,8 @@ export function Footer() {
               <address className="not-italic">
                 <ul className={`grid gap-[1.625rem] ${styles.columnList}`}>
                   <li>
-                    <FooterLink href="tel:+91921013324">
-                      +91 92101 3324
+                    <FooterLink href="tel:+919021829812">
+                      +91 90218 29812
                     </FooterLink>
                   </li>
                   <li>
@@ -157,7 +156,7 @@ export function Footer() {
                     <p
                       className={`max-w-[12.5rem] text-[#575757] ${styles.contactAddress}`}
                     >
-                     Benicio Homes, 55-58, Aldeia Aurino, Porvorim
+                     Benicio Homes, S5-S8, Aldeia Aurino, Porvorim
                       North Goa - 403501
                     </p>
                   </li>

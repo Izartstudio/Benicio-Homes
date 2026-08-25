@@ -25,8 +25,8 @@ export const nayanVillaProject = {
       alt: "",
     },
     mediaCanvas: {
-      aspectRatio: 1400 / 1500,
-      foregroundCanvasHeightRatio: 955 / 1500,
+      aspectRatio: 1230 / 1100,
+      foregroundCanvasHeightRatio: 1045 / 1500,
     },
   },
   intro: {

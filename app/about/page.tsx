@@ -21,7 +21,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     rightLabel: "CLIMATE LIVING",
     href: "/projects/vanam-villas",
     number: "TROPICAL HOMES-",
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-nextproject.webp",
+    url: "/assets/projects/bgvanam.png",
     alt: "Restoration project placeholder",
   },
   {
@@ -41,7 +41,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     rightLabel: "CRAFTED AROUND PLACE",
     href: "/projects/el-salva-villa",
     number: "TROPICAL HOMES-",
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-nextproject.webp",
+    url: "/assets/projects/villaelsalvabg.png",
     alt: "Restored Goan home placeholder",
   },
     {
@@ -51,7 +51,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     rightLabel: "Crafted Around Place",
     href: "/projects/zen-villas-2",
     number: "TROPICAL HOMES-",
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/vanam-nextproject.webp",
+    url: "/assets/projects/villazenbg.png",
     alt: "Restored Goan home placeholder",
   },
 ];

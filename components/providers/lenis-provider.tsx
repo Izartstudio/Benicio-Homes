@@ -22,6 +22,18 @@ const LenisContext = createContext<Lenis | null>(null);
 const nativeScrollMediaQuery = "(max-width: 767px), (pointer: coarse)";
 const scrollStoragePrefix = "benicio-scroll-position:";
 
+function scrollWindowImmediately(top: number) {
+  const root = document.documentElement;
+  const previousScrollBehavior = root.style.scrollBehavior;
+
+  // The native-scroll fallback has `scroll-behavior: smooth` in CSS for
+  // in-page anchors. Temporarily override it so route changes never animate
+  // through the outgoing page or reveal an intermediate scroll position.
+  root.style.scrollBehavior = "auto";
+  window.scrollTo({ left: 0, top, behavior: "auto" });
+  root.style.scrollBehavior = previousScrollBehavior;
+}
+
 /** The single document-level Lenis instance for public site routes. */
 export function LenisProvider({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
@@ -142,29 +154,33 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     const isReload = !isClientNavigation && navigationEntry?.type === "reload";
     const scrollStorageKey = `${scrollStoragePrefix}${window.location.pathname}${window.location.search}`;
 
-    const scrollFrame = requestAnimationFrame(() => {
-      const hash = window.location.hash;
-      const target = hash
-        ? document.getElementById(decodeURIComponent(hash.slice(1)))
-        : null;
+    const hash = window.location.hash;
+    const target = hash
+      ? document.getElementById(decodeURIComponent(hash.slice(1)))
+      : null;
 
-      if (target) {
-        lenisRef.current?.scrollTo(target, { immediate: true, offset: 0 });
-        target.scrollIntoView({ block: "start" });
-      } else if (isClientNavigation) {
-        lenisRef.current?.scrollTo(0, { immediate: true });
-        window.scrollTo({ left: 0, top: 0, behavior: "auto" });
-      } else if (isReload) {
-        const storedPosition = Number(
-          window.sessionStorage.getItem(scrollStorageKey),
-        );
-
-        if (Number.isFinite(storedPosition) && storedPosition > 0) {
-          lenisRef.current?.scrollTo(storedPosition, { immediate: true });
-          window.scrollTo({ left: 0, top: storedPosition, behavior: "auto" });
-        }
+    // A layout effect runs after the destination DOM is committed but before
+    // the browser paints it. Resetting synchronously here avoids a frame at the
+    // outgoing page's scroll position.
+    if (target) {
+      lenisRef.current?.scrollTo(target, { immediate: true, offset: 0 });
+      if (!lenisRef.current) {
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        scrollWindowImmediately(targetTop);
       }
-    });
+    } else if (isClientNavigation) {
+      lenisRef.current?.scrollTo(0, { immediate: true });
+      scrollWindowImmediately(0);
+    } else if (isReload) {
+      const storedPosition = Number(
+        window.sessionStorage.getItem(scrollStorageKey),
+      );
+
+      if (Number.isFinite(storedPosition) && storedPosition > 0) {
+        lenisRef.current?.scrollTo(storedPosition, { immediate: true });
+        scrollWindowImmediately(storedPosition);
+      }
+    }
 
     let active = true;
     const refreshWhenReady = () => {
@@ -182,7 +198,6 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     }
 
     return () => {
-      cancelAnimationFrame(scrollFrame);
       active = false;
       window.removeEventListener("load", refreshWhenReady);
 
@@ -263,10 +278,23 @@ export function LenisProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      if (isSameDocument) return;
+      if (isSameDocument) {
+        // Next does not remount when a link points to the route already being
+        // viewed, so make repeated nav/footer links act as a reliable "top"
+        // action without animating through the whole page.
+        event.preventDefault();
 
-      lenisRef.current?.scrollTo(0, { immediate: true });
-      window.scrollTo({ left: 0, top: 0, behavior: "auto" });
+        if (window.location.href !== destination.href) {
+          window.history.pushState(
+            null,
+            "",
+            `${destination.pathname}${destination.search}${destination.hash}`,
+          );
+        }
+
+        lenisRef.current?.scrollTo(0, { immediate: true });
+        scrollWindowImmediately(0);
+      }
     };
 
     window.addEventListener("pagehide", storeScrollPosition);
