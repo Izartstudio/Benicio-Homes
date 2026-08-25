@@ -76,6 +76,9 @@ export function ResponsiveHeroVideo({
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover"
+          decoding="async"
+          fetchPriority="high"
+          loading="eager"
           src={getPoster(desktopPlaybackId!, 1920)}
         />
       </picture>

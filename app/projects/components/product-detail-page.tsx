@@ -17,7 +17,20 @@ type ProductDetailPageProps = {
   project: ProjectDetailData;
 };
 
+const brochureCopyBySlug: Record<string, string> = {
+  "el-salva-villa":
+    "Step into El Salva, where heritage and nature come together.",
+  "nayan-villa":
+    "Every space tells a story. Discover the design philosophy of Nayan Villas.",
+  "vanam-villas":
+    "Every aspect serves a reason. Discover the full concept behind Vanam Villas.",
+  "zen-villas-2":
+    "Every space reflects a purpose. Discover the vision behind Zen Villa II.",
+};
+
 export function ProductDetailPage({ project }: ProductDetailPageProps) {
+  const brochureCopy = brochureCopyBySlug[project.slug];
+
   return (
     <main className="bg-[#232323]" data-project-detail-page>
       <HeroSection data={project.hero} intro={project.intro} />
@@ -25,7 +38,9 @@ export function ProductDetailPage({ project }: ProductDetailPageProps) {
       {project.editorialVariants ? (
         <>
           <EditorialVariantSections data={project.editorialVariants} />
-          <BrochurePrompt projectSlug={project.slug} />
+          {brochureCopy ? (
+            <BrochurePrompt copy={brochureCopy} projectSlug={project.slug} />
+          ) : null}
         </>
       ) : (
         <>
@@ -35,7 +50,9 @@ export function ProductDetailPage({ project }: ProductDetailPageProps) {
           <SpecificationSection data={project.specifications} />
           <FloorPlanCollection layout={project.floorPlanLayout} plans={project.floorPlans} />
           <GallerySection data={project.gallery} />
-          <BrochurePrompt projectSlug={project.slug} />
+          {brochureCopy ? (
+            <BrochurePrompt copy={brochureCopy} projectSlug={project.slug} />
+          ) : null}
           <NextProjectSection data={project.nextProject} />
         </>
       )}

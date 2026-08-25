@@ -35,7 +35,7 @@ function FieldError({
   }
 
   return (
-    <p className="mt-1 text-[0.75rem] leading-none text-laterite">
+    <p className={styles.fieldError}>
       {errors[name]}
     </p>
   );
@@ -50,7 +50,7 @@ function TextField({
   type = "text",
 }: FieldProps) {
   return (
-    <div className="border-b border-[#464646]/15 pb-[0.8rem]">
+    <div className={`relative border-b border-[#464646]/15 pb-[0.8rem] ${styles.field}`}>
       <label
         className="block [font-size:var(--contact-form-text-size)] leading-none text-[#464646]"
         htmlFor={`contact-${name}`}
@@ -67,7 +67,7 @@ function TextField({
         required={required}
         type={type}
       />
-      <div id={`contact-${name}-error`}>
+      <div className={styles.fieldErrorSlot} id={`contact-${name}-error`}>
         <FieldError errors={errors} name={name} />
       </div>
     </div>
@@ -91,7 +91,7 @@ function ProjectSelect() {
         </option>
         <option value="Vanam Villa">Vanam Villa</option>
         <option value="Zen Villa">Zen Villa</option>
-        <option value="Majodra Villa">Majodra Villa</option>
+        <option value="Nayan Villa">Nayan Villa</option>
       </select>
       <span
         aria-hidden="true"
@@ -103,7 +103,7 @@ function ProjectSelect() {
 
 function MessageField({ errors }: { errors?: ContactFormErrors }) {
   return (
-    <div className="border-b border-[#464646]/15 pb-[0.8rem]">
+    <div className={`relative border-b border-[#464646]/15 pb-[0.8rem] ${styles.field}`}>
       <label
         className="block [font-size:var(--contact-form-text-size)] leading-none text-[#232323]"
         htmlFor="contact-message"
@@ -120,7 +120,7 @@ function MessageField({ errors }: { errors?: ContactFormErrors }) {
         name="message"
         required
       />
-      <div id="contact-message-error">
+      <div className={styles.fieldErrorSlot} id="contact-message-error">
         <FieldError errors={errors} name="message" />
       </div>
     </div>
@@ -133,7 +133,7 @@ function SubmitButton() {
   return (
     <CTA
       arrowClassName="text-[1.35rem] leading-none"
-      className="mt-[2.625rem] flex h-[3.125rem] w-full items-center justify-between px-[0.75rem] [font-size:var(--contact-form-text-size)] leading-none disabled:cursor-not-allowed disabled:opacity-60"
+      className="mt-[1rem] flex h-[3.125rem] w-full items-center justify-between px-[0.75rem] [font-size:var(--contact-form-text-size)] leading-none disabled:cursor-not-allowed disabled:opacity-60"
       darkBackground="#4e4e4e"
       disabled={pending}
       type="submit"
@@ -150,6 +150,7 @@ export function ContactForm() {
     submitContactForm,
     initialContactFormState,
   );
+  const statusMessage = state.errors ? undefined : state.message;
 
   useEffect(() => {
     if (state.status === "success") {
@@ -199,16 +200,17 @@ export function ContactForm() {
       </div>
 
       <div className="mt-auto">
-        {state.message ? (
-          <p
-            className={`mb-[1rem] text-[0.875rem] leading-[1.35] ${
-              state.status === "success" ? "text-[#232323]" : "text-laterite"
-            }`}
-            role={state.status === "error" ? "alert" : "status"}
-          >
-            {state.message}
-          </p>
-        ) : null}
+        <p
+          aria-live="polite"
+          className={`${styles.formStatus} ${
+            statusMessage ? "visible" : "invisible"
+          } ${
+            state.status === "success" ? "text-[#D45231]" : "text-laterite"
+          }`}
+          role={state.status === "error" ? "alert" : "status"}
+        >
+          {statusMessage ?? "\u00a0"}
+        </p>
         <SubmitButton />
       </div>
     </form>

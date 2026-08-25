@@ -48,7 +48,8 @@
 .field input { display: block; width: 100%; margin-top: .45rem; border: 0; outline: 0; color: #232323; background: transparent; font: inherit; }
 .error, .formError, .success { margin: .4rem 0 0; font-size: .75rem; line-height: 1.25; }
 .error, .formError { color: var(--color-laterite); }
-.success { color: #343434; }
+.success { color: #d45231; }
+.formStatus { min-height: .9375rem; }
 .submit { display: flex; width: 100%; height: 3.125rem; align-items: center; justify-content: space-between; margin-top: auto; border: 0; padding: 0 .875rem; color: #fafafa; background: #4e4e4e; font-family: var(--font-description-family); font-size: 1rem; }
 .submit:disabled { cursor: wait; opacity: .65; }
 

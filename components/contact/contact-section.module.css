@@ -21,6 +21,29 @@
   font-weight: inherit;
 }
 
+.fieldErrorSlot {
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fieldError {
+  margin: 0;
+  color: #d45231;
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.formStatus {
+  min-height: 1.18125rem;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
 .heading {
   font-family: var(--font-heading-family) !important;
   font-size: 2.5rem;

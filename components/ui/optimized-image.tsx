@@ -1,10 +1,10 @@
 import NextImage, { type ImageProps } from "next/image";
 import { forwardRef } from "react";
 
-export const defaultSiteImageQuality = 85;
+export const defaultSiteImageQuality = 90;
 
 /**
- * Shared image defaults: visibly sharper than Next's default quality while
+ * Shared image defaults: high-fidelity output above Next's default quality while
  * preserving responsive optimization, native lazy loading, and async decode.
  */
 export const OptimizedImage = forwardRef<HTMLImageElement, ImageProps>(

@@ -424,8 +424,7 @@ export function StepsSection() {
             data-step-copy
           >
             Good Architecture should respect the climate of the land, and not stay apart from it
-            <br />
-            -Benicio Homes
+          
           </p>
 
           <p

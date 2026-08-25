@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -41,6 +41,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const refreshFrameRef = useRef<number | null>(null);
   const refreshTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const previousPathnameRef = useRef(pathname);
 
   const scheduleRefresh = useCallback(() => {
@@ -294,7 +295,19 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
         lenisRef.current?.scrollTo(0, { immediate: true });
         scrollWindowImmediately(0);
+
+        return;
       }
+
+      // Own internal route scrolling instead of allowing Next's native scroll
+      // restoration to race this provider on touch devices. `scroll: false`
+      // keeps the outgoing page stable; the destination layout effect above
+      // then places the new page at its top before paint.
+      event.preventDefault();
+      router.push(
+        `${destination.pathname}${destination.search}${destination.hash}`,
+        { scroll: false },
+      );
     };
 
     window.addEventListener("pagehide", storeScrollPosition);
@@ -304,7 +317,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       window.removeEventListener("pagehide", storeScrollPosition);
       document.removeEventListener("click", resetBeforeInternalNavigation, true);
     };
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     let lastWidth = window.innerWidth;

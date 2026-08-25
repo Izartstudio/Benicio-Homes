@@ -173,8 +173,8 @@ export const PROJECT_MEDIA = {
     restorationTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perolatexture.webp",
   },
   zenVilla1: {
-    hero: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/image%2060458.webp",
-    heroForeground: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/image%2060458%202.webp",
+    hero: "/assets/projects/zenvilla1.png",
+    heroForeground: "/assets/projects/zen-villa-foreground.png",
     intro: "/images/placeholders/responsive-media-fallback.webp",
     location: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1-horizontal.webp",
     locationDecorative: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",

@@ -105,8 +105,9 @@ export const ProjectHeroBackground = forwardRef<
                 <CdnImage
                   alt={foregroundImage.alt}
                   className={styles.mediaImage}
+                  fetchPriority="high"
                   fill
-                  loading="eager"
+                  preload
                   quality={projectHeroImageQuality}
                   sizes="100vw"
                   src={foregroundImage.src}

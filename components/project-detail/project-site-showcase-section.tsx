@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CdnImage } from "@/components/ui/cdn-image";
 import { PDP_MEDIA_URLS } from "./pdp-texture";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
+import { CTA } from "@/components/ui/cta";
 import { Reveal } from "@/components/ui/reveal";
 import { ParallaxMedia } from "@/components/ui/parallax-media";
 import { OPEN_BROCHURE_FORM_EVENT } from "./brochure-prompt";
@@ -242,20 +243,16 @@ export function ProjectSiteShowcaseSection({
               start={SHOWCASE_REVEAL_START}
               triggerSelector={SHOWCASE_REVEAL_TRIGGER}
             >
-              <button
-                className="inline-flex h-[3.125rem] w-full items-center justify-between bg-[#575757] px-3 font-display text-[0.95rem] text-bone hover:bg-[#696969] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone"
+              <CTA
+                arrowClassName="translate-y-[0.1rem] text-lg"
+                className="inline-flex h-[3.125rem] w-full items-center justify-between px-3 font-display text-[0.95rem] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone"
                 data-project-site-showcase-cta
+                darkBackground="#575757"
                 onClick={() => window.dispatchEvent(new Event(OPEN_BROCHURE_FORM_EVENT))}
                 type="button"
               >
                 {cta.label}
-                <span
-                  aria-hidden="true"
-                  className="translate-y-[0.1rem] text-lg"
-                >
-                  &rsaquo;
-                </span>
-              </button>
+              </CTA>
               <span
                 aria-hidden="true"
                 className="absolute left-[22.25rem] top-[-1.1875rem] hidden h-px w-[4.25rem] bg-silver/25 md:block"

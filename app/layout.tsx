@@ -43,15 +43,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL?.trim().replace(/\/+$/, "");
+  const mediaOrigins = Array.from(new Set([
+    cdnUrl,
+    "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev",
+    "https://image.mux.com",
+    "https://stream.mux.com",
+  ].filter((origin): origin is string => Boolean(origin))));
 
   return (
     <html data-scroll-behavior="smooth" lang="en">
-      {cdnUrl ? (
-        <head>
-          <link crossOrigin="anonymous" href={cdnUrl} rel="preconnect" />
-          <link href={cdnUrl} rel="dns-prefetch" />
-        </head>
-      ) : null}
+      <head>
+        {mediaOrigins.map((origin) => (
+          <link crossOrigin="anonymous" href={origin} key={`preconnect-${origin}`} rel="preconnect" />
+        ))}
+        {mediaOrigins.map((origin) => (
+          <link href={origin} key={`dns-prefetch-${origin}`} rel="dns-prefetch" />
+        ))}
+      </head>
       <body className={`${bahnschrift.className} ${bahnschrift.variable} ${robotoSlab.variable} ${robotoSerif.variable} antialiased`}>
         <LenisProvider>
           <CameraDepthMotion />

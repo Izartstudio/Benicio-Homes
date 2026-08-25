@@ -15,8 +15,11 @@ const initialState: BrochureFormState = { status: "idle" };
 export const OPEN_BROCHURE_FORM_EVENT = "benicio:open-brochure-form";
 
 type BrochurePromptProps = {
+  copy: string;
   projectSlug: string;
 };
+
+type BrochureFormProps = Pick<BrochurePromptProps, "projectSlug">;
 
 function BrochureField({
   autoComplete,
@@ -57,7 +60,7 @@ function BrochureSubmitButton() {
   );
 }
 
-function BrochureForm({ projectSlug }: BrochurePromptProps) {
+function BrochureForm({ projectSlug }: BrochureFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [formState, formAction] = useActionState(
     submitBrochureForm,
@@ -98,18 +101,20 @@ function BrochureForm({ projectSlug }: BrochurePromptProps) {
           <BrochureField autoComplete="tel" errors={formState.errors} label="Phone Number" name="phone" type="tel" />
           <BrochureField autoComplete="email" errors={formState.errors} label="Email Address" name="email" type="email" />
         </div>
-        {formState.message ? (
-          <p className={formState.status === "success" ? styles.success : styles.formError} role={formState.status === "error" ? "alert" : "status"}>
-            {formState.message}
-          </p>
-        ) : null}
+        <p
+          aria-live="polite"
+          className={`${styles.formStatus} ${formState.status === "success" ? styles.success : styles.formError}`}
+          role={formState.status === "error" ? "alert" : "status"}
+        >
+          {formState.message ?? "\u00a0"}
+        </p>
         <BrochureSubmitButton />
       </div>
     </form>
   );
 }
 
-export function BrochurePrompt({ projectSlug }: BrochurePromptProps) {
+export function BrochurePrompt({ copy, projectSlug }: BrochurePromptProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogTitleId = useId();
 
@@ -141,8 +146,7 @@ export function BrochurePrompt({ projectSlug }: BrochurePromptProps) {
       <section className={styles.section} aria-label="Project brochure">
         <div className={styles.copyBlock}>
           <p data-project-brochure-copy>
-            Every aspect serves a reason. Discover the full concept behind
-            Vanam Villas.
+            {copy}
           </p>
           <CTA
             className={styles.cta}
