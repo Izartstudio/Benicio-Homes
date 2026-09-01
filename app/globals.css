@@ -7,6 +7,12 @@ html:not([data-scroll-engine="lenis"]) {
   scroll-behavior: smooth;
 }
 
+/* Hide Safari's single incorrect restoration frame during client navigation.
+ * The route provider removes this as soon as the destination is positioned. */
+html[data-scroll-engine="safari-native"][data-route-changing] body {
+  visibility: hidden;
+}
+
 /* Preserve the homepage's original mixed type system. */
 [data-homepage-root] {
   --font-sans: var(--font-bahnschrift);

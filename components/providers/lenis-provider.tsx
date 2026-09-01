@@ -159,19 +159,27 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     const target = hash
       ? document.getElementById(decodeURIComponent(hash.slice(1)))
       : null;
+    const positionDestination = () => {
+      if (target) {
+        lenisRef.current?.scrollTo(target, { immediate: true, offset: 0 });
+        if (!lenisRef.current) {
+          const targetTop = target.getBoundingClientRect().top + window.scrollY;
+          scrollWindowImmediately(targetTop);
+        }
+        return;
+      }
+
+      lenisRef.current?.scrollTo(0, { immediate: true });
+      scrollWindowImmediately(0);
+    };
 
     // A layout effect runs after the destination DOM is committed but before
     // the browser paints it. Resetting synchronously here avoids a frame at the
     // outgoing page's scroll position.
     if (target) {
-      lenisRef.current?.scrollTo(target, { immediate: true, offset: 0 });
-      if (!lenisRef.current) {
-        const targetTop = target.getBoundingClientRect().top + window.scrollY;
-        scrollWindowImmediately(targetTop);
-      }
+      positionDestination();
     } else if (isClientNavigation) {
-      lenisRef.current?.scrollTo(0, { immediate: true });
-      scrollWindowImmediately(0);
+      positionDestination();
     } else if (isReload) {
       const storedPosition = Number(
         window.sessionStorage.getItem(scrollStorageKey),
@@ -181,6 +189,24 @@ export function LenisProvider({ children }: { children: ReactNode }) {
         lenisRef.current?.scrollTo(storedPosition, { immediate: true });
         scrollWindowImmediately(storedPosition);
       }
+    }
+
+    let safariSettleFrameOne: number | null = null;
+    let safariSettleFrameTwo: number | null = null;
+
+    if (
+      isClientNavigation &&
+      document.documentElement.hasAttribute("data-route-changing")
+    ) {
+      // WebKit can restore/clamp the previous page's scroll after React layout
+      // effects. Reassert across its next two paint frames, then reveal.
+      safariSettleFrameOne = requestAnimationFrame(() => {
+        positionDestination();
+        safariSettleFrameTwo = requestAnimationFrame(() => {
+          positionDestination();
+          delete document.documentElement.dataset.routeChanging;
+        });
+      });
     }
 
     let active = true;
@@ -200,6 +226,12 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
     return () => {
       active = false;
+      if (safariSettleFrameOne !== null) {
+        cancelAnimationFrame(safariSettleFrameOne);
+      }
+      if (safariSettleFrameTwo !== null) {
+        cancelAnimationFrame(safariSettleFrameTwo);
+      }
       window.removeEventListener("load", refreshWhenReady);
 
       if (refreshTimerRef.current !== null) {
@@ -304,6 +336,14 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       // keeps the outgoing page stable; the destination layout effect above
       // then places the new page at its top before paint.
       event.preventDefault();
+      if (
+        document.documentElement.dataset.scrollEngine === "safari-native"
+      ) {
+        document.documentElement.dataset.routeChanging = "";
+        window.setTimeout(() => {
+          delete document.documentElement.dataset.routeChanging;
+        }, 2000);
+      }
       router.push(
         `${destination.pathname}${destination.search}${destination.hash}`,
         { scroll: false },

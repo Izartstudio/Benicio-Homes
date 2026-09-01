@@ -25,8 +25,8 @@ export const zenVillas2Project = {
       alt: "",
     },
     mediaCanvas: {
-      aspectRatio: 2222 / 2000,
-      foregroundCanvasHeightRatio: 1500 / 1500,
+      aspectRatio: 2000 / 1800,
+      foregroundCanvasHeightRatio: 1500 / 1600,
     },
   },
   intro: {

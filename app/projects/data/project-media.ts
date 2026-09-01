@@ -73,9 +73,9 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-next-project.webp",
   },
   zenVillas2: {
-    hero: "/assets/projects/villazenbg.png",
+    hero: "/assets/projects/zen-villa-2-bg.png",
     heroForeground:
-      "/assets/projects/zen-foreground.webp",
+      "/assets/projects/zen-villa-2-foree.png",
     intro:
       "",
     location:
