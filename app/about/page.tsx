@@ -66,6 +66,7 @@ export default async function AboutPage() {
         backgroundTexture="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/restoration-about.webp"
         designSource="Section -6 about.svg"
         labelFont="roboto-slab"
+        showLabels={false}
         smoothContactTransition
         slides={restorationSlides}
       />

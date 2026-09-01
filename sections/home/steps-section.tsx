@@ -417,7 +417,7 @@ export function StepsSection() {
 
         <div className="absolute inset-0 z-40" data-steps-content-layer>
           <h2 id="steps-section-title" className="sr-only">
-            About Benicio
+            THE PRACTICE
           </h2>
           <p
             className="absolute left-[5.28%] top-[15.7%] max-w-[61rem] font-display text-[2rem] font-light leading-[1.42] tracking-[0.01em] text-[#eeeeee]"
@@ -435,12 +435,12 @@ export function StepsSection() {
           </p>
 
           <a
-            href="#about"
-            className="absolute left-[5.28%] top-[55.85%] inline-flex items-center gap-3 font-mono text-[1.125rem] font-medium uppercase leading-[1.35] tracking-[0.04em] text-[#dc4c28]"
+            href="/about"
+            className="absolute left-[5.28%] top-[55.85%] inline-flex items-center gap-3 font-mono text-[1.375rem] font-medium uppercase leading-[1.35] tracking-[0.04em] text-[#dc4c28]"
             data-step-link
             style={{ color: "#DC4C28" }}
           >
-            ABOUT BENICIO
+            THE PRACTICE
             <span aria-hidden="true" className="translate-y-[-1px]">
               &rsaquo;
             </span>

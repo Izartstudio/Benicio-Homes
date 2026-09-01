@@ -29,7 +29,7 @@ export default async function Home() {
       <ImageShowcaseSection />
       <LegacySection />
       <LegacyGallerySection />
-      <RestorationShowcaseSection />
+      <RestorationShowcaseSection backgroundPosition="calc(100% + 28.5vw) center" />
       <JournalSection articles={journalArticles} />
       <ContactSection />
       <Footer />

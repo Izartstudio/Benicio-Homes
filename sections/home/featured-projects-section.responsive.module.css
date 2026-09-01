@@ -4,7 +4,7 @@
   min-width: 0;
 }
 
-.responsiveRoot:global([data-section="featured-projects"]),
+.responsiveRoot,
 .responsiveRoot :global([data-featured-animation-canvas]) {
   overscroll-behavior-y: auto;
   touch-action: pan-y;
@@ -24,7 +24,69 @@
   display: none;
 }
 
-.responsiveRoot:global([data-section="featured-projects"]) {
+.responsiveRoot:global([data-featured-theme="restoration"])
+  :global([data-featured-metadata]) {
+  font-family: var(--font-roboto-slab), serif;
+  font-weight: 500;
+}
+
+.responsiveRoot:global([data-featured-theme="restoration"])
+  :global([data-featured-metadata-row]) {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+
+.responsiveRoot:global([data-featured-theme="restoration"])
+  :global([data-featured-metadata-row] dt),
+.responsiveRoot:global([data-featured-theme="restoration"])
+  :global([data-featured-metadata-row] dd) {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.responsiveRoot :global([data-featured-bottom-transition]) {
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 45;
+  height: clamp(10rem, 18vw, 16rem);
+  overflow: hidden;
+  background-color: #b9b9b9;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.35) 30%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.35) 30%,
+    #000 100%
+  );
+}
+
+.responsiveRoot :global([data-featured-bottom-transition])::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    180deg,
+    rgb(185 185 185 / 0) 0%,
+    rgb(185 185 185 / 0.38) 48%,
+    rgb(185 185 185 / 0.82) 76%,
+    #b9b9b9 100%
+  );
+}
+
+.responsiveRoot :global([data-featured-bottom-transition] img) {
+  mix-blend-mode: multiply;
+}
+
+.responsiveRoot {
   --featured-sticky-height: max(100svh, 47rem);
   --featured-scroll-distance: 63.92rem;
 
@@ -59,7 +121,7 @@
 }
 
 @media (min-width: 1200px) {
-  .responsiveRoot:global([data-section="featured-projects"]) {
+  .responsiveRoot {
     --featured-sticky-height: max(
       100svh,
       clamp(53.75rem, 71.111vw, 64rem)
@@ -75,6 +137,11 @@
     font-size: 7.655rem;
   }
 
+  .responsiveRoot:global([data-featured-theme="restoration"])
+    :global([data-featured-floating-title]) {
+    font-size: clamp(5.5rem, 7vw, 6.75rem);
+  }
+
   .responsiveRoot :global([data-featured-panel-kicker]),
   .responsiveRoot :global([data-featured-metadata]) {
     font-size: clamp(0.75rem, 0.97vw, 0.875rem);
@@ -86,12 +153,12 @@
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-  .responsiveRoot:global([data-section="featured-projects"]) {
+  .responsiveRoot {
     --featured-sticky-height: max(100svh, 53.75rem);
     --featured-scroll-distance: 107.5rem;
   }
 
-  .responsiveRoot:global([data-section="featured-projects"]) {
+  .responsiveRoot {
     max-width: 100%;
   }
 
@@ -326,7 +393,7 @@
 
 @media (max-width: 430px) {
   .responsiveRoot :global([data-featured-floating-title]) {
-    font-size: clamp(2.35rem, 13vw, 3.25rem);
+    font-size: clamp(2.35rem, 13vw, 3.10rem);
   }
 }
 

@@ -6,7 +6,7 @@ import styles from "./footer.module.css";
 
 const navigationLinks = [
   { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About Us" },
+  { href: "/about", label: "The Practice" },
   { href: "#contact", label: "Get In Touch" },
   { href: "/journal", label: "Journal" },
 ] as const;

@@ -11,8 +11,19 @@ import { OrangeBlock } from "@/components/ui/orange-block";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const texturePath = "/assets/textures/concrete-background-textures-09-1.webp";
-const projects = [
+const defaultTexturePath = "/assets/textures/concrete-background-textures-09-1.webp";
+
+export type FeaturedProject = {
+  id: string;
+  title: string;
+  href: string;
+  url: string;
+  imageAlt: string;
+  description: string;
+  metadata: readonly (readonly [string, string])[];
+};
+
+const defaultProjects: readonly FeaturedProject[] = [
   {
     id: "majorda",
     title: "NAYAN",
@@ -57,13 +68,31 @@ const projects = [
   },
 ] as const;
 
-const imageStateClasses = [
-  "left-0 top-[19.65%] z-20 h-[clamp(32rem,42vw,50rem)] w-[64.24%] opacity-100",
-  "invisible left-0 top-[19.65%] z-10 h-[clamp(32rem,42vw,50rem)] w-[64.24%] opacity-0",
-  "invisible left-0 top-[19.65%] z-0 h-[clamp(32rem,42vw,50rem)] w-[64.24%] opacity-0",
-] as const;
+type FeaturedProjectsSectionProps = {
+  projects?: readonly FeaturedProject[];
+  sectionKey?: string;
+  sectionTitle?: string;
+  kicker?: string;
+  ctaLabel?: string;
+  texturePath?: string;
+  texturePosition?: string;
+  theme?: "dark" | "restoration";
+  bottomTransition?: boolean;
+};
 
-export function FeaturedProjectsSection() {
+export function FeaturedProjectsSection({
+  projects = defaultProjects,
+  sectionKey = "featured-projects",
+  sectionTitle = "Featured Projects",
+  kicker = "Featured",
+  ctaLabel = "View Project",
+  texturePath = defaultTexturePath,
+  texturePosition = "center",
+  theme = "dark",
+  bottomTransition = false,
+}: FeaturedProjectsSectionProps = {}) {
+  const featuredProjects = projects.length > 0 ? projects : defaultProjects;
+  const isRestorationTheme = theme === "restoration";
   const sectionRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
@@ -110,9 +139,9 @@ export function FeaturedProjectsSection() {
           );
 
           if (
-            images.length < projects.length ||
-            titles.length < projects.length ||
-            contentGroups.length < projects.length
+            images.length < featuredProjects.length ||
+            titles.length < featuredProjects.length ||
+            contentGroups.length < featuredProjects.length
           ) {
             return;
           }
@@ -164,7 +193,9 @@ export function FeaturedProjectsSection() {
             force3D: true,
             y: contentTravel,
           });
-          gsap.set(progressFills, { width: "33%" });
+          gsap.set(progressFills, {
+            width: `${100 / featuredProjects.length}%`,
+          });
 
           const timeline = gsap.timeline({
             defaults: {
@@ -187,7 +218,7 @@ export function FeaturedProjectsSection() {
             toIndex: number,
           ) => {
             const position = toIndex;
-            const progressWidth = `${((toIndex + 1) / projects.length) * 100}%`;
+            const progressWidth = `${((toIndex + 1) / featuredProjects.length) * 100}%`;
             const titleTransitionDuration = reduceMotion ? 0.01 : 0.52;
             const imageTransitionDuration = reduceMotion ? 0.01 : 0.66;
             const contentTransitionDuration = reduceMotion ? 0.01 : 0.5;
@@ -275,11 +306,11 @@ export function FeaturedProjectsSection() {
           };
 
           timeline.to({}, { duration: 1 });
-          projects.slice(1).forEach((_, index) => {
+          featuredProjects.slice(1).forEach((_, index) => {
             const toIndex = index + 1;
             transitionToProject(toIndex - 1, toIndex);
 
-            if (toIndex < projects.length - 1) {
+            if (toIndex < featuredProjects.length - 1) {
               timeline.to({}, { duration: 0.75 });
             }
           });
@@ -291,14 +322,19 @@ export function FeaturedProjectsSection() {
     );
 
     return () => media.revert();
-  }, []);
+  }, [featuredProjects]);
 
   return (
     <BlendScope
       as="section"
-      aria-labelledby="featured-projects-title"
-      className={`overflow-clip bg-graphite text-bone ${responsiveStyles.responsiveRoot}`}
-      data-section="featured-projects"
+      aria-labelledby={`${sectionKey}-title`}
+      className={`relative isolate overflow-clip ${
+        isRestorationTheme
+          ? "bg-[#FAFAFA] text-[#232323]"
+          : "bg-graphite text-bone"
+      } ${responsiveStyles.responsiveRoot}`}
+      data-section={sectionKey}
+      data-featured-theme={theme}
       ref={sectionRef}
     >
       <div
@@ -310,19 +346,30 @@ export function FeaturedProjectsSection() {
           className="absolute inset-0 z-0"
           data-featured-background-layer
         >
+          {!isRestorationTheme ? (
+            <div
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#464646_0%,#2d2d2d_100%)] mix-blend-multiply"
+              data-featured-gradient-overlay
+            />
+          ) : null}
           <div
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#464646_0%,#2d2d2d_100%)] mix-blend-multiply"
-            data-featured-gradient-overlay
-          />
-          <div
-            className="pointer-events-none absolute inset-0 select-none bg-cover bg-center opacity-90 mix-blend-overlay"
+            className={`pointer-events-none absolute inset-0 select-none bg-cover bg-center ${
+              isRestorationTheme
+                ? "opacity-70 mix-blend-multiply"
+                : "opacity-90 mix-blend-overlay"
+            }`}
             data-featured-texture-layer
-            style={{ backgroundImage: `url("${texturePath}")` }}
+            style={{
+              backgroundImage: `url("${texturePath}")`,
+              backgroundPosition: texturePosition,
+            }}
           />
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 top-[73.24%] bg-[linear-gradient(180deg,rgba(70,70,70,0)_0%,#464646_100%)]"
-            data-featured-lower-gradient-overlay
-          />
+          {!isRestorationTheme ? (
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 top-[73.24%] bg-[linear-gradient(180deg,rgba(70,70,70,0)_0%,#464646_100%)]"
+              data-featured-lower-gradient-overlay
+            />
+          ) : null}
         </div>
 
         <div
@@ -334,18 +381,23 @@ export function FeaturedProjectsSection() {
             data-featured-mobile-progress-rail
           >
             <p
-              className="shrink-0 font-display font-semibold text-bone"
+              className={`shrink-0 font-display font-semibold ${
+                isRestorationTheme ? "text-[#232323]" : "text-bone"
+              }`}
               data-featured-panel-kicker
             >
-              Featured
+              {kicker}
             </p>
             <div
-              className="relative h-px flex-1 bg-[#fafafa]"
+              className={`relative h-px flex-1 ${
+                isRestorationTheme ? "bg-[#232323]/25" : "bg-[#fafafa]"
+              }`}
               data-featured-progress-track
             >
               <div
-                className="absolute inset-y-0 left-0 h-px w-[33%] bg-[#d45231]"
+                className="absolute inset-y-0 left-0 h-px bg-[#d45231]"
                 data-featured-progress-fill
+                style={{ width: `${100 / featuredProjects.length}%` }}
               />
             </div>
           </div>
@@ -354,10 +406,12 @@ export function FeaturedProjectsSection() {
             className="pointer-events-none absolute inset-0 z-20"
             data-featured-image-stack
           >
-            {projects.map((project, index) => (
+            {featuredProjects.map((project, index) => (
               <figure
                 key={project.id}
-                className={`absolute overflow-hidden ${imageStateClasses[index]}`}
+                className={`absolute left-0 top-[19.65%] h-[clamp(32rem,42vw,50rem)] w-[64.24%] overflow-hidden ${
+                  index === 0 ? "z-20 opacity-100" : "invisible z-10 opacity-0"
+                }`}
                 data-featured-image={project.id}
                 data-featured-image-index={index + 1}
               >
@@ -377,7 +431,7 @@ export function FeaturedProjectsSection() {
             className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden mix-blend-difference"
             data-featured-floating-title-stack
           >
-            {projects.map((project, index) => (
+            {featuredProjects.map((project, index) => (
               <p
                 key={project.id}
                 className={`absolute left-0 top-[12.8%] w-full whitespace-nowrap text-center font-display font-light uppercase leading-[135%] tracking-[0] text-white ${
@@ -392,16 +446,18 @@ export function FeaturedProjectsSection() {
           </div>
 
           <aside
-            className="absolute bottom-0 right-0 top-0 z-40 w-full border-silver/35 lg:w-[35.76%] lg:border-l"
-            aria-labelledby="featured-projects-title"
+            className={`absolute bottom-0 right-0 top-0 z-40 w-full lg:w-[35.76%] lg:border-l ${
+              isRestorationTheme ? "border-[#232323]/25" : "border-silver/35"
+            }`}
+            aria-labelledby={`${sectionKey}-title`}
             data-featured-information-panel
           >
             <div
               className="relative h-full px-[8.95%] pb-[8%] pt-[15.35%]"
               data-featured-panel-layout
             >
-              <h2 id="featured-projects-title" className="sr-only">
-                Featured Projects
+              <h2 id={`${sectionKey}-title`} className="sr-only">
+                {sectionTitle}
               </h2>
               <div
                 className="relative h-full"
@@ -417,19 +473,24 @@ export function FeaturedProjectsSection() {
                     data-featured-progress-rail
                   >
                     <p
-                      className="shrink-0 font-display text-sm font-semibold text-bone"
+                      className={`shrink-0 font-display text-sm font-semibold ${
+                        isRestorationTheme ? "text-[#232323]" : "text-bone"
+                      }`}
                       data-featured-panel-kicker
                     >
-                      Featured
+                      {kicker}
                     </p>
                     <div
                       aria-hidden="true"
-                      className="relative h-px flex-1 bg-[#fafafa]"
+                      className={`relative h-px flex-1 ${
+                        isRestorationTheme ? "bg-[#232323]/25" : "bg-[#fafafa]"
+                      }`}
                       data-featured-progress-track
                     >
                       <div
-                        className="absolute inset-y-0 left-0 h-px w-[33%] bg-[#d45231]"
+                        className="absolute inset-y-0 left-0 h-px bg-[#d45231]"
                         data-featured-progress-fill
+                        style={{ width: `${100 / featuredProjects.length}%` }}
                       />
                     </div>
                   </div>
@@ -440,7 +501,7 @@ export function FeaturedProjectsSection() {
                     data-featured-decorative-line="panel-top"
                   />
 
-                  {projects.map((project, index) => (
+                  {featuredProjects.map((project, index) => (
                     <article
                       key={project.id}
                       className={`absolute inset-0 grid h-full content-start gap-[clamp(3.5rem,6vh,4.75rem)] ${
@@ -462,29 +523,47 @@ export function FeaturedProjectsSection() {
                         />
 
                         <p
-                          className="max-w-[19.5rem] font-display text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.42] text-bone"
+                          className={`max-w-[19.5rem] font-display ${
+                            isRestorationTheme
+                              ? "text-[clamp(0.95rem,1.12vw,1rem)] leading-none text-[#D45231]"
+                              : "text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.42] text-bone"
+                          }`}
                           data-featured-description={project.id}
                         >
                           {project.description}
                         </p>
                       </div>
 
-                      <dl
-                        className="font-display text-sm"
-                        data-featured-metadata={project.id}
-                        data-featured-metadata-region
-                      >
-                        {project.metadata.map(([label, value]) => (
-                          <div
-                            key={label}
-                            className="grid grid-cols-[1fr_auto] gap-6 border-b border-transparent bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)] bg-[length:100%_1px] bg-bottom bg-no-repeat py-3"
-                            data-featured-metadata-row
-                          >
-                            <dt>{label}</dt>
-                            <dd className="text-right text-silver">{value}</dd>
-                          </div>
-                        ))}
-                      </dl>
+                      {project.metadata.length > 0 ? (
+                        <dl
+                          className="font-display text-sm"
+                          data-featured-metadata={project.id}
+                          data-featured-metadata-region
+                        >
+                          {project.metadata.map(([label, value]) => (
+                            <div
+                              key={label}
+                              className={`grid grid-cols-[1fr_auto] gap-6 border-b border-transparent bg-[length:100%_1px] bg-bottom bg-no-repeat py-3 ${
+                                isRestorationTheme
+                                  ? "bg-[linear-gradient(90deg,rgba(35,35,35,0.45)_0%,rgba(35,35,35,0)_100%)]"
+                                  : "bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
+                              }`}
+                              data-featured-metadata-row
+                            >
+                              <dt>{label}</dt>
+                              <dd
+                                className={`text-right ${
+                                  isRestorationTheme
+                                    ? "text-[#575757]"
+                                    : "text-silver"
+                                }`}
+                              >
+                                {value}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                      ) : null}
 
                       <div
                         className="flex items-start"
@@ -498,7 +577,7 @@ export function FeaturedProjectsSection() {
                           href={project.href}
                           variant="dark"
                         >
-                          View Project
+                          {ctaLabel}
                         </CTA>
                       </div>
                     </article>
@@ -535,6 +614,22 @@ export function FeaturedProjectsSection() {
           </div>
         </div>
       </div>
+
+      {bottomTransition ? (
+        <div
+          aria-hidden="true"
+          data-featured-bottom-transition
+        >
+          <CdnImage
+            alt=""
+            className="object-cover object-bottom"
+            fill
+            quality={75}
+            sizes="100vw"
+            src="/assets/textures/contact-texture.webp"
+          />
+        </div>
+      ) : null}
     </BlendScope>
   );
 }
