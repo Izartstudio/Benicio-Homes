@@ -427,7 +427,7 @@ export function StepsSection() {
             className="absolute left-[5.28%] top-[15.7%] max-w-[61rem] font-display text-[2rem] font-light leading-[1.42] tracking-[0.01em] text-[#eeeeee]"
             data-step-copy
           >
-            Good Architecture should respect the climate of the land, and not stay apart from it
+            Not the Goa home most people come looking for. The one some people know how to wait for.
           
           </p>
 

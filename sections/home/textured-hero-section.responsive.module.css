@@ -43,28 +43,9 @@
   will-change: transform;
 }
 
-.concreteBackground {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-color: #2d2d2d;
-  background-image:
-    linear-gradient(rgb(24 24 24 / 0.53), rgb(24 24 24 / 0.53)),
-    url("/assets/textures/concrete-background-textures-09-1.webp");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply, normal;
-}
-
-.sequenceRoot,
-.finalComposition,
-.heroCrosshair {
-  position: absolute;
-  inset: 0;
-}
-
 .sequenceRoot {
+  position: absolute;
+  inset: 0;
   z-index: 10;
 }
 
@@ -112,8 +93,9 @@
 }
 
 .floatingImage {
-  filter: grayscale(1);
+  filter: grayscale(1) blur(2px);
   object-fit: cover;
+  transform: scale(1.005);
 }
 
 @keyframes hero-grid-float {
@@ -156,157 +138,10 @@
   opacity: 0;
 }
 
-.heroCrosshair {
-  --orange-box-half: 0.90625rem;
-
-  z-index: 1;
-  pointer-events: none;
-}
-
-.heroCrosshair i {
-  position: absolute;
-  display: block;
-  transform: scaleX(0);
-}
-
-.heroCrosshair i:nth-child(1) {
-  display: none;
-}
-
-.heroCrosshair i:nth-child(2) {
-  top: 50%;
-  right: 11.77%;
-  left: calc(50% + var(--orange-box-half));
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    rgb(185 185 185 / 1),
-    rgb(185 185 185 / 0)
-  );
-}
-
-.heroCrosshair i:nth-child(3) {
-  top: 19%;
-  left: 49.5%;
-  width: 1px;
-  height: 26.4%;
-  background: linear-gradient(to bottom, rgb(185 185 185 / 0), #777);
-  transform: scaleY(0);
-}
-
-.heroCrosshair i:nth-child(4) {
-  top: 54.5%;
-  bottom: 19.1%;
-  left: 49.5%;
-  width: 1px;
-  background: linear-gradient(to bottom, #777, rgb(185 185 185 / 0));
-  transform: scaleY(0);
-}
-
-.heroCrosshair i:nth-child(5) {
-  display: none;
-}
-
-.heroCrosshair i:nth-child(6) {
-  top: 50%;
-  right: calc(50% + var(--orange-box-half));
-  left: 11.77%;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    rgb(185 185 185 / 0),
-    rgb(185 185 185 / 1)
-  );
-}
-
-.finalComposition {
-  z-index: 2;
-  color: #b9b9b9;
-  pointer-events: none;
-}
-
-.finalComposition p {
-  position: absolute;
-  margin: 0;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.location {
-  top: 20.35%;
-  left: 5.55%;
-  font-family: var(--font-roboto-slab);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1;
-}
-
-.locationleft {
-  top: 20.35%;
-  left: 68.85%;
-  font-family: var(--font-roboto-slab);
-  font-size: 1.15rem;
-  font-weight: 100;
-  line-height: 1;
-  color: #DC4C28;
-}
-.locationleft2 {
-  top: 20.35%;
-  left: 76.85%;
-  font-family: var(--font-roboto-slab);
-  font-size: 1.15rem;
-  font-weight: 100;
-  line-height: 1;
-  color: #DC4C28;
-}
-
-.statement {
-  top: 20.15%;
-  left: 65.85%;
-  width: 28.5%;
-  color: #eee;
-  font-family: var(--font-bahnschrift);
-  font-size: clamp(1.15rem, 1.67vw, 1.5rem);
-  font-weight: 300;
-  line-height: 1.32;
-}
-.statementbottom{
-   top: 78.15%;
-  left: 65.85%;
-  width: 28.5%;
-  color: #eee;
-  font-family: var(--font-bahnschrift);
-  font-size: clamp(1.15rem, 1.67vw, 1.5rem);
-  font-weight: 300;
-  line-height: 1.32;
-}
-.wordmark {
-  bottom: 11.3%;
-
-  font-family: var(--font-bahnschrift);
-  font-size: clamp(1.6rem, 0.4vw, 2.375rem);
-  font-weight: 300;
-  line-height: 1.32;
-  letter-spacing: 0.005em;
-  
-}
-
-.wordmarkLeft {
-  left: 3.45%;
-}
-
-.wordmarkRight {
-  right: 3.95%;
-}
-
 @media (max-width: 1023px) {
   .imageFrame {
     width: clamp(19rem, 48vw, 25rem);
     height: clamp(19.45rem, 49.15vw, 25.6rem);
-  }
-
-  .wordmark {
-    font-size: clamp(5.25rem, 10vw, 7.5rem);
   }
 
   .floatingGrid,
@@ -320,10 +155,6 @@
 }
 
 @media (max-width: 767px) {
-  .scrollStage {
-    height: 240svh;
-  }
-
   .stickyViewport {
     min-height: 34rem;
   }
@@ -331,53 +162,6 @@
   .imageFrame {
     width: min(78vw, 22rem);
     height: min(79.85vw, 22.55rem);
-  }
-
-  .concreteBackground {
-    background-position: 58% center;
-  }
-
-  .heroCrosshair i:nth-child(6) {
-    left: 6%;
-    right: calc(50% + var(--orange-box-half));
-  }
-
-  .heroCrosshair i:nth-child(2) {
-    left: calc(50% + var(--orange-box-half));
-    right: 4%;
-  }
-
-  .heroCrosshair i:nth-child(3),
-  .heroCrosshair i:nth-child(4) {
-    left: 50%;
-  }
-
-  .location {
-    top: 17%;
-    left: 1.5rem;
-    font-size: 0.875rem;
-  }
-
-  .statement {
-    top: 16%;
-    right: 1.5rem;
-    left: auto;
-    width: 43%;
-    font-size: clamp(0.75rem, 3.15vw, 0.9rem);
-  }
-
-  .wordmark {
-    bottom: 13%;
-    font-size: clamp(3.25rem, 16vw, 5rem);
-  }
-
-  .wordmarkLeft {
-    left: 1.5rem;
-  }
-
-  .wordmarkRight {
-    right: 1.5rem;
-    bottom: 4.5%;
   }
 
   .floatingGrid {

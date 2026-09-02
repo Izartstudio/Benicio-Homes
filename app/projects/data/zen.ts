@@ -24,9 +24,21 @@ export const zenVillas2Project = {
       src: media.heroForeground,
       alt: "",
     },
+    mobileImage: {
+      src: media.heroMobile,
+      alt: "Zen Villas-2 hero",
+    },
+    mobileForegroundImage: {
+      src: media.heroForegroundMobile,
+      alt: "",
+    },
     mediaCanvas: {
       aspectRatio: 2000 / 1800,
       foregroundCanvasHeightRatio: 1500 / 1600,
+    },
+    mobileMediaCanvas: {
+      aspectRatio: 420 / 913,
+      foregroundCanvasHeightRatio: 1,
     },
   },
   intro: {

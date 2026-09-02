@@ -117,23 +117,16 @@ export function LegacySection() {
             className="max-w-[34rem] whitespace-pre-line font-display text-[clamp(1.7rem,2.45vw,2.25rem)] font-normal leading-[1.38] tracking-[0.015em]"
             data-legacy-heading
           >
-            {"Built For The Place.\nDesigned For Life."}
+            {"The Honesty of Brutalism.\nThe Openness of the Tropics."}
           </h2>
 
           <div className="relative pl-[1.15%]" data-legacy-copy-group>
-            <div
-              aria-hidden="true"
-              className="absolute bottom-[-3.5rem] left-0 top-[-4.5rem] w-px bg-[linear-gradient(90deg,#b9b9b9_0%,rgba(83,83,83,0)_100%)]"
-              data-legacy-vertical-divider
-            />
+           
             <p
               className="max-w-[22rem] font-display text-[clamp(0.9rem,1.1vw,1rem)] leading-[1.42]"
               data-legacy-copy
             >
-              Great homes are measured by how they are lived in, not simply how
-              they are seen. We create developments where architecture,
-              landscape, and everyday living come together to leave a lasting
-              legacy.
+              We keep what brutalism gets right: honest materials, clear structure, and nothing disguised. Then we open it to the tropics. Concrete meets laterite and aged teak. Weight is balanced by air, shade and vegetation. Raw architecture, made to feel alive.
             </p>
             <CTA
               arrowClassName="translate-y-[0.1rem] text-lg"

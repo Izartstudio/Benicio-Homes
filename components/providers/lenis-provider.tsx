@@ -22,6 +22,7 @@ const LenisContext = createContext<Lenis | null>(null);
 const nativeScrollMediaQuery = "(max-width: 767px), (pointer: coarse)";
 const scrollStoragePrefix = "benicio-scroll-position:";
 const heroReloadStorageSuffix = ":hero-active";
+const routeTopStorageKey = "benicio-route-top-destination";
 
 function scrollWindowImmediately(top: number) {
   const root = document.documentElement;
@@ -45,7 +46,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const previousPathnameRef = useRef(pathname);
 
-  const scheduleRefresh = useCallback(() => {
+  const scheduleRefresh = useCallback((afterRefresh?: () => void) => {
     if (refreshTimerRef.current !== null) {
       window.clearTimeout(refreshTimerRef.current);
     }
@@ -61,6 +62,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
           lenisRef.current?.resize();
           ScrollTrigger.sort();
           ScrollTrigger.refresh();
+          afterRefresh?.();
         });
       });
     }, 180);
@@ -148,8 +150,15 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   useLayoutEffect(() => {
     window.history.scrollRestoration = "manual";
 
-    const isClientNavigation = previousPathnameRef.current !== pathname;
+    const currentRoute = `${window.location.pathname}${window.location.search}`;
+    const requestedTopRoute = window.sessionStorage.getItem(routeTopStorageKey);
+    const routeTopRequested = requestedTopRoute === currentRoute;
+    const isClientNavigation =
+      previousPathnameRef.current !== pathname || routeTopRequested;
     previousPathnameRef.current = pathname;
+    if (routeTopRequested) {
+      window.sessionStorage.removeItem(routeTopStorageKey);
+    }
     const navigationEntry = performance.getEntriesByType(
       "navigation",
     )[0] as PerformanceNavigationTiming | undefined;
@@ -252,7 +261,16 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       void document.fonts.ready.then(() => {
         if (active) {
           resetHeroReload();
-          scheduleRefresh();
+          if (isClientNavigation) {
+            positionDestination();
+          }
+          scheduleRefresh(() => {
+            resetHeroReload();
+            if (isClientNavigation) {
+              positionDestination();
+              delete document.documentElement.dataset.routeChanging;
+            }
+          });
         }
       });
     };
@@ -398,14 +416,12 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       // keeps the outgoing page stable; the destination layout effect above
       // then places the new page at its top before paint.
       event.preventDefault();
-      if (
-        document.documentElement.dataset.scrollEngine === "safari-native"
-      ) {
-        document.documentElement.dataset.routeChanging = "";
-        window.setTimeout(() => {
-          delete document.documentElement.dataset.routeChanging;
-        }, 2000);
-      }
+      const destinationRoute = `${destination.pathname}${destination.search}`;
+      window.sessionStorage.setItem(routeTopStorageKey, destinationRoute);
+      document.documentElement.dataset.routeChanging = "";
+      window.setTimeout(() => {
+        delete document.documentElement.dataset.routeChanging;
+      }, 2000);
       router.push(
         `${destination.pathname}${destination.search}${destination.hash}`,
         { scroll: false },

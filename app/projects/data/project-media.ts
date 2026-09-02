@@ -12,6 +12,8 @@ export const PROJECT_MEDIA = {
   vanamVillas: {
     hero: "/assets/projects/bgvanam.png",
     heroForeground: "/assets/projects/vanam-hero-foreground.png",
+    heroMobile: "/assets/projects/vanam-bg-mobile.png",
+    heroForegroundMobile: "/assets/projects/vanam-foreground-mobile.png",
     intro: "/assets/projects/bgvanam.png",
     location: "/assets/storysection/story-hero.webp",
     locationDecorative:
@@ -39,9 +41,10 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/vanam/next-project.webp",
   },
   nayanVilla: {
-    hero: "/assets/projects/NAYANBG.png",
-    heroForeground:
-      "/assets/projects/NAYANFORE.png",
+    hero: "/assets/projects/nayan-bg-desktop.png",
+    heroForeground: "/assets/projects/nayan-foreground-desktop.png",
+    heroMobile: "/assets/projects/nayan-bg-mobile.png",
+    heroForegroundMobile: "/assets/projects/nayan-foreground-mobile.png",
     intro:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-continuous.webp",
     location:
@@ -70,12 +73,14 @@ export const PROJECT_MEDIA = {
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-imageshowcase6.webp",
     ],
     nextProject:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/nayan/nayan-next-project.webp",
+      "/assets/projects/zen-villa-2-bg.png",
   },
   zenVillas2: {
     hero: "/assets/projects/zen-villa-2-bg.png",
     heroForeground:
       "/assets/projects/zen-villa-2-foree.png",
+    heroMobile: "/assets/projects/zen-villa-2-bg-mobile.png",
+    heroForegroundMobile: "/assets/projects/zen-villa-2-foreground-mobile.png",
     intro:
       "",
     location:
@@ -88,7 +93,7 @@ export const PROJECT_MEDIA = {
     moodboardMobile: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-moodboard-mobile.webp",
    
     architecture:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-architecture.webp",
+      "/assets/projects/zen-architecture.png",
     floorPlan01Ground:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-floorplan1.webp",
     floorPlan01First:
@@ -114,6 +119,8 @@ export const PROJECT_MEDIA = {
     hero: "/assets/projects/villaelsalvabg.png",
     heroForeground:
       "/assets/projects/elsalva-foreground.png",
+    heroMobile: "/assets/projects/el-salva-bg-mobile.png",
+    heroForegroundMobile: "/assets/projects/el-salva-foreground-mobile.png",
     intro:
       "",
     location:
@@ -148,6 +155,8 @@ export const PROJECT_MEDIA = {
   villaPerola: {
     hero: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/villaperolabg.webp",
     heroForeground: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/villaperola-foreground.webp",
+    heroMobile: "/assets/projects/villa-perola-bg-mobile.png",
+    heroForegroundMobile: "/assets/projects/villa-perola-foreground-mobile.png",
     intro: "/images/placeholders/responsive-media-fallback.webp",
     location: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/perola-horizontal.webp",
     locationDecorative: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
@@ -175,6 +184,8 @@ export const PROJECT_MEDIA = {
   zenVilla1: {
     hero: "/assets/projects/zenvilla1.png",
     heroForeground: "/assets/projects/zen-villa-foreground.png",
+    heroMobile: "/assets/projects/zen-villa-1-bg-mobile.png",
+    heroForegroundMobile: "/assets/projects/zen-villa-1-foreground-mobile.png",
     intro: "/images/placeholders/responsive-media-fallback.webp",
     location: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa1/villazen1-horizontal.webp",
     locationDecorative: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",

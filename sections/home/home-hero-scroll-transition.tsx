@@ -11,8 +11,8 @@ type HomeHeroScrollTransitionProps = {
   children: ReactNode;
 };
 
-const finalWidthRem = 47.875;
-const finalHeightRem = 26.625;
+const finalWidthRem = 67;
+const finalHeightRem = 37.25;
 const finalWidthViewportRatio = finalWidthRem / 90;
 const finalHeightViewportRatio = finalHeightRem / 56.25;
 

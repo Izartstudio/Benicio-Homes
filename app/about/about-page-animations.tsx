@@ -4,6 +4,7 @@ import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { addCrosshair } from "@/lib/animations/crosshair";
+import { addEditorialHeroReveal } from "@/lib/animations/editorial-hero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,18 +37,8 @@ export function AboutPageAnimations() {
       const vision = root.querySelector<HTMLElement>('[data-design-source="Section -5 about.svg"]');
 
       if (hero) {
-        const crosshair = hero.querySelector<HTMLElement>("[data-section-crosshair]");
-        const copy = Array.from(hero.querySelectorAll<HTMLElement>("[data-reveal]"));
-        gsap.set(copy, revealFrom);
         const timeline = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.12 });
-        if (crosshair) addCrosshair(timeline, crosshair);
-        timeline.to(copy, {
-          autoAlpha: 1,
-          clearProps: "opacity,visibility,transform",
-          duration: 0.58,
-          stagger: 0.07,
-          y: 0,
-        }, 0.42);
+        addEditorialHeroReveal(timeline, hero);
       }
 
       if (respect) {

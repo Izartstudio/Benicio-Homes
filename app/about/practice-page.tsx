@@ -1,6 +1,7 @@
 import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import { CTA } from "@/components/ui/cta";
+import { EditorialHeroComposition } from "@/components/editorial-hero/editorial-hero-composition";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionCrosshair } from "@/components/ui/section-crosshair";
 import { AboutPageAnimations } from "./about-page-animations";
@@ -61,27 +62,12 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
   return (
     <div className={styles.page} data-about-practice-root>
       <AboutPageAnimations />
-      <section
-        aria-labelledby="practice-title"
-        className={styles.hero}
-        data-design-source="Hero Section.svg"
-        data-section="practice-hero"
-      >
-        <div aria-hidden="true" className={styles.heroConcrete} />
-        <div aria-hidden="true" className={styles.heroShadow} />
-        <SectionCrosshair className={`${styles.sectionCrosshair} ${styles.heroCrosshair}`} showMarker />
-        <Reveal className={styles.heroTitle} revealMode="manual">
-          <h1 id="practice-title">Thoughtfully Designed,<br />Endlessly Lived</h1>
-        </Reveal>
-        <Reveal className={styles.heroLocation} revealMode="manual">
-          <strong>GOA, IN</strong>
-          <span>15.4909° N&nbsp;&nbsp;/&nbsp;&nbsp;73.8278° E</span>
-        </Reveal>
-        <Reveal className={styles.heroStatement} revealMode="manual">
-          <p>Every Benicio home begins with an understanding of place. From heritage restorations to contemporary tropical villas, our work celebrates craftsmanship, climate, and a slower way of living.</p>
-          <CTA href="/projects" variant="light">Explore Projects</CTA>
-        </Reveal>
-      </section>
+      <EditorialHeroComposition
+        designSource="Hero Section.svg"
+        sectionName="practice-hero"
+        title={<>Thoughtfully Designed,<br />Endlessly Lived</>}
+        titleId="practice-title"
+      />
 
       <section
         aria-labelledby="respect-title"

@@ -227,7 +227,7 @@ export function Navbar() {
           arrowClassName="translate-y-[0.42rem] text-[1.2rem] leading-none"
           className="inline-flex h-[3.125rem] w-[11rem] items-center justify-between justify-self-end px-[0.8125rem] font-display text-[1rem] leading-none"
           data-navbar-cta
-          href="/#contact"
+          href="#contact"
           lightBackground="#cccccc"
           variant="light"
         >
@@ -303,7 +303,7 @@ export function Navbar() {
             <CTA
               arrowClassName="translate-y-[0.42rem] text-[1.2rem] leading-none"
               className={responsiveStyles.mobileCta}
-              href="/#contact"
+              href="#contact"
               lightBackground="#cccccc"
               onClick={() => setIsMobileMenuOpen(false)}
               variant="light"

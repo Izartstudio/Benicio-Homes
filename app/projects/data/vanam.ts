@@ -23,9 +23,21 @@ export const vanamProject = {
       src: media.heroForeground,
       alt: "",
     },
+    mobileImage: {
+      src: media.heroMobile,
+      alt: "Vanam Villas framed by tropical planting",
+    },
+    mobileForegroundImage: {
+      src: media.heroForegroundMobile,
+      alt: "",
+    },
     mediaCanvas: {
       aspectRatio: 1440 / 1600,
       foregroundCanvasHeightRatio: 840 / 1500,
+    },
+    mobileMediaCanvas: {
+      aspectRatio: 390 / 1042,
+      foregroundCanvasHeightRatio: 1,
     },
   },
   intro: {

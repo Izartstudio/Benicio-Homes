@@ -69,7 +69,7 @@ export function Footer() {
               <p
                 className={`mt-[2.875rem] max-w-[21rem] font-display text-[1.125rem] leading-[1.35] ${styles.brandTagline}`}
               >
-                Good Architecture should respect the climate of the land, and not stay apart from it.
+                 Not the Goa home most people come looking for. The one some people know how to wait for.
               </p>
 
               <p className="sr-only">

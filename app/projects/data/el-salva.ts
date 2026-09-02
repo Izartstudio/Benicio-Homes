@@ -13,6 +13,7 @@ export const elSalvaVillaProject = {
   },
   hero: {
     layout: "el-salva",
+    variant: "el-salva",
     title: "Villa El Salva",
     description:
       "Rooted in the architectural charm of old Goa and reimagined for today, this heritage villa brings together history, elegance, and contemporary luxury in one timeless sanctuary.",
@@ -24,8 +25,20 @@ export const elSalvaVillaProject = {
       src: media.heroForeground,
       alt: "",
     },
+    mobileImage: {
+      src: media.heroMobile,
+      alt: "El Salva Villa hero",
+    },
+    mobileForegroundImage: {
+      src: media.heroForegroundMobile,
+      alt: "",
+    },
     mediaCanvas: {
       aspectRatio: 1435 / 1500,
+    },
+    mobileMediaCanvas: {
+      aspectRatio: 420 / 911,
+      foregroundCanvasHeightRatio: 1,
     },
   },
   intro: {

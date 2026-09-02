@@ -2,8 +2,10 @@
 
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import { SectionCrosshair } from "@/components/ui/section-crosshair";
-import { addCrosshair } from "@/lib/animations/crosshair";
+import {
+  addEditorialHeroReveal,
+  showEditorialHeroFinalState,
+} from "@/lib/animations/editorial-hero";
 import { HeroFinalComposition } from "./hero-final-composition";
 import {
   HeroShrinkingGallery,
@@ -16,7 +18,16 @@ type HomeHeroSequenceProps = {
 };
 
 const imageStep = 0.15;
-const sizeRatios = [1, 0.78, 0.58, 0.4, 0.23] as const;
+const finalImageRatio = 0.23;
+
+function getImageSizeRatio(index: number, imageCount: number) {
+  if (imageCount <= 1) {
+    return 1;
+  }
+
+  const progress = index / (imageCount - 1);
+  return 1 - (1 - finalImageRatio) * progress;
+}
 
 export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -33,10 +44,11 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
       root.querySelectorAll<HTMLElement>("[data-hero-sequence-image]"),
     );
     const orangeImage = root.querySelector<HTMLElement>("[data-hero-orange-image]");
-    const crosshair = root.querySelector<HTMLElement>("[data-section-crosshair]");
-    const copy = Array.from(root.querySelectorAll<HTMLElement>("[data-hero-copy]"));
+    const finalComposition = root.querySelector<HTMLElement>(
+      "[data-editorial-hero]",
+    );
 
-    if (!frame || !imageLayers.length || !orangeImage || !crosshair) {
+    if (!frame || !imageLayers.length || !orangeImage || !finalComposition) {
       return;
     }
 
@@ -46,14 +58,12 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
       gsap.set(imageLayers, { autoAlpha: 0 });
       gsap.set(imageLayers[0], { autoAlpha: 1 });
       gsap.set(orangeImage, { autoAlpha: 0 });
-      gsap.set(copy, { autoAlpha: 0, y: 14 });
 
       if (reducedMotion) {
         gsap.set(frame, { height: 29, width: 29 });
         gsap.set(imageLayers, { autoAlpha: 0 });
         gsap.set(orangeImage, { autoAlpha: 1 });
-        gsap.set(crosshair.querySelectorAll("i"), { scaleX: 1, scaleY: 1 });
-        gsap.set(copy, { autoAlpha: 1, y: 0 });
+        showEditorialHeroFinalState(finalComposition);
         return;
       }
 
@@ -61,23 +71,26 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
 
       imageLayers.slice(1).forEach((image, index) => {
         const nextIndex = index + 1;
-        const ratio = sizeRatios[nextIndex] ?? Math.max(0.16, 1 - nextIndex * 0.2);
+        const ratio = getImageSizeRatio(nextIndex, imageLayers.length);
         const at = nextIndex * imageStep;
 
         timeline
           .to(frame, {
-            duration: 0.22,
+            duration: imageStep,
+            ease: "none",
             height: frameBounds.height * ratio,
             width: frameBounds.width * ratio,
           }, at)
           .to(imageLayers[nextIndex - 1], {
             autoAlpha: 0,
-            duration: 0.1,
+            duration: imageStep,
+            ease: "none",
           }, at)
           .to(image, {
             autoAlpha: 1,
-            duration: 0.12,
-          }, at + 0.02);
+            duration: imageStep,
+            ease: "none",
+          }, at);
       });
 
       const orangeAt = imageLayers.length * imageStep;
@@ -95,14 +108,8 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
         .to(orangeImage, { autoAlpha: 1, duration: 0.12 }, orangeAt + 0.03);
 
       const linesAt = orangeAt + 0.3;
-      addCrosshair(timeline, crosshair, linesAt);
-      timeline.to(copy, {
-        autoAlpha: 1,
-        duration: 0.28,
-        ease: "power3.out",
-        stagger: 0.14,
-        y: 0,
-      }, linesAt + 0.4);
+      timeline.to(frame, { autoAlpha: 0, duration: 0.12 }, linesAt);
+      addEditorialHeroReveal(timeline, finalComposition, linesAt);
     }, root);
 
     return () => ctx.revert();
@@ -110,9 +117,8 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
 
   return (
     <div className={styles.sequenceRoot} ref={rootRef}>
-      <SectionCrosshair className={styles.heroCrosshair} />
-      <HeroShrinkingGallery images={images} />
       <HeroFinalComposition />
+      <HeroShrinkingGallery images={images} />
     </div>
   );
 }

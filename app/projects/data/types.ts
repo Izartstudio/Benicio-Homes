@@ -19,9 +19,15 @@ export type ProjectHeroData = {
     };
     foregroundCanvasHeightRatio?: number;
   };
+  mobileForegroundImage?: ProjectImage;
+  mobileImage?: ProjectImage;
+  mobileMediaCanvas?: {
+    aspectRatio: number;
+    foregroundCanvasHeightRatio?: number;
+  };
   title: string;
   titleLayer?: "behind" | "front";
-  variant?: "perola" | "vanam";
+  variant?: "el-salva" | "perola" | "vanam";
 };
 
 export type ProjectIntroData = {

@@ -2,9 +2,23 @@
   transform: translateX(-50%);
 }
 
+.responsiveRoot :global([data-about-copy]) {
+  max-width: 19.5rem;
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.38;
+}
+
+.responsiveRoot :global([data-about-copy="right"]) {
+  max-width: 18.5rem;
+}
+
 @media (min-width: 1200px) {
   .responsiveRoot :global([data-about-heading]) {
     top: clamp(-4rem, -4.15vw, -3rem);
+  }
+
+  .responsiveRoot :global([data-about-reveal="5"]) {
+    top: 48%;
   }
 }
 
@@ -101,12 +115,14 @@
 
   .responsiveRoot :global([data-about-reveal="5"]) {
     right: 5%;
-    top: 48%;
+    top: 34%;
   }
 
   .responsiveRoot :global([data-about-copy]) {
     width: 100%;
-    max-width: none;
+    max-width: 20rem;
+    font-size: clamp(1rem, 1.8vw, 1.125rem);
+    line-height: 1.4;
   }
 
   .responsiveRoot :global([data-about-orange-square]) {
@@ -239,8 +255,9 @@
   }
 
   .responsiveRoot :global([data-about-copy]) {
-    max-width: min(18rem, calc(100vw - 3.5rem));
-    font-size: 0.95rem;
+    max-width: min(19rem, calc(100vw - 3.5rem));
+    font-size: clamp(1rem, 4.4vw, 1.1rem);
+    line-height: 1.42;
     text-align: center;
   }
 

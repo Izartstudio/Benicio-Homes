@@ -18,8 +18,20 @@ export const zenVillas1Project = {
       "Zen Villa I is a contemporary tropical home in Assagao, designed for openness and simplicity. With clean forms and natural light, it offers a refined retreat that blends modern design with Goa's calm landscape.",
     image: { src: media.hero, alt: "Zen Villa 1 exterior" },
     foregroundImage: { src: media.heroForeground, alt: "" },
+    mobileImage: {
+      src: media.heroMobile,
+      alt: "Zen Villa 1 exterior",
+    },
+    mobileForegroundImage: {
+      src: media.heroForegroundMobile,
+      alt: "",
+    },
     mediaCanvas: {
       aspectRatio: 1440 / 1500,
+    },
+    mobileMediaCanvas: {
+      aspectRatio: 420 / 912,
+      foregroundCanvasHeightRatio: 1,
     },
   },
   intro: {

@@ -24,6 +24,10 @@ export type ProjectHeroMedia = {
   foreground?: ProjectHeroImage;
   foregroundCanvasHeightRatio?: number;
   mediaAspectRatio: number;
+  mobileBackground?: ProjectHeroImage;
+  mobileForeground?: ProjectHeroImage;
+  mobileForegroundCanvasHeightRatio?: number;
+  mobileMediaAspectRatio?: number;
 };
 
 export type ProjectHeroSequenceProps = {
@@ -33,7 +37,7 @@ export type ProjectHeroSequenceProps = {
   media: ProjectHeroMedia;
   title: string;
   titleLayer?: "behind" | "front";
-  variant?: "perola" | "vanam";
+  variant?: "el-salva" | "perola" | "vanam";
 };
 
 export function ProjectHeroSequence({
@@ -219,6 +223,12 @@ export function ProjectHeroSequence({
           foregroundImage={media.foreground}
           foregroundMotionRef={foregroundMotionRef}
           mediaAspectRatio={media.mediaAspectRatio}
+          mobileBackgroundImage={media.mobileBackground}
+          mobileForegroundCanvasHeightRatio={
+            media.mobileForegroundCanvasHeightRatio
+          }
+          mobileForegroundImage={media.mobileForeground}
+          mobileMediaAspectRatio={media.mobileMediaAspectRatio}
           ref={mediaMotionRef}
         />
 

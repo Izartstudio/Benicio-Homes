@@ -18,8 +18,20 @@ export const villaPerolaProject = {
       "An ancestral Goan home restored with care, preserving the character of its past while creating a refined setting for contemporary life.",
     image: { src: media.hero, alt: "Villa Perola exterior" },
     foregroundImage: { src: media.heroForeground, alt: "" },
+    mobileImage: {
+      src: media.heroMobile,
+      alt: "Villa Perola exterior",
+    },
+    mobileForegroundImage: {
+      src: media.heroForegroundMobile,
+      alt: "",
+    },
     mediaCanvas: {
       aspectRatio: 1440 / 1500,
+    },
+    mobileMediaCanvas: {
+      aspectRatio: 420 / 912,
+      foregroundCanvasHeightRatio: 1,
     },
   },
   intro: {

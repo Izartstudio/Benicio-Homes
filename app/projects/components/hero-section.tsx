@@ -19,6 +19,11 @@ export function HeroSection({ data, intro }: HeroSectionProps) {
         foregroundCanvasHeightRatio:
           data.mediaCanvas.foregroundCanvasHeightRatio,
         mediaAspectRatio: data.mediaCanvas.aspectRatio,
+        mobileBackground: data.mobileImage,
+        mobileForeground: data.mobileForegroundImage,
+        mobileForegroundCanvasHeightRatio:
+          data.mobileMediaCanvas?.foregroundCanvasHeightRatio,
+        mobileMediaAspectRatio: data.mobileMediaCanvas?.aspectRatio,
       }}
       title={data.title}
       titleLayer={data.titleLayer}

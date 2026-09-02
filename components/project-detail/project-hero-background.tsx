@@ -29,6 +29,10 @@ export type ProjectHeroBackgroundProps = {
   foregroundImage?: ProjectHeroBackgroundImage;
   foregroundMotionRef?: Ref<HTMLDivElement>;
   mediaAspectRatio: number;
+  mobileBackgroundImage?: ProjectHeroBackgroundImage;
+  mobileForegroundCanvasHeightRatio?: number;
+  mobileForegroundImage?: ProjectHeroBackgroundImage;
+  mobileMediaAspectRatio?: number;
 };
 
 export const ProjectHeroBackground = forwardRef<
@@ -45,6 +49,10 @@ export const ProjectHeroBackground = forwardRef<
       foregroundImage,
       foregroundMotionRef,
       mediaAspectRatio,
+      mobileBackgroundImage,
+      mobileForegroundCanvasHeightRatio = foregroundCanvasHeightRatio,
+      mobileForegroundImage,
+      mobileMediaAspectRatio = mediaAspectRatio,
     },
     mediaMotionRef,
   ) => {
@@ -60,12 +68,15 @@ export const ProjectHeroBackground = forwardRef<
       "--project-hero-focal-translate-mobile": `${-mobileFocalX}%`,
       "--project-hero-focal-translate-tablet": `${-tabletFocalX}%`,
       "--project-media-aspect-ratio": mediaAspectRatio,
+      "--project-mobile-foreground-canvas-height": `${mobileForegroundCanvasHeightRatio * 100}%`,
+      "--project-mobile-media-aspect-ratio": mobileMediaAspectRatio,
     } as CSSProperties;
 
     return (
       <div
         aria-hidden="true"
         className={styles.backgroundRoot}
+        data-has-mobile-hero={Boolean(mobileBackgroundImage)}
         data-project-hero-background
         style={rootStyle}
       >
@@ -87,6 +98,17 @@ export const ProjectHeroBackground = forwardRef<
                 sizes="100vw"
                 src={backgroundImage.src}
               />
+              {mobileBackgroundImage ? (
+                <CdnImage
+                  alt={mobileBackgroundImage.alt}
+                  className={`${styles.mediaImage} ${styles.mobileMediaImage}`}
+                  fill
+                  preload
+                  quality={projectHeroImageQuality}
+                  sizes="100vw"
+                  src={mobileBackgroundImage.src}
+                />
+              ) : null}
             </div>
 
             <div
@@ -112,6 +134,18 @@ export const ProjectHeroBackground = forwardRef<
                   sizes="100vw"
                   src={foregroundImage.src}
                 />
+                {mobileForegroundImage ? (
+                  <CdnImage
+                    alt={mobileForegroundImage.alt}
+                    className={`${styles.mediaImage} ${styles.mobileMediaImage}`}
+                    fetchPriority="high"
+                    fill
+                    preload
+                    quality={projectHeroImageQuality}
+                    sizes="100vw"
+                    src={mobileForegroundImage.src}
+                  />
+                ) : null}
               </div>
             </div>
           </div>

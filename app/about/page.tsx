@@ -49,7 +49,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     heading: "ZEN VILLAS-II",
     leftLabel: "A Living Legacy",
     rightLabel: "Crafted Around Place",
-    href: "/projects/zen-villas-2",
+    href: "/projects/zen-villa-2-bg",
     number: "TROPICAL HOMES-",
     url: "/assets/projects/villazenbg.png",
     alt: "Restored Goan home placeholder",

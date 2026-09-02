@@ -66,6 +66,10 @@
   object-position: 50% 0;
 }
 
+.mobileMediaImage {
+  display: none;
+}
+
 .upperMaskLayer {
   z-index: 2;
   bottom: 50%;
@@ -156,5 +160,26 @@
     --project-hero-focal-translate: var(
       --project-hero-focal-translate-mobile
     );
+  }
+
+  .backgroundRoot[data-has-mobile-hero="true"] .mediaPositioner,
+  .backgroundRoot[data-has-mobile-hero="true"] .foregroundPositioner {
+    left: 0;
+    width: 100%;
+    aspect-ratio: var(--project-mobile-media-aspect-ratio);
+    translate: 0 0;
+  }
+
+  .backgroundRoot[data-has-mobile-hero="true"] .foregroundLayer {
+    height: var(--project-mobile-foreground-canvas-height);
+  }
+
+  .backgroundRoot[data-has-mobile-hero="true"]
+    .mediaImage:not(.mobileMediaImage) {
+    display: none;
+  }
+
+  .backgroundRoot[data-has-mobile-hero="true"] .mobileMediaImage {
+    display: block;
   }
 }

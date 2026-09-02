@@ -14,12 +14,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const storyImages = {
   upper: {
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/story-section-upper.webp",
+    url: "/assets/storysection/upperimage.png",
     loading: "lazy",
     alt: "Open sky above a tropical villa",
   },
   hero: {
-    url: "/assets/storysection/story-hero.webp",
+    url: "/assets/storysection/story-hero.jpg",
     loading: "lazy",
     alt: "Goan coastal landscape and villa atmosphere",
   },
@@ -150,15 +150,13 @@ export function StorySection() {
           className="max-w-[33rem] whitespace-pre-line font-display text-[clamp(1.85rem,2.35vw,2.5rem)] font-normal leading-[1.34] tracking-[0.015em] text-bone"
           data-story-copy-heading
         >
-          {"The Difference Is Found\nIn What You Don't See"}
+          {"Different homes\nOne point of view"}
         </h2>
         <p
           className="ml-auto max-w-[20rem] font-mono text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.32] tracking-[0.01em] text-silver"
           data-story-copy-paragraph
         >
-          Long before construction begins, every proportion, opening, and
-          material is considered. Those unseen decisions are what make a
-          Benicio home feel timeless.
+         A Benicio home is never copied from another. But each one is held by the same refusal: no pastiche, no excess, no borrowed idea of Goa. 
         </p>
       </div>
 

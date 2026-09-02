@@ -1,3 +1,4 @@
+import { PROJECT_MEDIA } from "@/app/projects/data/project-media";
 import responsiveStyles from "./textured-hero-section.responsive.module.css";
 import { HomeHeroSequence } from "./home-hero-sequence";
 import { HomeHeroScrollTransition } from "./home-hero-scroll-transition";
@@ -6,39 +7,57 @@ import type { HeroImage } from "./hero-shrinking-gallery";
 
 const heroImages: readonly HeroImage[] = [
   {
-    src: "/assets/projects/zen-villa-2-bg.png",
-    alt: "A home surrounded by tropical planting",
+    src: "/assets/hero/loader/interior-kitchen.jpg",
+    alt: "A light-filled kitchen opening onto a tropical garden",
   },
   {
-    src: "/assets/projects/gallery-earth-light-shelter.jpg",
-    alt: "A light-filled interior framed by natural materials",
+    src: "/assets/hero/loader/illuminated-rural-house.png",
+    alt: "A rural house framed by an illuminated installation",
   },
   {
-    src: "/assets/projects/vanam-site-showcase.png",
-    alt: "Vanam residence at golden hour",
+    src: "/assets/hero/loader/city-sky-billboard.png",
+    alt: "A city installation reflecting the sky",
   },
   {
-    src: "/assets/projects/villaelsalvabg.png",
-    alt: "A restored Goan villa set among palm trees",
+    src: "/assets/hero/loader/sunset-installation.png",
+    alt: "A glowing sunset installation in a public landscape",
   },
   {
-    src: "/assets/projects/gallery-calm-through-craft.png",
-    alt: "Sunlight casting a palm shadow across a textured wall",
+    src: "/assets/hero/loader/forest-house.png",
+    alt: "A modern house surrounded by dense vegetation",
+  },
+  {
+    src: "/assets/hero/loader/tree-oculus.png",
+    alt: "A tree viewed through a circular architectural opening",
+  },
+  {
+    src: "/assets/hero/loader/concrete-harbour-building.png",
+    alt: "A sculptural concrete building beside a harbour",
+  },
+  {
+    src: "/assets/hero/loader/landscape-mirror-installation.png",
+    alt: "A mirrored installation crossing a green landscape",
+  },
+  {
+    src: "/assets/hero/loader/garden-pool.jpg",
+    alt: "A secluded swimming pool surrounded by tropical planting",
+  },
+  {
+    src: "/assets/hero/loader/living-room.jpg",
+    alt: "A warm contemporary living room overlooking a garden",
   },
 ] as const;
 
 const floatingImageColumns = [
   [
-    "/assets/projects/NAYANBG.png",
-    "/assets/projects/villaelsalvabg.png",
-    "/assets/projects/gallery-earth-light-shelter.jpg",
-    "/assets/projects/vanam-site-showcase.png",
+    PROJECT_MEDIA.vanamVillas.hero,
+    PROJECT_MEDIA.zenVillas2.hero,
+    PROJECT_MEDIA.villaPerola.hero,
   ],
   [
-    "/assets/projects/villaperolabg.png",
-    "/assets/projects/gallery-built-around-nature.png",
-    "/assets/projects/zen-villa-2-bg.png",
-    "/assets/projects/gallery-calm-through-craft.png",
+    PROJECT_MEDIA.nayanVilla.hero,
+    PROJECT_MEDIA.elSalvaVilla.hero,
+    PROJECT_MEDIA.zenVilla1.hero,
   ],
 ] as const;
 
@@ -52,11 +71,6 @@ export function TexturedHeroSection() {
       <HomeHeroScrollTransition>
         <HeroFloatingGrid columns={floatingImageColumns} />
         <div className={responsiveStyles.heroScreen} data-hero-screen>
-          <div
-            aria-hidden="true"
-            className={responsiveStyles.concreteBackground}
-            data-hero-background-fill
-          />
           <HomeHeroSequence images={heroImages} />
         </div>
       </HomeHeroScrollTransition>

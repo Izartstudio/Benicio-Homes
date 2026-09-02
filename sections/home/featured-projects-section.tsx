@@ -56,7 +56,7 @@ const defaultProjects: readonly FeaturedProject[] = [
     id: "palm-house",
     title: "ZEN VILLA II",
     href: "/projects/zen-villas-2",
-    url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-section-villa3.webp",
+    url: "/assets/projects/zen-villa-2-bg.png",
     imageAlt: "Palm House villa exterior with tropical landscape",
     description:
       "An architectural sanctuary of modern design, Zen Villa II offers a secluded retreat defined by contemporary elegance and luxury. ",

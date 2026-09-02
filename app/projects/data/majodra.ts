@@ -24,9 +24,21 @@ export const nayanVillaProject = {
       src: media.heroForeground,
       alt: "",
     },
+    mobileImage: {
+      src: media.heroMobile,
+      alt: "Nayan Villas hero",
+    },
+    mobileForegroundImage: {
+      src: media.heroForegroundMobile,
+      alt: "",
+    },
     mediaCanvas: {
-      aspectRatio: 1230 / 1100,
-      foregroundCanvasHeightRatio: 1045 / 1500,
+      aspectRatio: 1020 / 1000,
+      foregroundCanvasHeightRatio: 1,
+    },
+    mobileMediaCanvas: {
+      aspectRatio: 420 / 912,
+      foregroundCanvasHeightRatio: 1,
     },
   },
   intro: {

@@ -293,6 +293,10 @@
     inset-block-start: clamp(10.5rem, 22svh, 12rem);
   }
 
+  .heroSequence[data-hero-variant="el-salva"] .heroTitleLayer {
+    inset-block-start: clamp(8rem, 18svh, 9.5rem);
+  }
+
   .heroSequence[data-hero-layout="nayan"] .heroTitleReveal,
   .heroSequence[data-hero-layout="el-salva"] .heroTitleReveal {
     width: 100%;
