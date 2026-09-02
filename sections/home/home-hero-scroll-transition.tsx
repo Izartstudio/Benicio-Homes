@@ -43,7 +43,12 @@ export function HomeHeroScrollTransition({
 
     const ctx = gsap.context(() => {
       gsap.set(grid, { autoAlpha: 1 });
-      gsap.set(screen, { scaleX: 1, scaleY: 1, transformOrigin: "center" });
+      gsap.set(screen, {
+        height: "100%",
+        width: "100%",
+        xPercent: -50,
+        yPercent: -50,
+      });
 
       gsap.timeline({
         scrollTrigger: {
@@ -57,23 +62,19 @@ export function HomeHeroScrollTransition({
         .to(screen, {
           duration: 1,
           ease: "none",
-          scaleX: () => {
+          width: () => {
             const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
-            const targetWidth = Math.min(
+            return Math.min(
               finalWidthRem * rootFontSize,
               window.innerWidth * finalWidthViewportRatio,
             );
-
-            return targetWidth / screen.offsetWidth;
           },
-          scaleY: () => {
+          height: () => {
             const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
-            const targetHeight = Math.min(
+            return Math.min(
               finalHeightRem * rootFontSize,
               window.innerHeight * finalHeightViewportRatio,
             );
-
-            return targetHeight / screen.offsetHeight;
           },
         }, 0);
     }, stage);

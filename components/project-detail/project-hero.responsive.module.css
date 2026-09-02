@@ -353,6 +353,10 @@
     inset-block-start: clamp(13rem, 28svh, 15rem);
   }
 
+  .heroSequence[data-hero-variant="perola"] .heroTitleLayer {
+    inset-block-start: clamp(8.5rem, 18svh, 10rem);
+  }
+
   .heroDescription {
     width: min(24rem, 100%);
     font-size: 0.875rem;

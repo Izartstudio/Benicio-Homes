@@ -3,6 +3,12 @@
   inset: 0;
 }
 
+.responsiveRoot:not([data-legacy-animation-ready])
+  :global([data-architectural-stair]) {
+  visibility: hidden;
+  opacity: 0;
+}
+
 @media (max-width: 1023px) {
 
   .responsiveRoot:global([data-section="legacy"]) {
@@ -114,6 +120,21 @@
 
   .responsiveRoot :global([data-legacy-staircase]) {
     transform: none;
+  }
+
+  .responsiveRoot :global([data-legacy-staircase] [data-stair-index="2"]) {
+    left: calc(20.35% - 1px);
+    width: calc(45.49% + 1px);
+  }
+
+  .responsiveRoot :global([data-legacy-staircase] [data-stair-index="3"]) {
+    left: calc(65.84% - 1px);
+    width: calc(5.76% + 2px);
+  }
+
+  .responsiveRoot :global([data-legacy-staircase] [data-stair-index="4"]) {
+    left: calc(71.6% - 1px);
+    width: calc(28.4% + 1px);
   }
 
   .responsiveRoot :global([data-legacy-orange-square="left"]) {

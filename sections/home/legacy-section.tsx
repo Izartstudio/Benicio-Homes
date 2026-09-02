@@ -40,6 +40,7 @@ export function LegacySection() {
       stairs.forEach((stair) => {
         stair.dataset.revealInitialized = "";
       });
+      section.dataset.legacyAnimationReady = "";
 
       const stairTimeline = gsap.timeline({
         paused: true,
@@ -70,6 +71,7 @@ export function LegacySection() {
     }, section);
 
     return () => {
+      delete section.dataset.legacyAnimationReady;
       cleanupReveals();
       ctx.revert();
       gsap.set(stairs, { clearProps: "opacity,visibility,transform" });

@@ -17,7 +17,7 @@ type HomeHeroSequenceProps = {
   images: readonly HeroImage[];
 };
 
-const imageStep = 0.15;
+const imageStep = 0.09;
 const finalImageRatio = 0.23;
 
 function getImageSizeRatio(index: number, imageCount: number) {

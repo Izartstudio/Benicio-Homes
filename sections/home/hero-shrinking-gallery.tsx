@@ -19,9 +19,10 @@ export function HeroShrinkingGallery({ images }: HeroShrinkingGalleryProps) {
           aria-hidden={index > 0}
           className={styles.sequenceImage}
           data-hero-sequence-image
+          loading="eager"
           fill
           key={image.src}
-          priority={index === 0}
+          fetchPriority={index < 3 ? "high" : "auto"}
           sizes="(max-width: 767px) 78vw, (max-width: 1023px) 48vw, 422px"
           src={image.src}
         />

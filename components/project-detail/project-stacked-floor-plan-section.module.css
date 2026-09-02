@@ -328,3 +328,18 @@
     inset-inline: -0.5rem;
   }
 }
+
+@media (max-width: 767px) {
+  .section[data-floor-plan-layout="stacked-three"]
+    .item:nth-child(3)
+    .marker {
+    top: 0;
+    height: 7.2rem;
+  }
+
+  .section[data-floor-plan-layout="stacked-three"]
+    .item:nth-child(3)
+    .markerLine {
+    height: 6.8rem;
+  }
+}

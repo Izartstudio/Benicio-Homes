@@ -310,6 +310,11 @@
     white-space: nowrap;
   }
 
+  .responsiveRoot:global([data-featured-theme="restoration"])
+    :global([data-featured-floating-title]) {
+    font-size: clamp(1.9rem, 10.5vw, 2.65rem);
+  }
+
   .responsiveRoot :global([data-featured-information-panel]) {
     top: calc(
       6.6875rem + min(70.513vw, 17.1875rem) + 0.4375rem

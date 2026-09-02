@@ -15,6 +15,7 @@ export function prepareCrosshair(crosshair: HTMLElement) {
           : "left center";
 
     gsap.set(line, {
+      autoAlpha: 1,
       scaleX: vertical ? 1 : 0,
       scaleY: vertical ? 0 : 1,
       transformOrigin: origin,

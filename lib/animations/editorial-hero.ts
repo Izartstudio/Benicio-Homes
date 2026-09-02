@@ -36,6 +36,7 @@ export function showEditorialHeroFinalState(root: HTMLElement) {
   );
 
   gsap.set(crosshair?.querySelectorAll("i") ?? [], {
+    autoAlpha: 1,
     scaleX: 1,
     scaleY: 1,
   });
