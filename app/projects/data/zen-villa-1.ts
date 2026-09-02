@@ -8,7 +8,7 @@ export const zenVillas1Project = {
   metadata: {
     title: "Zen Villa 1 | Benicio",
     description:
-      "Zen Villa 1 is shaped as a quiet Goan retreat, balancing contemporary architecture, privacy, and a close relationship with nature.",
+      "Explore Zen Villa I by Benicio Homes, a standalone 3 BHK home in Assagao, Goa, defined by a restrained, Zen-inspired approach to tropical living.",
   },
   hero: {
     layout: "el-salva",
@@ -16,11 +16,11 @@ export const zenVillas1Project = {
     titleLayer: "front",
     description:
       "Zen Villa I is a contemporary tropical home in Assagao, designed for openness and simplicity. With clean forms and natural light, it offers a refined retreat that blends modern design with Goa's calm landscape.",
-    image: { src: media.hero, alt: "Zen Villa 1 exterior" },
+    image: { src: media.hero, alt: "Contemporary exterior of Zen Villa I in Assagao, Goa" },
     foregroundImage: { src: media.heroForeground, alt: "" },
     mobileImage: {
       src: media.heroMobile,
-      alt: "Zen Villa 1 exterior",
+      alt: "Contemporary exterior of Zen Villa I in Assagao, Goa",
     },
     mobileForegroundImage: {
       src: media.heroForegroundMobile,
@@ -37,12 +37,12 @@ export const zenVillas1Project = {
   intro: {
     intro:
       "Zen Villa I balances clean contemporary design with the warmth of tropical living, creating a home defined by light, openness, and calm.",
-    backgroundImage: { src: media.intro, alt: "Zen Villa 1 introduction" },
+    backgroundImage: { src: media.intro, alt: "Zen Villa I contemporary architecture and tropical landscape" },
   },
   location: {
     location: "Assagao, Goa",
-    featureImage: { src: media.location, alt: "Zen Villa 1 and its landscape" },
-    decorativeImage: { src: media.locationDecorative, alt: "Tropical foliage" },
+    featureImage: { src: media.location, alt: "Zen Villa I within the tropical landscape of Assagao, Goa" },
+    decorativeImage: { src: media.locationDecorative, alt: "Tropical foliage surrounding Zen Villa I in Assagao" },
     description: [
       "Nestled in the vibrant village of Assagao, Zen Villa I is a contemporary tropical residence designed around openness, natural light, and everyday comfort.",
       "Clean architectural forms, honest materials, and seamless indoor-outdoor connections come together to create a home that feels calm, timeless, and deeply connected to its surroundings.",
@@ -62,7 +62,7 @@ export const zenVillas1Project = {
       gallery: media.restorationTexture,
     },
     siteComposition: {
-      image: { src: media.editorialSiteComposition, alt: "Zen Villa 1 site composition" },
+      image: { src: media.editorialSiteComposition, alt: "Architectural composition of Zen Villa I in Assagao, Goa" },
     },
     moodboard: {
       labels: {
@@ -71,27 +71,27 @@ export const zenVillas1Project = {
         footer: "REFINED",
       },
       images: [
-        { src: media.editorialMoodboard[0], alt: "Zen Villa 1 moodboard image 1" },
-        { src: media.editorialMoodboard[1], alt: "Zen Villa 1 moodboard image 2" },
-        { src: media.editorialMoodboard[2], alt: "Zen Villa 1 moodboard image 3" },
-        { src: media.editorialMoodboard[3], alt: "Zen Villa 1 moodboard image 4" },
+        { src: media.editorialMoodboard[0], alt: "Zen Villa I architectural references inspired by calm tropical living" },
+        { src: media.editorialMoodboard[1], alt: "Natural material palette for Zen Villa I in Assagao" },
+        { src: media.editorialMoodboard[2], alt: "Zen Villa I design sketches and spatial references" },
+        { src: media.editorialMoodboard[3], alt: "Tropical architecture details informing Zen Villa I" },
       ],
     },
     showcase: {
       images: [
-        { src: media.editorialShowcase[0], alt: "Zen Villa 1 showcase image" },
-        { src: media.editorialShowcase[1], alt: "Zen Villa 1 detail image 1" },
-        { src: media.editorialShowcase[2], alt: "Zen Villa 1 detail image 2" },
-        { src: media.editorialShowcase[3], alt: "Zen Villa 1 detail image 3" },
-        { src: media.editorialShowcase[4], alt: "Zen Villa 1 detail image 4" },
+        { src: media.editorialShowcase[0], alt: "Contemporary facade and garden of Zen Villa I in Assagao" },
+        { src: media.editorialShowcase[1], alt: "Clean architectural lines and tropical planting at Zen Villa I" },
+        { src: media.editorialShowcase[2], alt: "Natural light and material detail inside Zen Villa I" },
+        { src: media.editorialShowcase[3], alt: "Crafted contemporary detail at Zen Villa I" },
+        { src: media.editorialShowcase[4], alt: "Indoor-outdoor living detail at Zen Villa I in Goa" },
       ],
     },
     gallery: {
       hideWatermark: true,
       watermark: "Zen Villa 1",
       items: [
-        { caption: "Calm, Shaped By Light.", image: { src: media.editorialGallery[0], alt: "Zen Villa 1 gallery image 1" } },
-        { caption: "Inside, Calm Endures.", image: { src: media.editorialGallery[1], alt: "Zen Villa 1 gallery image 2" } },
+        { caption: "Calm, Shaped By Light.", image: { src: media.editorialGallery[0], alt: "Natural light shaping the calm interiors of Zen Villa I" } },
+        { caption: "Inside, Calm Endures.", image: { src: media.editorialGallery[1], alt: "Refined contemporary interior of Zen Villa I in Assagao" } },
       ],
     },
   },

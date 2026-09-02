@@ -6,7 +6,7 @@ import type { ProjectStatus } from "@/components/journal/project-status-tag";
 export const metadata: Metadata = {
   title: "Projects | Benicio Residences",
   description:
-    "Explore Benicio residences shaped by Goa's landscape, climate, craft, and architectural heritage.",
+    "Explore Benicio Homes projects across Goa, from contemporary tropical residences to heritage restorations shaped by honest materials and a distinct architectural point of view.",
 };
 
 const projectListingDetails: Record<
@@ -19,7 +19,7 @@ const projectListingDetails: Record<
 > = {
   "vanam-villas": {
     status: "sold-out",
-    description: "Gated community of six signature villas in Anjuna, Goa.",
+    description: "Six 4 BHK homes in Anjuna, arranged for privacy within a tropical setting.",
     specifications: [
       { label: "Bedrooms", value: "4 BHK" },
       { label: "Plot Size", value: "2100 sq. m." },
@@ -28,7 +28,7 @@ const projectListingDetails: Record<
   },
   "nayan-villa": {
     status: "for-sale",
-    description: "Gated community of six private-pool tropical villas in Majorda, South Goa.",
+    description: "Six private-pool villas in Majorda, shaped by open lawns, shade and a restrained material palette.",
     specifications: [
       { label: "Bedrooms", value: "4 BHK" },
       { label: "Plot Size", value: "2400 sq. m." },
@@ -37,7 +37,7 @@ const projectListingDetails: Record<
   },
   "zen-villa-1": {
     status: "sold-out",
-    description: "Gated community of six private-pool tropical villas in Majorda, South Goa.",
+    description: "A standalone 3 BHK home in Assagao, defined by open structure, natural light and restraint.",
     specifications: [
       { label: "Bedrooms", value: "3 BHK" },
       { label: "Plot Size", value: "260 sq. m." },
@@ -46,7 +46,7 @@ const projectListingDetails: Record<
   },
   "zen-villas-2": {
     status: "ongoing",
-    description: "Standalone zen-style villas in Assagaon, Goa.",
+    description: "A standalone 3 BHK villa in Assagao with a private plunge pool and a clear contemporary structure.",
     specifications: [
       { label: "Bedrooms", value: "3 BHK" },
       { label: "Plot Size", value: "251 sq. m." },
@@ -55,7 +55,7 @@ const projectListingDetails: Record<
   },
   "el-salva-villa": {
     status: "for-sale",
-    description: "A restored Goan mansion in Salvador do Mundo, Goa.",
+    description: "A five-bedroom Goan mansion in Salvador do Mundo, restored without erasing its original character.",
     specifications: [
       { label: "Bedrooms", value: "5 BHK" },
       { label: "Plot Size", value: "1000 sq. m." },
@@ -64,7 +64,7 @@ const projectListingDetails: Record<
   },
   "villa-perola": {
     status: "ongoing",
-    description: "An ancestral Goan home restored for contemporary life.",
+    description: "An ancestral five-bedroom villa in Socorro, repaired for contemporary life without manufacturing nostalgia.",
     specifications: [
       { label: "Type", value: "Heritage Villa" },
       { label: "Plot Size", value: "700 sq. m." },
@@ -73,9 +73,28 @@ const projectListingDetails: Record<
   },
 };
 
+const projectListStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Benicio Homes projects in Goa",
+  itemListElement: projectList.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: project.hero.title,
+    url: `https://benicio.co.in/projects/${project.slug}`,
+  })),
+};
+
 export default function ProjectsPage() {
   return (
-    <EditorialListingPage
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(projectListStructuredData).replace(/</g, "\\u003c"),
+        }}
+        type="application/ld+json"
+      />
+      <EditorialListingPage
       accentColor="#dc4c28"
       cardAuthorColor="#ffffff"
       cardTitleColor="#232323"
@@ -83,10 +102,10 @@ export default function ProjectsPage() {
       ctaBackgroundColor="#575757"
       ctaTextColor="#ffffff"
       contactTransitionGradient="linear-gradient(180deg, rgba(185,185,185,0) 0%, rgba(185,185,185,0.35) 48%, rgba(185,185,185,0.78) 76%, #b9b9b9 100%)"
-      description="From tropical villas shaped by Goa's landscape to heritage homes restored with care, every project reflects our commitment to thoughtful design, enduring craftsmanship, and architecture that belongs to its place."
+      description="A record of what Benicio has built and what is taking shape. Contemporary tropical homes, private villa communities and heritage restorations, approached with a standard vision."
       descriptionTextColor="#EEEEEE"
       emptyMessage="New projects are coming soon."
-      heading="A Collection Built Over Time."
+      heading="We built the Home we Believe in"
       introBackgroundColor="#343434"
       introTextColor="#EEEEEE"
       introTexture="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/ListingPage/introtexture.webp"
@@ -106,13 +125,14 @@ export default function ProjectsPage() {
       })}
       listingBackgroundColor="#b9b9b9"
       listingTexture="/assets/projects/texture-listing.webp"
-      listingHeading="Homes With A Sense Of Place"
-      loadMoreLabel="Load More Projects"
+      listingHeading="The Work, Project by Project"
+      loadMoreLabel="View More Projects"
       sectionLabel="Benicio projects"
       stepBackgroundColor="#b9b9b9"
       stepTexture="/assets/projects/texture-listing.webp"
       stepTextureBlend={false}
       variant="projects"
-    />
+      />
+    </>
   );
 }

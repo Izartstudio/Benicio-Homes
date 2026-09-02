@@ -23,11 +23,11 @@ export const fallbackAboutTeamSection: AboutTeamSection = {
   isVisible: true,
   heading: "Crafted By A Shared Vision",
   members: [
-    { id: "marketing", role: "Head Of Marketing & Branding", name: "Priyanka Rohra", image: fallbackImage, altText: "Priyanka Rohra" },
-    { id: "finance", role: "Head Of Finance", name: "Ms. Kaneez", image: fallbackImage, altText: "Ms. Kaneez" },
-    { id: "admin", role: "Head Of Admin", name: "Ms. Fatima", image: fallbackImage, altText: "Ms. Fatima" },
-    { id: "supervisor", role: "Site Supervisor", name: "Afzal Khan", image: fallbackImage, altText: "Afzal Khan" },
-    { id: "legal", role: "Head Of Legal Team", name: "Priyam Sheik", image: fallbackImage, altText: "Priyam Sheik" },
+    { id: "marketing", role: "Head Of Marketing & Branding", name: "Priyanka Rohra", image: fallbackImage, altText: "Priyanka Rohra, Head of Marketing and Branding at Benicio Homes" },
+    { id: "finance", role: "Head Of Finance", name: "Ms. Kaneez", image: fallbackImage, altText: "Ms. Kaneez, Head of Finance at Benicio Homes" },
+    { id: "admin", role: "Head Of Admin", name: "Ms. Fatima", image: fallbackImage, altText: "Ms. Fatima, Head of Administration at Benicio Homes" },
+    { id: "supervisor", role: "Site Supervisor", name: "Afzal Khan", image: fallbackImage, altText: "Afzal Khan, Site Supervisor at Benicio Homes" },
+    { id: "legal", role: "Head Of Legal Team", name: "Priyam Sheik", image: fallbackImage, altText: "Priyam Sheik, Head of Legal at Benicio Homes" },
     { id: "placeholder", role: "Designation", name: "Name", image: fallbackImage, altText: "Team member portrait" },
   ],
 };
@@ -67,7 +67,7 @@ export async function getAboutTeamSection(): Promise<AboutTeamSection> {
         name,
         role,
         image,
-        altText: member.altText?.trim() || `${name}, ${role}`,
+        altText: member.altText?.trim() || `${name}, ${role} at Benicio Homes`,
       }];
     });
 

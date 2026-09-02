@@ -72,7 +72,7 @@ function normalizePost(
       src: imageUrl || fallback.image.src,
       alt:
         cleanText(post.altText) ||
-        (title ? `Cover image for ${title}` : fallback.image.alt),
+        (title ? `${title} — Benicio Homes journal` : fallback.image.alt),
     },
   };
 }

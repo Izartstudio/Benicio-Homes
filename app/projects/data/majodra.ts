@@ -9,7 +9,7 @@ export const nayanVillaProject = {
   metadata: {
     title: "Nayan Villas | Benicio",
     description:
-      "An intimate collection of six private pool villas in Majorda, thoughtfully designed to bring together nature, privacy, and timeless tropical living with effortless elegance.",
+      "Explore Nayan Villa by Benicio Homes, a design-led home in Goa shaped by a distinct architectural point of view, honest materials and considered living.",
   },
   hero: {
     layout: "nayan",
@@ -18,7 +18,7 @@ export const nayanVillaProject = {
       "An intimate collection of six private pool villas in Majorda, thoughtfully designed to bring together nature, privacy, and timeless tropical living with effortless elegance.",
     image: {
       src: media.hero,
-      alt: "Nayan Villas hero",
+      alt: "Nayan Villas contemporary tropical residences in Majorda, South Goa",
     },
     foregroundImage: {
       src: media.heroForeground,
@@ -26,7 +26,7 @@ export const nayanVillaProject = {
     },
     mobileImage: {
       src: media.heroMobile,
-      alt: "Nayan Villas hero",
+      alt: "Nayan Villas contemporary tropical residences in Majorda, South Goa",
     },
     mobileForegroundImage: {
       src: media.heroForegroundMobile,
@@ -46,18 +46,18 @@ export const nayanVillaProject = {
       "Surrounded by tropical plantations, each residence blends privacy, openness, and nature into a peaceful retreat.",
     backgroundImage: {
       src: media.intro,
-      alt: "Majodra Villas introduction",
+      alt: "Nayan Villas facade opening onto a landscaped lawn in Majorda, Goa",
     },
   },
   location: {
     location: "Majorda, South Goa",
     featureImage: {
       src: media.location,
-      alt: "Landscape surrounding Majodra Villas",
+      alt: "Tropical landscape surrounding Nayan Villas in Majorda, South Goa",
     },
     decorativeImage: {
       src: media.locationDecorative,
-      alt: "Tropical foliage at Majodra Villas",
+      alt: "Tropical foliage framing Nayan Villas in Majorda, South Goa",
     },
     description: [
       "Tropical architecture, thoughtful materiality and lush landscaping come together to create homes that breathe with their surroundings, offering a slower, more intentional way of living in South Goa.",
@@ -70,7 +70,7 @@ export const nayanVillaProject = {
       "Nayan Villas is thoughtfully designed to exist in harmony with its tropical surroundings. Lush gardens, winding pathways, and carefully curated landscapes create a peaceful retreat where every step feels connected to nature.",
     masterplanImage: {
       src: media.siteComposition,
-      alt: "Masterplan of nayan Villas",
+      alt: "Masterplan of six Nayan Villas in Majorda, South Goa",
     },
     compass: "N",
     textureSrc: PROJECT_MEDIA.shared.siteCompositionTexture,
@@ -98,11 +98,11 @@ export const nayanVillaProject = {
       "Before Nayan became a collection of homes, it began as a vision inspired by its natural surroundings. Every space was thoughtfully shaped in response to the tropical landscape, climate, and quiet character of the site, allowing the architecture to exist in harmony with nature. Through careful planning and timeless design, that vision became a place that feels deeply connected to its setting.",
     desktopImage: {
       src: media.moodboardDesktop,
-      alt: "Nayan Villas architectural moodboard",
+      alt: "Nayan Villas architectural moodboard with plans, materials and tropical design references",
     },
     mobileImage: {
       src: media.moodboardMobile,
-      alt: "Nayan Villas architectural moodboard",
+      alt: "Nayan Villas architectural moodboard with plans, materials and tropical design references",
     },
   },
   architectureImage: {
@@ -115,7 +115,7 @@ export const nayanVillaProject = {
     },
     image: {
       src: media.architecture,
-      alt: "Architectural view of Majodra Villas",
+      alt: "Contemporary architecture and landscaped garden at Nayan Villas in Majorda",
     },
   },
   specifications: {
@@ -176,11 +176,11 @@ export const nayanVillaProject = {
       footerLabel: "NAYAN",
       leftDrawing: {
         src: media.floorPlan01Ground,
-        alt: "Ground floor plan for Majodra Villa 01",
+        alt: "Ground floor plan for Nayan Villas in Majorda, South Goa",
       },
       rightDrawing: {
         src: media.floorPlan01First,
-        alt: "First floor plan for Majodra Villa 01",
+        alt: "First floor plan for Nayan Villas in Majorda, South Goa",
       },
       specifications: [
         { label: "Bedrooms", value: "1" },
@@ -199,11 +199,11 @@ export const nayanVillaProject = {
       mirrored: true,
       leftDrawing: {
         src: media.floorPlan02Ground,
-        alt: "Ground floor plan for Majodra Villa 02",
+        alt: "Ground floor plan for the second Nayan Villas layout",
       },
       rightDrawing: {
         src: media.floorPlan02First,
-        alt: "First floor plan for Majodra Villa 02",
+        alt: "First floor plan for the second Nayan Villas layout",
       },
       specifications: [
         { label: "Bedrooms", value: "3" },
@@ -222,7 +222,7 @@ export const nayanVillaProject = {
         caption: "Nature Leaves Light.",
         image: {
           src: media.gallery[0],
-          alt: "Majodra Villas gallery image 1",
+          alt: "Sunlight filtering through tropical landscaping at Nayan Villas",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[0],
       },
@@ -230,7 +230,7 @@ export const nayanVillaProject = {
         caption: "Nature Shapes Every View.",
         image: {
           src: media.gallery[1],
-          alt: "Majodra Villas gallery image 2",
+          alt: "Garden views surrounding Nayan Villas in Majorda, South Goa",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[1],
       },
@@ -238,7 +238,7 @@ export const nayanVillaProject = {
         caption: "Life Flows Naturally.",
         image: {
           src: media.gallery[2],
-          alt: "Majodra Villas gallery image 3",
+          alt: "Indoor-outdoor living space at Nayan Villas in Majorda, Goa",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[2],
       },
@@ -246,7 +246,7 @@ export const nayanVillaProject = {
         caption: "Quiet Streets. Private Living.",
         image: {
           src: media.gallery[3],
-          alt: "Majodra Villas gallery image 4",
+          alt: "Private residential approach to Nayan Villas in a tropical setting",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[3],
       },
@@ -254,7 +254,7 @@ export const nayanVillaProject = {
         caption: "Reflections of Calm.",
         image: {
           src: media.gallery[4],
-          alt: "Majodra Villas gallery image 5",
+          alt: "Swimming pool reflecting the tropical landscape at Nayan Villas",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[4],
       },
@@ -262,7 +262,7 @@ export const nayanVillaProject = {
         caption: "Nature In Every Surface.",
         image: {
           src: media.gallery[5],
-          alt: "Majodra Villas gallery image 6",
+          alt: "Natural architectural materials used throughout Nayan Villas",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[5],
       },
@@ -274,7 +274,7 @@ export const nayanVillaProject = {
       "Each residence is shaped by its surroundings, blending Goa's natural beauty with enduring architectural design.",
     image: {
       src: media.nextProject,
-      alt: "Zen Villas-2 project preview",
+      alt: "Zen Villa II contemporary tropical home in Assagao, Goa",
     },
     ctaLabel: "Explore Project",
     ctaHref: "/projects/zen-villas-2",

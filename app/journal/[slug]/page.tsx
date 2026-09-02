@@ -41,18 +41,50 @@ export default async function JournalDetailPage({ params }: PageProps) {
       : "none",
     "--journal-texture": journalTexture ? `url("${journalTexture}")` : "none",
   } as CSSProperties;
+  const coverImage = typeof post.image.src === "string"
+    ? post.image.src.startsWith("http")
+      ? post.image.src
+      : `https://benicio.co.in${post.image.src}`
+    : undefined;
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    mainEntityOfPage: `https://benicio.co.in/journal/${post.slug}`,
+    image: coverImage,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Benicio Homes",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://benicio.co.in/assets/NavBar/Logo-NavBar-colored.svg",
+      },
+    },
+  };
 
   return (
     <main className="bg-[#b9b9b9] text-[#343434]" data-journal-detail style={textureStyle}>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleStructuredData).replace(/</g, "\\u003c"),
+        }}
+        type="application/ld+json"
+      />
       <section className="journal-detail-stage relative h-[64rem] overflow-hidden bg-[#b9b9b9]">
       <header className="journal-detail-masthead absolute inset-x-0 top-0 grid h-[34.375rem] items-center gap-14 px-[5.208vw] pb-36 pt-18 text-[#d8d6cf] lg:grid-cols-[1fr_30rem]">
-        <Reveal as="h3" revealMode="mount" className="max-w-[32rem] break-words font-Bahnschrift text-[clamp(2.8rem,5vw,2rem)] font-light leading-[1.03]">
+        <Reveal as="h1" revealMode="mount" className="max-w-[32rem] break-words font-Bahnschrift text-[clamp(2.8rem,5vw,2rem)] font-light leading-[1.03]">
           {post.title}
         </Reveal>
         <Reveal revealMode="mount" delay={0.08} className="self-center font-Bahnschrift text-[0.8rem]">
           <p className="border-b border-[#dc4c28] pb-3 font-semibold uppercase text-[#dc4c28]">{post.category}</p>
           <dl className="divide-y divide-white/20 text-[#d8d6cf]">
-            <div className="flex justify-between py-3"><dt>Published</dt><dd>{published}</dd></div>
+            <div className="flex justify-between py-3"><dt>Published</dt><dd><time dateTime={post.publishedAt}>{published}</time></dd></div>
             <div className="flex justify-between py-3"><dt>Author</dt><dd>{post.author}</dd></div>
             <div className="flex justify-between py-3"><dt>Journal</dt><dd>{post.number.replace("Journal ", "")}</dd></div>
           </dl>
@@ -72,7 +104,7 @@ export default async function JournalDetailPage({ params }: PageProps) {
             <div className="flex items-center gap-3 font-serif text-[0.78rem] font-semibold uppercase text-[#dc4c28]"><span>Table of contents</span><span className="h-px flex-1 bg-[#dc4c28]" /></div>
             <JournalTableOfContents headings={headings} />
           </aside>
-          <JournalBody body={post.body} />
+          <JournalBody articleTitle={post.title} body={post.body} />
         </div>
       </section>
       <ContactSection />

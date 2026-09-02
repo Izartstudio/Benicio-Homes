@@ -28,13 +28,57 @@ const bahnschrift = localFont({
   display: "swap",
 });
 
+const siteStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://benicio.co.in/#website",
+      name: "Benicio Homes",
+      url: "https://benicio.co.in",
+    },
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://benicio.co.in/#organization",
+      name: "Benicio Homes",
+      url: "https://benicio.co.in",
+      logo: "https://benicio.co.in/assets/NavBar/Logo-NavBar-colored.svg",
+      image: "https://benicio.co.in/assets/projects/bgvanam.png",
+      email: "info@benicio.co.in",
+      telephone: "+91 90218 29812",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Porvorim",
+        addressRegion: "Goa",
+        postalCode: "403501",
+        addressCountry: "IN",
+      },
+      areaServed: {
+        "@type": "AdministrativeArea",
+        name: "Goa, India",
+      },
+      sameAs: ["https://www.instagram.com/benicio_homes_/"],
+    },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: "Benicio Residences",
+  title: "Benicio homes | Tropical Designer Homes in Goa",
   description:
-    "A premium real estate storytelling website foundation for Benicio Residences.",
+    "Benicio is a Goa-based real estate developer creating tropical designer homes defined by raw materials, brutalist influences, and a distinct architectural point of view.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        type: "image/png",
+        url: "/benicio-favicon-light.png",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        type: "image/png",
+        url: "/benicio-favicon-dark.png",
+      },
+    ],
   },
 };
 
@@ -65,6 +109,13 @@ export default function RootLayout({
         ))}
       </head>
       <body className={`${bahnschrift.className} ${bahnschrift.variable} ${robotoSlab.variable} ${robotoSerif.variable} antialiased`}>
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteStructuredData).replace(/</g, "\\u003c"),
+          }}
+          id="benicio-structured-data"
+          type="application/ld+json"
+        />
         <LenisProvider>
           <CameraDepthMotion />
           <Navbar />

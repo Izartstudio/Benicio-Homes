@@ -65,7 +65,7 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
       <EditorialHeroComposition
         designSource="Hero Section.svg"
         sectionName="practice-hero"
-        title={<>Thoughtfully Designed,<br />Endlessly Lived</>}
+        title={<>The Practice,<br />Behind the homes</>}
         titleId="practice-title"
       />
 
@@ -89,13 +89,13 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
         </Reveal>
         <div className={styles.respectBand} data-respect-media-band>
           <figure className={styles.respectBandImage}>
-            <Image src={horizontalbandimage} alt="Architecture in its landscape" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 50vw" className={styles.cover} />
+            <Image src={horizontalbandimage} alt="Tropical architecture integrated with the Goan landscape" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 50vw" className={styles.cover} />
           </figure>
           <div className={styles.respectLogoBlock}>
-            <Image src="/assets/NavBar/Logo-NavBar.svg" alt="Benicio" width={188} height={143} className={styles.respectLogo} style={{ height: "auto" }} />
+            <Image src="/assets/NavBar/Logo-NavBar.svg" alt="Benicio Homes" width={188} height={143} className={styles.respectLogo} style={{ height: "auto" }} />
           </div>
           <figure className={styles.respectBandImage}>
-            <Image src={horizontalBandRightImage} alt="Goan landscape placeholder" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 50vw" className={styles.cover} />
+            <Image src={horizontalBandRightImage} alt="Tropical landscape surrounding a Benicio home in Goa" fill sizes="(max-width: 767px) calc((100vw - 7.5rem) / 2), 50vw" className={styles.cover} />
           </figure>
         </div>
         <Reveal className={styles.respectCopy} revealMode="manual">
@@ -122,16 +122,17 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
         <SectionCrosshair className={`${styles.sectionCrosshair} ${styles.manifestoCrosshair}`} showMarker />
         <Reveal className={styles.manifestoCopy} revealMode="manual">
           <div className={styles.manifestoKicker}><span>Our Manifesto</span><i /></div>
-          <h2 id="manifesto-title">We Build With A Deep<br />Respect For Place</h2>
-          <p className={styles.manifestoLead}>Every project begins by understanding what already exists before imagining what comes next.</p>
-          <p className={styles.manifestoBody}>Architecture is more than the act of building. It is the careful balance of land, climate, material, memory, and the lives that unfold within them. Whether restoring a century-old Goan home or crafting a contemporary tropical villa, our work is guided by the belief that every home should feel inevitable, as though it has always belonged there.</p>
+          <h2 id="manifesto-title">Architecture Needs Someone
+<br />To See It Through.</h2>
+          <p className={styles.manifestoLead}>An idea only matters when it survives the realities of building.</p>
+          <p className={styles.manifestoBody}>Aqeeb founded Benicio to bring architectural conviction and developer discipline into the same practice. The role is not only to imagine a different home, but to protect its intent through drawings, materials, construction and handover.</p>
           <div className={styles.manifestoLines}>
-            <p>We Preserve What Deserves To Endure.<br />We Create What Deserves To Last.</p>
-            <p>We Design For The Rhythm Of Everyday Living.<br />We Build For Generations Yet To Come.</p>
+            <p>From First Drawing To Final Joint.<br />We Create What Deserves To Last.</p>
+            <p>Every Decision Has A Reason.<br />Every Detail Has An Author.</p>
           </div>
         </Reveal>
         <Reveal as="figure" className={styles.founderPortrait} revealMode="manual">
-          <Image src={founderimage} alt="Founder portrait placeholder" fill sizes="(max-width: 767px) 100vw, 28rem" className={styles.cover} />
+          <Image src={founderimage} alt="Aqeeb Mapari, founder of Benicio Homes" fill sizes="(max-width: 767px) 100vw, 28rem" className={styles.cover} />
           <figcaption>
             <span>Founder</span><i /><b aria-hidden="true" />
             <strong>Aqeeb Mapari</strong>
@@ -147,7 +148,7 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
         <div className={styles.servicesTop}>
           <HorizontalLinePair className={styles.servicesCrosshair} />
           <Reveal as="figure" className={styles.sketches} revealMode="manual">
-            <Image src={texturePlaceholder} alt="Architectural sketches placeholder" fill sizes="(max-width: 767px) 100vw, 66vw" className={styles.cover} />
+            <Image src={texturePlaceholder} alt="Architectural concept sketches for Benicio homes in Goa" fill sizes="(max-width: 767px) 100vw, 66vw" className={styles.cover} />
           </Reveal>
           <Reveal className={styles.servicesIntro} revealMode="manual">
             <p>From new developments to restorations, every project is approached with commitment to design, craftsmanship, and quality.</p>

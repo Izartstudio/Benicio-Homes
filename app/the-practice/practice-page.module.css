@@ -86,7 +86,7 @@
   height: 1px;
 }
 /* Artboard 04 — Section -4 about.svg, 1440 × 800 */
-.services { position: relative; height: 50rem; overflow: hidden; background: #464646; }
+.services { position: relative; height: 50rem; overflow: hidden; background: #E7E8E8 center/cover; background-blend-mode: screen; }
 .servicesTop { height: 36.8rem; position: relative; }
 .horizontalLinePair { position: absolute; inset: 0; pointer-events: none; }
 .horizontalLinePair i { position: absolute; display: block; height: 1px; background: rgb(218 218 216/.35); }

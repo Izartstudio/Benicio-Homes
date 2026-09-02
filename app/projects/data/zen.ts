@@ -9,7 +9,7 @@ export const zenVillas2Project = {
   metadata: {
     title: "Zen Villas-II | Benicio",
     description:
-      "Nestled in the tranquil heart of Assagaon, Goa, crafted for privacy, comfort, and refined living, where contemporary luxury meets nature.",
+      "Explore Zen Villa II by Benicio Homes, a standalone 3 BHK villa with a private plunge pool in Assagao, Goa, shaped by contemporary tropical design.",
   },
   hero: {
     layout: "zen",
@@ -18,7 +18,7 @@ export const zenVillas2Project = {
       "Nestled in the tranquil heart of Assagaon, Goa, crafted for privacy, comfort, and refined living, where contemporary luxury meets nature.",
     image: {
       src: media.hero,
-      alt: "Zen Villas-2 hero",
+      alt: "Zen Villa II contemporary tropical facade in Assagao, Goa",
     },
     foregroundImage: {
       src: media.heroForeground,
@@ -26,7 +26,7 @@ export const zenVillas2Project = {
     },
     mobileImage: {
       src: media.heroMobile,
-      alt: "Zen Villas-2 hero",
+      alt: "Zen Villa II contemporary tropical facade in Assagao, Goa",
     },
     mobileForegroundImage: {
       src: media.heroForegroundMobile,
@@ -46,18 +46,18 @@ export const zenVillas2Project = {
       "Where bespoke architecture, lush surroundings, and effortless luxury become one.",
     backgroundImage: {
       src: media.intro,
-      alt: "Zen Villas-2 introduction",
+      alt: "Zen Villa II contemporary architecture surrounded by tropical planting",
     },
   },
   location: {
     location: "Assagaon, Goa",
     featureImage: {
       src: media.location,
-      alt: "Landscape surrounding Zen Villas-2",
+      alt: "Tropical landscape surrounding Zen Villa II in Assagao, Goa",
     },
     decorativeImage: {
       src: media.locationDecorative,
-      alt: "Tropical foliage at Zen Villas-2",
+      alt: "Tropical foliage framing Zen Villa II in Assagao, Goa",
     },
     description: [
       "Surrounded by peaceful landscapes and crafted with elegant design, this exclusive residence offers an elevated lifestyle where every space inspires calm and sophistication.",
@@ -71,7 +71,7 @@ export const zenVillas2Project = {
       "Zen Villa II offers a secluded retreat while keeping the very best of North Goa close at hand. From pristine beaches and fine dining to boutique cafés, beach clubs, and vibrant cultural experiences, every destination is just moments away.",
     masterplanImage: {
       src: media.siteComposition,
-      alt: "Masterplan of Zen Villas-2",
+      alt: "Site plan of Zen Villa II in Assagao, Goa",
     },
     compass: "N",
     textureSrc: PROJECT_MEDIA.shared.siteCompositionTexture,
@@ -91,11 +91,11 @@ export const zenVillas2Project = {
       "The story of Zen Villa II began with the landscape. Inspired by Goa's lush surroundings and tropical climate, every space was carefully planned to welcome natural light, enhance privacy, and create a seamless connection between the villa and its environment. The result is a timeless residence where architecture and nature exist in perfect balance.",
     desktopImage: {
       src: media.moodboardDesktop,
-      alt: "Zen Villas-2 architectural moodboard",
+      alt: "Zen Villa II architectural moodboard with plans, materials and tropical design references",
     },
     mobileImage: {
       src: media.moodboardMobile,
-      alt: "Zen Villas-2 architectural moodboard",
+      alt: "Zen Villa II architectural moodboard with plans, materials and tropical design references",
     },
   },
   architectureImage: {
@@ -108,7 +108,7 @@ export const zenVillas2Project = {
     },
     image: {
       src: media.architecture,
-      alt: "Architectural view of Zen Villas-2",
+      alt: "Contemporary facade and tropical landscaping at Zen Villa II",
     },
   },
   specifications: {
@@ -232,7 +232,7 @@ export const zenVillas2Project = {
         caption: "Quiet By Design.",
         image: {
           src: media.gallery[0],
-          alt: "Zen Villas-2 gallery image 1",
+          alt: "Contemporary exterior of Zen Villa II in Assagao, Goa",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[0],
       },
@@ -240,7 +240,7 @@ export const zenVillas2Project = {
         caption: "Open To Nature.",
         image: {
           src: media.gallery[1],
-          alt: "Zen Villas-2 gallery image 2",
+          alt: "Zen Villa II opening onto tropical landscaping in Assagao",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[1],
       },
@@ -248,7 +248,7 @@ export const zenVillas2Project = {
         caption: "Light In Balance.",
         image: {
           src: media.gallery[2],
-          alt: "Zen Villas-2 gallery image 3",
+          alt: "Natural light across the interiors of Zen Villa II",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[2],
       },
@@ -256,7 +256,7 @@ export const zenVillas2Project = {
         caption: "Space To Breathe.",
         image: {
           src: media.gallery[3],
-          alt: "Zen Villas-2 gallery image 4",
+          alt: "Open-plan living space at Zen Villa II in Goa",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[3],
       },
@@ -264,7 +264,7 @@ export const zenVillas2Project = {
         caption: "Rooted In Calm.",
         image: {
           src: media.gallery[4],
-          alt: "Zen Villas-2 gallery image 5",
+          alt: "Landscaped private retreat surrounding Zen Villa II",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[4],
       },
@@ -272,7 +272,7 @@ export const zenVillas2Project = {
         caption: "Crafted With Restraint.",
         image: {
           src: media.gallery[5],
-          alt: "Zen Villas-2 gallery image 6",
+          alt: "Crafted natural material details at Zen Villa II",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[5],
       },
@@ -284,7 +284,7 @@ export const zenVillas2Project = {
       "Each residence is shaped by its surroundings, blending Goa's natural beauty with enduring architectural design.",
     image: {
       src: media.nextProject,
-      alt: "El Salva Villa project preview",
+      alt: "Villa El Salva restored Goan heritage home in Salvador do Mundo",
     },
     ctaLabel: "Explore Project",
     ctaHref: "/projects/el-salva-villa",

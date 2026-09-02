@@ -13,7 +13,7 @@ export const fallbackJournalArticles: readonly JournalArticle[] = [
     author: "Author Name",
     image: {
       src: "/assets/legacy/legacy-1.svg",
-      alt: "Concrete room opening into tropical landscape",
+      alt: "Restored Goan home opening onto a tropical landscape",
     },
   },
   {
@@ -28,7 +28,7 @@ export const fallbackJournalArticles: readonly JournalArticle[] = [
     author: "Author Name",
     image: {
       src: "/assets/legacy/legacy-2.svg",
-      alt: "Architectural stair and planted courtyard",
+      alt: "Architectural staircase beside a planted courtyard in a Goan home",
     },
   },
   {
@@ -43,7 +43,7 @@ export const fallbackJournalArticles: readonly JournalArticle[] = [
     author: "Author Name",
     image: {
       src: "/assets/legacy/legacy-3.svg",
-      alt: "Laterite detail with an orange square insert",
+      alt: "Textured Goan laterite stone with a contemporary orange detail",
     },
   },
 ] as const;

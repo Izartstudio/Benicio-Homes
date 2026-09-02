@@ -15,6 +15,7 @@ type EditorialHeroCompositionProps = {
   embedded?: boolean;
   location?: string;
   sectionName: string;
+  showMarker?: boolean;
   statement?: string;
   title: ReactNode;
   titleId: string;
@@ -22,7 +23,7 @@ type EditorialHeroCompositionProps = {
 };
 
 const defaultStatement =
-  "A Goa based real estate developer building tropical homes shaped by land, climate and nature.";
+  "Our work begins before form. We study the land, decide what should remain and use structure, material, light and shade to determine what follows.";
 
 export function EditorialHeroComposition({
   alignMarkerToImageCenter = false,
@@ -34,6 +35,7 @@ export function EditorialHeroComposition({
   embedded = false,
   location = "GOA, IN",
   sectionName,
+  showMarker = true,
   statement = defaultStatement,
   title,
   titleId,
@@ -56,7 +58,7 @@ export function EditorialHeroComposition({
           alignMarkerToImageCenter && styles.imageCenteredForeground,
         )}
       >
-        <SectionCrosshair className={styles.crosshair} showMarker />
+        <SectionCrosshair className={styles.crosshair} showMarker={showMarker} />
 
         <Reveal
           className={cn(

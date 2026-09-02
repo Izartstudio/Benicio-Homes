@@ -9,7 +9,7 @@ export const elSalvaVillaProject = {
   metadata: {
     title: "El Salva Villa | Benicio",
     description:
-      "Rooted in the architectural charm of old Goa and reimagined for today, this heritage villa brings together history, elegance, and contemporary luxury in one timeless sanctuary.",
+      "Explore Villa El Salva by Benicio Homes, a heritage villa shaped by a distinct architectural charm of old Goa, reimagined for today, history, elegance, and contemporary luxury.",
   },
   hero: {
     layout: "el-salva",
@@ -19,7 +19,7 @@ export const elSalvaVillaProject = {
       "Rooted in the architectural charm of old Goa and reimagined for today, this heritage villa brings together history, elegance, and contemporary luxury in one timeless sanctuary.",
     image: {
       src: media.hero,
-      alt: "El Salva Villa hero",
+      alt: "Villa El Salva restored Goan heritage home in Salvador do Mundo",
     },
     foregroundImage: {
       src: media.heroForeground,
@@ -27,7 +27,7 @@ export const elSalvaVillaProject = {
     },
     mobileImage: {
       src: media.heroMobile,
-      alt: "El Salva Villa hero",
+      alt: "Villa El Salva restored Goan heritage home in Salvador do Mundo",
     },
     mobileForegroundImage: {
       src: media.heroForegroundMobile,
@@ -46,18 +46,18 @@ export const elSalvaVillaProject = {
       "El Salva blends the soul of the 1930s with the refinement of 2026, creating a heritage villa reimagined for luxury.",
     backgroundImage: {
       src: media.intro,
-      alt: "El Salva Villa introduction",
+      alt: "Restored facade of Villa El Salva surrounded by tropical landscaping",
     },
   },
   location: {
     location: "Salvador du Mundo - Goa",
     featureImage: {
       src: media.location,
-      alt: "Landscape surrounding El Salva Villa",
+      alt: "Tropical landscape surrounding Villa El Salva in North Goa",
     },
     decorativeImage: {
       src: media.locationDecorative,
-      alt: "Tropical foliage at El Salva Villa",
+      alt: "Tropical foliage framing Villa El Salva in Salvador do Mundo",
     },
     description: [
       "Set in Salvador du Mundo, Goa, El Salva is a heritage villa shaped by its surroundings. Blending history with modern living, it preserves the spirit of Goa architecture while embracing a contemporary way of life.",
@@ -71,7 +71,7 @@ export const elSalvaVillaProject = {
       "El Salva offers five spacious bedrooms, generous living areas, and a thoughtfully designed kitchen and dining space for effortless living. A private pool, landscaped gardens, and a versatile attic complete this timeless villa retreat.",
     masterplanImage: {
       src: media.siteComposition,
-      alt: "Site composition of El Salva Villa",
+      alt: "Site plan of the five-bedroom Villa El Salva heritage residence",
     },
     compass: "N",
     textureSrc: PROJECT_MEDIA.shared.siteCompositionTexture,
@@ -94,11 +94,11 @@ export const elSalvaVillaProject = {
       "El Salva is rooted in the character of its setting in Goa, where heritage and nature come together to shape a home of quiet elegance. Thoughtful planning, timeless materials, and a deep respect for the villa's surroundings create spaces that feel warm, private, and effortlessly connected to the landscape and its natural rhythm of life.",
     desktopImage: {
       src: media.moodboardDesktop,
-      alt: "El Salva Villa architectural moodboard",
+      alt: "Villa El Salva architectural moodboard with heritage details, plans and materials",
     },
     mobileImage: {
       src: media.moodboardMobile,
-      alt: "El Salva Villa architectural moodboard",
+      alt: "Villa El Salva architectural moodboard with heritage details, plans and materials",
     },
   },
   architectureImage: {
@@ -111,7 +111,7 @@ export const elSalvaVillaProject = {
     },
     image: {
       src: media.architecture,
-      alt: "Architectural view of El Salva Villa",
+      alt: "Restored Goan architecture and landscaped garden at Villa El Salva",
     },
   },
   specifications: {
@@ -218,7 +218,7 @@ export const elSalvaVillaProject = {
         caption: "Living At The Edge Of Nature.",
         image: {
           src: media.gallery[0],
-          alt: "El Salva Villa gallery image 1",
+          alt: "Villa El Salva living spaces opening onto tropical nature",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[0],
       },
@@ -226,7 +226,7 @@ export const elSalvaVillaProject = {
         caption: "Light, Filtered Through Time.",
         image: {
           src: media.gallery[1],
-          alt: "El Salva Villa gallery image 2",
+          alt: "Natural light filtering through the restored Villa El Salva",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[1],
       },
@@ -234,7 +234,7 @@ export const elSalvaVillaProject = {
         caption: "Spaces Made To Be Shared.",
         image: {
           src: media.gallery[2],
-          alt: "El Salva Villa gallery image 3",
+          alt: "Shared living space inside the Villa El Salva heritage home",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[2],
       },
@@ -242,7 +242,7 @@ export const elSalvaVillaProject = {
         caption: "Stillness, Within Reach.",
         image: {
           src: media.gallery[3],
-          alt: "El Salva Villa gallery image 4",
+          alt: "Quiet private space within the restored Villa El Salva",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[3],
       },
@@ -250,7 +250,7 @@ export const elSalvaVillaProject = {
         caption: "Materials That Age Gracefully.",
         image: {
           src: media.gallery[4],
-          alt: "El Salva Villa gallery image 5",
+          alt: "Traditional materials preserved in the Villa El Salva restoration",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[4],
       },
@@ -258,7 +258,7 @@ export const elSalvaVillaProject = {
         caption: "Crafted By Human Hands.",
         image: {
           src: media.gallery[5],
-          alt: "El Salva Villa gallery image 6",
+          alt: "Handcrafted architectural details at Villa El Salva in Goa",
         },
         ...SIX_IMAGE_GALLERY_LAYOUT[5],
       },
@@ -270,7 +270,7 @@ export const elSalvaVillaProject = {
       "A collection of homes rooted in Goa's tropical landscape and shaped by light, material, and nature.",
     image: {
       src: media.nextProject,
-      alt: "Vanam Villas project preview",
+      alt: "Vanam Villas tropical residences surrounded by planting in Anjuna, Goa",
     },
     ctaLabel: "Explore Project",
     ctaHref: "/projects/vanam-villas",

@@ -7,9 +7,10 @@ export function HeroFinalComposition() {
       alignMarkerToImageCenter
       embedded
       sectionName="homepage-hero-composition"
+      showMarker={false}
       title={
         <Image
-          alt="Benicio"
+          alt="Benicio Homes"
           height={218}
           sizes="(max-width: 767px) 68vw, (max-width: 1023px) 45vw, 640px"
           src="/assets/projects/wordmark.png"

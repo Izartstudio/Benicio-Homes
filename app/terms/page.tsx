@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/legal/legal-page";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | Benicio Homes",
-  description: "Terms and conditions for using the Benicio Homes website.",
+  description: "Terms and conditions for the Benicio Homes.",
 };
 
 export default function TermsPage() {

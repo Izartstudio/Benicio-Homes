@@ -8,7 +8,7 @@ export const vanamProject = {
   metadata: {
     title: "Vanam Villas | Benicio",
     description:
-      "Rooted in Goa's tropical landscape, Vanam Villas brings architecture, light, and nature together in a calm, private rhythm.",
+      "Explore Vanam Villas by Benicio Homes, a gated collection of six 4 BHK tropical villas in Anjuna, Goa, designed for privacy and considered living.",
   },
   hero: {
     variant: "vanam",

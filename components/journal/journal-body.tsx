@@ -7,7 +7,13 @@ function textOf(block: Extract<JournalPost["body"][number], { _type: "block" }>)
   return block.children?.map((child) => child.text).join("") ?? "";
 }
 
-export function JournalBody({ body }: { body: JournalPost["body"] }) {
+export function JournalBody({
+  articleTitle,
+  body,
+}: {
+  articleTitle: string;
+  body: JournalPost["body"];
+}) {
   const headingIds = new Map(
     body
       .filter(
@@ -26,7 +32,7 @@ export function JournalBody({ body }: { body: JournalPost["body"] }) {
           return (
             <Reveal as="figure" className="my-16" key={block._key}>
               <div className="relative aspect-[16/10] overflow-hidden bg-[#c8c8c8]">
-                <Image alt={block.alt ?? ""} className="object-cover" fill sizes="(min-width: 1024px) 60vw, 90vw" src={block.imageUrl} />
+                <Image alt={block.alt?.trim() || block.caption?.trim() || `Architectural image from ${articleTitle}`} className="object-cover" fill sizes="(min-width: 1024px) 60vw, 90vw" src={block.imageUrl} />
               </div>
               {block.caption ? <figcaption className="mt-3 text-xs text-[#696969]">{block.caption}</figcaption> : null}
             </Reveal>

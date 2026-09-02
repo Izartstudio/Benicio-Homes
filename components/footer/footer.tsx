@@ -6,7 +6,7 @@ import styles from "./footer.module.css";
 
 const navigationLinks = [
   { href: "/projects", label: "Projects" },
-  { href: "/about", label: "The Practice" },
+  { href: "/the-practice", label: "The Practice" },
   { href: "#contact", label: "Get In Touch" },
   { href: "/journal", label: "Journal" },
 ] as const;
@@ -60,7 +60,7 @@ export function Footer() {
                 <Image
                   className={styles.brandLogo}
                   src="/assets/footer/Logo-footer.svg"
-                  alt="Benicio"
+                  alt="Benicio Homes"
                   width={75}
                   height={57}
                 />

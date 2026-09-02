@@ -439,7 +439,7 @@ export function StepsSection() {
           </p>
 
           <a
-            href="/about"
+            href="/the-practice"
             className="absolute left-[5.28%] top-[55.85%] inline-flex items-center gap-3 font-mono text-[1.375rem] font-medium uppercase leading-[1.35] tracking-[0.04em] text-[#dc4c28]"
             data-step-link
             style={{ color: "#DC4C28" }}

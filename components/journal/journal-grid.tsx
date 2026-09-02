@@ -91,9 +91,9 @@ export function JournalGrid({
                 </span>
                 <span className="project-listing-copy grid h-[15.25rem] grid-cols-[minmax(0,1fr)_minmax(13rem,1fr)] gap-10 bg-[rgb(185_185_185_/_0.25)] bg-[image:var(--editorial-card-texture)] bg-[length:100%_100%] bg-center bg-no-repeat bg-blend-overlay px-9 py-10 text-[var(--editorial-card-title-color)]">
                   <span className="min-w-0">
-                    <span className="project-listing-title block break-words font-display text-[clamp(1.5rem,2vw,2rem)] font-medium uppercase leading-tight">
+                    <h2 className="project-listing-title block break-words font-display text-[clamp(1.5rem,2vw,2rem)] font-medium uppercase leading-tight">
                       {article.title}
-                    </span>
+                    </h2>
                     {article.description ? (
                       <span className="mt-6 line-clamp-4 block font-serif text-sm leading-[1.4]">
                         {article.description}
@@ -120,9 +120,9 @@ export function JournalGrid({
                   <span className="whitespace-nowrap">{article.number}</span>
                   <span className="h-px flex-1 bg-[var(--editorial-accent-color)]" />
                 </span>
-                <span className="mt-5 line-clamp-3 block break-words font-serif text-[clamp(1.35rem,1.8vw,1.75rem)] leading-[1.15] text-[var(--editorial-card-title-color)]">
+                <h2 className="mt-5 line-clamp-3 block break-words font-serif text-[clamp(1.35rem,1.8vw,1.75rem)] leading-[1.15] text-[var(--editorial-card-title-color)]">
                   {article.title}
-                </span>
+                </h2>
                 <span className="mt-7 flex items-center gap-3 font-display text-[0.75rem] text-[var(--editorial-card-author-color)]">
                   <span className="h-4 w-px bg-[var(--editorial-card-author-color)]" /> {article.author}
                 </span>

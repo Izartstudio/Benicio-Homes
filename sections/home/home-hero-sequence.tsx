@@ -108,7 +108,6 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
         .to(orangeImage, { autoAlpha: 1, duration: 0.12 }, orangeAt + 0.03);
 
       const linesAt = orangeAt + 0.3;
-      timeline.to(frame, { autoAlpha: 0, duration: 0.12 }, linesAt);
       addEditorialHeroReveal(timeline, finalComposition, linesAt);
     }, root);
 

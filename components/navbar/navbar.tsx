@@ -10,7 +10,7 @@ import { useLenis } from "@/components/providers/lenis-provider";
 import { CTA } from "@/components/ui/cta";
 
 const navigationLinks = [
-  { href: "/about", label: "The Practice" },
+  { href: "/the-practice", label: "The Practice" },
   { href: "/journal", label: "Journal" },
 ] as const;
 
@@ -182,7 +182,7 @@ export function Navbar() {
         >
           <Image
             src="/assets/NavBar/Logo-NavBar-colored.svg"
-            alt="Benicio"
+            alt="Benicio Homes"
             width={75}
             height={57}
             className="h-auto w-[3.75rem]"
@@ -275,7 +275,7 @@ export function Navbar() {
           <li className={responsiveStyles.mobileMenuRow}>
             <FooterLink
               className={responsiveStyles.mobileMenuLink}
-              href="/about"
+              href="/the-practice"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               The Practice

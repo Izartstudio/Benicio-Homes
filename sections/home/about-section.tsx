@@ -212,7 +212,7 @@ export function AboutSection() {
               />
               <Image
                 src="/assets/footer/Logo-footer.svg"
-                alt="Benicio"
+                alt="Benicio Homes"
                 width={75}
                 height={57}
                 className="relative z-10 h-[clamp(2.35rem,3.5vw,3.25rem)] w-auto"

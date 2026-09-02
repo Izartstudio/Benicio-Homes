@@ -422,7 +422,7 @@ export function ImageShowcaseSection() {
         data-showcase-desktop-layout
       >
         <h2
-          className="absolute left-1/2 top-[5.75rem] z-30 w-[min(36.5rem,72vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.35rem,2.1vw,1.875rem)] font-normal uppercase leading-[1.25] tracking-[0.01em] text-transparent"
+          className="absolute left-1/2 top-[5.75rem] z-30 w-[min(46.5rem,92vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.35rem,2.1vw,1.875rem)] font-normal leading-[1.25] tracking-[0.01em] text-transparent"
           data-showcase-heading
           style={{
             backgroundImage: 'url("/assets/textures/LateriteTexture.svg")',
@@ -430,7 +430,9 @@ export function ImageShowcaseSection() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          LATERITE. MONSOON. COCONUT GROVES. SEA BREEZE. VERANDAHS.
+          LATERITE, TEAK WOOD, EXPOSED CONCRETE
+          <br />
+          THE BENEICIO HOME
         </h2>
 
         <div
@@ -522,7 +524,7 @@ export function ImageShowcaseSection() {
       >
         <div ref={mobileRevealRef} className="relative h-full w-full">
           <h2
-            className="absolute left-1/2 top-[4rem] z-30 w-[min(21rem,84vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.25rem,5.65vw,1.55rem)] font-normal uppercase leading-[1.25] tracking-[0.01em] text-transparent"
+            className="absolute left-1/2 top-[4rem] z-30 w-[min(71rem,94vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.25rem,8.65vw,1.55rem)] font-normal leading-[1.25] tracking-[0.01em] text-transparent"
             data-showcase-mobile-heading
             style={{
               backgroundImage: 'url("/assets/textures/LateriteTexture.svg")',
@@ -530,8 +532,10 @@ export function ImageShowcaseSection() {
               WebkitTextFillColor: "transparent",
             }}
           >
-            LATERITE. MONSOON. COCONUT GROVES. SEA BREEZE. VERANDAHS.
-          </h2>
+          LATERITE, TEAK WOOD, EXPOSED CONCRETE
+          <br />
+          THE BENEICIO HOME 
+        </h2>
 
           <div
             className="absolute inset-x-0 top-[17.75rem] z-10 h-[7.5rem] bg-[#232323]"
