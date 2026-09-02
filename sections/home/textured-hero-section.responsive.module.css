@@ -1,64 +1,425 @@
-/* Matches the vertically flipped Figma alpha mask in videohero.svg. */
-.videoMask {
-  -webkit-mask-image: linear-gradient(
+.responsiveRoot {
+  background: #2d2d2d;
+}
+
+.scrollStage {
+  position: relative;
+  height: 300svh;
+}
+
+.heroToStepsBlend {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  height: clamp(7rem, 13vw, 12rem);
+  background: linear-gradient(
     to bottom,
-    #737373 0%,
-    #737373 50%,
-    rgb(217 217 217 / 0%) 100%
+    rgb(45 45 45 / 0) 0%,
+    rgb(45 45 45 / 0.18) 28%,
+    rgb(45 45 45 / 0.68) 72%,
+    #2d2d2d 100%
   );
-  mask-image: linear-gradient(
-    to bottom,
-    #737373 0%,
-    #737373 50%,
-    rgb(217 217 217 / 0%) 100%
+  pointer-events: none;
+}
+
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 40rem;
+  overflow: hidden;
+  background: #2d2d2d;
+}
+
+.heroScreen {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  background: #2d2d2d;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.concreteBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #2d2d2d;
+  background-image:
+    linear-gradient(rgb(24 24 24 / 0.53), rgb(24 24 24 / 0.53)),
+    url("/assets/textures/concrete-background-textures-09-1.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply, normal;
+}
+
+.sequenceRoot,
+.finalComposition,
+.heroCrosshair {
+  position: absolute;
+  inset: 0;
+}
+
+.sequenceRoot {
+  z-index: 10;
+}
+
+.floatingGrid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.75rem;
+  overflow: hidden;
+  padding-inline: 0;
+}
+
+.floatingColumn {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.floatingTrack {
+  animation: hero-grid-float 14s linear infinite;
+  will-change: transform;
+}
+
+.floatingTrackSlow {
+  animation-duration: 18s;
+  animation-delay: -4.5s;
+}
+
+.floatingSet {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+  padding-bottom: 2.75rem;
+}
+
+.floatingCard {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(18rem, 31.25vw, 28rem);
+  margin: 0;
+  overflow: hidden;
+}
+
+.floatingImage {
+  filter: grayscale(1);
+  object-fit: cover;
+}
+
+@keyframes hero-grid-float {
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+.imageFrame {
+  position: absolute;
+  top: 53.1%;
+  left: 50%;
+  z-index: 3;
+  width: clamp(20rem, 29.3vw, 26.375rem);
+  height: clamp(20.5rem, 30vw, 27rem);
+  overflow: hidden;
+  background: #242424;
+  transform: translate(-50%, -50%);
+  will-change: width, height;
+}
+
+.sequenceImage {
+  object-fit: cover;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.sequenceImage:first-child {
+  visibility: visible;
+  opacity: 1;
+}
+
+.orangeImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.heroCrosshair {
+  --orange-box-half: 0.90625rem;
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroCrosshair i {
+  position: absolute;
+  display: block;
+  transform: scaleX(0);
+}
+
+.heroCrosshair i:nth-child(1) {
+  display: none;
+}
+
+.heroCrosshair i:nth-child(2) {
+  top: 50%;
+  right: 11.77%;
+  left: calc(50% + var(--orange-box-half));
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgb(185 185 185 / 1),
+    rgb(185 185 185 / 0)
   );
 }
 
-.heroTitle {
+.heroCrosshair i:nth-child(3) {
+  top: 19%;
+  left: 49.5%;
+  width: 1px;
+  height: 26.4%;
+  background: linear-gradient(to bottom, rgb(185 185 185 / 0), #777);
+  transform: scaleY(0);
+}
+
+.heroCrosshair i:nth-child(4) {
+  top: 54.5%;
+  bottom: 19.1%;
+  left: 49.5%;
+  width: 1px;
+  background: linear-gradient(to bottom, #777, rgb(185 185 185 / 0));
+  transform: scaleY(0);
+}
+
+.heroCrosshair i:nth-child(5) {
+  display: none;
+}
+
+.heroCrosshair i:nth-child(6) {
+  top: 50%;
+  right: calc(50% + var(--orange-box-half));
+  left: 11.77%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgb(185 185 185 / 0),
+    rgb(185 185 185 / 1)
+  );
+}
+
+.finalComposition {
+  z-index: 2;
+  color: #b9b9b9;
+  pointer-events: none;
+}
+
+.finalComposition p {
   position: absolute;
-  right: 5.2%;
-  bottom: clamp(4rem, 9.25svh, 5.75rem);
-  left: 5.2%;
-  z-index: 20;
   margin: 0;
-  color: #f4f4f2;
-  font-family: var(--font-heading-family);
-  font-size: clamp(2.5rem, 3.9vw, 3.5rem);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.location {
+  top: 20.35%;
+  left: 5.55%;
+  font-family: var(--font-roboto-slab);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.locationleft {
+  top: 20.35%;
+  left: 68.85%;
+  font-family: var(--font-roboto-slab);
+  font-size: 1.15rem;
+  font-weight: 100;
+  line-height: 1;
+  color: #DC4C28;
+}
+.locationleft2 {
+  top: 20.35%;
+  left: 76.85%;
+  font-family: var(--font-roboto-slab);
+  font-size: 1.15rem;
+  font-weight: 100;
+  line-height: 1;
+  color: #DC4C28;
+}
+
+.statement {
+  top: 20.15%;
+  left: 65.85%;
+  width: 28.5%;
+  color: #eee;
+  font-family: var(--font-bahnschrift);
+  font-size: clamp(1.15rem, 1.67vw, 1.5rem);
   font-weight: 300;
-  line-height: 1.08;
-  letter-spacing: 0.01em;
-  text-shadow: 0 0.0625rem 0.75rem rgb(0 0 0 / 0.24);
-  text-wrap: balance;
+  line-height: 1.32;
+}
+.statementbottom{
+   top: 78.15%;
+  left: 65.85%;
+  width: 28.5%;
+  color: #eee;
+  font-family: var(--font-bahnschrift);
+  font-size: clamp(1.15rem, 1.67vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1.32;
+}
+.wordmark {
+  bottom: 11.3%;
+
+  font-family: var(--font-bahnschrift);
+  font-size: clamp(1.6rem, 0.4vw, 2.375rem);
+  font-weight: 300;
+  line-height: 1.32;
+  letter-spacing: 0.005em;
+  
+}
+
+.wordmarkLeft {
+  left: 3.45%;
+}
+
+.wordmarkRight {
+  right: 3.95%;
 }
 
 @media (max-width: 1023px) {
-  .responsiveRoot:global([data-section="textured-hero"]) {
-    max-width: 100%;
+  .imageFrame {
+    width: clamp(19rem, 48vw, 25rem);
+    height: clamp(19.45rem, 49.15vw, 25.6rem);
   }
 
-  .heroTitle {
-    right: clamp(2rem, 5.2vw, 3.25rem);
-    bottom: clamp(3.5rem, 8svh, 4.5rem);
-    left: clamp(2rem, 5.2vw, 3.25rem);
-    font-size: clamp(2.25rem, 5.6vw, 3rem);
+  .wordmark {
+    font-size: clamp(5.25rem, 10vw, 7.5rem);
+  }
+
+  .floatingGrid,
+  .floatingSet {
+    gap: 1.5rem;
+  }
+
+  .floatingSet {
+    padding-bottom: 1.5rem;
   }
 }
 
 @media (max-width: 767px) {
-  .responsiveRoot:global([data-section="textured-hero"]) {
-    min-height: 52.75rem;
+  .scrollStage {
+    height: 240svh;
   }
 
-  .responsiveRoot:global([data-section="textured-hero"]) {
-    min-height: min(52.75rem, 100svh);
+  .stickyViewport {
+    min-height: 34rem;
   }
 
-  .heroTitle {
-    right: 1.5rem;
-    bottom: clamp(2.5rem, 7svh, 3.5rem);
+  .imageFrame {
+    width: min(78vw, 22rem);
+    height: min(79.85vw, 22.55rem);
+  }
+
+  .concreteBackground {
+    background-position: 58% center;
+  }
+
+  .heroCrosshair i:nth-child(6) {
+    left: 6%;
+    right: calc(50% + var(--orange-box-half));
+  }
+
+  .heroCrosshair i:nth-child(2) {
+    left: calc(50% + var(--orange-box-half));
+    right: 4%;
+  }
+
+  .heroCrosshair i:nth-child(3),
+  .heroCrosshair i:nth-child(4) {
+    left: 50%;
+  }
+
+  .location {
+    top: 17%;
     left: 1.5rem;
-    max-width: 12ch;
-    font-size: clamp(2rem, 9.5vw, 2.75rem);
-    line-height: 1.04;
+    font-size: 0.875rem;
+  }
+
+  .statement {
+    top: 16%;
+    right: 1.5rem;
+    left: auto;
+    width: 43%;
+    font-size: clamp(0.75rem, 3.15vw, 0.9rem);
+  }
+
+  .wordmark {
+    bottom: 13%;
+    font-size: clamp(3.25rem, 16vw, 5rem);
+  }
+
+  .wordmarkLeft {
+    left: 1.5rem;
+  }
+
+  .wordmarkRight {
+    right: 1.5rem;
+    bottom: 4.5%;
+  }
+
+  .floatingGrid {
+    gap: 0.75rem;
+  }
+
+  .floatingSet {
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .floatingCard {
+    height: clamp(13rem, 64vw, 20rem);
+  }
+
+  .floatingTrack {
+    animation-duration: 13s;
+  }
+
+  .floatingTrackSlow {
+    animation-duration: 16s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollStage {
+    height: 100svh;
+  }
+
+  .imageFrame {
+    will-change: auto;
+  }
+
+  .heroScreen {
+    will-change: auto;
+  }
+
+  .floatingGrid {
+    display: none;
+  }
+
+  .floatingTrack {
+    animation: none;
   }
 }

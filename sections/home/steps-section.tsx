@@ -382,6 +382,10 @@ export function StepsSection() {
           data-steps-background-texture
           style={{ backgroundImage: `url("${texturePath}")` }}
         />
+        <div
+          aria-hidden="true"
+          className={responsiveStyles.heroToStepsBlend}
+        />
 
         <ArchitecturalStairs />
 

@@ -1,0 +1,89 @@
+"use client";
+
+import { useLayoutEffect, useRef, type ReactNode } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import styles from "./textured-hero-section.responsive.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
+
+type HomeHeroScrollTransitionProps = {
+  children: ReactNode;
+};
+
+const finalWidthRem = 47.875;
+const finalHeightRem = 26.625;
+const finalWidthViewportRatio = finalWidthRem / 90;
+const finalHeightViewportRatio = finalHeightRem / 56.25;
+
+export function HomeHeroScrollTransition({
+  children,
+}: HomeHeroScrollTransitionProps) {
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const stage = stageRef.current;
+
+    if (!stage) {
+      return;
+    }
+
+    const screen = stage.querySelector<HTMLElement>("[data-hero-screen]");
+    const grid = stage.querySelector<HTMLElement>("[data-hero-floating-grid]");
+
+    if (!screen || !grid) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      gsap.set(grid, { autoAlpha: 1 });
+      gsap.set(screen, { scaleX: 1, scaleY: 1, transformOrigin: "center" });
+
+      gsap.timeline({
+        scrollTrigger: {
+          end: "bottom bottom",
+          invalidateOnRefresh: true,
+          scrub: 0.35,
+          start: "top top",
+          trigger: stage,
+        },
+      })
+        .to(screen, {
+          duration: 1,
+          ease: "none",
+          scaleX: () => {
+            const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+            const targetWidth = Math.min(
+              finalWidthRem * rootFontSize,
+              window.innerWidth * finalWidthViewportRatio,
+            );
+
+            return targetWidth / screen.offsetWidth;
+          },
+          scaleY: () => {
+            const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+            const targetHeight = Math.min(
+              finalHeightRem * rootFontSize,
+              window.innerHeight * finalHeightViewportRatio,
+            );
+
+            return targetHeight / screen.offsetHeight;
+          },
+        }, 0);
+    }, stage);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div className={styles.scrollStage} ref={stageRef}>
+      <div className={styles.stickyViewport}>{children}</div>
+    </div>
+  );
+}

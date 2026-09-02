@@ -6,6 +6,23 @@
   --steps-about-right-divider-width: 15.55%;
 }
 
+.heroToStepsBlend {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  height: clamp(8rem, 13vw, 17rem);
+  background: linear-gradient(
+    to top,
+    #2d2d2d 0%,
+    rgba(45, 45, 45, 0.733) 24%,
+    rgba(45, 45, 45, 0.874) 68%,
+    rgb(45, 45, 45) 0%
+  );
+  pointer-events: none;
+}
+
 .responsiveRoot :global([data-architectural-stair="stair-01"]) {
   width: var(--steps-first-step-width);
 }

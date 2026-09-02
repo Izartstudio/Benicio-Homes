@@ -21,6 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 const LenisContext = createContext<Lenis | null>(null);
 const nativeScrollMediaQuery = "(max-width: 767px), (pointer: coarse)";
 const scrollStoragePrefix = "benicio-scroll-position:";
+const heroReloadStorageSuffix = ":hero-active";
 
 function scrollWindowImmediately(top: number) {
   const root = document.documentElement;
@@ -152,8 +153,15 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     const navigationEntry = performance.getEntriesByType(
       "navigation",
     )[0] as PerformanceNavigationTiming | undefined;
-    const isReload = !isClientNavigation && navigationEntry?.type === "reload";
+    const legacyNavigationType = (
+      performance as Performance & { navigation?: { type: number } }
+    ).navigation?.type;
+    const isReload =
+      !isClientNavigation &&
+      (navigationEntry?.type === "reload" || legacyNavigationType === 1);
     const scrollStorageKey = `${scrollStoragePrefix}${window.location.pathname}${window.location.search}`;
+    const heroReloadStorageKey = `${scrollStorageKey}${heroReloadStorageSuffix}`;
+    let heroReloadStart: number | null = null;
 
     const hash = window.location.hash;
     const target = hash
@@ -184,8 +192,18 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       const storedPosition = Number(
         window.sessionStorage.getItem(scrollStorageKey),
       );
+      const homepageHero = document.querySelector<HTMLElement>(
+        '[data-section="textured-hero"]',
+      );
+      const heroWasActive =
+        window.sessionStorage.getItem(heroReloadStorageKey) === "true";
 
-      if (Number.isFinite(storedPosition) && storedPosition > 0) {
+      if (homepageHero && heroWasActive) {
+        const heroStart = homepageHero?.offsetTop ?? 0;
+        heroReloadStart = heroStart;
+        lenisRef.current?.scrollTo(heroStart, { immediate: true });
+        scrollWindowImmediately(heroStart);
+      } else if (Number.isFinite(storedPosition) && storedPosition > 0) {
         lenisRef.current?.scrollTo(storedPosition, { immediate: true });
         scrollWindowImmediately(storedPosition);
       }
@@ -193,6 +211,26 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
     let safariSettleFrameOne: number | null = null;
     let safariSettleFrameTwo: number | null = null;
+    let reloadSettleFrameOne: number | null = null;
+    let reloadSettleFrameTwo: number | null = null;
+
+    const resetHeroReload = () => {
+      if (heroReloadStart === null) {
+        return;
+      }
+
+      lenisRef.current?.scrollTo(heroReloadStart, { immediate: true });
+      scrollWindowImmediately(heroReloadStart);
+      ScrollTrigger.update();
+    };
+
+    if (heroReloadStart !== null) {
+      reloadSettleFrameOne = requestAnimationFrame(() => {
+        resetHeroReload();
+        reloadSettleFrameTwo = requestAnimationFrame(resetHeroReload);
+      });
+      window.addEventListener("pageshow", resetHeroReload);
+    }
 
     if (
       isClientNavigation &&
@@ -213,6 +251,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     const refreshWhenReady = () => {
       void document.fonts.ready.then(() => {
         if (active) {
+          resetHeroReload();
           scheduleRefresh();
         }
       });
@@ -232,6 +271,13 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       if (safariSettleFrameTwo !== null) {
         cancelAnimationFrame(safariSettleFrameTwo);
       }
+      if (reloadSettleFrameOne !== null) {
+        cancelAnimationFrame(reloadSettleFrameOne);
+      }
+      if (reloadSettleFrameTwo !== null) {
+        cancelAnimationFrame(reloadSettleFrameTwo);
+      }
+      window.removeEventListener("pageshow", resetHeroReload);
       window.removeEventListener("load", refreshWhenReady);
 
       if (refreshTimerRef.current !== null) {
@@ -248,7 +294,23 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const storeScrollPosition = () => {
       const key = `${scrollStoragePrefix}${window.location.pathname}${window.location.search}`;
-      window.sessionStorage.setItem(key, String(window.scrollY));
+      const scrollPosition = window.scrollY;
+      const homepageHero = document.querySelector<HTMLElement>(
+        '[data-section="textured-hero"]',
+      );
+      const heroStart = homepageHero?.offsetTop ?? 0;
+      const heroEnd = heroStart + (homepageHero?.offsetHeight ?? 0);
+      const heroIsActive = Boolean(
+        homepageHero &&
+        scrollPosition >= heroStart &&
+        scrollPosition < heroEnd,
+      );
+
+      window.sessionStorage.setItem(key, String(scrollPosition));
+      window.sessionStorage.setItem(
+        `${key}${heroReloadStorageSuffix}`,
+        String(heroIsActive),
+      );
     };
 
     const resetBeforeInternalNavigation = (event: MouseEvent) => {
@@ -350,10 +412,12 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       );
     };
 
+    window.addEventListener("beforeunload", storeScrollPosition);
     window.addEventListener("pagehide", storeScrollPosition);
     document.addEventListener("click", resetBeforeInternalNavigation, true);
 
     return () => {
+      window.removeEventListener("beforeunload", storeScrollPosition);
       window.removeEventListener("pagehide", storeScrollPosition);
       document.removeEventListener("click", resetBeforeInternalNavigation, true);
     };

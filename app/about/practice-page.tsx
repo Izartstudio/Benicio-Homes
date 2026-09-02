@@ -2,6 +2,7 @@ import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import { CTA } from "@/components/ui/cta";
 import { Reveal } from "@/components/ui/reveal";
+import { SectionCrosshair } from "@/components/ui/section-crosshair";
 import { AboutPageAnimations } from "./about-page-animations";
 import type { AboutTeamSection } from "@/sanity/lib/aboutTeam";
 import styles from "./practice-page.module.css";
@@ -33,25 +34,6 @@ function EditorialRule() {
       <span data-marker-line />
       <span data-marker-block />
     </span>
-  );
-}
-
-function SectionCrosshair({
-  className,
-  showMarker = false,
-}: {
-  className?: string;
-  showMarker?: boolean;
-}) {
-  return (
-    <div
-      aria-hidden="true"
-      className={`${styles.sectionCrosshair} ${className ?? ""}`}
-      data-section-crosshair
-    >
-      <i /><i /><i /><i /><i /><i />
-      {showMarker ? <b data-crosshair-marker /> : null}
-    </div>
   );
 }
 
@@ -87,7 +69,7 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
       >
         <div aria-hidden="true" className={styles.heroConcrete} />
         <div aria-hidden="true" className={styles.heroShadow} />
-        <SectionCrosshair className={styles.heroCrosshair} showMarker />
+        <SectionCrosshair className={`${styles.sectionCrosshair} ${styles.heroCrosshair}`} showMarker />
         <Reveal className={styles.heroTitle} revealMode="manual">
           <h1 id="practice-title">Thoughtfully Designed,<br />Endlessly Lived</h1>
         </Reveal>
@@ -151,7 +133,7 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
             src="https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/ourmanifesto-bg.webp"
           />
         </div>
-        <SectionCrosshair className={styles.manifestoCrosshair} showMarker />
+        <SectionCrosshair className={`${styles.sectionCrosshair} ${styles.manifestoCrosshair}`} showMarker />
         <Reveal className={styles.manifestoCopy} revealMode="manual">
           <div className={styles.manifestoKicker}><span>Our Manifesto</span><i /></div>
           <h2 id="manifesto-title">We Build With A Deep<br />Respect For Place</h2>

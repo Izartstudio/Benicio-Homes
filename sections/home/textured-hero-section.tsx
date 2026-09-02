@@ -1,40 +1,69 @@
 import responsiveStyles from "./textured-hero-section.responsive.module.css";
-import { ResponsiveHeroVideo } from "./responsive-hero-video";
+import { HomeHeroSequence } from "./home-hero-sequence";
+import { HomeHeroScrollTransition } from "./home-hero-scroll-transition";
+import { HeroFloatingGrid } from "./hero-floating-grid";
+import type { HeroImage } from "./hero-shrinking-gallery";
 
-const fallbackHeroVideo = {
-  url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/0_Villa_Resort_3840x2160.webm",
-} as const;
+const heroImages: readonly HeroImage[] = [
+  {
+    src: "/assets/projects/zen-villa-2-bg.png",
+    alt: "A home surrounded by tropical planting",
+  },
+  {
+    src: "/assets/projects/gallery-earth-light-shelter.jpg",
+    alt: "A light-filled interior framed by natural materials",
+  },
+  {
+    src: "/assets/projects/vanam-site-showcase.png",
+    alt: "Vanam residence at golden hour",
+  },
+  {
+    src: "/assets/projects/villaelsalvabg.png",
+    alt: "A restored Goan villa set among palm trees",
+  },
+  {
+    src: "/assets/projects/gallery-calm-through-craft.png",
+    alt: "Sunlight casting a palm shadow across a textured wall",
+  },
+] as const;
 
-const desktopPlaybackId =
-  process.env.NEXT_PUBLIC_MUX_HERO_DESKTOP_PLAYBACK_ID?.trim() ||
-  process.env.NEXT_PUBLIC_MUX_HERO_PLAYBACK_ID?.trim();
-const mobilePlaybackId =
-  process.env.NEXT_PUBLIC_MUX_HERO_MOBILE_PLAYBACK_ID?.trim();
+const floatingImageColumns = [
+  [
+    "/assets/projects/NAYANBG.png",
+    "/assets/projects/villaelsalvabg.png",
+    "/assets/projects/gallery-earth-light-shelter.jpg",
+    "/assets/projects/vanam-site-showcase.png",
+  ],
+  [
+    "/assets/projects/villaperolabg.png",
+    "/assets/projects/gallery-built-around-nature.png",
+    "/assets/projects/zen-villa-2-bg.png",
+    "/assets/projects/gallery-calm-through-craft.png",
+  ],
+] as const;
 
 export function TexturedHeroSection() {
   return (
     <section
-      aria-labelledby="homepage-hero-title"
-      className={`relative isolate h-[100svh] min-h-[640px] overflow-hidden bg-[#2d2d2d] ${responsiveStyles.responsiveRoot}`}
+      aria-label="Benicio Residences"
+      className={`relative isolate ${responsiveStyles.responsiveRoot}`}
       data-section="textured-hero"
     >
+      <HomeHeroScrollTransition>
+        <HeroFloatingGrid columns={floatingImageColumns} />
+        <div className={responsiveStyles.heroScreen} data-hero-screen>
+          <div
+            aria-hidden="true"
+            className={responsiveStyles.concreteBackground}
+            data-hero-background-fill
+          />
+          <HomeHeroSequence images={heroImages} />
+        </div>
+      </HomeHeroScrollTransition>
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 bg-[#2d2d2d]"
-        data-hero-background-fill
+        className={responsiveStyles.heroToStepsBlend}
       />
-      <ResponsiveHeroVideo
-        className={`absolute inset-0 z-10 h-full w-full object-cover ${responsiveStyles.videoMask}`}
-        desktopPlaybackId={desktopPlaybackId}
-        fallbackSrc={fallbackHeroVideo.url}
-        mobilePlaybackId={mobilePlaybackId}
-      />
-      <h1
-        className={responsiveStyles.heroTitle}
-        id="homepage-hero-title"
-      >
-        Where Architecture Meets Nature
-      </h1>
     </section>
   );
 }

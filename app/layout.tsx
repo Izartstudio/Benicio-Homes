@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Roboto_Serif, Roboto_Slab } from "next/font/google";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/navbar/navbar";
@@ -53,6 +54,9 @@ export default function RootLayout({
   return (
     <html data-scroll-behavior="smooth" lang="en">
       <head>
+        <Script id="manual-scroll-restoration" strategy="beforeInteractive">
+          {`if ("scrollRestoration" in history) history.scrollRestoration = "manual";`}
+        </Script>
         {mediaOrigins.map((origin) => (
           <link crossOrigin="anonymous" href={origin} key={`preconnect-${origin}`} rel="preconnect" />
         ))}
