@@ -1,5 +1,4 @@
 import { OptimizedImage as Image } from "@/components/ui/optimized-image";
-import { ArchitecturalStairs } from "@/components/ArchitecturalStairs";
 import { CTA } from "@/components/ui/cta";
 import { EditorialHeroComposition } from "@/components/editorial-hero/editorial-hero-composition";
 import { Reveal } from "@/components/ui/reveal";
@@ -16,17 +15,18 @@ const orangeBarImage = "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home
 
 const services = [
   {
-    title: "Develop & Build Holiday Homes",
-    copy: "From land to handover, we design and build homes that are rooted in Goa’s landscape and crafted for timeless living.",
+    title: "Develop & Build Homes",
+    copy: "We carry each project from planning and design through construction and handover. This keeps the architectural intent intact at every stage.",
+  },
+    {
+    title: "Architectural Design & Development ",
+    copy: "Structure, openings, materials and movement are resolved in response to the site, then followed through during construction.",
   },
   {
     title: "Property Management",
-    copy: "We care for every home long after completion, ensuring it remains maintained, secure, and ready whenever you arrive.",
+    copy: "Our responsibility continues after handover. We oversee maintenance, security and readiness with the same care used to build the home.",
   },
-  {
-    title: "Architectural Design & Development",
-    copy: "Thoughtful planning, refined design, and meticulous execution come together to create homes that endure for generations.",
-  },
+ 
 ] as const;
 
 function EditorialRule() {
@@ -156,14 +156,11 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
           </Reveal>
         </div>
         <div className={styles.serviceSteps} aria-hidden="true">
-          <ArchitecturalStairs variant="practice" stairClassName="bg-[#E7E8E8]" />
+          <div className={styles.servicesSurface} data-architectural-stair="services-surface" />
         </div>
         <div className={styles.servicesPanel}>
           <div className={styles.mobileServiceSteps} aria-hidden="true">
-            <ArchitecturalStairs
-              variant="practice-mobile"
-              stairClassName="bg-[#E7E8E8]"
-            />
+            <div className={styles.servicesSurface} data-architectural-stair="services-surface-mobile" />
           </div>
           <div className={styles.servicesKicker}><span id="services-title">What We Build</span><i /></div>
           <div className={styles.servicesGrid}>

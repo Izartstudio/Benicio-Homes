@@ -86,7 +86,7 @@
   height: 1px;
 }
 /* Artboard 04 — Section -4 about.svg, 1440 × 800 */
-.services { position: relative; height: 50rem; overflow: hidden; background: #E7E8E8 center/cover; background-blend-mode: screen; }
+.services { position: relative; height: 50rem; overflow: hidden; background: #464646; }
 .servicesTop { height: 36.8rem; position: relative; }
 .horizontalLinePair { position: absolute; inset: 0; pointer-events: none; }
 .horizontalLinePair i { position: absolute; display: block; height: 1px; background: rgb(218 218 216/.35); }
@@ -98,6 +98,25 @@
 .servicesIntro p { font: var(--font-description-weight) .78rem/1.45 var(--font-description-family); }
 .servicesIntro a { width: 11rem; margin-top: 1rem; }
 .serviceSteps { position: absolute; inset: auto 0 0; height: 17.5rem; pointer-events: none; }
+.servicesSurface {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  background-color: #FAFAFA;
+  overflow: hidden;
+  clip-path: polygon(0 0, 56% 0, 56% 12.5%, 96.5% 12.5%, 96.5% 100%, 0 100%);
+}
+.servicesSurface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/about/restoration-about.webp");
+  background-position: top center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  opacity: .7;
+  mix-blend-mode: multiply;
+}
 .servicesPanel { position: absolute; inset: auto 3.45% 0; height: 17.5rem; z-index: 20; padding: 5.2rem 0 2rem; color: #232323; }
 .mobileServiceSteps { display: none; }
 .servicesKicker { position: absolute; left: 0; top: 2rem; }
@@ -177,6 +196,15 @@
   .serviceSteps { display: none; }
   .servicesPanel { position: relative; isolation: isolate; inset: auto; height: auto; margin-top: 0; padding: 6.25rem 1.5rem 2rem; background: transparent; }
   .mobileServiceSteps { position: absolute; z-index: -1; inset: 0; display: block; pointer-events: none; }
+  .mobileServiceSteps .servicesSurface {
+    clip-path: polygon(0 0, 58% 0, 58% 1.25rem, 100% 1.25rem, 100% 100%, 0 100%);
+  }
+  .mobileServiceSteps .servicesSurface::before {
+    background-position: top center;
+    background-size: auto 250%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+  }
   .servicesKicker { left: 1.5rem; }
   .servicesGrid { grid-template-columns: 1fr; gap: 2.5rem; }
   .service h3 { min-height: 0; }
