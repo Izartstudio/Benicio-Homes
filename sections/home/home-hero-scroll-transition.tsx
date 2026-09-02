@@ -15,6 +15,7 @@ const finalWidthRem = 67;
 const finalHeightRem = 37.25;
 const finalWidthViewportRatio = finalWidthRem / 90;
 const finalHeightViewportRatio = finalHeightRem / 56.25;
+const mobileFinalScale = 0.72;
 
 export function HomeHeroScrollTransition({
   children,
@@ -36,6 +37,7 @@ export function HomeHeroScrollTransition({
     }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
 
     if (reducedMotion) {
       return;
@@ -45,12 +47,14 @@ export function HomeHeroScrollTransition({
       gsap.set(grid, { autoAlpha: 1 });
       gsap.set(screen, {
         height: "100%",
+        scale: 1,
+        transformOrigin: "center center",
         width: "100%",
         xPercent: -50,
         yPercent: -50,
       });
 
-      gsap.timeline({
+      const timeline = gsap.timeline({
         scrollTrigger: {
           end: "bottom bottom",
           invalidateOnRefresh: true,
@@ -58,8 +62,16 @@ export function HomeHeroScrollTransition({
           start: "top top",
           trigger: stage,
         },
-      })
-        .to(screen, {
+      });
+
+      if (mobile) {
+        timeline.to(screen, {
+          duration: 1,
+          ease: "none",
+          scale: mobileFinalScale,
+        }, 0);
+      } else {
+        timeline.to(screen, {
           duration: 1,
           ease: "none",
           width: () => {
@@ -77,6 +89,7 @@ export function HomeHeroScrollTransition({
             );
           },
         }, 0);
+      }
     }, stage);
 
     return () => ctx.revert();

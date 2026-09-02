@@ -17,7 +17,7 @@ type HomeHeroSequenceProps = {
   images: readonly HeroImage[];
 };
 
-const imageStep = 0.09;
+const imageStep = 0.13;
 const finalImageRatio = 0.23;
 
 function getImageSizeRatio(index: number, imageCount: number) {
@@ -53,6 +53,9 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
     }
 
     const frameBounds = frame.getBoundingClientRect();
+    const frameStartTop =
+      (Number.parseFloat(getComputedStyle(frame).top) / root.clientHeight) * 100;
+    const frameEndTop = 50;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const ctx = gsap.context(() => {
       gsap.set(imageLayers, { autoAlpha: 0 });
@@ -71,7 +74,9 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
 
       imageLayers.slice(1).forEach((image, index) => {
         const nextIndex = index + 1;
+        const progress = nextIndex / (imageLayers.length - 1);
         const ratio = getImageSizeRatio(nextIndex, imageLayers.length);
+        const top = `${frameStartTop + (frameEndTop - frameStartTop) * progress}%`;
         const at = nextIndex * imageStep;
 
         timeline
@@ -79,12 +84,8 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
             duration: imageStep,
             ease: "none",
             height: frameBounds.height * ratio,
+            top,
             width: frameBounds.width * ratio,
-          }, at)
-          .to(imageLayers[nextIndex - 1], {
-            autoAlpha: 0,
-            duration: imageStep,
-            ease: "none",
           }, at)
           .to(image, {
             autoAlpha: 1,
@@ -101,11 +102,11 @@ export function HomeHeroSequence({ images }: HomeHeroSequenceProps) {
           duration: 0.24,
           ease: "power3.inOut",
           height: 29,
-          top: "50%",
+          top: `${frameEndTop}%`,
           width: 29,
         }, orangeAt)
-        .to(lastImage, { autoAlpha: 0, duration: 0.1 }, orangeAt)
-        .to(orangeImage, { autoAlpha: 1, duration: 0.12 }, orangeAt + 0.03);
+        .to(orangeImage, { autoAlpha: 1, duration: 0.12 }, orangeAt + 0.03)
+        .set(lastImage, { autoAlpha: 0 }, orangeAt + 0.15);
 
       const linesAt = orangeAt + 0.3;
       addEditorialHeroReveal(timeline, finalComposition, linesAt);

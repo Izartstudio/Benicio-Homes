@@ -4,7 +4,7 @@
 
 .scrollStage {
   position: relative;
-  height: 300svh;
+  height: 200svh;
 }
 
 .heroToStepsBlend {
@@ -43,7 +43,7 @@
   overflow: hidden;
   background: #2d2d2d;
   transform: translate(-50%, -50%);
-  will-change: width, height;
+  will-change: width, height, transform;
 }
 
 .sequenceRoot {
@@ -61,6 +61,8 @@
   gap: 2.75rem;
   overflow: hidden;
   padding-inline: 0;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .floatingColumn {
@@ -72,6 +74,8 @@
 
 .floatingTrack {
   animation: hero-grid-float 14s linear infinite;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   will-change: transform;
 }
 
@@ -93,15 +97,23 @@
   height: clamp(18rem, 31.25vw, 28rem);
   margin: 0;
   overflow: hidden;
+  backface-visibility: hidden;
+  contain: paint;
+  transform: translateZ(0);
 }
 
 .floatingImage {
+  backface-visibility: hidden;
   filter: grayscale(1) blur(2px);
   object-fit: cover;
-  transform: scale(1.005);
+  transform: translateZ(0) scale(1.005);
 }
 
 @keyframes hero-grid-float {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
   to {
     transform: translate3d(0, -50%, 0);
   }
@@ -158,6 +170,10 @@
 }
 
 @media (max-width: 767px) {
+  .scrollStage {
+    height: 165svh;
+  }
+
   .stickyViewport {
     min-height: 34rem;
   }
