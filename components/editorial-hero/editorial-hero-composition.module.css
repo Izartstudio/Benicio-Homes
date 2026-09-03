@@ -289,7 +289,12 @@
 
   .crosshair i:nth-child(2) {
     top: 52%;
+    right: 1.5rem;
     left: 54%;
+  }
+
+  .crosshair i:nth-child(5) {
+    display: none;
   }
 
   .crosshair i:nth-child(3) {
