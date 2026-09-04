@@ -68,7 +68,6 @@
 @media (max-width: 767px) {
   .responsiveRoot :global(#next-project-highlight-title) {
     font-size: clamp(1.75rem, 9.5vw, 3.25rem);
-    mix-blend-mode: difference;
   }
 
 

@@ -427,7 +427,7 @@ export function FeaturedProjectsSection({
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden mix-blend-difference"
+            className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden"
             data-featured-floating-title-stack
           >
             {featuredProjects.map((project, index) => (
