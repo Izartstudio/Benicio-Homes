@@ -19,9 +19,9 @@ const storyImages = {
     alt: "Open sky above a tropical villa",
   },
   hero: {
-    url: "/assets/storysection/story-hero.jpg",
+    url: "/assets/storysection/goa.png",
     loading: "lazy",
-    alt: "Goan coastal landscape and villa atmosphere",
+    alt: "A sandy Goa beach with clear blue water and rocky, green headlands",
   },
 } as const;
 

@@ -6,7 +6,6 @@ import { BlendScope } from "@/components/ui/blend-scope";
 import { FeaturedProjectsSection } from "@/sections/home/featured-projects-section";
 import { ImageShowcaseSection } from "@/sections/home/image-showcase-section";
 import { JournalSection } from "@/sections/home/journal-section";
-import { LegacyGallerySection } from "@/sections/home/legacy-gallery-section";
 import { LegacySection } from "@/sections/home/legacy-section";
 import { RestorationShowcaseSection } from "@/sections/home/restoration-showcase-section";
 import { StepsSection } from "@/sections/home/steps-section";
@@ -28,7 +27,6 @@ export default async function Home() {
       </BlendScope>
       <ImageShowcaseSection />
       <LegacySection />
-      <LegacyGallerySection />
       <RestorationShowcaseSection backgroundPosition="calc(100% + 28.5vw) center" />
       <JournalSection articles={journalArticles} />
       <ContactSection />
