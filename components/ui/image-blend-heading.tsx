@@ -15,7 +15,7 @@ export function ImageBlendHeading({
     <DifferenceText
       as="p"
       className={cn(
-        "font-display text-[10rem] font-light uppercase leading-[1.35] tracking-[0]",
+        "font-display text-[10rem] font-light uppercase leading-[1.35] tracking-[0] mix-blend-difference",
         className,
       )}
       {...props}

@@ -114,7 +114,7 @@ export function NextProjectHighlight({
         >
           <DifferenceText
             as="h2"
-            className="relative z-30 max-w-none whitespace-nowrap font-Bahnschrift text-[clamp(3.25rem,11.111vw,10rem)] font-light uppercase leading-none tracking-[0.01em]"
+            className="relative z-30 max-w-none whitespace-nowrap font-Bahnschrift text-[clamp(3.25rem,11.111vw,10rem)] font-light uppercase leading-none tracking-[0.01em] mix-blend-difference"
             id="next-project-highlight-title"
           >
             {title}

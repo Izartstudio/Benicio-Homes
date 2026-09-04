@@ -98,7 +98,14 @@ export function Reveal({
         )
       : start;
 
-    gsap.set(element, fade ? { autoAlpha: 0, y: effectiveY } : { y: effectiveY });
+    const containsDifferenceText = Boolean(
+      element.querySelector("[data-difference-text]"),
+    );
+    gsap.set(element, {
+      ...(fade ? { autoAlpha: 0 } : {}),
+      y: effectiveY,
+      ...(containsDifferenceText ? { force3D: false } : {}),
+    });
     element.dataset.revealInitialized = "";
 
     const ctx = gsap.context(() => {

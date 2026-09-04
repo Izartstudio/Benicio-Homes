@@ -176,7 +176,7 @@ export function FeaturedProjectsSection({
           gsap.set(titles, {
             autoAlpha: 0,
             y: titleTravel,
-            force3D: true,
+            force3D: false,
           });
           gsap.set(titles[0], {
             autoAlpha: 1,
@@ -218,7 +218,7 @@ export function FeaturedProjectsSection({
           ) => {
             const position = toIndex;
             const progressWidth = `${((toIndex + 1) / featuredProjects.length) * 100}%`;
-            const titleTransitionDuration = reduceMotion ? 0.01 : 0.52;
+            const titleTransitionDuration = reduceMotion ? 0.01 : 0.26;
             const imageTransitionDuration = reduceMotion ? 0.01 : 0.66;
             const contentTransitionDuration = reduceMotion ? 0.01 : 0.5;
 
@@ -274,7 +274,7 @@ export function FeaturedProjectsSection({
                   duration: titleTransitionDuration,
                   ease: "power2.inOut",
                 },
-                position,
+                position + titleTransitionDuration,
               )
               .to(
                 contentGroups[fromIndex],
@@ -427,7 +427,7 @@ export function FeaturedProjectsSection({
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden"
+            className="pointer-events-none absolute inset-y-0 left-0 z-30 w-[64.24%] overflow-hidden mix-blend-difference"
             data-featured-floating-title-stack
           >
             {featuredProjects.map((project, index) => (

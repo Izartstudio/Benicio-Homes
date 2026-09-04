@@ -108,6 +108,16 @@ body:has([data-homepage-root]) [data-navbar] {
   }
 }
 
+/* Blend the reveal as a whole rather than isolating its text inside a fading
+ * parent. This keeps the backdrop consistent throughout the reveal. */
+[data-reveal]:has(> [data-difference-text]) {
+  mix-blend-mode: difference;
+}
+
+[data-reveal] > [data-difference-text] {
+  mix-blend-mode: normal;
+}
+
 /* WebKit can drop background-clipped text when its transformed parent is
  * composited. Safari uses a solid title fill so project names never vanish. */
 html[data-scroll-engine="safari-native"] [data-project-title-texture] {

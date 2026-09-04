@@ -17,6 +17,7 @@ export function DifferenceText<T extends NativeTextElement = "span">({
 }: DifferenceTextProps<T>) {
   return createElement(as ?? "span", {
     ...props,
-    className: cn("text-benicio-blend", className),
+    "data-difference-text": true,
+    className: cn("text-benicio-blend mix-blend-difference", className),
   });
 }
