@@ -7,7 +7,15 @@
 }
 
 .responsiveRoot[data-guide-line-variant="zen"] {
-  --site-composition-plan-aspect-ratio: 737 / 491;
+  --site-composition-plan-aspect-ratio: 558 / 366;
+}
+
+.responsiveRoot[data-guide-line-variant="zen"]
+  :global([data-project-site-composition-guide-lines]),
+.responsiveRoot[data-guide-line-variant="zen"]
+  :global([data-project-site-composition-masterplan-wrapper]) {
+  width: 85%;
+  max-width: 35rem;
 }
 
 .responsiveRoot[data-guide-line-variant="el-salva"] {
@@ -100,7 +108,7 @@
     :global([data-project-site-composition-guide-lines]),
   .responsiveRoot[data-guide-line-variant="zen"]
     :global([data-project-site-composition-masterplan-wrapper]) {
-    width: min(51.18vw, 46.0625rem);
+    width: min(39vw, 35rem);
     max-width: none;
     flex-shrink: 0;
   }
@@ -109,7 +117,7 @@
     :global([data-project-site-composition-guide-lines]),
   .responsiveRoot[data-guide-line-variant="el-salva"]
     :global([data-project-site-composition-masterplan-wrapper]) {
-    width: min(77.7vw, 69.9375rem);
+    width: min(69.93vw, 62.94375rem);
     max-width: none;
     flex-shrink: 0;
   }

@@ -8,6 +8,7 @@ export function HeroFinalComposition() {
       embedded
       sectionName="homepage-hero-composition"
       showMarker={false}
+      statementHeading="Brutalist Tropical Homes"
       title={
         <Image
           alt="Benicio Homes"

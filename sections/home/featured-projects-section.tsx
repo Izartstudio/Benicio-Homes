@@ -25,11 +25,11 @@ export type FeaturedProject = {
 
 const defaultProjects: readonly FeaturedProject[] = [
   {
-    id: "majorda",
+    id: "nayan",
     title: "NAYAN",
     href: "/projects/nayan-villa",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-villa1.webp",
-    imageAlt: "Majorda villa front elevation",
+    imageAlt: "Nayan villa front elevation",
     description:
       "Nayan Villas is a collection of six tropical 4 bedroom private pool Villas, each set on an independent plot within an exclusive gated community in Majorda, South Goa.",
     metadata: [
@@ -39,30 +39,29 @@ const defaultProjects: readonly FeaturedProject[] = [
     ],
   },
   {
-    id: "casa-verde",
+    id: "vanam",
     title: "VANAM",
     href: "/projects/vanam-villas",
     url: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Home-Page/featuredprojects-villa2.webp",
-    imageAlt: "Casa Verde villa exterior with arched facade",
+    imageAlt: "Vanam villa exterior with arched facade",
     description:
       "Vanam Villas features six tropical residences in Anjuna's lush landscape. Each villa balances privacy, architecture, and nature for a serene retreat.",
     metadata: [
-      ["Built Up Area", "3408 sqft."],
-      ["Saleable Area", "3518 sqft."],
+      ["Super Built Up Area", "3408-3658 sq.m."],
+      ["Saleable Area", "3518-3776 sq.m."],
       ["Villa Configuration", "4BHK"],
     ],
   },
   {
-    id: "palm-house",
+    id: "zen-villa-2",
     title: "ZEN VILLA II",
     href: "/projects/zen-villas-2",
     url: "/assets/projects/zen-villa-2-bg.png",
-    imageAlt: "Palm House villa exterior with tropical landscape",
+    imageAlt: "Zen villa exterior with tropical landscape",
     description:
       "An architectural sanctuary of modern design, Zen Villa II offers a secluded retreat defined by contemporary elegance and luxury. ",
     metadata: [
-      ["Built Up Area", "339 sqft."],
-      ["Saleable Area", "351 sqft."],
+      ["Plot Size", "251 sq.m."],
       ["Villa Configuration", "3BHK"],
     ],
   },

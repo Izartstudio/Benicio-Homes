@@ -7,58 +7,34 @@ import type { HeroImage } from "./hero-shrinking-gallery";
 
 const heroImages: readonly HeroImage[] = [
   {
-    src: "/assets/hero/loader/interior-kitchen.jpg",
-    alt: "A light-filled kitchen opening onto a tropical garden",
+    src: PROJECT_MEDIA.vanamVillas.hero,
+    alt: "Vanam Villa by Benicio Homes",
   },
   {
-    src: "/assets/hero/loader/illuminated-rural-house.png",
-    alt: "A rural house framed by an illuminated installation",
+    src: PROJECT_MEDIA.zenVillas2.hero,
+    alt: "Zen Villa 2 by Benicio Homes",
   },
   {
-    src: "/assets/hero/loader/city-sky-billboard.png",
-    alt: "A city installation reflecting the sky",
+    src: PROJECT_MEDIA.villaPerola.hero,
+    alt: "Villa Perola by Benicio Homes",
   },
   {
-    src: "/assets/hero/loader/sunset-installation.png",
-    alt: "A glowing sunset installation in a public landscape",
+    src: PROJECT_MEDIA.nayanVilla.hero,
+    alt: "Nayan Villa by Benicio Homes",
   },
   {
-    src: "/assets/hero/loader/forest-house.png",
-    alt: "A modern house surrounded by dense vegetation",
+    src: PROJECT_MEDIA.elSalvaVilla.hero,
+    alt: "El Salva Villa by Benicio Homes",
   },
   {
-    src: "/assets/hero/loader/tree-oculus.png",
-    alt: "A tree viewed through a circular architectural opening",
-  },
-  {
-    src: "/assets/hero/loader/concrete-harbour-building.png",
-    alt: "A sculptural concrete building beside a harbour",
-  },
-  {
-    src: "/assets/hero/loader/landscape-mirror-installation.png",
-    alt: "A mirrored installation crossing a green landscape",
-  },
-  {
-    src: "/assets/hero/loader/garden-pool.jpg",
-    alt: "A secluded swimming pool surrounded by tropical planting",
-  },
-  {
-    src: "/assets/hero/loader/living-room.jpg",
-    alt: "A warm contemporary living room overlooking a garden",
+    src: PROJECT_MEDIA.zenVilla1.hero,
+    alt: "Zen Villa 1 by Benicio Homes",
   },
 ] as const;
 
 const floatingImageColumns = [
-  [
-    PROJECT_MEDIA.vanamVillas.hero,
-    PROJECT_MEDIA.zenVillas2.hero,
-    PROJECT_MEDIA.villaPerola.hero,
-  ],
-  [
-    PROJECT_MEDIA.nayanVilla.hero,
-    PROJECT_MEDIA.elSalvaVilla.hero,
-    PROJECT_MEDIA.zenVilla1.hero,
-  ],
+  heroImages.slice(0, 3).map((image) => image.src),
+  heroImages.slice(3).map((image) => image.src),
 ] as const;
 
 export function TexturedHeroSection() {

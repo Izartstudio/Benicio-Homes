@@ -92,6 +92,7 @@ function ProjectSelect() {
         <option value="Vanam Villa">Vanam Villa</option>
         <option value="Zen Villa">Zen Villa</option>
         <option value="Nayan Villa">Nayan Villa</option>
+        <option value="Villa Perola">Villa Perola</option>
       </select>
       <span
         aria-hidden="true"

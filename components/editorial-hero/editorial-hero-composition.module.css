@@ -211,6 +211,18 @@
   font: 300 0.82rem/1.45 var(--font-Bahnschrift-light);
 }
 
+.statement h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-description-family);
+  font-size: clamp(1.5rem, 2vw, 1.875rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.withStatementHeading p {
+  font-size: 0.75rem;
+}
+
 .statement a {
   display: flex;
   align-items: center;
@@ -339,6 +351,14 @@
 
   .statement p {
     font-size: 0.66rem;
+  }
+
+  .statement h2 {
+    font-size: clamp(1.125rem, 4.5vw, 1.375rem);
+  }
+
+  .withStatementHeading p {
+    font-size: 0.625rem;
   }
 
   .statement a {

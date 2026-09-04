@@ -78,15 +78,15 @@ export const vanamProject = {
       {
         title: "Villa 1 - 3",
         items: [
-          { label: "Built Up Area", value: "316 sq.m" },
+          { label: "Super Built Up Area", value: "316 sq.m" },
           { label: "Carpet Area", value: "218 sq.m" },
-          { label: "Saleable Area", value: "328 sq.m" },
+          { label: "Saleable Area", value: "327 sq.m" },
         ],
       },
       {
         title: "Villa 4 - 6",
         items: [
-          { label: "Built Up Area", value: "339 sq.m" },
+          { label: "Super Built Up Area", value: "339 sq.m" },
           { label: "Carpet Area", value: "234 sq.m" },
           { label: "Saleable Area", value: "351 sq.m" },
         ],

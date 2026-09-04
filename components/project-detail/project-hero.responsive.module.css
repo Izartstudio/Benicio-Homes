@@ -273,6 +273,10 @@
     inset-block-start: clamp(11rem, 24svh, 13.5rem);
   }
 
+  .heroSequence[data-hero-layout="zen"] .heroTitleLayer {
+    inset-block-start: clamp(10rem, 21svh, 11.5rem);
+  }
+
   .heroTitle {
     font-size: clamp(3rem, 12.8vw, 4rem);
     line-height: 0.82;

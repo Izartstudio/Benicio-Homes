@@ -19,34 +19,34 @@ const projectListingDetails: Record<
 > = {
   "vanam-villas": {
     status: "sold-out",
-    description: "Six 4 BHK homes in Anjuna, arranged for privacy within a tropical setting.",
+    description: "Gated community of 6 signature villas in Anjuna, Goa.",
     specifications: [
       { label: "Bedrooms", value: "4 BHK" },
       { label: "Plot Size", value: "2100 sq. m." },
-      { label: "Project Status", value: "Ongoing" },
+      { label: "Project Status", value: "Sold Out" },
     ],
   },
   "nayan-villa": {
     status: "for-sale",
-    description: "Six private-pool villas in Majorda, shaped by open lawns, shade and a restrained material palette.",
+    description: "Gated community of six private-pool tropical villas in Majorda, South Goa",
     specifications: [
       { label: "Bedrooms", value: "4 BHK" },
       { label: "Plot Size", value: "2400 sq. m." },
-      { label: "Project Status", value: "Coming Soon" },
+      { label: "Project Status", value: "For Sale" },
     ],
   },
   "zen-villa-1": {
     status: "sold-out",
-    description: "A standalone 3 BHK home in Assagao, defined by open structure, natural light and restraint.",
+    description: "Standalone 3 BHK zen style villa in Assagaon, Goa",
     specifications: [
       { label: "Bedrooms", value: "3 BHK" },
       { label: "Plot Size", value: "260 sq. m." },
-      { label: "Project Status", value: "Coming Soon" },
+      { label: "Project Status", value: "Sold Out" },
     ],
   },
   "zen-villas-2": {
     status: "ongoing",
-    description: "A standalone 3 BHK villa in Assagao with a private plunge pool and a clear contemporary structure.",
+    description: "Standalone 3 BHK zen style villa in Assagaon, Goa",
     specifications: [
       { label: "Bedrooms", value: "3 BHK" },
       { label: "Plot Size", value: "251 sq. m." },
@@ -55,16 +55,16 @@ const projectListingDetails: Record<
   },
   "el-salva-villa": {
     status: "for-sale",
-    description: "A five-bedroom Goan mansion in Salvador do Mundo, restored without erasing its original character.",
+    description: "Standalone 5 BHK restored Goan mansion in Salvador do mundo, Goa.",
     specifications: [
       { label: "Bedrooms", value: "5 BHK" },
       { label: "Plot Size", value: "1000 sq. m." },
-      { label: "Project Status", value: "Ongoing" },
+      { label: "Project Status", value: "For Sale" },
     ],
   },
   "villa-perola": {
-    status: "ongoing",
-    description: "An ancestral five-bedroom villa in Socorro, repaired for contemporary life without manufacturing nostalgia.",
+    status: "sold-out",
+    description: "Standalone 5 BHK restored Goan Villa in Socorro, Goa",
     specifications: [
       { label: "Type", value: "Heritage Villa" },
       { label: "Plot Size", value: "700 sq. m." },

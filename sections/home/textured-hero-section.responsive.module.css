@@ -133,6 +133,7 @@
 }
 
 .sequenceImage {
+  filter: none;
   object-fit: cover;
   visibility: hidden;
   opacity: 0;

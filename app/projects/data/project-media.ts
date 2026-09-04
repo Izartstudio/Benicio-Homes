@@ -76,11 +76,11 @@ export const PROJECT_MEDIA = {
       "/assets/projects/zen-villa-2-bg.png",
   },
   zenVillas2: {
-    hero: "/assets/projects/zen-villa-2-bg.png",
+    hero: "/assets/projects/Zen-Villa-IIbg.png",
     heroForeground:
-      "/assets/projects/zen-villa-2-foree.png",
-    heroMobile: "/assets/projects/zen-villa-2-bg-mobile.png",
-    heroForegroundMobile: "/assets/projects/zen-villa-2-foreground-mobile.png",
+      "/assets/projects/zen-villa-fore.png",
+    heroMobile: "/assets/projects/zen-mobilebg.png",
+    heroForegroundMobile: "/assets/projects/zenvillaforemob.png",
     intro:
       "",
     location:
@@ -88,7 +88,7 @@ export const PROJECT_MEDIA = {
     locationDecorative:
       "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/leaf.webp",
     siteComposition:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-villa-masterplan.webp",
+      "/assets/projects/zen-sitecomposition.png",
     moodboardDesktop: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-moodboard-desktop.webp",
     moodboardMobile: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/zen-villa-2/zen-moodboard-mobile.webp",
    

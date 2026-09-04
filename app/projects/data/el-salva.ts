@@ -85,6 +85,7 @@ export const elSalvaVillaProject = {
           { label: "Parking Area", value: "70 sq.m" },
           { label: "Built up Area", value: "714 sq.m" },
           { label: "Carpet Area", value: "559 sq.m" },
+          { label: "Super Built Up Area", value: "470 sq.m" },
         ],
       },
     ],

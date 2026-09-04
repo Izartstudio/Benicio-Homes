@@ -432,7 +432,7 @@ export function ImageShowcaseSection() {
         >
           LATERITE, TEAK WOOD, EXPOSED CONCRETE
           <br />
-          THE BENEICIO HOME
+          THE BENICIO HOME
         </h2>
 
         <div
@@ -534,7 +534,7 @@ export function ImageShowcaseSection() {
           >
           LATERITE, TEAK WOOD, EXPOSED CONCRETE
           <br />
-          THE BENEICIO HOME 
+          THE BENICIO HOME 
         </h2>
 
           <div

@@ -34,7 +34,7 @@ export const zenVillas2Project = {
     },
     mediaCanvas: {
       aspectRatio: 2000 / 1800,
-      foregroundCanvasHeightRatio: 1500 / 1600,
+      foregroundCanvasHeightRatio: 1200 / 1600,
     },
     mobileMediaCanvas: {
       aspectRatio: 420 / 913,
@@ -79,9 +79,8 @@ export const zenVillas2Project = {
       {
         title: "PROPERTY DETAILS",
         items: [
-          { label: "Built Up Area", value: "339 sq.m." },
-          { label: "Carpet Area", value: "234 sq.m." },
-          { label: "Saleable Area", value: "351 sq.m." },
+          { label: "Plot Size", value: "251 sq.m." },
+         
         ],
       },
     ],

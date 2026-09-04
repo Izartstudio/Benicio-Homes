@@ -17,6 +17,7 @@ type EditorialHeroCompositionProps = {
   sectionName: string;
   showMarker?: boolean;
   statement?: string;
+  statementHeading?: string;
   title: ReactNode;
   titleId: string;
   titleVariant?: "text" | "wordmark";
@@ -37,6 +38,7 @@ export function EditorialHeroComposition({
   sectionName,
   showMarker = true,
   statement = defaultStatement,
+  statementHeading,
   title,
   titleId,
   titleVariant = "text",
@@ -81,10 +83,11 @@ export function EditorialHeroComposition({
         </Reveal>
 
         <Reveal
-          className={styles.statement}
+          className={cn(styles.statement, statementHeading && styles.withStatementHeading)}
           data-editorial-hero-reveal
           revealMode="manual"
         >
+          {statementHeading && <h2>{statementHeading}</h2>}
           <p>{statement}</p>
           <CTA href={ctaHref} variant="light">
             {ctaLabel}

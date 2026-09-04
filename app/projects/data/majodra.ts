@@ -76,21 +76,14 @@ export const nayanVillaProject = {
     textureSrc: PROJECT_MEDIA.shared.siteCompositionTexture,
     specifications: [
       {
-        title: "Villa 1 - 3",
+        title: "Villa 1 - 6",
         items: [
-          { label: "Built Up Area", value: "316 sq.m" },
-          { label: "Carpet Area", value: "218 sq.m." },
-          { label: "Saleable Area", value: "328 sq.m" },
+          { label: "Total Built Up Area", value: "321 sq.m" },
+          { label: "Total Carpet Area", value: "282 sq.m." },
+         
         ],
       },
-      {
-        title: "Villa 4 - 6",
-        items: [
-          { label: "Built Up Area", value: "339 sq.m." },
-          { label: "Carpet Area", value: "234 sq.m." },
-          { label: "Saleable Area", value: "351 sq.m." },
-        ],
-      },
+   
     ],
   },
   moodboard: {
