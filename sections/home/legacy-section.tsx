@@ -6,9 +6,7 @@ export function LegacySection() {
   return (
     <section aria-labelledby="legacy-section-title" className={styles.root} data-section="legacy">
       <div className={styles.canvas} data-legacy-canvas>
-        <div aria-hidden="true" className={styles.background}>
-          <Image alt="" src="/assets/legacy/bglegacy.png" fill sizes="100vw" className={styles.backgroundImage} />
-        </div>
+        <div aria-hidden="true" className={styles.background} />
         <div aria-hidden="true" className={styles.topMarkers}>
           <OrangeBlock />
           <OrangeBlock />

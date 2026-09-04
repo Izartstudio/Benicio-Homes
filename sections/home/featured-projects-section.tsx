@@ -56,7 +56,7 @@ const defaultProjects: readonly FeaturedProject[] = [
     id: "zen-villa-2",
     title: "ZEN VILLA II",
     href: "/projects/zen-villas-2",
-    url: "/assets/projects/zen-villa-2-bg.png",
+    url: "/assets/projects/Zen-Villa-IIbg.png",
     imageAlt: "Zen villa exterior with tropical landscape",
     description:
       "An architectural sanctuary of modern design, Zen Villa II offers a secluded retreat defined by contemporary elegance and luxury. ",

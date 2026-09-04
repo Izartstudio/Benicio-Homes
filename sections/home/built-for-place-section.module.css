@@ -1,0 +1,79 @@
+.root {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(30rem, 34.72vw, 35rem);
+  color: #232323;
+  background: #b9b9b9 url('/assets/textures/texture-builtfor.png') center / cover;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28.4%;
+  padding: clamp(3rem, 4vw, 4rem) 5.28% 0;
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.8rem, 2.25vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.38;
+}
+
+.copy {
+  font-family: var(--font-description-family);
+  font-size: clamp(1rem, 1.1vw, 1.125rem);
+  line-height: 1.42;
+}
+
+.copy p { margin: 0; }
+
+.cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 11rem;
+  height: 3.125rem;
+  max-width: 100%;
+  margin-top: 2.25rem;
+  padding-inline: 0.75rem;
+}
+
+.divider {
+  position: absolute;
+  top: 2;
+  bottom: 16%;
+  left: 71.7%;
+  width: 1px;
+  background: rgb(255 255 255 / 25%);
+}
+
+.stairs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #2d2d2d;
+  clip-path: polygon(0 44.8%, 19.23% 44.8%, 19.23% 56.2%, 65.35% 56.2%, 65.35% 62.9%, 71.2% 62.9%, 71.2% 84%, 100% 84%, 100% 100%, 0 100%);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .root { min-height: 35rem; }
+  .content { grid-template-columns: minmax(0, 1fr) 35%; gap: 2rem; }
+  .divider { display: none; }
+}
+
+@media (max-width: 767px) {
+  .root { min-height: 0; }
+  .content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    padding: 3.75rem clamp(1.25rem, 7vw, 2.1875rem) 12rem;
+  }
+  .heading { font-size: 1.8rem; }
+  .copy { max-width: 26rem; font-size: 1rem; }
+  .divider { display: none; }
+  .stairs { top: auto; height: 12rem; }
+}

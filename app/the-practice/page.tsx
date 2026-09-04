@@ -51,7 +51,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     rightLabel: "Crafted Around Place",
     href: "/projects/zen-villas-2",
     number: "TROPICAL HOMES-",
-    url: "/assets/projects/villazenbg.png",
+    url: "/assets/projects/Zen-Villa-IIbg.png",
     alt: "Zen Villa II contemporary tropical home in Assagao, Goa",
   },
 ];

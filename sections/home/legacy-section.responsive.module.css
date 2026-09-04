@@ -1,5 +1,6 @@
 .root {
   position: relative;
+  margin-top: -1px;
   isolation: isolate;
   overflow: hidden;
   color: #eeeeee;
@@ -25,11 +26,7 @@
   width: 100vw;
   pointer-events: none;
   opacity: 1;
-}
-
-.backgroundImage {
-  object-fit: cover;
-  object-position: center bottom;
+  background: url('/assets/legacy/bglegacy.png') center bottom / cover no-repeat;
 }
 
 .topMarkers,

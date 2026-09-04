@@ -54,6 +54,9 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Avoid a corrupt local disk-cache entry blocking image requests in dev.
+    // Production keeps Next's normal image disk cache.
+    maximumDiskCacheSize: process.env.NODE_ENV === "development" ? 0 : undefined,
     // Extra small responsive candidates prevent phones and compact cards from
     // downloading a 640px image when a 320/480px source is sufficient.
     deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],

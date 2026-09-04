@@ -7,6 +7,7 @@ import { FeaturedProjectsSection } from "@/sections/home/featured-projects-secti
 import { ImageShowcaseSection } from "@/sections/home/image-showcase-section";
 import { JournalSection } from "@/sections/home/journal-section";
 import { LegacySection } from "@/sections/home/legacy-section";
+import { BuiltForPlaceSection } from "@/sections/home/built-for-place-section";
 import { RestorationShowcaseSection } from "@/sections/home/restoration-showcase-section";
 import { StepsSection } from "@/sections/home/steps-section";
 import { StorySection } from "@/sections/home/story-section";
@@ -26,6 +27,7 @@ export default async function Home() {
         <AboutSection />
       </BlendScope>
       <ImageShowcaseSection />
+      <BuiltForPlaceSection />
       <LegacySection />
       <RestorationShowcaseSection backgroundPosition="calc(100% + 28.5vw) center" />
       <JournalSection articles={journalArticles} />
