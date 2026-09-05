@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { Navbar } from "@/components/navbar/navbar";
 import { CameraDepthMotion } from "@/components/providers/camera-depth-motion";
 import { LenisProvider } from "@/components/providers/lenis-provider";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 import "./globals.css";
 
 const robotoSlab = Roboto_Slab({
@@ -65,7 +66,7 @@ const siteStructuredData = {
 export const metadata: Metadata = {
   title: "Benicio homes | Tropical Designer Homes in Goa",
   description:
-    "Benicio is a Goa-based real estate developer creating tropical designer homes defined by raw materials, brutalist influences, and a distinct architectural point of view.",
+    "Benicio is a Goa-based real estate developer building tropical homes shaped by land, climate and nature",
   icons: {
     icon: [
       {
@@ -121,6 +122,7 @@ export default function RootLayout({
           <Navbar />
           {children}
         </LenisProvider>
+        <WhatsAppButton />
       </body>
     </html>
   );
