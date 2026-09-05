@@ -111,6 +111,18 @@ export default function RootLayout({
       </head>
       <body className={`${bahnschrift.className} ${bahnschrift.variable} ${robotoSlab.variable} ${robotoSerif.variable} antialiased`}>
         <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-EMX1NEDYJM"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-EMX1NEDYJM');
+          `}
+        </Script>
+        <Script
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(siteStructuredData).replace(/</g, "\\u003c"),
           }}
