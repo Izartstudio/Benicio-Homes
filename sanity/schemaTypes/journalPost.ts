@@ -4,6 +4,13 @@ export const journalPost = defineType({
   name: "journalPost",
   title: "Journal post",
   type: "document",
+  fieldsets: [
+    {
+      name: "seo",
+      title: "Search engine metadata",
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -29,6 +36,31 @@ export const journalPost = defineType({
       rows: 4,
       description: "A concise summary of no more than 180 characters.",
       validation: (rule) => rule.required().max(180),
+    }),
+    defineField({
+      name: "metaTitle",
+      title: "Meta title",
+      type: "string",
+      fieldset: "seo",
+      description:
+        "Title shown in search results and browser tabs. If empty, the article title is used.",
+      validation: (rule) =>
+        rule
+          .max(60)
+          .warning("Meta titles usually work best at 60 characters or fewer."),
+    }),
+    defineField({
+      name: "metaDescription",
+      title: "Meta description",
+      type: "text",
+      rows: 3,
+      fieldset: "seo",
+      description:
+        "Summary shown in search results. If empty, the article excerpt is used.",
+      validation: (rule) =>
+        rule
+          .max(160)
+          .warning("Meta descriptions usually work best at 160 characters or fewer."),
     }),
     defineField({
       name: "coverImage",

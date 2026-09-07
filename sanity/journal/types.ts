@@ -9,6 +9,8 @@ export type JournalArticle = {
   excerpt: string;
   image: JournalImage;
   location?: string;
+  metaDescription?: string;
+  metaTitle?: string;
   number: string;
   publishedAt: string;
   slug: string;

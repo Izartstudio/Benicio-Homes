@@ -17,7 +17,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = await getJournalPost(slug);
   return post
-    ? { title: `${post.title} | The Journal`, description: post.excerpt }
+    ? {
+        title: post.metaTitle || `${post.title} | The Journal`,
+        description: post.metaDescription || post.excerpt,
+      }
     : { title: "Journal article not found" };
 }
 

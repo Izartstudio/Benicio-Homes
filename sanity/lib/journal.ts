@@ -25,6 +25,8 @@ type RawJournalPost = {
   excerpt?: string;
   featured?: boolean;
   location?: string;
+  metaDescription?: string;
+  metaTitle?: string;
   publishedAt?: string;
   slug?: string;
   title?: string;
@@ -64,6 +66,11 @@ function normalizePost(
     publishedAt: cleanText(post.publishedAt) || fallback.publishedAt,
     category: cleanText(post.category) || fallback.category,
     location: cleanText(post.location) || fallback.location,
+    metaDescription:
+      cleanText(post.metaDescription) ||
+      cleanText(post.excerpt) ||
+      fallback.excerpt,
+    metaTitle: cleanText(post.metaTitle) || title,
     author:
       cleanText(post.author) ||
       cleanText(post.location) ||
@@ -199,7 +206,9 @@ export async function getJournalPost(slug: string): Promise<JournalPost | null> 
       { slug },
       { next: { revalidate: 300 } },
     );
-    if (!raw) return fallback ? { ...fallback, body: fallbackBody(fallback) } : null;
+    // When Sanity is configured, a missing document has been removed (or never
+    // existed) and must not be resurrected from the local demo content.
+    if (!raw) return null;
 
     const article = normalizePost(raw, 0);
     const detailCover = getJournalDetailImageUrl(raw.coverImage);

@@ -53,7 +53,7 @@ export const JOURNAL_POSTS_QUERY = defineQuery(`
     defined(publishedAt) &&
     publishedAt <= now()
   ] | order(publishedAt desc) {
-    _id, title, "slug": slug.current, excerpt,
+    _id, title, "slug": slug.current, excerpt, metaTitle, metaDescription,
     coverImage { asset, crop, hotspot }, publishedAt,
     category, author, location, altText, featured
   }
@@ -65,7 +65,7 @@ export const JOURNAL_POST_QUERY = defineQuery(`
     !(_id in path("drafts.**")) &&
     slug.current == $slug
   ][0] {
-    _id, title, "slug": slug.current, excerpt,
+    _id, title, "slug": slug.current, excerpt, metaTitle, metaDescription,
     coverImage { asset, crop, hotspot }, publishedAt,
     category, author, location, altText, body[] {
       ...,
