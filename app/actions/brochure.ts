@@ -1,6 +1,7 @@
 "use server";
 
 import { appendBrochureSubmission } from "@/lib/googleSheets";
+import { getBrochure } from "@/lib/brochures";
 
 export type BrochureFormErrors = Partial<
   Record<"email" | "name" | "phone", string>
@@ -25,6 +26,8 @@ export async function submitBrochureForm(
   const name = getField(formData, "name");
   const phone = getField(formData, "phone");
   const email = getField(formData, "email");
+  const projectSlug = getField(formData, "projectSlug");
+  const brochure = getBrochure(projectSlug);
   const errors: BrochureFormErrors = {};
 
   if (!name) errors.name = "Name is required.";
@@ -42,11 +45,20 @@ export async function submitBrochureForm(
     };
   }
 
+  if (!brochure || !("pdfPath" in brochure)) {
+    return {
+      message: "This project brochure is not available for download.",
+      status: "error",
+    };
+  }
+
   try {
     await appendBrochureSubmission({
+      downloadedBrochure: `${brochure.projectName} brochure`,
       email,
       name,
       phone,
+      projectName: brochure.projectName,
       timestamp: new Date().toISOString(),
     });
 

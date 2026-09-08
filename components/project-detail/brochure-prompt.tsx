@@ -16,10 +16,14 @@ export const OPEN_BROCHURE_FORM_EVENT = "benicio:open-brochure-form";
 
 type BrochurePromptProps = {
   copy: string;
+  pdfPath?: string;
+  projectName: string;
   projectSlug: string;
 };
 
-type BrochureFormProps = Pick<BrochurePromptProps, "projectSlug">;
+type BrochureFormProps = Required<
+  Pick<BrochurePromptProps, "pdfPath" | "projectName" | "projectSlug">
+>;
 
 function BrochureField({
   autoComplete,
@@ -60,7 +64,7 @@ function BrochureSubmitButton() {
   );
 }
 
-function BrochureForm({ projectSlug }: BrochureFormProps) {
+function BrochureForm({ pdfPath, projectName, projectSlug }: BrochureFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [formState, formAction] = useActionState(
     submitBrochureForm,
@@ -73,15 +77,16 @@ function BrochureForm({ projectSlug }: BrochureFormProps) {
     formRef.current?.reset();
 
     const downloadLink = document.createElement("a");
-    downloadLink.href = `/assets/pdf/${projectSlug}.pdf`;
+    downloadLink.href = pdfPath;
     downloadLink.download = `${projectSlug}-brochure.pdf`;
     document.body.appendChild(downloadLink);
     downloadLink.click();
     downloadLink.remove();
-  }, [formState.status, formState.submissionId, projectSlug]);
+  }, [formState.status, formState.submissionId, pdfPath, projectSlug]);
 
   return (
     <form action={formAction} className={styles.brochureForm} ref={formRef}>
+      <input name="projectSlug" type="hidden" value={projectSlug} />
       <div className={styles.formTexture} aria-hidden="true">
         <OptimizedImage
           alt=""
@@ -94,7 +99,7 @@ function BrochureForm({ projectSlug }: BrochureFormProps) {
       </div>
       <div className={styles.formContent}>
         <header>
-          <h3>VANAM VILLAS</h3>
+          <h3>{projectName}</h3>
         </header>
         <div className={styles.fields}>
           <BrochureField autoComplete="name" errors={formState.errors} label="Full Name" name="name" />
@@ -114,15 +119,27 @@ function BrochureForm({ projectSlug }: BrochureFormProps) {
   );
 }
 
-export function BrochurePrompt({ copy, projectSlug }: BrochurePromptProps) {
+export function BrochurePrompt({
+  copy,
+  pdfPath,
+  projectName,
+  projectSlug,
+}: BrochurePromptProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogTitleId = useId();
 
   useEffect(() => {
-    const openBrochureForm = () => setIsOpen(true);
+    const openBrochureForm = () => {
+      if (pdfPath) {
+        setIsOpen(true);
+        return;
+      }
+
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    };
     window.addEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
     return () => window.removeEventListener(OPEN_BROCHURE_FORM_EVENT, openBrochureForm);
-  }, []);
+  }, [pdfPath]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -148,14 +165,24 @@ export function BrochurePrompt({ copy, projectSlug }: BrochurePromptProps) {
           <p data-project-brochure-copy>
             {copy}
           </p>
-          <CTA
-            className={styles.cta}
-            darkBackground="#575757"
-            onClick={() => setIsOpen(true)}
-            type="button"
-          >
-            Download Brochure
-          </CTA>
+          {pdfPath ? (
+            <CTA
+              className={styles.cta}
+              darkBackground="#575757"
+              onClick={() => setIsOpen(true)}
+              type="button"
+            >
+              Download Brochure
+            </CTA>
+          ) : (
+            <CTA
+              className={styles.cta}
+              darkBackground="#575757"
+              href="#contact"
+            >
+              Contact Our Team
+            </CTA>
+          )}
         </div>
         <div className={styles.rule} aria-hidden="true">
           <span />
@@ -163,7 +190,7 @@ export function BrochurePrompt({ copy, projectSlug }: BrochurePromptProps) {
         </div>
       </section>
 
-      {isOpen ? (
+      {isOpen && pdfPath ? (
         <div
           className={styles.backdrop}
           onMouseDown={(event) => {
@@ -192,7 +219,11 @@ export function BrochurePrompt({ copy, projectSlug }: BrochurePromptProps) {
             >
               ×
             </button>
-            <BrochureForm projectSlug={projectSlug} />
+            <BrochureForm
+              pdfPath={pdfPath}
+              projectName={projectName}
+              projectSlug={projectSlug}
+            />
           </section>
         </div>
       ) : null}

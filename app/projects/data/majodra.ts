@@ -103,7 +103,7 @@ export const nayanVillaProject = {
     description:
       "Every space tells a story. Discover the design philosophy of Nayan Villas.",
     cta: {
-      label: "Download Brochure",
+      label: "Contact Our Team",
       href: "/#contact",
     },
     image: {
