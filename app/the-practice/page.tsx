@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { ContactSection } from "@/components/contact/contact-section";
 import { Footer } from "@/components/footer/footer";
@@ -8,10 +9,7 @@ import { getAboutTeamSection } from "@/sanity/lib/aboutTeam";
 // The CMS visibility switch must be reflected on the very next page request.
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "The Practice | Benicio Homes",
-  description: "Discover the thinking behind Benicio Homes, a Goa-based real estate developer shaped by tropical modernism, brutalist influences, honest materials, and a clear architectural point of view.",
-};
+export const metadata: Metadata = { ...pageMetadata("/the-practice", "The Practice | Benicio Homes", "Discover the thinking behind Benicio Homes, a Goa-based real estate developer shaped by tropical modernism, brutalist influences, honest materials, and a clear architectural point of view.") };
 
 const restorationSlides: readonly RestorationSlide[] = [
   {

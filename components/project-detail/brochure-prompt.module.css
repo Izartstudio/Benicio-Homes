@@ -19,7 +19,30 @@
   line-height: 1.45;
 }
 
-.cta { width: 15.5rem; height: 3.5rem; margin-top: 1.5rem; padding-inline: .875rem; }
+.cta {
+  display: flex;
+  width: 15.5rem;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-inline: .875rem;
+  cursor: pointer;
+  font-family: var(--font-heading-family);
+  font-size: 1rem;
+  font-weight: var(--font-heading-weight);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.contactCta {
+  width: 14.0625rem;
+  height: 3.125rem;
+  padding-inline: .75rem;
+  font-family: var(--font-description-family);
+  font-size: .95rem;
+  font-weight: 400;
+}
 .rule { display: flex; align-items: flex-start; padding-top: 4rem; }
 .rule span { width: 1.25rem; height: 1.25rem; flex: none; background: var(--color-laterite); }
 .rule i { width: 100%; height: 1px; margin-top: .625rem; background: rgb(35 35 35 / .25); }

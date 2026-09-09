@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { OptimizedImage as Image } from "@/components/ui/optimized-image";
 import { notFound } from "next/navigation";
@@ -17,10 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = await getJournalPost(slug);
   return post
-    ? {
-        title: post.metaTitle || `${post.title} | The Journal`,
-        description: post.metaDescription || post.excerpt,
-      }
+    ? { ...pageMetadata(`/journal/${post.slug}`, post.metaTitle || `${post.title} | Benicio Journal`, post.metaDescription || post.excerpt), openGraph: { ...pageMetadata(`/journal/${post.slug}`, post.metaTitle || post.title, post.metaDescription || post.excerpt).openGraph, type: "article", publishedTime: post.publishedAt } }
     : { title: "Journal article not found" };
 }
 
@@ -58,10 +56,11 @@ export default async function JournalDetailPage({ params }: PageProps) {
     mainEntityOfPage: `https://benicio.co.in/journal/${post.slug}`,
     image: coverImage,
     author: {
-      "@type": "Person",
-      name: post.author,
+      "@type": /lead architect|author name/i.test(post.author) ? "Organization" : "Person",
+      name: /lead architect|author name/i.test(post.author) ? "Benicio Homes" : post.author,
     },
     publisher: {
+      "@id": "https://benicio.co.in/#organization",
       "@type": "Organization",
       name: "Benicio Homes",
       logo: {
@@ -107,7 +106,7 @@ export default async function JournalDetailPage({ params }: PageProps) {
             <div className="flex items-center gap-3 font-serif text-[0.78rem] font-semibold uppercase text-[#dc4c28]"><span>Table of contents</span><span className="h-px flex-1 bg-[#dc4c28]" /></div>
             <JournalTableOfContents headings={headings} />
           </aside>
-          <JournalBody articleTitle={post.title} body={post.body} />
+          <article><JournalBody articleTitle={post.title} body={post.body} /></article>
         </div>
       </section>
       <ContactSection />

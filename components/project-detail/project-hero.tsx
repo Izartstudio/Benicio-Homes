@@ -247,6 +247,7 @@ export function ProjectHeroSequence({
             y={36}
           >
             <ProjectTitleTexture
+              aria-label={title}
               className={styles.heroTitle}
               id="project-hero-title"
             >

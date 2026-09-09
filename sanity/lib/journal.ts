@@ -55,12 +55,13 @@ function normalizePost(
 ): JournalArticle {
   const fallback =
     fallbackJournalArticles[index] ?? fallbackJournalArticles[0];
+  const heritage = ["Journal004", "restoring-heritage-homes-in-goa"].includes(cleanText(post.slug));
   const title = cleanText(post.title) || fallback.title;
   const imageUrl = getJournalImageUrl(post.coverImage);
 
   return {
     number: `Journal ${String(HOMEPAGE_JOURNAL_CARD_COUNT - index).padStart(3, "0")}`,
-    slug: cleanText(post.slug) || fallback.slug,
+    slug: heritage ? "restoring-heritage-homes-in-goa" : cleanText(post.slug) || fallback.slug,
     title,
     excerpt: cleanText(post.excerpt) || fallback.excerpt,
     publishedAt: cleanText(post.publishedAt) || fallback.publishedAt,
@@ -70,7 +71,7 @@ function normalizePost(
       cleanText(post.metaDescription) ||
       cleanText(post.excerpt) ||
       fallback.excerpt,
-    metaTitle: cleanText(post.metaTitle) || title,
+    metaTitle: heritage ? "Restoring Heritage Homes in Goa | Benicio Journal" : cleanText(post.metaTitle) || title,
     author:
       cleanText(post.author) ||
       cleanText(post.location) ||

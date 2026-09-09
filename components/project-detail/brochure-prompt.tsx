@@ -176,7 +176,7 @@ export function BrochurePrompt({
             </CTA>
           ) : (
             <CTA
-              className={styles.cta}
+              className={`${styles.cta} ${styles.contactCta}`}
               darkBackground="#575757"
               href="#contact"
             >

@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { AboutSection } from "@/sections/home/about-section";
 import { ContactSection } from "@/components/contact/contact-section";
 import { Footer } from "@/components/footer/footer";
@@ -13,6 +14,8 @@ import { StepsSection } from "@/sections/home/steps-section";
 import { StorySection } from "@/sections/home/story-section";
 import { TexturedHeroSection } from "@/sections/home/textured-hero-section";
 import { getJournalArticles } from "@/sanity/lib/journal";
+
+export const metadata = pageMetadata("/", "", "Design-led tropical homes, luxury villas and heritage restorations across Goa by Benicio Homes.");
 
 export default async function Home() {
   const journalArticles = await getJournalArticles();

@@ -96,6 +96,11 @@ export function ProjectMoodboardSection({
                 sizes={desktopImageProps.sizes}
                 srcSet={desktopImageProps.srcSet}
               />
+              <source
+                media="(max-width: 767px)"
+                sizes={mobileImageProps.sizes}
+                srcSet={mobileImageProps.srcSet}
+              />
               <img
                 alt={desktopImage.alt}
                 className="h-auto w-full"
@@ -108,34 +113,6 @@ export function ProjectMoodboardSection({
               />
             </picture>
           </div>
-        </Reveal>
-
-        <Reveal
-          className="hidden"
-          data-project-moodboard-mobile-reveal
-          delay={0.2}
-          revealId="project-moodboard-mobile-svg"
-          start="top 78%"
-          triggerClosest="[data-project-moodboard-section]"
-          y={0}
-        >
-          <picture className="block">
-            <source
-              media="(max-width: 767px)"
-              sizes={mobileImageProps.sizes}
-              srcSet={mobileImageProps.srcSet}
-            />
-            <img
-              alt={mobileImage.alt}
-              className="h-auto w-full"
-              data-project-moodboard-mobile-image
-              decoding="async"
-              height={1776}
-              loading="lazy"
-              src="/images/placeholders/responsive-media-fallback.webp"
-              width={390}
-            />
-          </picture>
         </Reveal>
       </div>
     </section>

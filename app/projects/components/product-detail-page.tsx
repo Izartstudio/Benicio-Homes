@@ -1,8 +1,8 @@
+import dynamic from "next/dynamic";
 import type { ProjectDetailData } from "@/app/projects/data";
 import { ArchitectureImageSection } from "@/app/projects/components/architecture-image-section";
 import { ContactSection } from "@/app/projects/components/contact-section";
 import { FloorPlanCollection } from "@/app/projects/components/floor-plan-section";
-import { GallerySection } from "@/app/projects/components/gallery-section";
 import { HeroSection } from "@/app/projects/components/hero-section";
 import { LocationSection } from "@/app/projects/components/location-section";
 import { MoodboardSection } from "@/app/projects/components/moodboard-section";
@@ -18,11 +18,26 @@ type ProductDetailPageProps = {
   project: ProjectDetailData;
 };
 
+const GallerySection = dynamic(() =>
+  import("@/app/projects/components/gallery-section").then(
+    (module) => module.GallerySection,
+  ),
+);
+
 export function ProductDetailPage({ project }: ProductDetailPageProps) {
   const brochure = getBrochure(project.slug);
+  const residenceSchema = {
+    "@context": "https://schema.org", "@type": "Residence",
+    "@id": `https://benicio.co.in/projects/${project.slug}#residence`,
+    name: project.hero.title, description: project.metadata.description,
+    url: `https://benicio.co.in/projects/${project.slug}`,
+    address: { "@type": "PostalAddress", addressLocality: project.location.location, addressRegion: "Goa", addressCountry: "IN" },
+    image: { "@type": "ImageObject", contentUrl: typeof project.hero.image.src === "string" ? new URL(project.hero.image.src, "https://benicio.co.in").href : undefined, caption: project.hero.image.alt },
+  };
 
   return (
     <main className="bg-[#232323]" data-project-detail-page>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(residenceSchema).replace(/</g, "\\u003c") }} />
       <HeroSection data={project.hero} intro={project.intro} />
       <LocationSection data={project.location} />
       {project.editorialVariants ? (

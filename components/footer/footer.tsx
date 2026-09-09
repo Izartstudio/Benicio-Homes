@@ -13,7 +13,7 @@ const navigationLinks = [
 
 const socialLinks = [
   {
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/beniciohomesgoa/",
     label: "Facebook",
     src: "/assets/icons/facebookicon.svg",
   },

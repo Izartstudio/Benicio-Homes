@@ -70,7 +70,7 @@ export function EditorialHeroComposition({
           data-editorial-hero-reveal
           revealMode="manual"
         >
-          <h1 id={titleId}>{title}</h1>
+          <h1 id={titleId}>{titleVariant === "wordmark" ? <><span className="sr-only">Brutalist Tropical Homes in Goa</span><span aria-hidden="true">{title}</span></> : title}</h1>
         </Reveal>
 
         <Reveal

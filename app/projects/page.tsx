@@ -1,13 +1,10 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { projectList } from "@/app/projects/data";
 import { EditorialListingPage } from "@/components/journal/editorial-listing-page";
 import type { ProjectStatus } from "@/components/journal/project-status-tag";
 
-export const metadata: Metadata = {
-  title: "Projects | Benicio Residences",
-  description:
-    "Explore Benicio Homes projects across Goa, from contemporary tropical residences to heritage restorations shaped by honest materials and a distinct architectural point of view.",
-};
+export const metadata: Metadata = { ...pageMetadata("/projects", "Projects | Benicio Residences", "Explore Benicio Homes projects across Goa, from contemporary tropical residences to heritage restorations shaped by honest materials and a distinct architectural point of view.") };
 
 const projectListingDetails: Record<
   string,

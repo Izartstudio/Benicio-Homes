@@ -1,12 +1,9 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { EditorialListingPage } from "@/components/journal/editorial-listing-page";
 import { getJournalArticles } from "@/sanity/lib/journal";
 
-export const metadata: Metadata = {
-  title: "The Journal | Architecture & Design by Benicio Homes",
-  description:
-    "Essays and observations from Benicio on tropical architecture, brutalism, material honesty, craft, and the evolving language of design-led homes in Goa.",
-};
+export const metadata: Metadata = { ...pageMetadata("/journal", "The Journal | Architecture & Design by Benicio Homes", "Essays and observations from Benicio on tropical architecture, brutalism, material honesty, craft, and the evolving language of design-led homes in Goa.") };
 
 export default async function JournalPage() {
   const articles = await getJournalArticles();

@@ -63,7 +63,7 @@ export const JOURNAL_POST_QUERY = defineQuery(`
   *[
     _type == "journalPost" &&
     !(_id in path("drafts.**")) &&
-    slug.current == $slug
+    (slug.current == $slug || ($slug == "restoring-heritage-homes-in-goa" && slug.current == "Journal004"))
   ][0] {
     _id, title, "slug": slug.current, excerpt, metaTitle, metaDescription,
     coverImage { asset, crop, hotspot }, publishedAt,

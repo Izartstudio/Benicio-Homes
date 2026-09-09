@@ -1,10 +1,10 @@
-import type { ImageProps } from "next/image";
+import { getImageProps, type ImageProps } from "next/image";
 import {
   forwardRef,
   type CSSProperties,
   type Ref,
 } from "react";
-import { CdnImage } from "@/components/ui/cdn-image";
+import { getCdnAsset } from "@/lib/getCdnAsset";
 import styles from "./project-hero-background.module.css";
 
 const projectHeroImageQuality = 90;
@@ -56,6 +56,33 @@ export const ProjectHeroBackground = forwardRef<
     },
     mediaMotionRef,
   ) => {
+    const resolveImage = (image: ProjectHeroBackgroundImage) =>
+      typeof image.src === "string"
+        ? getCdnAsset(image.src) ?? image.src
+        : image.src;
+    const getHeroImageProps = (
+      image: ProjectHeroBackgroundImage,
+      loading: "eager" | "lazy",
+    ) =>
+      getImageProps({
+        alt: image.alt,
+        fill: true,
+        fetchPriority: loading === "eager" ? "high" : "auto",
+        loading,
+        quality: projectHeroImageQuality,
+        sizes: "100vw",
+        src: resolveImage(image),
+      }).props;
+    const backgroundProps = getHeroImageProps(backgroundImage, "eager");
+    const mobileBackgroundProps = mobileBackgroundImage
+      ? getHeroImageProps(mobileBackgroundImage, "eager")
+      : null;
+    const foregroundProps = foregroundImage
+      ? getHeroImageProps(foregroundImage, "lazy")
+      : null;
+    const mobileForegroundProps = mobileForegroundImage
+      ? getHeroImageProps(mobileForegroundImage, "lazy")
+      : null;
     const desktopFocalX = focalPosition?.desktop ?? 50;
     const tabletFocalX = focalPosition?.tablet ?? desktopFocalX;
     const mobileFocalX = focalPosition?.mobile ?? tabletFocalX;
@@ -87,28 +114,22 @@ export const ProjectHeroBackground = forwardRef<
             ref={mediaMotionRef}
           >
             <div className={styles.backgroundImageLayer}>
-              <CdnImage
-                alt={backgroundImage.alt}
-                className={styles.mediaImage}
-                data-project-hero-background-image
-                fill
-                preload
-                quality={projectHeroImageQuality}
-                ref={backgroundImageRef}
-                sizes="100vw"
-                src={backgroundImage.src}
-              />
-              {mobileBackgroundImage ? (
-                <CdnImage
-                  alt={mobileBackgroundImage.alt}
-                  className={`${styles.mediaImage} ${styles.mobileMediaImage}`}
-                  fill
-                  preload
-                  quality={projectHeroImageQuality}
-                  sizes="100vw"
-                  src={mobileBackgroundImage.src}
+              <picture>
+                {mobileBackgroundProps ? (
+                  <source
+                    media="(max-width: 767px)"
+                    sizes={mobileBackgroundProps.sizes}
+                    srcSet={mobileBackgroundProps.srcSet}
+                  />
+                ) : null}
+                <img
+                  {...backgroundProps}
+                  alt={backgroundImage.alt}
+                  className={styles.mediaImage}
+                  data-project-hero-background-image
+                  ref={backgroundImageRef}
                 />
-              ) : null}
+              </picture>
             </div>
 
             <div
@@ -124,28 +145,20 @@ export const ProjectHeroBackground = forwardRef<
           <div className={styles.foregroundPositioner}>
             <div className={styles.foregroundMotion} ref={foregroundMotionRef}>
               <div className={styles.foregroundLayer}>
-                <CdnImage
-                  alt={foregroundImage.alt}
-                  className={styles.mediaImage}
-                  fetchPriority="high"
-                  fill
-                  preload
-                  quality={projectHeroImageQuality}
-                  sizes="100vw"
-                  src={foregroundImage.src}
-                />
-                {mobileForegroundImage ? (
-                  <CdnImage
-                    alt={mobileForegroundImage.alt}
-                    className={`${styles.mediaImage} ${styles.mobileMediaImage}`}
-                    fetchPriority="high"
-                    fill
-                    preload
-                    quality={projectHeroImageQuality}
-                    sizes="100vw"
-                    src={mobileForegroundImage.src}
+                <picture>
+                  {mobileForegroundProps ? (
+                    <source
+                      media="(max-width: 767px)"
+                      sizes={mobileForegroundProps.sizes}
+                      srcSet={mobileForegroundProps.srcSet}
+                    />
+                  ) : null}
+                  <img
+                    {...foregroundProps!}
+                    alt={foregroundImage.alt}
+                    className={styles.mediaImage}
                   />
-                ) : null}
+                </picture>
               </div>
             </div>
           </div>

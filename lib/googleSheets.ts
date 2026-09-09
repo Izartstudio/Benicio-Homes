@@ -12,7 +12,6 @@ export type BrochureSubmission = Pick<
   ContactSubmission,
   "email" | "name" | "phone" | "timestamp"
 > & {
-  downloadedBrochure: string;
   projectName: string;
 };
 

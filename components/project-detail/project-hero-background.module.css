@@ -66,10 +66,6 @@
   object-position: 50% 0;
 }
 
-.mobileMediaImage {
-  display: none;
-}
-
 .upperMaskLayer {
   z-index: 2;
   bottom: 50%;
@@ -174,12 +170,4 @@
     height: var(--project-mobile-foreground-canvas-height);
   }
 
-  .backgroundRoot[data-has-mobile-hero="true"]
-    .mediaImage:not(.mobileMediaImage) {
-    display: none;
-  }
-
-  .backgroundRoot[data-has-mobile-hero="true"] .mobileMediaImage {
-    display: block;
-  }
 }

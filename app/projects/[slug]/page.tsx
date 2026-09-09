@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductDetailPage } from "@/app/projects/components";
@@ -30,10 +31,7 @@ export async function generateMetadata({
     };
   }
 
-  return {
-    title: project.metadata.title,
-    description: project.metadata.description,
-  };
+  return pageMetadata(`/projects/${slug}`, project.metadata.title, project.metadata.description);
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {

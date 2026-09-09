@@ -4,6 +4,8 @@ import {
   useLayoutEffect,
   useRef,
   type CSSProperties,
+  type ComponentType,
+  type RefAttributes,
   type HTMLAttributes,
   type JSX,
   type ReactNode,
@@ -185,9 +187,6 @@ export function Reveal({
     );
   }
 
-  return (
-    <div ref={setElementRef} {...revealProps}>
-      {children}
-    </div>
-  );
+  const Tag = Component as unknown as ComponentType<HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>>;
+  return <Tag ref={setElementRef} {...revealProps}>{children}</Tag>;
 }

@@ -54,7 +54,6 @@ export async function submitBrochureForm(
 
   try {
     await appendBrochureSubmission({
-      downloadedBrochure: `${brochure.projectName} brochure`,
       email,
       name,
       phone,

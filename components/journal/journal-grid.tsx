@@ -44,7 +44,7 @@ export function JournalGrid({
   loadMoreLabel = "Load More Blogs",
   variant = "journal",
 }: JournalGridProps) {
-  const pageSize = variant === "journal" ? JOURNAL_PAGE_SIZE : PAGE_SIZE;
+  const pageSize = variant === "journal" ? JOURNAL_PAGE_SIZE : Math.max(PAGE_SIZE, articles.length);
   const isMounted = useSyncExternalStore(
     subscribeToMount,
     () => true,

@@ -95,7 +95,7 @@ const legalSections: LegalSection[] = [
         <p>For any questions or concerns regarding these Terms and Conditions, please contact us at:</p>
         <address>
           <strong>Benicio Homes</strong><br /><br />
-          <a href="https://maps.google.com/?q=55-58+Aldeia+Aurino+Porvorim+North+Goa+403501">55–58, Aldeia Aurino, Porvorim<br />North Goa - 403501</a><br /><br />
+          <a href="https://maps.google.com/?q=S5-S8+Aldeia+Aurino+Porvorim+North+Goa+403501">S5–S8, Aldeia Aurino, Porvorim<br />North Goa - 403501</a><br /><br />
           <a href="mailto:info@benicio.co.in">info@benicio.co.in</a>
         </address>
       </>

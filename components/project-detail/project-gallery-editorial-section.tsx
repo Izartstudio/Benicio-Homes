@@ -114,6 +114,8 @@ export function GalleryItem({
             alt={image.alt}
             className="object-cover"
             fill
+            loading="lazy"
+            quality={75}
             sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc(50vw - 4.5rem), 33vw"
             src={image.src}
           />

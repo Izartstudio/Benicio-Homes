@@ -23,7 +23,7 @@ const robotoSerif = Roboto_Serif({
 });
 
 const bahnschrift = localFont({
-  src: "./fonts/bahnschrift.ttf",
+  src: "./fonts/bahnschrift-subset.woff2",
   variable: "--font-bahnschrift",
   weight: "300 700",
   display: "swap",
@@ -39,7 +39,7 @@ const siteStructuredData = {
       url: "https://benicio.co.in",
     },
     {
-      "@type": "RealEstateAgent",
+      "@type": "Organization",
       "@id": "https://benicio.co.in/#organization",
       name: "Benicio Homes",
       url: "https://benicio.co.in",
@@ -49,6 +49,7 @@ const siteStructuredData = {
       telephone: "+91 90218 29812",
       address: {
         "@type": "PostalAddress",
+        streetAddress: "S5–S8, Aldeia Aurino",
         addressLocality: "Porvorim",
         addressRegion: "Goa",
         postalCode: "403501",
@@ -58,7 +59,7 @@ const siteStructuredData = {
         "@type": "AdministrativeArea",
         name: "Goa, India",
       },
-      sameAs: ["https://www.instagram.com/benicio_homes_/"],
+      sameAs: ["https://www.instagram.com/benicio_homes_/", "https://www.facebook.com/beniciohomesgoa/"],
     },
   ],
 };
