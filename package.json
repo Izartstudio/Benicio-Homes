@@ -10,6 +10,8 @@
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck && npm run build",
     "sanity": "sanity dev",
     "sanity:deploy": "sanity deploy"
   },

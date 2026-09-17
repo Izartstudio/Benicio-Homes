@@ -47,6 +47,7 @@ Do not upload `.env.local` or commit secrets to Git.
 | `R2_ACCESS_KEY_ID` | Secret/runtime | Media upload API |
 | `R2_SECRET_ACCESS_KEY` | Secret/runtime | Media upload API |
 | `R2_BUCKET_NAME` | Secret/runtime | Media upload API |
+| `UPLOAD_API_TOKEN` | Secret/runtime | Authorizing trusted upload clients |
 | `R2_PUBLIC_URL` | Server/build-time | Uploaded-media URL and image allowlist |
 
 The repository contains fallback Sanity identifiers, but setting the three
@@ -57,6 +58,29 @@ with `503` instead of preventing the rest of the site from starting.
 `NEXT_PUBLIC_*` values and image-host allowlists are resolved by `next build`.
 After changing any of those values, trigger a full redeploy rather than only
 restarting the process.
+
+### Generate the upload token
+
+Generate a 256-bit token locally:
+
+```bash
+openssl rand -hex 32
+```
+
+Copy the resulting 64-character value directly into Hostinger's environment
+variables as `UPLOAD_API_TOKEN`, then redeploy. Do not add the value to
+`.env.example`, GitHub, documentation, chat, or an issue. Store a recovery copy
+in the client's password manager and configure the same value in the trusted
+CMS or administrative tool that calls the upload endpoint.
+
+That client must send this HTTP header:
+
+```text
+Authorization: Bearer YOUR_UPLOAD_API_TOKEN
+```
+
+To rotate the token, generate a new one, update both Hostinger and the trusted
+client, redeploy, verify an upload, and delete the old password-manager entry.
 
 ## Domain and DNS
 
@@ -85,8 +109,9 @@ restarting the process.
   is a complete `https://` URL, then rebuild the app.
 - **Forms return an error:** check the four Apps Script variables and confirm the
   deployed scripts accept requests from the production app.
-- **Uploads return 503:** configure all five R2 variables. A partial R2 setup is
-  intentionally treated as unavailable.
+- **Uploads return 401:** send the configured `UPLOAD_API_TOKEN` as a bearer token.
+- **Uploads return 503:** configure the upload token and all five R2 variables. A
+  partial setup is intentionally treated as unavailable.
 - **A public environment change is not visible:** use **Redeploy**, not Restart;
   public variables are compiled into the browser bundle.
 - **A route returns 403 after deployment:** redeploy from hPanel so Hostinger can

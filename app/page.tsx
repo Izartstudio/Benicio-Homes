@@ -20,6 +20,8 @@ export const metadata = pageMetadata("/", "", "Design-led tropical homes, luxury
 export default async function Home() {
   const journalArticles = await getJournalArticles();
 
+  // This order is the homepage's scroll narrative. Coordinate reordering with
+  // the sticky sections and ScrollTrigger refresh behavior in LenisProvider.
   return (
     <HomepageInteractionGuard>
       <TexturedHeroSection />

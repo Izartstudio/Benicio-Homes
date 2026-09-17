@@ -5,6 +5,37 @@ import { StorageError, uploadImage } from "@/lib/storage/r2";
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
+  // This route writes directly to the production media bucket. Keep the token
+  // server-side and send it only from trusted CMS or administrative tooling.
+  const uploadApiToken = process.env.UPLOAD_API_TOKEN?.trim();
+
+  if (!uploadApiToken) {
+    return NextResponse.json(
+      {
+        error: {
+          code: "UPLOAD_NOT_CONFIGURED",
+          message: "The upload API is not configured.",
+        },
+      },
+      { status: 503 },
+    );
+  }
+
+  if (request.headers.get("authorization") !== `Bearer ${uploadApiToken}`) {
+    return NextResponse.json(
+      {
+        error: {
+          code: "UNAUTHORIZED",
+          message: "A valid upload token is required.",
+        },
+      },
+      {
+        headers: { "WWW-Authenticate": "Bearer" },
+        status: 401,
+      },
+    );
+  }
+
   try {
     const formData = await request.formData();
     const file = formData.get("file");
