@@ -9,6 +9,28 @@ TypeScript, Tailwind CSS, `next/font`, and a section-driven homepage structure.
 - `npm run build` creates a production build.
 - `npm run lint` runs ESLint.
 
+## Deploying to Hostinger
+
+This repository is ready for Hostinger's **Node.js Web App** hosting. It must
+not be deployed as a static front-end: server actions, ISR, redirects, and API
+routes require a persistent Node.js process.
+
+Use these settings in hPanel:
+
+- Framework: `Next.js`
+- Node.js: `22.x`
+- Install command: `npm ci`
+- Build command: `npm run build`
+- Start command: `npm run start`
+- Health check: `/api/health`
+
+Add the variables from `.env.example` in hPanel before deploying. Values whose
+names start with `NEXT_PUBLIC_` are embedded during the build, so redeploy after
+changing them. Server-only secrets must never use that prefix.
+
+For the complete launch checklist, environment-variable matrix, domain setup,
+and troubleshooting notes, see [`HOSTINGER.md`](./HOSTINGER.md).
+
 ## Architecture
 
 - `app/` contains App Router entry points, metadata, and global CSS imports.

@@ -31,6 +31,10 @@ function getRemotePattern(urlValue: string | undefined, variableName: string): R
 }
 
 const nextConfig: NextConfig = {
+  // Hostinger terminates HTTPS at its reverse proxy and forwards traffic to
+  // this Node process. Keep the application portable and avoid disclosing the
+  // framework in an otherwise unnecessary response header.
+  poweredByHeader: false,
   async redirects() {
     return [
       { source: "/:path*", has: [{ type: "host", value: "www.benicio.co.in" }], destination: "https://benicio.co.in/:path*", permanent: true },

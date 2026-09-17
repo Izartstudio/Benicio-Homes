@@ -14,7 +14,6 @@ import { usePathname, useRouter } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { isSafariBrowser } from "@/utils/is-safari-browser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,16 +78,12 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       ignoreMobileResize: true,
     });
 
-    const isSafari = isSafariBrowser();
     const useNativeScrolling =
       mediaQuery.matches ||
-      isSafari ||
       window.matchMedia(nativeScrollMediaQuery).matches;
 
     if (useNativeScrolling) {
-      document.documentElement.dataset.scrollEngine = isSafari
-        ? "safari-native"
-        : "native";
+      document.documentElement.dataset.scrollEngine = "native";
       return () => {
         delete document.documentElement.dataset.scrollEngine;
       };

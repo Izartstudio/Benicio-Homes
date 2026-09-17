@@ -58,7 +58,10 @@ export function HomeHeroScrollTransition({
         scrollTrigger: {
           end: "bottom bottom",
           invalidateOnRefresh: true,
-          scrub: 0.35,
+          // Lenis already smooths the document scroll. A numeric scrub adds a
+          // second delayed interpolation and makes the hero trail the user's
+          // input, especially in Safari and on high-resolution trackpads.
+          scrub: true,
           start: "top top",
           trigger: stage,
         },
