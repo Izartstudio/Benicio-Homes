@@ -26,7 +26,7 @@
   width: 100vw;
   pointer-events: none;
   opacity: 1;
-  background: url('/assets/legacy/bglegacy.png') center bottom / cover no-repeat;
+  background: url('/assets/legacy/bglegacy.webp') center bottom / cover no-repeat;
 }
 
 .topMarkers,

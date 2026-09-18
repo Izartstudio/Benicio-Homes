@@ -7,8 +7,6 @@ import {
 import { getCdnAsset } from "@/lib/getCdnAsset";
 import styles from "./project-hero-background.module.css";
 
-const projectHeroImageQuality = 90;
-
 export type ProjectHeroBackgroundImage = {
   alt: string;
   src: ImageProps["src"];
@@ -63,16 +61,23 @@ export const ProjectHeroBackground = forwardRef<
     const getHeroImageProps = (
       image: ProjectHeroBackgroundImage,
       loading: "eager" | "lazy",
-    ) =>
-      getImageProps({
+    ) => {
+      const source = resolveImage(image);
+      const isDeliveryReadyImage =
+        typeof source === "string" &&
+        /\.(?:avif|webp)(?:\?|$)/i.test(source);
+
+      return getImageProps({
         alt: image.alt,
         fill: true,
         fetchPriority: loading === "eager" ? "high" : "auto",
         loading,
-        quality: projectHeroImageQuality,
+        quality: 75,
         sizes: "100vw",
-        src: resolveImage(image),
+        src: source,
+        unoptimized: isDeliveryReadyImage,
       }).props;
+    };
     const backgroundProps = getHeroImageProps(backgroundImage, "eager");
     const mobileBackgroundProps = mobileBackgroundImage
       ? getHeroImageProps(mobileBackgroundImage, "eager")

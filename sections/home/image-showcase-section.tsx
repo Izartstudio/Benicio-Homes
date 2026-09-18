@@ -425,7 +425,7 @@ export function ImageShowcaseSection() {
           className="absolute left-1/2 top-[5.75rem] z-30 w-[min(46.5rem,92vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.35rem,2.1vw,1.875rem)] font-normal leading-[1.25] tracking-[0.01em] text-transparent"
           data-showcase-heading
           style={{
-            backgroundImage: 'url("/assets/textures/LateriteTexture.svg")',
+            backgroundImage: 'url("/assets/textures/LateriteTexture.webp")',
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
@@ -505,6 +505,7 @@ export function ImageShowcaseSection() {
                       alt={index < showcaseImages.length ? image.alt : ""}
                       fill
                       draggable={false}
+                      loading="lazy"
                       sizes="(min-width: 1024px) 16vw, 42vw"
                       className="pointer-events-none select-none object-cover"
                     />
@@ -527,7 +528,7 @@ export function ImageShowcaseSection() {
             className="absolute left-1/2 top-[4rem] z-30 w-[min(71rem,94vw)] -translate-x-1/2 bg-cover bg-center bg-clip-text text-center font-display text-[clamp(1.25rem,8.65vw,1.55rem)] font-normal leading-[1.25] tracking-[0.01em] text-transparent"
             data-showcase-mobile-heading
             style={{
-              backgroundImage: 'url("/assets/textures/LateriteTexture.svg")',
+              backgroundImage: 'url("/assets/textures/LateriteTexture.webp")',
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
@@ -605,6 +606,7 @@ export function ImageShowcaseSection() {
                       alt={image.alt}
                       fill
                       draggable={false}
+                      loading="lazy"
                       sizes="42vw"
                       className="pointer-events-none select-none object-cover"
                     />
@@ -637,6 +639,7 @@ export function ImageShowcaseSection() {
                       alt=""
                       fill
                       draggable={false}
+                      loading="lazy"
                       sizes="42vw"
                       className="pointer-events-none select-none object-cover"
                     />

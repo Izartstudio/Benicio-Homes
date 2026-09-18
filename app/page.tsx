@@ -13,12 +13,12 @@ import { RestorationShowcaseSection } from "@/sections/home/restoration-showcase
 import { StepsSection } from "@/sections/home/steps-section";
 import { StorySection } from "@/sections/home/story-section";
 import { TexturedHeroSection } from "@/sections/home/textured-hero-section";
-import { getJournalArticles } from "@/sanity/lib/journal";
+import { getHomepageJournalArticles } from "@/sanity/lib/journal";
 
 export const metadata = pageMetadata("/", "", "Design-led tropical homes, luxury villas and heritage restorations across Goa by Benicio Homes.");
 
 export default async function Home() {
-  const journalArticles = await getJournalArticles();
+  const journalArticles = await getHomepageJournalArticles();
 
   // This order is the homepage's scroll narrative. Coordinate reordering with
   // the sticky sections and ScrollTrigger refresh behavior in LenisProvider.

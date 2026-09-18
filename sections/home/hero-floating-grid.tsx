@@ -28,8 +28,10 @@ function FloatingColumn({
                   alt={setIndex === 0 ? `Benicio residence ${imageIndex + 1}` : ""}
                   className={styles.floatingImage}
                   fill
-                  sizes="50vw"
+                  fetchPriority="low"
+                  sizes="(max-width: 767px) 50vw, 40vw"
                   src={src}
+                  unoptimized
                 />
               </figure>
             ))}

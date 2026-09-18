@@ -132,6 +132,15 @@
 }
 
 @media (min-width: 1024px) {
+  .heroSequence[data-hero-variant="vanam"] .heroTitleReveal {
+    overflow-clip-margin: 3rem;
+  }
+
+  .heroSequence[data-hero-variant="vanam"] .heroTitle {
+    margin-block-start: -0.16em !important;
+    padding-block-start: 0.16em !important;
+  }
+
   .heroSequence[data-hero-variant="perola"]
     .heroTitleLine[data-hero-title-line="2"] {
     left: 20.5%;

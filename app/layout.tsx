@@ -92,6 +92,7 @@ export default function RootLayout({
   const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL?.trim().replace(/\/+$/, "");
   const mediaOrigins = Array.from(new Set([
     cdnUrl,
+    "https://cdn.sanity.io",
     "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev",
     "https://image.mux.com",
     "https://stream.mux.com",

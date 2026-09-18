@@ -1,4 +1,3 @@
-import { PROJECT_MEDIA } from "@/app/projects/data/project-media";
 import responsiveStyles from "./textured-hero-section.responsive.module.css";
 import { HomeHeroSequence } from "./home-hero-sequence";
 import { HomeHeroScrollTransition } from "./home-hero-scroll-transition";
@@ -7,27 +6,27 @@ import type { HeroImage } from "./hero-shrinking-gallery";
 
 const heroImages: readonly HeroImage[] = [
   {
-    src: PROJECT_MEDIA.vanamVillas.hero,
+    src: "/assets/projects/bgvanam-hero.webp",
     alt: "Vanam Villa by Benicio Homes",
   },
   {
-    src: PROJECT_MEDIA.zenVillas2.hero,
+    src: "/assets/projects/zen-villa-2-hero.webp",
     alt: "Zen Villa 2 by Benicio Homes",
   },
   {
-    src: PROJECT_MEDIA.villaPerola.hero,
+    src: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/perola/villaperolabg.webp",
     alt: "Villa Perola by Benicio Homes",
   },
   {
-    src: PROJECT_MEDIA.nayanVilla.hero,
+    src: "/assets/projects/nayan-hero.webp",
     alt: "Nayan Villa by Benicio Homes",
   },
   {
-    src: PROJECT_MEDIA.elSalvaVilla.hero,
+    src: "/assets/projects/el-salva-hero.webp",
     alt: "El Salva Villa by Benicio Homes",
   },
   {
-    src: PROJECT_MEDIA.zenVilla1.hero,
+    src: "/assets/projects/zen-villa-1-hero.webp",
     alt: "Zen Villa 1 by Benicio Homes",
   },
 ] as const;

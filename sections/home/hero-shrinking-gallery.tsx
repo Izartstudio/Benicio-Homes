@@ -25,6 +25,7 @@ export function HeroShrinkingGallery({ images }: HeroShrinkingGalleryProps) {
           fetchPriority={index === 0 ? "high" : "auto"}
           sizes="(max-width: 767px) 78vw, (max-width: 1023px) 48vw, 422px"
           src={image.src}
+          unoptimized
         />
       ))}
 

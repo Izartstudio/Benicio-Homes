@@ -4,7 +4,7 @@
   overflow: hidden;
   min-height: clamp(30rem, 34.72vw, 35rem);
   color: #232323;
-  background: #b9b9b9 url('/assets/textures/texture-builtfor.png') center / cover;
+  background: #b9b9b9 url('/assets/textures/texture-builtfor.webp') center / cover;
 }
 
 .content {

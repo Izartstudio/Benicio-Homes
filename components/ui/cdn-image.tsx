@@ -16,8 +16,18 @@ export const CdnImage = forwardRef<HTMLImageElement, CdnImageProps>(
       return null;
     }
 
+    const isDeliveryReadyImage =
+      typeof resolvedSrc === "string" &&
+      /\.(?:avif|webp)(?:\?|$)/i.test(resolvedSrc);
+
     return (
-      <OptimizedImage {...props} alt={props.alt} ref={ref} src={resolvedSrc} />
+      <OptimizedImage
+        {...props}
+        alt={props.alt}
+        ref={ref}
+        src={resolvedSrc}
+        unoptimized={props.unoptimized ?? isDeliveryReadyImage}
+      />
     );
   },
 );

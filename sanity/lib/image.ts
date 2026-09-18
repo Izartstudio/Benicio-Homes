@@ -24,7 +24,7 @@ export function getJournalImageUrl(
     .height(864)
     .fit("crop")
     .auto("format")
-    .quality(85)
+    .quality(75)
     .url();
 }
 
@@ -38,7 +38,7 @@ export function getJournalDetailImageUrl(
     .width(1800)
     .fit("max")
     .auto("format")
-    .quality(88)
+    .quality(78)
     .url();
 }
 
