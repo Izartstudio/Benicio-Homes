@@ -14,6 +14,7 @@ export const villaPerolaProject = {
     layout: "el-salva",
     variant: "perola",
     title: "Villa Perola",
+    titleLayer: "front",
     description:
       "An ancestral Goan home restored with care, preserving the character of its past while creating a refined setting for contemporary life.",
     image: { src: media.hero, alt: "Restored exterior of Villa Perola heritage home in Goa" },

@@ -214,8 +214,7 @@ export const PROJECT_MEDIA = {
     concreteTexture: "/assets/textures/concrete-background-textures-09-1.webp",
     nextProjectTexture: "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/next-project-texture.webp",
     orangeBlock: "/assets/blocks/orange-block.svg",
-    pdpTexture:
-      "https://pub-5a938dd2c42e460dae151e92bbe99404.r2.dev/Product-Detail-Page/pdp-texture-3.webp",
+    pdpTexture: "/assets/textures/project-title-texture.webp",
     siteCompositionTexture:
       "/images/placeholders/site-composition-texture.webp",
   },

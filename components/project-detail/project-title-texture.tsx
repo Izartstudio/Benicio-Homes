@@ -6,7 +6,7 @@ type ProjectTitleTextureProps = ComponentPropsWithRef<"h1">;
 
 const titleTextureStyle = {
   backgroundColor: "var(--color-bone)",
-  backgroundImage: `url('${PDP_TEXTURE_URL}')`,
+  backgroundImage: `linear-gradient(rgb(245 245 240 / 0.72), rgb(245 245 240 / 0.72)), url('${PDP_TEXTURE_URL}')`,
   backgroundOrigin: "padding-box",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -20,6 +20,7 @@ const titleTextureStyle = {
   WebkitTextFillColor: "transparent",
   backgroundClip: "text",
   color: "transparent",
+  filter: "drop-shadow(0 2px 12px rgb(0 0 0 / 0.22))",
 } as const;
 
 /** A stable, shared texture treatment for PDP hero titles. */

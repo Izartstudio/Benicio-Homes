@@ -139,6 +139,7 @@
   .heroSequence[data-hero-variant="vanam"] .heroTitle {
     margin-block-start: -0.16em !important;
     padding-block-start: 0.16em !important;
+    font-size: clamp(8rem, 12.4vw, 11.15rem);
   }
 
   .heroSequence[data-hero-variant="perola"]
@@ -302,6 +303,10 @@
     inset-inline: 1.5rem;
   }
 
+  .heroSequence[data-hero-layout="nayan"] .heroTitleLayer {
+    inset-block-start: clamp(7.75rem, 17svh, 9.5rem);
+  }
+
   .heroSequence[data-hero-layout="el-salva"] .heroTitleLayer {
     inset-block-start: clamp(10.5rem, 22svh, 12rem);
   }
@@ -344,6 +349,10 @@
     width: auto;
   }
 
+  .heroSequence[data-hero-layout="nayan"] .heroDescriptionReveal {
+    top: clamp(26.5rem, 60svh, 31rem);
+  }
+
   .heroSequence[data-hero-layout="zen"] .heroDescriptionReveal {
     text-align: right;
   }
@@ -364,6 +373,10 @@
 
   .heroSequence[data-hero-variant="vanam"] .heroTitleLayer {
     inset-block-start: clamp(13rem, 28svh, 15rem);
+  }
+
+  .heroSequence[data-hero-variant="vanam"] .heroTitle {
+    font-size: clamp(2.15rem, 10.8vw, 3.25rem);
   }
 
   .heroSequence[data-hero-variant="perola"] .heroTitleLayer {
