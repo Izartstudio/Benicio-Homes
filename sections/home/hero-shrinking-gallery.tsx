@@ -36,6 +36,7 @@ export function HeroShrinkingGallery({ images }: HeroShrinkingGalleryProps) {
         data-hero-orange-image
         height={29}
         src="/assets/hero/orange-box.png"
+        unoptimized
         width={29}
       />
     </div>

@@ -82,11 +82,14 @@ export const ProjectHeroBackground = forwardRef<
     const mobileBackgroundProps = mobileBackgroundImage
       ? getHeroImageProps(mobileBackgroundImage, "eager")
       : null;
+    // Foregrounds are part of the initial hero composition rather than
+    // below-the-fold decoration. Loading them eagerly prevents the title and
+    // building cut-out from popping in after the background has rendered.
     const foregroundProps = foregroundImage
-      ? getHeroImageProps(foregroundImage, "lazy")
+      ? getHeroImageProps(foregroundImage, "eager")
       : null;
     const mobileForegroundProps = mobileForegroundImage
-      ? getHeroImageProps(mobileForegroundImage, "lazy")
+      ? getHeroImageProps(mobileForegroundImage, "eager")
       : null;
     const desktopFocalX = focalPosition?.desktop ?? 50;
     const tabletFocalX = focalPosition?.tablet ?? desktopFocalX;
@@ -124,7 +127,14 @@ export const ProjectHeroBackground = forwardRef<
                   <source
                     media="(max-width: 767px)"
                     sizes={mobileBackgroundProps.sizes}
-                    srcSet={mobileBackgroundProps.srcSet}
+                    // `getImageProps` intentionally omits `srcSet` for
+                    // delivery-ready unoptimized WebP files. Fall back to the
+                    // mobile `src`; otherwise browsers silently use the
+                    // desktop image and the two hero layers no longer align.
+                    srcSet={
+                      mobileBackgroundProps.srcSet ??
+                      mobileBackgroundProps.src
+                    }
                   />
                 ) : null}
                 <img
@@ -155,7 +165,10 @@ export const ProjectHeroBackground = forwardRef<
                     <source
                       media="(max-width: 767px)"
                       sizes={mobileForegroundProps.sizes}
-                      srcSet={mobileForegroundProps.srcSet}
+                      srcSet={
+                        mobileForegroundProps.srcSet ??
+                        mobileForegroundProps.src
+                      }
                     />
                   ) : null}
                   <img

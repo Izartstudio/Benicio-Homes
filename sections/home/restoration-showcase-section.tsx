@@ -22,7 +22,7 @@ const defaultRestorationSlides: readonly RestorationSlide[] = [
     rightLabel: "Portuguese-Inspired Architecture",
     href: "/projects/el-salva-villa",
     number: "",
-    url: "/assets/projects/villaelsalvabg.png",
+    url: "/assets/projects/villaelsalvabg.webp",
     alt: "Restored Goan villa interior opening into tropical landscape",
   },
   {
@@ -32,7 +32,7 @@ const defaultRestorationSlides: readonly RestorationSlide[] = [
     rightLabel: "Portuguese-Inspired Architecture",
     href: "/projects/villa-perola",
     number: "",
-    url: "/assets/projects/villaperolabg.png",
+    url: "/assets/projects/villaperolabg.webp",
     alt: "Restoration project facade with warm laterite material",
   },
 ] as const;

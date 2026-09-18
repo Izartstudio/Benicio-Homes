@@ -44,7 +44,7 @@ const siteStructuredData = {
       name: "Benicio Homes",
       url: "https://benicio.co.in",
       logo: "https://benicio.co.in/assets/NavBar/Logo-NavBar-colored.svg",
-      image: "https://benicio.co.in/assets/projects/bgvanam.png",
+      image: "https://benicio.co.in/assets/projects/bgvanam.webp",
       email: "info@benicio.co.in",
       telephone: "+91 90218 29812",
       address: {

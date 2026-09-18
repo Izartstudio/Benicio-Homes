@@ -132,7 +132,7 @@ export function AboutPracticePage({ teamSection }: { teamSection: AboutTeamSecti
           </div>
         </Reveal>
         <Reveal as="figure" className={styles.founderPortrait} revealMode="manual">
-          <Image src={founderimage} alt="Aqeeb Mapari, founder of Benicio Homes" fill sizes="(max-width: 767px) 100vw, 28rem" className={styles.cover} />
+          <Image src={founderimage} alt="Aqeeb Mapari, founder of Benicio Homes" fill sizes="(max-width: 767px) 100vw, 28rem" className={styles.cover} unoptimized />
           <figcaption>
             <span>Founder</span><i /><b aria-hidden="true" />
             <strong>Aqeeb Mapari</strong>

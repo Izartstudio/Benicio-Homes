@@ -19,7 +19,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     rightLabel: "CLIMATE LIVING",
     href: "/projects/vanam-villas",
     number: "TROPICAL HOMES-",
-    url: "/assets/projects/bgvanam.png",
+    url: "/assets/projects/bgvanam.webp",
     alt: "Vanam Villas tropical residences surrounded by landscaping in Anjuna, Goa",
   },
   {
@@ -39,7 +39,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     rightLabel: "CRAFTED AROUND PLACE",
     href: "/projects/el-salva-villa",
     number: "TROPICAL HOMES-",
-    url: "/assets/projects/villaelsalvabg.png",
+    url: "/assets/projects/villaelsalvabg.webp",
     alt: "Villa El Salva restored Goan heritage home in Salvador do Mundo",
   },
     {
@@ -49,7 +49,7 @@ const restorationSlides: readonly RestorationSlide[] = [
     rightLabel: "Crafted Around Place",
     href: "/projects/zen-villas-2",
     number: "TROPICAL HOMES-",
-    url: "/assets/projects/Zen-Villa-IIbg.png",
+    url: "/assets/projects/Zen-Villa-IIbg.webp",
     alt: "Zen Villa II contemporary tropical home in Assagao, Goa",
   },
 ];

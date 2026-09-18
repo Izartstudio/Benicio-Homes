@@ -15,6 +15,7 @@ export function HeroFinalComposition() {
           height={218}
           sizes="(max-width: 767px) 68vw, (max-width: 1023px) 45vw, 640px"
           src="/assets/projects/wordmark.png"
+          unoptimized
           width={1637}
         />
       }

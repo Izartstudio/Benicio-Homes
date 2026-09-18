@@ -28,12 +28,12 @@ export const OptimizedImage = forwardRef<HTMLImageElement, ImageProps>(
     const isSanityImage = remoteSource.startsWith(
       "https://cdn.sanity.io/images/",
     );
-    // R2 and the other media origins store delivery-ready WebP/AVIF files.
+    // Local assets and media origins store delivery-ready WebP/AVIF files.
     // Re-encoding those on the Hostinger Node process adds cold-start latency
-    // and produces several redundant variants for repeated carousel images.
-    const isDeliveryReadyRemoteImage =
-      /^https:\/\//i.test(remoteSource) &&
-      /\.(?:avif|webp)(?:\?|$)/i.test(remoteSource);
+    // and produces redundant variants for repeated carousel images.
+    const isDeliveryReadyImage = /\.(?:avif|webp)(?:\?|$)/i.test(
+      remoteSource,
+    );
 
     return (
       <NextImage
@@ -42,7 +42,7 @@ export const OptimizedImage = forwardRef<HTMLImageElement, ImageProps>(
         quality={quality}
         ref={ref}
         unoptimized={
-          unoptimized ?? (isSanityImage || isDeliveryReadyRemoteImage)
+          unoptimized ?? (isSanityImage || isDeliveryReadyImage)
         }
       />
     );

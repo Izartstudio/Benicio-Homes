@@ -14,12 +14,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const storyImages = {
   upper: {
-    url: "/assets/storysection/upperimage.png",
+    url: "/assets/storysection/upperimage.webp",
     loading: "lazy",
     alt: "Open sky above a tropical villa",
   },
   hero: {
-    url: "/assets/storysection/goa.png",
+    url: "/assets/storysection/goa.webp",
     loading: "lazy",
     alt: "A sandy Goa beach with clear blue water and rocky, green headlands",
   },
